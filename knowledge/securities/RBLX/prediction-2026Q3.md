@@ -16,7 +16,9 @@ in games they expect to drop. Analysts fixate on the one big hit (Steal an Egg) 
   under-13 bookings/hour below forecast. Q3 guide assumes the softness persists.
 - Guide (Jul 30): bookings $1,576-1,653M (-14% to -18% YoY vs $1,921.8M), revenue $1,413-1,490M. Consensus bookings
   ~$1.63B, DAU 130.65M (Q2 123M, Q3'25 151.5M), hours 32.24B (Q2 29B).
-- Steal An Egg created 2026-07-25 (after the guide was built), peak CCU 12.4M (rblxstat, Oct 3) to 14.2M (Aream/RoVitals).
+- Steal An Egg created 2026-07-25. RoVitals daily data: observed peak 14,272,591 on 2026-09-19 (inside Q3). Peaks are short weekly
+  event spikes: Oct 17 peak 11.07M vs day average 2.14M; Oct 24 peak 9.71M vs average 1.80M; normal days average ~1.0-1.3M.
+  30-day average 1.32M, down 25.7% on the prior 30 days (1.78M). Headline peaks overstate the game's weight roughly 10x.
 - Mobile IAP, AppMagic net (2026, same methodology): Apr $94.4M, May $97.3M, Jun n/a (~$97M assumed),
   Jul ~$98-102M, Aug $100.6M, Sep $98M. Q3 vs Q2 about +3.5%. 2025 AppMagic data unreliable (iOS tracking gap
   from Mar 2025), so YoY from trackers is not used.
@@ -61,7 +63,29 @@ bookings per hour keep falling even as engagement recovers.
   MCP server. Supports the long-tail content flood thesis.
 - Legal: new AG suits (NE Mar, OK May, AR Jun, IA proceeding), CT investigation, $35.8M settlements (WV, AL, NV),
   182 federal MDL cases (Sep), EU DSA VLOP designation, reported FTC probe. Rising legal/G&A cost; headline risk.
-- Q4 watch: Steal an Egg fading (BofA), GTA VI launches Nov 19 (competes for older-teen time), Algeria return,
+- Q4 watch: Steal an Egg fading (own data: 30d avg -25.7%), GTA VI launches Nov 19 (competes for older-teen time), Algeria return,
   private server change, Plus bundles, holiday season. Q4 2025 comp $2.2B bookings.
 - Revised: DAU mid 135M (Russia tailwind), bookings per DAU ~$12.1. Bookings call unchanged ($1.64B mid).
   Trade: still PASS.
+
+## Update 2026-10-27: first-hand data and RDC 2026 (replaces broker-sourced claims)
+- RoVitals fixed-cohort weekly reports (sampled concurrency, not a platform census):
+  - Aug 31-Sep 6: 4,909 games summed 10.26M avg concurrency (-7.4% WoW). Steal An Egg +51.6% to 1.60M (15.6% share);
+    every other game combined -13.6%; 3,888 of 4,909 games declined. The hit cannibalised the rest (plus back-to-school).
+  - Oct 5-11: 7,508 games summed 10.00M (-2.5%); Steal An Egg 1.50M (15.0%); top-10 share 31.9%.
+  => attention is close to zero-sum: a hit redistributes time more than it adds it. Supports a modest hours beat at best.
+- RDC 2026 (Sep 10-12, official release Sep 11):
+  - Roblox Everywhere: creators can soon ship games as standalone apps on mobile, PC and consoles; no stores, dates or
+    fees disclosed. Browser play in Chrome by end of 2026. Offline play early access, full mid-2027.
+  - Build tab (prompt-to-game): ~9,000 games published by Sep 1 in the NZ alpha; 71% of those creators had never used
+    Studio; expanding to Serbia and Singapore. Scene Generator later this year. => the AI long-tail flood is official strategy.
+  - Discovery: now balances younger players (shorter games) and older players (returning), measured over 28 days+;
+    testing optimisation for new players. This is the lever the CFO blamed for Q2 under-13 monetization; watch whether
+    Q4 commentary says it has been rebalanced.
+  - Roblox Wallet (US creators 18+, later 2026; global 2027) with daily USD payouts via Airwallex; Roblox Card 2027.
+    Creators earned ~$1.7B in the 12 months to Jun 30, 2026.
+  - Moments (short video feed) fully available in the US; tap-to-buy avatar items coming.
+- Earnings relevance: none of RDC moves Q3 numbers. It matters for the call narrative and for 2027: browser play and
+  standalone apps widen reach and can shift purchases away from app-store fees (margin), while Build and the
+  discovery changes keep growing content supply and engagement faster than spending per hour.
+- Call unchanged: engagement beat (smaller than headline peaks imply), bookings in line, bookings per DAU down. PASS.
