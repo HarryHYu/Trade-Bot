@@ -37,3 +37,15 @@ def test_small_account_uses_fractional_shares():
 def test_small_account_blocks_shorts():
     v = risk.check_portfolio("RBLX", 50, 300, [], 0, "standard", "short")
     assert any("short" in x for x in v)
+
+
+def test_earnings_tier_needs_edge_over_implied_move():
+    from tradebot import earnings
+    from tradebot.brain import Check
+    checks = [Check(name=n, verdict="pass", reasoning="") for n in ALL]
+    mk = lambda conf, move, stance="beat": earnings.EarningsCall(
+        stance=stance, guidance="raise", kpis=[], eps_mid=None, eps_consensus=None,
+        expected_reaction_pct=move, confidence=conf, checks=checks, trade_idea="", summary="")
+    assert earnings._tier(mk(0.8, 25), 14) == "big"
+    assert earnings._tier(mk(0.8, 10), 14) == "watch"      # expecting less than options already price
+    assert earnings._tier(mk(0.9, 30, "no_view"), 14) == "watch"

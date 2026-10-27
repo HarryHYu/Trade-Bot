@@ -99,6 +99,24 @@ def announce_new_proposals() -> None:
             p.note = "announced"
 
 
+def announce_new_theses() -> None:
+    """Every new thesis goes to Research; big-tier ones also go to Alerts as an OH SHIT."""
+    with session() as db:
+        rows = db.scalars(select(Thesis).where(Thesis.status == "open")).all()
+        for th in rows:
+            if (th.meta or {}).get("announced"):
+                continue
+            checks = " ".join(f"{c['name']}:{c['verdict']}" for c in th.checks)
+            body = (f"[{th.tier.upper()}] {th.ticker} {th.direction.upper()}  P={th.probability:.0%}  "
+                    f"move {th.expected_move_pct:.0f}%  {th.horizon_days}d\nDriver: {th.driver}\n"
+                    f"Mechanism: {th.mechanism}\nChecks: {checks}\nCatalysts: {'; '.join(th.catalysts)}\n"
+                    f"Kill if: {'; '.join(th.kill_criteria)}\nHedge idea: {(th.meta or {}).get('hedge_idea', '')}\n\n{th.summary}")
+            send(body, topic="Research")
+            if th.tier == "big":
+                send(f"OH SHIT: {th.ticker} {th.direction}. {th.driver}\nFull thesis in Research.", topic="Alerts")
+            th.meta = (th.meta or {}) | {"announced": True}
+
+
 HELP = ("Just talk to me, or send photos and files.\n"
         "/status  /positions  /halt  /flatten  /resume  /mode manual|threshold|auto  /new (fresh chat)")
 

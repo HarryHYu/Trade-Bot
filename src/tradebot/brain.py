@@ -139,9 +139,21 @@ def research_lead(lead_id: int) -> int | None:
         item = db.get(Item, lead.item_id)
         lead.status = "researching"
     ticker = lead.tickers[0]
+    from . import market
+    px = []
+    for tk in lead.tickers[:4]:
+        try:
+            snap = market.snapshot(tk)
+            if item.published_at:
+                snap["move_since_item_pct"] = market.move_since(tk, item.published_at)
+            px.append(snap)
+        except Exception:
+            px.append({"symbol": tk, "error": "no price data"})
     user = (f"LEAD (priority {lead.priority:.2f}, {lead.signal_kind}, urgency {lead.urgency}):\n{lead.theme}\n\n"
             f"ORIGINAL ITEM [{item.source}, tier {item.source_tier}] {item.title}\n{item.url}\n{item.text[:8000]}\n\n"
-            f"CANDIDATE TICKERS: {', '.join(lead.tickers)}\n\n{profile_context(ticker)}")
+            f"CANDIDATE TICKERS: {', '.join(lead.tickers)}\n"
+            f"PRICE ACTION (use for the 'noticed' check; a big move since the item means the market may have it):\n"
+            f"{json.dumps(px, default=str)}\n\n{profile_context(ticker)}")
     note = claude().research("research", s.research_model, RESEARCH_SYSTEM, user, effort=s.research_effort)
     out = claude().parse(
         "thesis_extract", s.triage_model,

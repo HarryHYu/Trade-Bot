@@ -1,0 +1,9 @@
+# Core watchlist: full earnings protocol on every report. kpis = the numbers that move the stock.
+core:
+  RBLX: {type: consumer-gaming, kpis: [DAUs, engagement hours, bookings, ABPDAU]}
+  TTWO: {type: consumer-gaming, kpis: [net bookings, recurrent consumer spending, GTA VI timing]}
+  EA: {type: consumer-gaming, kpis: [net bookings, live services]}
+  U: {type: consumer-gaming, kpis: [Grow Solutions revenue, Create revenue]}
+  APP: {type: adtech, kpis: [software platform revenue, adjusted EBITDA margin]}
+  XOM: {type: energy-commodity, kpis: [upstream production, realized prices, refining margins]}
+  OXY: {type: energy-commodity, kpis: [production, realized oil price]}

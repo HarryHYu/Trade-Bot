@@ -6,7 +6,7 @@ import logging
 import httpx
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from . import brain, collectors, execution, reflection, telegram
+from . import brain, collectors, earnings, execution, reflection, telegram
 from .config import get_settings
 from .db import init_db, kv_get, session
 
@@ -24,12 +24,17 @@ def _safe(fn):
 
 
 def research_cycle() -> None:
+    s = get_settings()
     for tid in brain.research_top(5):
-        execution.propose_for_thesis(tid)
+        if s.alpaca_key_id:  # no broker connected yet: theses still reach the phone
+            execution.propose_for_thesis(tid)
+    telegram.announce_new_theses()
     telegram.announce_new_proposals()
 
 
 def trade_cycle() -> None:
+    if not get_settings().alpaca_key_id:
+        return
     execution.execute_approved()
     execution.sync_fills()
     execution.manage_stops()
@@ -52,6 +57,7 @@ def run() -> None:
     sch.add_job(_safe(trade_cycle), "interval", minutes=1, max_instances=1)
     sch.add_job(_safe(heartbeat), "interval", minutes=5)
     sch.add_job(_safe(reflection.post_mortems), "cron", hour=7, minute=0)
+    sch.add_job(_safe(earnings.run_protocol), "cron", hour=6, minute=0)
     sch.add_job(_safe(lambda: telegram.send(reflection.daily_brief(), topic="Brief")), "cron", hour=7, minute=30)
     sch.add_job(_safe(reflection.weekly_review), "cron", day_of_week="sat", hour=9)
     telegram.start_listener()
