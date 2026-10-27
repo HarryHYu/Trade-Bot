@@ -163,6 +163,16 @@ class KV(Base):
     value: Mapped[str] = mapped_column(Text, default="")
 
 
+class ChatTurn(Base):
+    """Telegram chat history (text only; media is described, not stored)."""
+    __tablename__ = "chat_turns"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    ts: Mapped[dt.datetime] = mapped_column(DateTime, default=utcnow, index=True)
+    thread: Mapped[str] = mapped_column(String(32), index=True)
+    role: Mapped[str] = mapped_column(String(16))
+    text: Mapped[str] = mapped_column(Text)
+
+
 _engine = None
 _Session: sessionmaker[Session] | None = None
 

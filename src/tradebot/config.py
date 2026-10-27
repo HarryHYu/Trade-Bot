@@ -37,7 +37,10 @@ class Settings(BaseSettings):
     proposal_ttl_minutes: int = 240
 
     telegram_bot_token: str = ""
-    telegram_chat_id: str = ""
+    telegram_chat_id: str = ""  # your DM id, or a group id (topics are created automatically)
+    telegram_allowed_user_ids: str = ""  # comma-separated; empty = anyone in the chat
+    chat_model: str = "claude-opus-5-5"
+    chat_effort: str = "medium"
 
     reddit_client_id: str = ""
     reddit_client_secret: str = ""

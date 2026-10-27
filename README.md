@@ -40,6 +40,20 @@ Approval mode starts `manual`. `/halt` and `/flatten` work from Telegram at any 
    docker compose -f deploy/docker-compose.yml exec bot tradebot check
    ```
 
+## Telegram
+
+One bot, one private group. Any normal message is a chat with Claude (Opus 5.5), which can read the
+database and knowledge base, check the account, search the web, make charts and send files. Send it
+photos, screenshots, PDFs and text files. Rule changes come back as a button to confirm.
+
+1. BotFather: `/newbot`, keep the token. Then `/setprivacy` -> Disable, so it can read group messages.
+2. Make a Telegram group, turn on **Topics** in group settings, add the bot and make it admin.
+3. Send a message in the group, open `https://api.telegram.org/bot<TOKEN>/getUpdates`, and copy the
+   group's `chat.id` (starts with -100) into `TELEGRAM_CHAT_ID`. Put your own `from.id` in
+   `TELEGRAM_ALLOWED_USER_IDS`.
+4. On first start the bot creates topics: Proposals, Alerts, Brief, Research, Chat.
+   Mute the ones you don't need pinging. A DM chat ID also works; everything then lands in the DM.
+
 ## Local commands
 ```bash
 uv sync
@@ -54,4 +68,4 @@ uv run pytest
 ## Not built yet
 Earnings protocol timeline (T-21 to T+1), commodities fast-lane playbooks with armed orders,
 options instruments, watch-mode active re-search, browser tool for Claude, collector auto-writing,
-shadow-mode parameter testing, web portal. The schema already has `Prediction` for earnings.
+shadow-mode parameter testing, web portal, voice notes in chat. The schema already has `Prediction` for earnings.
