@@ -16,5 +16,14 @@ reddit:
 sec_forms: ["8-K", "4"]
 youtube: []   # - {id: UCxxxx, name: channel, tier: 3}
 roblox_universes: []   # universe IDs of top games to track concurrents for
+# Any topic or company, via Google News search. The bot adds more of these itself as research finds drivers.
+news_queries:
+  - {q: "Ebola Bundibugyo", name: ebola, tier: 2}
+  - {q: "shortage OR recall OR \"production halted\" OR \"force majeure\"", name: supply-shocks, tier: 2}
+  - {q: "\"emergency use authorization\" OR \"FDA approves\"", name: fda, tier: 2}
+  - {q: "\"activist investor\" OR \"13D\" stake", name: activists, tier: 2}
+  - {q: "viral OR \"sold out\" OR \"record sales\"", name: consumer-heat, tier: 3}
+web_pages: []   # - {url: https://example.com/status, name: thing, tier: 1, ticker: XYZ}
+sec_tickers: []
 steam_apps:   # hourly concurrent players; ticker = who earns from it
   - {appid: 3393110, name: AION 2, ticker: 036570.KS}

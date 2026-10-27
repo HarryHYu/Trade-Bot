@@ -90,6 +90,8 @@ Method:
    - override: is a bigger force acting on this company that swamps it?
    - reaction: when the market does see it, how will it interpret it?
 4. Name the catalyst that forces repricing, and the kill criteria that would prove you wrong.
+5. List what the desk should keep watching for this driver (monitor): news search queries and specific URLs
+   (status pages, trackers, regulator pages) whose changes would confirm or kill it.
 
 MANDATORY DILIGENCE before any tier above watch. Do these from primary sources, not headlines, and
 fill every diligence field. If you cannot verify one, say "unverified" and the thesis caps at small.
@@ -139,6 +141,7 @@ class ThesisOut(BaseModel):
     catalysts: list[str]
     kill_criteria: list[str]
     hedge_idea: str
+    monitor: list[str] = Field(default_factory=list, description="news search queries or URLs to keep watching for this driver")
     diligence: Diligence
     situation_updates: list[str] = Field(description="new forces acting on the company to add to its situation doc")
     summary: str
@@ -258,6 +261,10 @@ def research_lead(lead_id: int, fast: bool = False) -> int | None:
         tid = th.id
     for u in out.situation_updates:
         append_lesson(out.ticker, out.security_type, "situation", u)
+    from . import sources as reg
+    for m in out.monitor[:5]:
+        kind = "web_page" if m.startswith("http") else "news_query"
+        reg.add(kind, m, ticker=out.ticker, reason=f"thesis {tid}: {out.driver[:120]}", added_by="research")
     return tid
 
 

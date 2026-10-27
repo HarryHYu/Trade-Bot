@@ -167,6 +167,23 @@ class KV(Base):
     value: Mapped[str] = mapped_column(Text, default="")
 
 
+class Source(Base):
+    """Anything the eyes watch. Added from config, by research, or by the owner via Telegram."""
+    __tablename__ = "sources"
+    __table_args__ = (UniqueConstraint("kind", "key"),)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    kind: Mapped[str] = mapped_column(String(32))   # rss|news_query|subreddit|youtube_channel|web_page|sec_ticker|steam_app|roblox_game
+    key: Mapped[str] = mapped_column(String(512))   # url, query, subreddit, channel id, ticker, app id
+    name: Mapped[str] = mapped_column(String(256), default="")
+    tier: Mapped[int] = mapped_column(Integer, default=3)
+    ticker: Mapped[str | None] = mapped_column(String(16))  # who earns from it, if any
+    reason: Mapped[str] = mapped_column(Text, default="")
+    added_by: Mapped[str] = mapped_column(String(32), default="config")
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+    state: Mapped[dict[str, Any]] = mapped_column(default=dict)  # e.g. last content hash for web pages
+    created_at: Mapped[dt.datetime] = mapped_column(DateTime, default=utcnow)
+
+
 class ChatTurn(Base):
     """Telegram chat history (text only; media is described, not stored)."""
     __tablename__ = "chat_turns"

@@ -28,6 +28,10 @@ lessons, type briefings), the broker account, web search, charts and files. Use 
 and say when something is not in the data. The owner may send photos, screenshots, PDFs and files:
 read them properly.
 
+You can start or stop watching any source (add_source/list_sources/remove_source) when the owner asks, or when the
+conversation shows something worth tracking. If a source needs an account or API key, tell the owner exactly where
+to sign up and which .env variable the key goes in.
+
 You never place trades or change rules directly. To change a risk limit or setting, call
 propose_change; the owner confirms with a button. Paper vs live is never changed from chat."""
 
@@ -50,6 +54,16 @@ TOOLS: list[dict[str, Any]] = [
      "(e.g. a CSV or notes). Give either path, or filename plus content.",
      "input_schema": {"type": "object", "properties": {"path": {"type": "string"}, "filename": {"type": "string"},
                                                        "content": {"type": "string"}, "caption": {"type": "string"}}}},
+    {"name": "add_source", "description": "Start watching something: kind is one of rss, news_query, subreddit, "
+     "youtube_channel, web_page, sec_ticker, steam_app, roblox_game. key is the URL, query, subreddit name, channel id, "
+     "ticker or app id.",
+     "input_schema": {"type": "object", "properties": {"kind": {"type": "string"}, "key": {"type": "string"},
+                                                       "name": {"type": "string"}, "ticker": {"type": "string"},
+                                                       "reason": {"type": "string"}}, "required": ["kind", "key"]}},
+    {"name": "list_sources", "description": "List everything currently being watched, with ids.",
+     "input_schema": {"type": "object", "properties": {}}},
+    {"name": "remove_source", "description": "Stop watching a source by id.",
+     "input_schema": {"type": "object", "properties": {"id": {"type": "integer"}}, "required": ["id"]}},
     {"name": "propose_change", "description": "Propose changing a value in config/risk.yaml. The owner confirms by button.",
      "input_schema": {"type": "object", "properties": {"key": {"type": "string"}, "value": {},
                                                        "reason": {"type": "string"}}, "required": ["key", "value", "reason"]}},
@@ -132,6 +146,16 @@ def run_tool(name: str, inp: dict[str, Any], ctx: Ctx) -> str:
             p.write_text(inp.get("content", ""))
         ctx.files.append((p, inp.get("caption", "")))
         return f"{p.name} will be sent."
+    if name == "add_source":
+        from . import sources as reg
+        return reg.add(inp["kind"], inp["key"], inp.get("name", ""), ticker=inp.get("ticker"),
+                       reason=inp.get("reason", ""), added_by="owner")
+    if name == "list_sources":
+        from . import sources as reg
+        return "\n".join(f"#{s.id} {s.kind}: {s.name or s.key} ({s.added_by})" for s in reg.list_active())[:20000] or "None"
+    if name == "remove_source":
+        from . import sources as reg
+        return reg.remove(int(inp["id"]))
     if name == "propose_change":
         risk = load_yaml("risk.yaml")
         if inp["key"] not in risk:

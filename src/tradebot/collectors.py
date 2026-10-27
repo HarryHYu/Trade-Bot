@@ -202,22 +202,39 @@ def steam_players(apps: list[dict[str, Any]]) -> int:
 
 
 def run_all() -> dict[str, int]:
-    cfg = load_yaml("sources.yaml")
+    """Read every active source in the registry. One broken source never stops the rest."""
+    from . import sources as reg
+    reg.seed_from_config()
+    by: dict[str, list] = {}
+    for s in reg.list_active():
+        by.setdefault(s.kind, []).append(s)
     jobs = {
-        "rss": lambda: rss(cfg.get("rss", [])),
-        "reddit": lambda: reddit(cfg.get("reddit", [])),
-        "sec": lambda: sec_filings(cfg.get("sec_forms", ["8-K", "4"])),
-        "youtube": lambda: youtube(cfg.get("youtube", [])),
+        "rss": lambda: rss([{"name": s.name, "url": s.key, "tier": s.tier} for s in by.get("rss", [])]),
+        "news_query": lambda: rss([{"name": f"news/{s.name[:40]}", "url": reg.news_query_url(s.key), "tier": s.tier}
+                                   for s in by.get("news_query", [])]),
+        "reddit": lambda: reddit([{"name": s.key, "tier": s.tier} for s in by.get("subreddit", [])]),
+        "youtube": lambda: youtube([{"id": s.key, "name": s.name, "tier": s.tier} for s in by.get("youtube_channel", [])]),
+        "sec": lambda: sec_filings(load_yaml("sources.yaml").get("sec_forms", ["8-K", "4"])),
         "alpaca_news": alpaca_news,
-        "roblox": lambda: roblox_games(cfg.get("roblox_universes", [])),
-        "steam": lambda: steam_players(cfg.get("steam_apps", [])),
+        "roblox": lambda: roblox_games([int(s.key) for s in by.get("roblox_game", [])]),
         "roblox_charts": roblox_charts,
+        "steam": lambda: steam_players([{"appid": int(s.key), "name": s.name, "ticker": s.ticker} for s in by.get("steam_app", [])]),
+        "web_pages": lambda: store([x for s in by.get("web_page", []) if (x := _safe_page(s))]),
     }
     counts = {}
     for name, fn in jobs.items():
         try:
             counts[name] = fn()
-        except Exception as e:  # one broken source never stops the rest
+        except Exception as e:
             log.warning("collector %s failed: %s", name, e)
             counts[name] = -1
     return counts
+
+
+def _safe_page(s):
+    from .sources import fetch_web_page
+    try:
+        return fetch_web_page(s)
+    except Exception as e:
+        log.warning("web page %s failed: %s", s.key, e)
+        return None
