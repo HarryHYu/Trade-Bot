@@ -1,0 +1,7 @@
+# Watch list: leads checked and not yet trades
+Each entry: what we saw, which check it failed, and what would change the verdict.
+
+- [2026-10-27] RBLX earnings Oct 29 AMC. Steal an Egg engagement beat is noticed (stock +30%/20d, previews name it); BofA says engagement rolled over. Implied move ~14%. Verdict: no view. Re-check: Q4 bookings guide.
+- [2026-10-27] CAPR FDA decision Nov 22 (deramiocel, upper-limb DMD). Price $5.74 vs est. ~$3.60/share cash at Sep 30 (58.1M shares, ~$238M cash+securities at Jun 30, ~$30M/qtr burn). Market values the drug at ~$125M, i.e. ~20-25% approval odds. AdCom 3-9 against, prior CRL, FDA staff skeptical. Verdict: priced as a lottery, no probability edge; options IV >400%. Change if: FDA labeling talks, AdCom-reversal signals, or price drifts toward cash.
+- [2026-10-27] RAPP cluster insider buy (5 insiders incl. Maraganore, ~$1.6M, Oct 21-22) after a 9% dip on positive bipolar Ph2. No near-term catalyst (Ph3 2H 2027). Verdict: watch, long-horizon only.
+- [2026-10-27] Refiners vs diesel cracks. 3-2-1 crack peaked Sept (highest since 2006); diesel crack ~$118 Sep 16 -> ~$89 Oct 23; HO=F -4%/20d. Refiners +8% to +22% over 20d, +110% to +145% YoY, near highs. Q3 prints are known-huge (PSX Oct 28, DINO Oct 28, PBF Oct 29, MPC Nov 3, CVI Nov 3, DK Nov 6). Hypothesis: stocks price peak margins as durable while cracks fall; risk sits in Q4 commentary. Verdict: watch; needs evidence on forward cracks, not priced-in Q3.
