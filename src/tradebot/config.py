@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     verifier_model: str = "claude-opus-5-5"
     judge_model: str = "claude-fable-5-1"
     diligence_effort: str = "high"
-    max_diligence_per_day: int = 12
+    max_diligence_per_day: int = 2  # ~$10 per full run (8 agents + verifier + judge); 2/day is ~$600/month
 
     # Broker (Alpaca). Paper by default; live requires ALPACA_PAPER=false AND TRADING_LIVE_CONFIRM=yes.
     alpaca_key_id: str = ""

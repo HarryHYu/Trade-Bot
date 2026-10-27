@@ -62,7 +62,7 @@ confirmed, wrong or unverifiable. A judge (Claude Fable 5.1) sets the tier, and 
 a failed product_scope, buyer_channel or materiality, or any wrong material claim, means no trade; over 20%
 unverifiable claims or a red-team fail caps at small; any concern caps at standard.
 Run it by hand: `tradebot diligence OSUR "only FDA-EUA Bundibugyo rapid test, activist sale pressure"`.
-Budget: `MAX_DILIGENCE_PER_DAY` (default 12).
+Budget: `MAX_DILIGENCE_PER_DAY` (default 2). A full run costs roughly $10, so 2 a day is about $600 a month; raise it when the hit rate justifies it.
 
 ## Telegram
 
