@@ -3,11 +3,14 @@ from tradebot import brain, risk
 ALL = ["real_and_size", "noticed", "transmission", "reversal", "override", "reaction"]
 
 
-def _t(verdicts, p=0.7, move=25):
+def _t(verdicts, p=0.7, move=25, unverified=()):
     return brain.ThesisOut(has_thesis=True, ticker="X", security_type="t", driver="d", mechanism="m",
                            direction="long", probability=p, expected_move_pct=move, horizon_days=30,
                            checks=[brain.Check(name=n, verdict=v, reasoning="") for n, v in zip(ALL, verdicts)],
-                           catalysts=[], kill_criteria=[], hedge_idea="", situation_updates=[], summary="")
+                           catalysts=[], kill_criteria=[], hedge_idea="", situation_updates=[], summary="",
+                           diligence=brain.Diligence(filings_reviewed="", earnings_quality="", product_scope="",
+                                                     buyer_channel="", materiality="", competition="",
+                                                     consensus_and_guidance="", unverified=list(unverified)))
 
 
 def test_big_needs_every_check_to_pass():
@@ -49,3 +52,7 @@ def test_earnings_tier_needs_edge_over_implied_move():
     assert earnings._tier(mk(0.8, 25), 14) == "big"
     assert earnings._tier(mk(0.8, 10), 14) == "watch"      # expecting less than options already price
     assert earnings._tier(mk(0.9, 30, "no_view"), 14) == "watch"
+
+
+def test_unverified_diligence_caps_at_small():
+    assert brain.tier_for(_t(["pass"] * 6, unverified=["buyer_channel"])) == "small"

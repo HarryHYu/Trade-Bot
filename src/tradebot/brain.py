@@ -86,6 +86,19 @@ Method:
    - reaction: when the market does see it, how will it interpret it?
 4. Name the catalyst that forces repricing, and the kill criteria that would prove you wrong.
 
+MANDATORY DILIGENCE before any tier above watch. Do these from primary sources, not headlines, and
+fill every diligence field. If you cannot verify one, say "unverified" and the thesis caps at small.
+- filings: every filing since the last results (8-K, 10-Q, 13D/13G, Form 4, proxy). Who is buying, who is
+  agitating, what changed.
+- earnings quality: was the last profit or beat real, or from one-offs (accounting releases, gains)?
+- product scope: exactly what the product is cleared/approved/licensed for, and where it can be sold
+  (label limits, which regulators, which markets).
+- buyer channel: who actually pays, and are they allowed to buy it (procurement lists, tenders,
+  contracts databases). A real driver with no buyer is not revenue.
+- materiality: the driver's plausible revenue against the company's revenue and market value, in numbers.
+- competition: who else can serve the same demand right now.
+- consensus and guidance: what is already expected, and whether guidance was set before the driver.
+
 Use the security profile and situation provided; they hold what the desk has learned. Write a concise
 research note, then end with the verdict fields requested."""
 
@@ -94,6 +107,17 @@ class Check(BaseModel):
     name: Literal["real_and_size", "noticed", "transmission", "reversal", "override", "reaction"]
     verdict: Literal["pass", "concern", "fail"]
     reasoning: str
+
+
+class Diligence(BaseModel):
+    filings_reviewed: str = Field(description="filings since last results and what they show")
+    earnings_quality: str
+    product_scope: str = Field(description="exact label/clearance/licence limits and markets")
+    buyer_channel: str = Field(description="who pays and whether they can buy it; evidence")
+    materiality: str = Field(description="driver revenue vs company revenue and market cap, in numbers")
+    competition: str
+    consensus_and_guidance: str
+    unverified: list[str] = Field(description="diligence items that could not be verified")
 
 
 class ThesisOut(BaseModel):
@@ -110,6 +134,7 @@ class ThesisOut(BaseModel):
     catalysts: list[str]
     kill_criteria: list[str]
     hedge_idea: str
+    diligence: Diligence
     situation_updates: list[str] = Field(description="new forces acting on the company to add to its situation doc")
     summary: str
 
@@ -121,11 +146,12 @@ def tier_for(t: ThesisOut) -> str:
     verdicts = {c.name: c.verdict for c in t.checks}
     if "fail" in verdicts.values():
         return "watch"
+    capped = bool(t.diligence.unverified)  # any unverified diligence item caps conviction at small
     ev = t.probability * t.expected_move_pct - (1 - t.probability) * t.expected_move_pct * 0.5
     concerns = sum(v == "concern" for v in verdicts.values())
-    if ev >= 12 and concerns == 0 and len(verdicts) == 6:
+    if not capped and ev >= 12 and concerns == 0 and len(verdicts) == 6:
         return "big"
-    if ev >= 6 and concerns <= 1:
+    if not capped and ev >= 6 and concerns <= 1:
         return "standard"
     if ev >= 3:
         return "small"
@@ -174,7 +200,7 @@ def research_lead(lead_id: int) -> int | None:
                     horizon_days=out.horizon_days, tier=tier, checks=[c.model_dump() for c in out.checks],
                     catalysts=out.catalysts, kill_criteria=out.kill_criteria, summary=out.summary,
                     situation_snapshot=profile_context(out.ticker), evidence=[{"item": item.id, "note": note[:20000]}],
-                    meta={"hedge_idea": out.hedge_idea})
+                    meta={"hedge_idea": out.hedge_idea, "diligence": out.diligence.model_dump()})
         db.add(th)
         lead.status = "thesis" if tier != "watch" else "watch"
         db.flush()
