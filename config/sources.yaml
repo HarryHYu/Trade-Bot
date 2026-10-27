@@ -16,3 +16,5 @@ reddit:
 sec_forms: ["8-K", "4"]
 youtube: []   # - {id: UCxxxx, name: channel, tier: 3}
 roblox_universes: []   # universe IDs of top games to track concurrents for
+steam_apps:   # hourly concurrent players; ticker = who earns from it
+  - {appid: 3393110, name: AION 2, ticker: 036570.KS}

@@ -156,6 +156,27 @@ def roblox_games(universe_ids: list[int]) -> int:
     return store(out)
 
 
+def steam_players(apps: list[dict[str, Any]]) -> int:
+    """Live concurrent players per Steam game, one item per poll, so retention is a time series.
+    Free, no key. Pair each game with the listed company that earns from it."""
+    now = dt.datetime.now(dt.UTC).replace(tzinfo=None)
+    out = []
+    with httpx.Client(timeout=20) as c:
+        for a in apps:
+            r = c.get("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/",
+                      params={"appid": a["appid"]})
+            n = r.json().get("response", {}).get("player_count")
+            if n is None:
+                continue
+            out.append(dict(
+                source="steam/players", source_tier=1, external_id=f"{a['appid']}:{now:%Y%m%d%H}",
+                title=a["name"], text=f"{a['name']} ({a.get('ticker', '')}): {n} playing on Steam",
+                published_at=now, triaged=True,  # metrics feed the trackers, not triage
+                meta={"appid": a["appid"], "players": n, "ticker": a.get("ticker"), "kind": "metric"},
+            ))
+    return store(out)
+
+
 def run_all() -> dict[str, int]:
     cfg = load_yaml("sources.yaml")
     jobs = {
@@ -165,6 +186,7 @@ def run_all() -> dict[str, int]:
         "youtube": lambda: youtube(cfg.get("youtube", [])),
         "alpaca_news": alpaca_news,
         "roblox": lambda: roblox_games(cfg.get("roblox_universes", [])),
+        "steam": lambda: steam_players(cfg.get("steam_apps", [])),
     }
     counts = {}
     for name, fn in jobs.items():
