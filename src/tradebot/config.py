@@ -24,6 +24,12 @@ class Settings(BaseSettings):
     prediction_model: str = "claude-fable-5-1"
     research_effort: str = "high"
     max_research_per_day: int = 40
+    # Multi-agent diligence on any thesis that clears the first pass
+    diligence_model: str = "claude-opus-5-5"
+    verifier_model: str = "claude-opus-5-5"
+    judge_model: str = "claude-fable-5-1"
+    diligence_effort: str = "high"
+    max_diligence_per_day: int = 12
 
     # Broker (Alpaca). Paper by default; live requires ALPACA_PAPER=false AND TRADING_LIVE_CONFIRM=yes.
     alpaca_key_id: str = ""

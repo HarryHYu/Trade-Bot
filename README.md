@@ -40,6 +40,30 @@ Approval mode starts `manual`. `/halt` and `/flatten` work from Telegram at any 
    docker compose -f deploy/docker-compose.yml exec bot tradebot check
    ```
 
+## Research quality: multi-agent diligence
+
+Any thesis that clears the first pass goes to eight specialists in parallel, each with one narrow brief
+and primary-source data tools (SEC filings and XBRL financials, USAspending federal awards, prices,
+options) plus web search/fetch:
+
+| Specialist | Checks |
+|---|---|
+| filings | every filing since last results: 8-K, 10-Q, 13D/13G, Form 4, dilution |
+| financial_quality | one-offs behind profits, cash burn, net cash per share, EV |
+| product_scope | exact regulator authorisation and its limits |
+| buyer_channel | who pays, whether they are allowed to buy, evidence of orders |
+| materiality | driver revenue vs company revenue and market cap, with arithmetic |
+| competition | who else serves the demand, and threats to the core business |
+| priced_in | price reaction at each key date, consensus, implied move, crowding |
+| red_team | the strongest case that the thesis is wrong |
+
+Every claim must carry a value and a source URL. A verifier re-opens every source and marks each claim
+confirmed, wrong or unverifiable. A judge (Claude Fable 5.1) sets the tier, and hard rules in code cap it:
+a failed product_scope, buyer_channel or materiality, or any wrong material claim, means no trade; over 20%
+unverifiable claims or a red-team fail caps at small; any concern caps at standard.
+Run it by hand: `tradebot diligence OSUR "only FDA-EUA Bundibugyo rapid test, activist sale pressure"`.
+Budget: `MAX_DILIGENCE_PER_DAY` (default 12).
+
 ## Telegram
 
 One bot, one private group. Any normal message is a chat with Claude (Opus 5.5), which can read the

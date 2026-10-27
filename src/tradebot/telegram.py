@@ -111,6 +111,14 @@ def announce_new_theses() -> None:
                     f"move {th.expected_move_pct:.0f}%  {th.horizon_days}d\nDriver: {th.driver}\n"
                     f"Mechanism: {th.mechanism}\nChecks: {checks}\nCatalysts: {'; '.join(th.catalysts)}\n"
                     f"Kill if: {'; '.join(th.kill_criteria)}\nHedge idea: {(th.meta or {}).get('hedge_idea', '')}\n\n{th.summary}")
+            dil = (th.meta or {}).get("diligence_run")
+            if dil:
+                verdicts = " ".join(f"{r['dimension']}:{r['verdict']}" for r in dil["reports"])
+                checks = dil["verification"]["checks"]
+                ok = sum(c["status"] == "confirmed" for c in checks)
+                body += (f"\n\nDILIGENCE (8 specialists + fact check): {verdicts}\n"
+                         f"Claims confirmed {ok}/{len(checks)}. Caps: {'; '.join(dil['cap_reasons']) or 'none'}\n"
+                         f"Judge: {dil['verdict']['reasoning'][:800]}")
             send(body, topic="Research")
             if th.tier == "big":
                 send(f"OH SHIT: {th.ticker} {th.direction}. {th.driver}\nFull thesis in Research.", topic="Alerts")

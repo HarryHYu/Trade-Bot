@@ -158,6 +158,15 @@ def tier_for(t: ThesisOut) -> str:
     return "watch"
 
 
+def diligence_budget_left() -> bool:
+    import datetime as _dt
+    from .db import Decision
+    start = utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    with session() as db:
+        n = len(db.scalars(select(Decision.id).where(Decision.kind == "diligence_run", Decision.ts >= start)).all())
+    return n < get_settings().max_diligence_per_day
+
+
 def research_lead(lead_id: int) -> int | None:
     s = get_settings()
     with session() as db:
@@ -186,6 +195,20 @@ def research_lead(lead_id: int) -> int | None:
         "Extract the research note's conclusion into the schema exactly as the note states it. Do not add judgement.",
         note, ThesisOut, max_tokens=6000)
     tier = tier_for(out)
+    dil = None
+    if tier in ("small", "standard", "big") and diligence_budget_left():
+        brief = (f"TICKER {out.ticker} ({out.security_type}), {out.direction}.\nDRIVER: {out.driver}\n"
+                 f"MECHANISM: {out.mechanism}\nCATALYSTS: {'; '.join(out.catalysts)}\n"
+                 f"FIRST-PASS NOTE:\n{note[:12000]}")
+        try:
+            from . import diligence
+            dil = diligence.run(brief)
+            tier = dil["final_tier"]
+            v = dil["verdict"]
+            out.probability, out.expected_move_pct, out.horizon_days = v["probability"], v["expected_move_pct"], v["horizon_days"]
+        except Exception:
+            log.exception("diligence failed for lead %s; capping at small", lead_id)
+            tier = "small" if tier != "watch" else tier
     with session() as db:
         lead = db.get(Lead, lead_id)
         lead.resolved_at = utcnow()
@@ -200,11 +223,15 @@ def research_lead(lead_id: int) -> int | None:
                     horizon_days=out.horizon_days, tier=tier, checks=[c.model_dump() for c in out.checks],
                     catalysts=out.catalysts, kill_criteria=out.kill_criteria, summary=out.summary,
                     situation_snapshot=profile_context(out.ticker), evidence=[{"item": item.id, "note": note[:20000]}],
-                    meta={"hedge_idea": out.hedge_idea, "diligence": out.diligence.model_dump()})
+                    meta={"hedge_idea": out.hedge_idea, "diligence": out.diligence.model_dump(),
+                          "diligence_run": dil})
         db.add(th)
         lead.status = "thesis" if tier != "watch" else "watch"
         db.flush()
-        log_decision(db, "thesis_opened", th.id, tier=tier, ticker=th.ticker, summary=out.summary)
+        log_decision(db, "thesis_opened", th.id, tier=tier, ticker=th.ticker, summary=out.summary,
+                     cap_reasons=(dil or {}).get("cap_reasons"))
+        if dil:
+            log_decision(db, "diligence_run", th.id, ticker=th.ticker, final_tier=tier)
         tid = th.id
     for u in out.situation_updates:
         append_lesson(out.ticker, out.security_type, "situation", u)

@@ -146,6 +146,44 @@ class Claude:
         return "\n".join(b.text for b in resp.content if b.type == "text").strip()
 
 
+    def agent(self, purpose: str, model: str, system: str, user: str, tools: list[dict[str, Any]],
+              run_tool: Any, effort: str = "high", max_turns: int = 30, max_searches: int = 12) -> str:
+        """Agent loop: server web tools plus our own data tools. Returns the final text.
+        run_tool(name, input) -> str executes client-side tools; errors go back as is_error results."""
+        all_tools = [
+            {"type": "web_search_20260209", "name": "web_search", "max_uses": max_searches},
+            {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": max_searches},
+            *tools,
+        ]
+        messages: list[dict[str, Any]] = [{"role": "user", "content": user}]
+        extra: dict[str, Any] = {}
+        if model in FALLBACK_MODELS:
+            extra = {"betas": ["server-side-fallback-2026-07-01"], "fallbacks": "default"}
+        sys_blocks = [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]
+        resp = None
+        for _ in range(max_turns):
+            def call(c: anthropic.Anthropic) -> Any:
+                with c.beta.messages.stream(model=model, max_tokens=32000, system=sys_blocks, tools=all_tools,
+                                            messages=messages, output_config={"effort": effort}, **extra) as st:
+                    return st.get_final_message()
+            resp = self._call(purpose, model, call)
+            messages.append({"role": "assistant", "content": resp.content})
+            if resp.stop_reason == "pause_turn":
+                continue
+            if resp.stop_reason != "tool_use":
+                break
+            results = []
+            for b in resp.content:
+                if b.type == "tool_use":
+                    try:
+                        out, err = run_tool(b.name, b.input), False
+                    except Exception as e:  # tool failures go back to the model, never crash the run
+                        out, err = f"Error: {e}", True
+                    results.append({"type": "tool_result", "tool_use_id": b.id, "content": out, "is_error": err})
+            messages.append({"role": "user", "content": results})
+        return "\n".join(b.text for b in (resp.content if resp else []) if b.type == "text").strip()
+
+
 _claude: Claude | None = None
 
 
