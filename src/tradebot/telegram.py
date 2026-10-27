@@ -12,7 +12,7 @@ from typing import Any
 
 import httpx
 
-from .config import get_settings
+from .config import get_settings, load_yaml
 from .db import Proposal, Thesis, kv_get, kv_set, log_decision, select, session
 
 log = logging.getLogger(__name__)
@@ -92,6 +92,8 @@ def announce_new_proposals() -> None:
             checks = " ".join(f"{c['name']}:{c['verdict']}" for c in th.checks)
             send(f"PROPOSAL #{p.id} [{th.tier.upper()}]\n{p.side.upper()} {p.qty:g} {p.symbol} @ ~{p.entry_ref_price:.2f}"
                  f"\nStop {p.stop_price:.2f}  Target {p.take_profit:.2f}  Risk ${p.risk_usd:.0f}{hedge_txt}"
+                 f"\nExit plan: stop to breakeven at +0.75R, trail from +1R, time stop {load_yaml('strategy.yaml').get('default_time_stop_days', 5)} trading days"
+                 f"{'  [FAST LANE]' if (th.meta or {}).get('fast') else ''}"
                  f"\n\nDriver: {th.driver}\nP={th.probability:.0%} move={th.expected_move_pct:.0f}% {th.horizon_days}d"
                  f"\nChecks: {checks}\n\n{th.summary[:1200]}\n\nAsk about it in Chat.",
                  [[{"text": "Approve", "callback_data": f"a:{p.id}"}, {"text": "Reject", "callback_data": f"r:{p.id}"}]],

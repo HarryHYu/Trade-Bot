@@ -43,6 +43,18 @@ Full walkthrough: [docs/SERVER_SETUP.md](docs/SERVER_SETUP.md)
    docker compose -f deploy/docker-compose.yml exec bot tradebot check
    ```
 
+## Trading style: act now
+
+Lots of trades on drivers that are visibly happening now. Buy as the move starts, ride it while the driver and the
+trend hold, cut dead money fast. No bets that need an event months away (`config/strategy.yaml`).
+
+- Fast lane: breaking, high-priority leads get a 3-agent check (news verification, priced-in, red team) within
+  minutes and enter at small size. The full 8-specialist review runs afterwards and can kill the trade.
+- Exits are bot-managed every minute: initial stop at 1.5 ATR, stop to breakeven at +0.75R, trailing stop from +1R,
+  hard target at 3R or the expected move, a dead-money time stop after 10 trading days for trades not yet up 1R, and
+  an immediate exit if the thesis is killed. Winners are never time-stopped.
+- Risk: 0.5% of equity per trade, up to 20 positions, 8% max per name, unhedged by default.
+
 ## Research quality: multi-agent diligence
 
 Any thesis that clears the first pass goes to eight specialists in parallel, each with one narrow brief

@@ -112,6 +112,10 @@ class Proposal(Base):
     decided_at: Mapped[dt.datetime | None] = mapped_column(DateTime)
     decided_by: Mapped[str | None] = mapped_column(String(32))
     closed_at: Mapped[dt.datetime | None] = mapped_column(DateTime)
+    filled_at: Mapped[dt.datetime | None] = mapped_column(DateTime)
+    hold_until: Mapped[dt.datetime | None] = mapped_column(DateTime)  # time stop
+    peak_price: Mapped[float | None] = mapped_column(Float)           # best price since entry
+    exit_reason: Mapped[str | None] = mapped_column(String(32))
     note: Mapped[str] = mapped_column(Text, default="")
 
 

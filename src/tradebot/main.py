@@ -27,8 +27,18 @@ def _safe(fn):
 
 def research_cycle() -> None:
     s = get_settings()
+    brain.followup_diligence()
     for tid in brain.research_top(5):
         if s.alpaca_key_id:  # no broker connected yet: theses still reach the phone
+            execution.propose_for_thesis(tid)
+    telegram.announce_new_theses()
+    telegram.announce_new_proposals()
+
+
+def fast_cycle() -> None:
+    s = get_settings()
+    for tid in brain.fast_lane():
+        if s.alpaca_key_id:
             execution.propose_for_thesis(tid)
     telegram.announce_new_theses()
     telegram.announce_new_proposals()
@@ -39,7 +49,7 @@ def trade_cycle() -> None:
         return
     execution.execute_approved()
     execution.sync_fills()
-    execution.manage_stops()
+    execution.manage_exits()
 
 
 def heartbeat() -> None:
@@ -58,6 +68,7 @@ def run() -> None:
     sch.add_job(_safe(collectors.run_all), "interval", minutes=10, max_instances=1, next_run_time=now)
     sch.add_job(_safe(brain.triage_pending), "interval", minutes=5, max_instances=1,
                 next_run_time=now + dt.timedelta(minutes=2))
+    sch.add_job(_safe(fast_cycle), "interval", minutes=2, max_instances=1)
     sch.add_job(_safe(research_cycle), "interval", minutes=30, max_instances=1)
     sch.add_job(_safe(trade_cycle), "interval", minutes=1, max_instances=1)
     sch.add_job(_safe(heartbeat), "interval", minutes=5)

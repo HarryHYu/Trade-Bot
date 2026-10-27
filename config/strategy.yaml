@@ -1,0 +1,18 @@
+# Trading style: lots of trades on drivers that are acting NOW. Buy as the move starts, ride it while the
+# driver and the trend hold, cut dead money fast so capital moves to the next opportunity.
+# No bets that need a future event months away (next quarter, next year).
+style: act_now
+max_hold_trading_days: 30        # the repricing must already be underway or expected within ~6 weeks
+default_time_stop_days: 10       # dead-money exit: if not up 1R after this many trading days, sell.
+                                 # Winners past 1R are NOT time-stopped; the trailing stop decides.
+stop_atr_mult: 1.5               # initial stop distance in daily ATRs
+breakeven_at_r: 0.75             # once up 0.75R, the stop moves to the entry price
+trail_activate_r: 1.0            # once up 1R, a trailing stop follows the best price
+trail_atr_mult: 1.0              # trailing distance in ATRs below the best price (above, for shorts)
+target_r_min: 3.0                # hard take-profit at max(expected move, 3R); the trail usually exits first
+fast_lane:
+  enabled: true
+  urgency: [now]                 # triage urgency levels that skip the queue
+  min_priority: 0.25
+  max_per_day: 20
+  followup_full_diligence: true  # the 8-specialist review runs after entry and can cut the trade

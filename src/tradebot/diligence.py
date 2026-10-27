@@ -70,6 +70,11 @@ coverage. Answer:
 1. Price path around each key date of the driver (did it react, how much, on what volume)? 2. Current
 consensus for the next report and how it was set. 3. Options-implied move, if any. 4. How crowded is the
 idea (coverage, social chatter, recent volume spikes)? 5. What would have to happen for upside not yet in the price.""",
+    "news_verification": """DIMENSION: news verification (fast lane). The trade is about a breaking event. Answer:
+1. Is the event real? Find the earliest primary or tier-1 source (company release, regulator, exchange filing,
+   major wire), with its exact timestamp. 2. Is it new, or a rehash of older news? 3. Any denial, correction or
+   contradicting report? 4. What exactly changed, in numbers? Verdict 'fail' if it cannot be confirmed from a
+   primary or tier-1 source, or if it is old news.""",
     "red_team": """DIMENSION: red team. Your job is to kill the thesis. Find the strongest evidence it is wrong:
 facts that contradict it, base rates for similar setups, reasons the driver will not reach revenue or price,
 and what a short seller would say. Rank the top 5 risks with evidence and probability. Verdict 'fail' if any
@@ -175,7 +180,7 @@ def apply_caps(v: Verdict, reports: list[SpecialistReport], ver: Verification, c
     reasons: list[str] = []
     cap = "big"
     by = {r.dimension: r for r in reports}
-    for dim in ("product_scope", "buyer_channel", "materiality"):
+    for dim in ("product_scope", "buyer_channel", "materiality", "news_verification", "priced_in"):
         if dim in by and by[dim].verdict == "fail":
             cap = "watch"
             reasons.append(f"{dim} failed")
@@ -196,10 +201,16 @@ def apply_caps(v: Verdict, reports: list[SpecialistReport], ver: Verification, c
     return min(v.tier, cap, key=ORDER.index), reasons
 
 
-def run(thesis_brief: str) -> dict[str, Any]:
-    """Full pipeline. Returns everything, so the journal keeps the whole audit trail."""
-    with ThreadPoolExecutor(max_workers=len(SPECIALISTS)) as pool:
-        futs = {n: pool.submit(run_specialist, n, thesis_brief) for n in SPECIALISTS}
+FULL = ["filings", "financial_quality", "product_scope", "buyer_channel", "materiality", "competition",
+        "priced_in", "red_team"]
+FAST = ["news_verification", "priced_in", "red_team"]
+
+
+def run(thesis_brief: str, fast: bool = False) -> dict[str, Any]:
+    """Full pipeline (8 specialists) or fast lane (3). Returns everything, so the journal keeps the audit trail."""
+    names = FAST if fast else FULL
+    with ThreadPoolExecutor(max_workers=len(names)) as pool:
+        futs = {n: pool.submit(run_specialist, n, thesis_brief) for n in names}
         reports = []
         for n, f in futs.items():
             try:

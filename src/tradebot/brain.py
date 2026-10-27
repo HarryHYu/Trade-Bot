@@ -68,7 +68,12 @@ def triage_pending(limit: int = 200) -> int:
     return made
 
 
-RESEARCH_SYSTEM = """You are the research lead of a small, disciplined trading desk. You are given a lead: a possible
+RESEARCH_SYSTEM = """You are the research lead of a small, disciplined trading desk that takes LOTS of trades on drivers
+acting NOW. The model trade: a real-world driver is visibly happening (a game exploding, an outbreak spreading, a
+shortage biting), the market has not fully priced it, and the stock reprices over days to a few weeks. Buy as it
+starts, ride it while it holds, sell when it fades. A thesis only counts if the driver is already observable today
+and the repricing is underway or likely within about six weeks; put that in horizon_days. Ideas that need a future
+event months away (next quarter's launch, a 2027 product) are not theses here: opportunity cost is the enemy. You are given a lead: a possible
 real-world driver for a security. Your job is to find out whether ONE clear driver exists and whether it will
 go through to the price, and to say so honestly. Most leads die here; that is correct.
 
@@ -140,9 +145,14 @@ class ThesisOut(BaseModel):
 
 
 def tier_for(t: ThesisOut) -> str:
-    """Conviction tier. Big requires every check to pass: independent confirmation, not crowded."""
+    """Conviction tier. Big requires every check to pass: independent confirmation, not crowded.
+    Short-term desk: anything expected to take longer than max_hold_trading_days is watch only."""
     if not t.has_thesis:
         return "none"
+    from .config import load_yaml as _ly
+    max_days = _ly("strategy.yaml").get("max_hold_trading_days", 10)
+    if t.horizon_days > max_days * 7 / 5:
+        return "watch"
     verdicts = {c.name: c.verdict for c in t.checks}
     if "fail" in verdicts.values():
         return "watch"
@@ -167,7 +177,7 @@ def diligence_budget_left() -> bool:
     return n < get_settings().max_diligence_per_day
 
 
-def research_lead(lead_id: int) -> int | None:
+def research_lead(lead_id: int, fast: bool = False) -> int | None:
     s = get_settings()
     with session() as db:
         lead = db.get(Lead, lead_id)
@@ -189,14 +199,27 @@ def research_lead(lead_id: int) -> int | None:
             f"CANDIDATE TICKERS: {', '.join(lead.tickers)}\n"
             f"PRICE ACTION (use for the 'noticed' check; a big move since the item means the market may have it):\n"
             f"{json.dumps(px, default=str)}\n\n{profile_context(ticker)}")
-    note = claude().research("research", s.research_model, RESEARCH_SYSTEM, user, effort=s.research_effort)
+    note = claude().research("research_fast" if fast else "research", s.research_model, RESEARCH_SYSTEM, user,
+                             effort="medium" if fast else s.research_effort, max_searches=8 if fast else 15)
     out = claude().parse(
         "thesis_extract", s.triage_model,
         "Extract the research note's conclusion into the schema exactly as the note states it. Do not add judgement.",
         note, ThesisOut, max_tokens=6000)
     tier = tier_for(out)
     dil = None
-    if tier in ("small", "standard", "big") and diligence_budget_left():
+    if fast and tier in ("small", "standard", "big"):
+        brief = (f"TICKER {out.ticker}, {out.direction}. BREAKING DRIVER: {out.driver}\nMECHANISM: {out.mechanism}\n"
+                 f"FIRST-PASS NOTE:\n{note[:8000]}")
+        try:
+            from . import diligence
+            dil = diligence.run(brief, fast=True)
+            tier = min(dil["final_tier"], "small", key=["watch", "small", "standard", "big"].index)  # fast lane enters small
+            v = dil["verdict"]
+            out.probability, out.expected_move_pct, out.horizon_days = v["probability"], v["expected_move_pct"], v["horizon_days"]
+        except Exception:
+            log.exception("fast diligence failed for lead %s", lead_id)
+            tier = "watch"
+    elif tier in ("small", "standard", "big") and diligence_budget_left():
         brief = (f"TICKER {out.ticker} ({out.security_type}), {out.direction}.\nDRIVER: {out.driver}\n"
                  f"MECHANISM: {out.mechanism}\nCATALYSTS: {'; '.join(out.catalysts)}\n"
                  f"FIRST-PASS NOTE:\n{note[:12000]}")
@@ -224,7 +247,7 @@ def research_lead(lead_id: int) -> int | None:
                     catalysts=out.catalysts, kill_criteria=out.kill_criteria, summary=out.summary,
                     situation_snapshot=profile_context(out.ticker), evidence=[{"item": item.id, "note": note[:20000]}],
                     meta={"hedge_idea": out.hedge_idea, "diligence": out.diligence.model_dump(),
-                          "diligence_run": dil})
+                          "diligence_run": dil, "fast": fast, "full_diligence_done": bool(dil) and not fast})
         db.add(th)
         lead.status = "thesis" if tier != "watch" else "watch"
         db.flush()
@@ -252,3 +275,62 @@ def research_top(n: int | None = None) -> list[int]:
         except Exception as e:
             log.exception("research failed on lead %s: %s", lid, e)
     return done
+
+
+def fast_lane() -> list[int]:
+    """Breaking, high-priority leads skip the queue: quick 3-agent check, small entry within minutes."""
+    from .config import load_yaml as _ly
+    from .db import Decision
+    cfg = _ly("strategy.yaml").get("fast_lane", {})
+    if not cfg.get("enabled", True):
+        return []
+    start = utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    with session() as db:
+        used = len(db.scalars(select(Decision.id).where(Decision.kind == "fast_lane", Decision.ts >= start)).all())
+        room = cfg.get("max_per_day", 20) - used
+        if room <= 0:
+            return []
+        ids = db.scalars(select(Lead.id).where(Lead.status == "new", Lead.urgency.in_(cfg.get("urgency", ["now"])),
+                                               Lead.priority >= cfg.get("min_priority", 0.25))
+                         .order_by(Lead.priority.desc()).limit(room)).all()
+    done = []
+    for lid in ids:
+        with session() as db:
+            log_decision(db, "fast_lane", lid)
+        try:
+            tid = research_lead(lid, fast=True)
+            if tid:
+                done.append(tid)
+        except Exception:
+            log.exception("fast lane failed on lead %s", lid)
+    return done
+
+
+def followup_diligence() -> int:
+    """Open fast-lane theses get the full 8-specialist review afterwards. If it caps them at watch, the thesis is
+    killed and manage_exits sells. If it confirms standard or big, the tier is raised for any add-on proposal."""
+    from . import diligence
+    n = 0
+    with session() as db:
+        rows = [t for t in db.scalars(select(Thesis).where(Thesis.status == "open")).all()
+                if (t.meta or {}).get("fast") and not (t.meta or {}).get("full_diligence_done")]
+    for th in rows:
+        if not diligence_budget_left():
+            break
+        brief = f"TICKER {th.ticker} ({th.security_type}), {th.direction}.\nDRIVER: {th.driver}\nMECHANISM: {th.mechanism}"
+        try:
+            dil = diligence.run(brief)
+        except Exception:
+            log.exception("followup diligence failed %s", th.ticker)
+            continue
+        with session() as db:
+            t = db.get(Thesis, th.id)
+            t.meta = (t.meta or {}) | {"full_diligence_done": True, "followup_diligence": dil}
+            if dil["final_tier"] == "watch":
+                t.status, t.closed_at = "killed", utcnow()
+                log_decision(db, "thesis_killed", t.id, reason="full diligence capped at watch", caps=dil["cap_reasons"])
+            else:
+                t.tier = dil["final_tier"]
+            log_decision(db, "diligence_run", t.id, ticker=t.ticker, final_tier=dil["final_tier"], followup=True)
+        n += 1
+    return n

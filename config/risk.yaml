@@ -1,14 +1,15 @@
 # Hard limits enforced in code after every model decision. The model cannot override these.
-max_risk_per_trade_pct: 1.0        # max loss at stop, % of equity
-tier_risk_multiplier: {small: 0.4, standard: 1.0, big: 2.0}
-max_position_pct: 15               # max notional in one name, % of equity
+max_risk_per_trade_pct: 0.5        # max loss at stop, % of equity (many small trades)
+tier_risk_multiplier: {small: 0.5, standard: 1.0, big: 1.5}
+max_position_pct: 8                # max notional in one name, % of equity
 max_gross_exposure_pct: 120
-max_open_positions: 12
+max_open_positions: 20
 max_theme_positions: 3             # correlated cluster cap
 daily_loss_halt_pct: 3.0           # halt new trades for the day past this drawdown
-dry_powder_pct: 20                 # cash kept back for big-tier opportunities
+dry_powder_pct: 15                 # cash kept back for big-tier opportunities
 hedge_beta_with: SPY               # default market hedge
-hedge_ratio: 0.5                   # fraction of beta exposure hedged on standard trades
+hedge_ratio: 0.5                   # fraction of beta exposure hedged
+hedge_on_tiers: []                 # short-term catalyst trades are unhedged by default; add [big] to hedge
 allowed_symbols_regex: "^[A-Z]{1,5}$"
 
 # Small-account mode (equity below this): long only, fractional shares, no hedge legs,
