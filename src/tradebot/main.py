@@ -1,0 +1,58 @@
+"""Scheduler: runs every loop on its interval. One process, restarts itself via Docker."""
+from __future__ import annotations
+
+import logging
+
+import httpx
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+from . import brain, collectors, execution, reflection, telegram
+from .config import get_settings
+from .db import init_db, kv_get, session
+
+log = logging.getLogger("tradebot")
+
+
+def _safe(fn):
+    def run():
+        try:
+            fn()
+        except Exception:
+            log.exception("job %s failed", fn.__name__)
+    run.__name__ = fn.__name__
+    return run
+
+
+def research_cycle() -> None:
+    for tid in brain.research_top(5):
+        execution.propose_for_thesis(tid)
+    telegram.announce_new_proposals()
+
+
+def trade_cycle() -> None:
+    execution.execute_approved()
+    execution.sync_fills()
+
+
+def heartbeat() -> None:
+    url = get_settings().heartbeat_url
+    if url:
+        httpx.get(url, timeout=10)
+
+
+def run() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
+    s = get_settings()
+    init_db()
+    sch = BlockingScheduler(timezone=s.timezone)
+    sch.add_job(_safe(collectors.run_all), "interval", minutes=10, max_instances=1)
+    sch.add_job(_safe(brain.triage_pending), "interval", minutes=5, max_instances=1)
+    sch.add_job(_safe(research_cycle), "interval", minutes=30, max_instances=1)
+    sch.add_job(_safe(trade_cycle), "interval", minutes=1, max_instances=1)
+    sch.add_job(_safe(telegram.poll_once), "interval", seconds=30, max_instances=1)
+    sch.add_job(_safe(heartbeat), "interval", minutes=5)
+    sch.add_job(_safe(reflection.post_mortems), "cron", hour=7, minute=0)
+    sch.add_job(_safe(lambda: telegram.send(reflection.daily_brief())), "cron", hour=7, minute=30)
+    sch.add_job(_safe(reflection.weekly_review), "cron", day_of_week="sat", hour=9)
+    telegram.send(f"Tradebot started. paper={not s.is_live} mode={s.approval_mode}")
+    sch.start()

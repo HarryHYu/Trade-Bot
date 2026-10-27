@@ -1,2 +1,57 @@
 # Trade-Bot
-eh
+
+Research-driven trading bot. It reads niche sources constantly, finds one clear real-world driver
+before it is priced in, interrogates it, sizes and hedges it, asks your phone for approval, trades,
+and learns from every outcome.
+
+```
+collectors (every 10 min) -> Haiku triage (every 5 min) -> leads
+leads -> Opus research with web search (every 30 min) -> thesis with 6 checks -> conviction tier
+thesis -> risk engine sizing + hard limits + SPY hedge -> proposal -> Telegram Approve/Reject
+approved -> Alpaca bracket order (stop + target) -> fills tracked -> post-mortem -> lessons in knowledge/
+```
+
+| Piece | File |
+|---|---|
+| Sources (edit freely) | `config/sources.yaml` |
+| Risk limits (code-enforced) | `config/risk.yaml` |
+| Collectors | `src/tradebot/collectors.py` |
+| Triage, research, thesis, tiers | `src/tradebot/brain.py` |
+| Knowledge base (profiles, situations, lessons, type briefings) | `knowledge/`, `src/tradebot/knowledge.py` |
+| Claude client, two-key rotation, spend cap | `src/tradebot/llm.py` |
+| Broker, sizing, approval gate | `broker.py`, `risk.py`, `execution.py` |
+| Phone | `telegram.py` |
+| Learning loop | `reflection.py` |
+
+Safety: paper by default. Live needs `ALPACA_PAPER=false` **and** `TRADING_LIVE_CONFIRM=yes`.
+Approval mode starts `manual`. `/halt` and `/flatten` work from Telegram at any time.
+
+## Setup
+
+1. Get keys: two Anthropic Console keys, Alpaca paper keys, a Telegram bot token from BotFather,
+   a Reddit "script" app, a YouTube Data API key, a free healthchecks.io URL.
+2. Telegram chat ID: message your bot once, then open
+   `https://api.telegram.org/bot<TOKEN>/getUpdates` and copy `message.chat.id`.
+3. Cloud server: Ubuntu 24.04, 2 vCPU / 4 GB (Hetzner, DigitalOcean or Vultr).
+4. On the server:
+   ```bash
+   git clone https://github.com/HarryHYu/Trade-Bot.git && cd Trade-Bot
+   bash deploy/install.sh        # creates .env, edit it, then run again
+   docker compose -f deploy/docker-compose.yml exec bot tradebot check
+   ```
+
+## Local commands
+```bash
+uv sync
+uv run tradebot check      # verify credentials
+uv run tradebot collect    # one collection pass
+uv run tradebot triage     # triage pending items
+uv run tradebot research   # research the top lead
+uv run tradebot brief      # print the daily brief
+uv run pytest
+```
+
+## Not built yet
+Earnings protocol timeline (T-21 to T+1), commodities fast-lane playbooks with armed orders,
+options instruments, watch-mode active re-search, browser tool for Claude, collector auto-writing,
+shadow-mode parameter testing, web portal. The schema already has `Prediction` for earnings.

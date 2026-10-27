@@ -1,0 +1,9 @@
+services:
+  bot:
+    build: {context: .., dockerfile: deploy/Dockerfile}
+    restart: unless-stopped
+    env_file: ../.env
+    volumes:
+      - ../data:/app/data
+      - ../knowledge:/app/knowledge
+      - ../config:/app/config

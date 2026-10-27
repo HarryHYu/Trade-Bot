@@ -60,13 +60,15 @@ def propose_for_thesis(thesis_id: int) -> list[int]:
 
 
 def auto_approve(ids: list[int]) -> None:
+    from .db import kv_get
     s = get_settings()
-    if s.approval_mode == "manual":
-        return
     with session() as db:
+        mode = kv_get(db, "approval_mode", s.approval_mode)  # /mode from Telegram overrides .env
+        if mode == "manual":
+            return
         for pid in ids:
             p = db.get(Proposal, pid)
-            if s.approval_mode == "auto" or (s.approval_mode == "threshold" and p.notional <= s.auto_approve_max_usd):
+            if mode == "auto" or (mode == "threshold" and p.notional <= s.auto_approve_max_usd):
                 p.state, p.decided_at, p.decided_by = "approved", utcnow(), "auto"
 
 

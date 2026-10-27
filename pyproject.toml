@@ -22,6 +22,9 @@ dependencies = [
     "youtube-transcript-api>=1.2.4",
 ]
 
+[project.scripts]
+tradebot = "tradebot.cli:main"
+
 [build-system]
 requires = ["uv_build>=0.11.32,<0.12.0"]
 build-backend = "uv_build"
