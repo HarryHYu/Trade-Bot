@@ -45,3 +45,23 @@ bookings per hour keep falling even as engagement recovers.
 - Reaction: options imply ~14%. Headline beats are partly priced (stock ~+30% in 20d before print). The swing is
   the Q4 bookings guide and commentary on bookings/hour. No directional edge beyond the implied move.
 - Trade: PASS (watch). Score after print: bookings, DAU, hours, ABPDAU, Q4 guide, and the next-day move.
+
+## Update 2026-10-27 (pre-freeze): what else Roblox is doing
+- Roblox Plus (Apr 30): $4.99 single tier, NO monthly Robux stipend (Premium had $4.99/$9.99/$19.99 tiers with
+  stipends; closed to new sign-ups). Plus gives 10% off Robux spending (20% after ~3 months); Roblox funds the
+  discount so creators are paid in full. Legacy Premium lost its 10% purchase bonus May 30. Net: fewer Robux needed
+  per item and lower-priced subs -> likely a drag on bookings that started in Q2 and continues; Roblox absorbs margin.
+  Sep 24: Plus cut from unlimited to one free private server per game (small monetization lever for Q4).
+- Russia unblocked Jun 10-11 after a Dec 2025 block (full quarter of return in Q3). Turkey reportedly unblocked
+  Jun 18 (conflicting sources). Algeria restored Oct 13 (Q4). These add DAU with low monetization (payment
+  restrictions), pushing bookings per DAU down further: consistent with "users back, money not".
+- Ads: rewarded video opened to all eligible creators Feb 2026, Magnite exclusive global rights; company calls ad
+  revenue "modest". Not a Q3 swing factor.
+- AI: 4D creation in public beta (Feb), Roblox says +64% playtime for players using it; Studio Assistant agentic,
+  MCP server. Supports the long-tail content flood thesis.
+- Legal: new AG suits (NE Mar, OK May, AR Jun, IA proceeding), CT investigation, $35.8M settlements (WV, AL, NV),
+  182 federal MDL cases (Sep), EU DSA VLOP designation, reported FTC probe. Rising legal/G&A cost; headline risk.
+- Q4 watch: Steal an Egg fading (BofA), GTA VI launches Nov 19 (competes for older-teen time), Algeria return,
+  private server change, Plus bundles, holiday season. Q4 2025 comp $2.2B bookings.
+- Revised: DAU mid 135M (Russia tailwind), bookings per DAU ~$12.1. Bookings call unchanged ($1.64B mid).
+  Trade: still PASS.
