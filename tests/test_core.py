@@ -25,3 +25,15 @@ def test_sizing_respects_risk_and_position_caps():
     assert sz.risk_usd <= 1000 + 1e-6
     assert sz.notional <= 15_000
     assert sz.stop < 100 < sz.take_profit
+
+
+def test_small_account_uses_fractional_shares():
+    bars = [dict(h=101, l=99, c=100) for _ in range(30)]
+    sz = risk.size("standard", "long", 450, 300, bars, 15)
+    assert sz is not None and sz.qty != int(sz.qty)
+    assert sz.notional <= 300 * 0.30 + 1e-6
+
+
+def test_small_account_blocks_shorts():
+    v = risk.check_portfolio("RBLX", 50, 300, [], 0, "standard", "short")
+    assert any("short" in x for x in v)

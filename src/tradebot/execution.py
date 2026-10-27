@@ -28,7 +28,7 @@ def propose_for_thesis(thesis_id: int) -> list[int]:
     sz = size(th.tier, th.direction, price, equity, br.daily_bars(th.ticker), th.expected_move_pct)
     if not sz:
         return []
-    violations = check_portfolio(th.ticker, sz.notional, equity, br.positions(), day_pnl_pct, th.tier)
+    violations = check_portfolio(th.ticker, sz.notional, equity, br.positions(), day_pnl_pct, th.tier, th.direction)
     with session() as db:
         if violations:
             log_decision(db, "proposal_blocked", thesis_id, violations=violations)
@@ -43,7 +43,8 @@ def propose_for_thesis(thesis_id: int) -> list[int]:
         ids = [main.id]
         r = load_yaml("risk.yaml")
         hedge_sym = r.get("hedge_beta_with")
-        if th.tier in ("standard", "big") and hedge_sym and hedge_sym != th.ticker:
+        small = equity < r.get("small_account_below_usd", 2000)
+        if not small and th.tier in ("standard", "big") and hedge_sym and hedge_sym != th.ticker:
             hp = br.last_price(hedge_sym)
             hq = int(sz.notional * r.get("hedge_ratio", 0.5) / hp)
             if hq >= 1:
@@ -139,3 +140,34 @@ def halt(flatten: bool = False) -> None:
         log_decision(db, "halt", "", flatten=flatten)
     if flatten:
         Alpaca().close_all()
+
+
+def manage_stops() -> int:
+    """For positions without a broker bracket (fractional), close when price crosses stop or target."""
+    br = Alpaca()
+    if not br.clock()["is_open"]:
+        return 0
+    held = {p["symbol"]: p for p in br.positions()}
+    n = 0
+    with session() as db:
+        rows = db.scalars(select(Proposal).where(Proposal.state == "filled", Proposal.role == "main")).all()
+    for p in rows:
+        if p.qty == int(p.qty) or p.symbol not in held:
+            continue
+        px = float(held[p.symbol]["current_price"])
+        long = p.side == "buy"
+        hit = None
+        if p.stop_price and (px <= p.stop_price if long else px >= p.stop_price):
+            hit = "stop"
+        elif p.take_profit and (px >= p.take_profit if long else px <= p.take_profit):
+            hit = "target"
+        if hit:
+            br.close_position(p.symbol)
+            with session() as db:
+                row = db.get(Proposal, p.id)
+                row.exit_price = px
+                row.pnl_usd = (px - (row.fill_price or px)) * row.qty * (1 if long else -1)
+                row.state, row.closed_at = "closed", utcnow()
+                log_decision(db, "closed", p.id, reason=hit, price=px, pnl=row.pnl_usd)
+            n += 1
+    return n

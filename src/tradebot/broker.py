@@ -47,14 +47,21 @@ class Alpaca:
         existing = self.order_by_client_id(client_order_id)
         if existing:
             return existing
-        body: dict[str, Any] = dict(symbol=symbol, side=side, qty=str(int(qty)), type="market",
-                                    time_in_force="day", client_order_id=client_order_id)
-        if stop and tp:
+        fractional = qty != int(qty)
+        body: dict[str, Any] = dict(symbol=symbol, side=side, qty=str(qty if fractional else int(qty)),
+                                    type="market", time_in_force="day", client_order_id=client_order_id)
+        if fractional:
+            pass  # bot manages the stop and target itself (see execution.manage_stops)
+        elif stop and tp:
             body |= dict(order_class="bracket", take_profit={"limit_price": round(tp, 2)},
                          stop_loss={"stop_price": round(stop, 2)})
         elif stop:
             body |= dict(order_class="oto", stop_loss={"stop_price": round(stop, 2)})
         return self._j(self.t.post("/v2/orders", json=body))
+
+    def latest_order_for(self, symbol: str) -> dict[str, Any] | None:
+        r = self._j(self.t.get("/v2/orders", params={"status": "closed", "symbols": symbol, "limit": 1, "direction": "desc"}))
+        return r[0] if r else None
 
     def close_position(self, symbol: str) -> Any:
         return self._j(self.t.delete(f"/v2/positions/{symbol}"))

@@ -32,6 +32,7 @@ def research_cycle() -> None:
 def trade_cycle() -> None:
     execution.execute_approved()
     execution.sync_fills()
+    execution.manage_stops()
 
 
 def heartbeat() -> None:

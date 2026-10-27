@@ -10,3 +10,10 @@ dry_powder_pct: 20                 # cash kept back for big-tier opportunities
 hedge_beta_with: SPY               # default market hedge
 hedge_ratio: 0.5                   # fraction of beta exposure hedged on standard trades
 allowed_symbols_regex: "^[A-Z]{1,5}$"
+
+# Small-account mode (equity below this): long only, fractional shares, no hedge legs,
+# bot-managed stops. Alpaca blocks shorting under ~US$2k, and fractional orders may not take brackets.
+small_account_below_usd: 2000
+small_account_risk_per_trade_pct: 5.0   # loss at stop, % of equity (5% of $300 = $15)
+small_account_max_position_pct: 30
+small_account_dry_powder_pct: 10

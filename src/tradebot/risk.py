@@ -12,7 +12,7 @@ from .config import load_yaml
 
 @dataclass
 class Sizing:
-    qty: int
+    qty: float
     stop: float
     take_profit: float
     risk_usd: float
@@ -34,16 +34,19 @@ def size(tier: str, direction: str, price: float, equity: float, bars: list[dict
     r = load_yaml("risk.yaml")
     a = atr_pct(bars)
     stop_dist = max(2.5 * a, 0.03) * price
-    risk_usd = equity * r["max_risk_per_trade_pct"] / 100 * r["tier_risk_multiplier"].get(tier, 0)
+    small = equity < r.get("small_account_below_usd", 2000)
+    risk_pct = r.get("small_account_risk_per_trade_pct", 5.0) if small else r["max_risk_per_trade_pct"]
+    risk_usd = equity * risk_pct / 100 * r["tier_risk_multiplier"].get(tier, 0)
     if risk_usd <= 0:
         return None
-    qty = math.floor(risk_usd / stop_dist)
-    reasons = []
-    cap = equity * r["max_position_pct"] / 100
+    rnd = (lambda q: math.floor(q * 1000) / 1000) if small else math.floor  # fractional shares when small
+    qty = rnd(risk_usd / stop_dist)
+    reasons = ["small-account mode: fractional, long only, no hedge"] if small else []
+    cap = equity * r.get("small_account_max_position_pct" if small else "max_position_pct", r["max_position_pct"]) / 100
     if qty * price > cap:
-        qty = math.floor(cap / price)
-        reasons.append("capped by max_position_pct")
-    if qty < 1:
+        qty = rnd(cap / price)
+        reasons.append("capped by max position size")
+    if qty * price < (1 if small else price):
         return None
     sign = 1 if direction == "long" else -1
     stop = price - sign * stop_dist
@@ -52,7 +55,7 @@ def size(tier: str, direction: str, price: float, equity: float, bars: list[dict
 
 
 def check_portfolio(symbol: str, notional: float, equity: float, positions: list[dict[str, Any]],
-                    day_pnl_pct: float, tier: str) -> list[str]:
+                    day_pnl_pct: float, tier: str, direction: str = "long") -> list[str]:
     """Returns violations. Empty list means allowed."""
     r = load_yaml("risk.yaml")
     v = []
@@ -65,7 +68,11 @@ def check_portfolio(symbol: str, notional: float, equity: float, positions: list
     gross = sum(abs(float(p["market_value"])) for p in positions)
     if (gross + notional) / equity * 100 > r["max_gross_exposure_pct"]:
         v.append("gross exposure cap")
+    small = equity < r.get("small_account_below_usd", 2000)
+    if small and direction == "short":
+        v.append("small account: shorting not allowed")
     cash_after = equity - gross - notional
-    if tier != "big" and cash_after / equity * 100 < r["dry_powder_pct"]:
+    powder = r.get("small_account_dry_powder_pct", 10) if small else r["dry_powder_pct"]
+    if tier != "big" and cash_after / equity * 100 < powder:
         v.append("would dip into dry powder reserve (big tier only)")
     return v
