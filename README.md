@@ -28,6 +28,9 @@ Approval mode starts `manual`. `/halt` and `/flatten` work from Telegram at any 
 
 ## Setup
 
+Full walkthrough: [docs/SERVER_SETUP.md](docs/SERVER_SETUP.md)
+
+
 1. Get keys: two Anthropic Console keys, Alpaca paper keys, a Telegram bot token from BotFather,
    a Reddit "script" app, a YouTube Data API key, a free healthchecks.io URL.
 2. Telegram chat ID: message your bot once, then open

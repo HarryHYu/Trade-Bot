@@ -1,6 +1,7 @@
 """Scheduler: runs every loop on its interval. One process, restarts itself via Docker."""
 from __future__ import annotations
 
+import datetime as dt
 import logging
 
 import httpx
@@ -19,7 +20,8 @@ def _safe(fn):
             fn()
         except Exception:
             log.exception("job %s failed", fn.__name__)
-    run.__name__ = fn.__name__
+    run.__name__ = getattr(fn, "__name__", "job")
+    run.__qualname__ = run.__name__
     return run
 
 
@@ -51,14 +53,20 @@ def run() -> None:
     s = get_settings()
     init_db()
     sch = BlockingScheduler(timezone=s.timezone)
-    sch.add_job(_safe(collectors.run_all), "interval", minutes=10, max_instances=1)
-    sch.add_job(_safe(brain.triage_pending), "interval", minutes=5, max_instances=1)
+    from zoneinfo import ZoneInfo
+    now = dt.datetime.now(ZoneInfo(s.timezone))
+    sch.add_job(_safe(collectors.run_all), "interval", minutes=10, max_instances=1, next_run_time=now)
+    sch.add_job(_safe(brain.triage_pending), "interval", minutes=5, max_instances=1,
+                next_run_time=now + dt.timedelta(minutes=2))
     sch.add_job(_safe(research_cycle), "interval", minutes=30, max_instances=1)
     sch.add_job(_safe(trade_cycle), "interval", minutes=1, max_instances=1)
     sch.add_job(_safe(heartbeat), "interval", minutes=5)
     sch.add_job(_safe(reflection.post_mortems), "cron", hour=7, minute=0)
     sch.add_job(_safe(earnings.run_protocol), "cron", hour=6, minute=0)
-    sch.add_job(_safe(lambda: telegram.send(reflection.daily_brief(), topic="Brief")), "cron", hour=7, minute=30)
+    sch.add_job(_safe(earnings.run_protocol), "date", run_date=now + dt.timedelta(minutes=5))
+    def daily_brief() -> None:
+        telegram.send(reflection.daily_brief(), topic="Brief")
+    sch.add_job(_safe(daily_brief), "cron", hour=7, minute=30)
     sch.add_job(_safe(reflection.weekly_review), "cron", day_of_week="sat", hour=9)
     telegram.start_listener()
     telegram.send(f"Tradebot started. paper={not s.is_live} mode={s.approval_mode}")
