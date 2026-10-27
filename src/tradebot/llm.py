@@ -13,12 +13,12 @@ from .db import ApiUsage, select, session
 
 T = TypeVar("T", bound=BaseModel)
 
-# USD per million tokens: (input, output). Cache reads ~10% of input, writes 125%.
+# USD per million tokens: (input, output, cache read). Cache writes are 1.25x input.
 PRICES = {
-    "claude-haiku-5-5": (0.10, 0.50),
-    "claude-sonnet-5-5": (2.0, 10.0),
-    "claude-opus-5-5": (4.0, 20.0),
-    "claude-fable-5-1": (10.0, 50.0),
+    "claude-haiku-5-5": (0.10, 0.50, 0.01),
+    "claude-sonnet-5-5": (2.0, 10.0, 0.20),
+    "claude-opus-5-5": (4.0, 20.0, 0.20),
+    "claude-fable-5-1": (10.0, 50.0, 0.25),
 }
 WEB_SEARCH_USD = 0.01
 FALLBACK_MODELS = {"claude-fable-5-1", "claude-opus-5-5", "claude-sonnet-5-5"}
@@ -43,10 +43,10 @@ def spend_by_key() -> dict[int, float]:
 
 
 def _cost(model: str, usage: Any, searches: int) -> float:
-    pin, pout = PRICES.get(model, PRICES["claude-opus-5-5"])
+    pin, pout, pcr = PRICES.get(model, PRICES["claude-opus-5-5"])
     cr = getattr(usage, "cache_read_input_tokens", 0) or 0
     cw = getattr(usage, "cache_creation_input_tokens", 0) or 0
-    return (usage.input_tokens * pin + cr * pin * 0.1 + cw * pin * 1.25
+    return (usage.input_tokens * pin + cr * pcr + cw * pin * 1.25
             + usage.output_tokens * pout) / 1e6 + searches * WEB_SEARCH_USD
 
 

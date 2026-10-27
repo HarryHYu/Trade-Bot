@@ -46,6 +46,31 @@ def diligence(ticker: str, thesis: str):
 
 
 @app.command()
+def costs(days: int = 30):
+    """Measured API spend by purpose and model, from the call log."""
+    import datetime as _dt
+    from sqlalchemy import func
+    from .db import ApiUsage, Decision, init_db, select, session
+    init_db()
+    since = _dt.datetime.now(_dt.UTC).replace(tzinfo=None) - _dt.timedelta(days=days)
+    with session() as s:
+        rows = s.execute(select(ApiUsage.purpose, ApiUsage.model, func.count(), func.sum(ApiUsage.input_tokens),
+                                func.sum(ApiUsage.cache_read_tokens), func.sum(ApiUsage.output_tokens),
+                                func.sum(ApiUsage.web_searches), func.sum(ApiUsage.cost_usd))
+                         .where(ApiUsage.ts >= since).group_by(ApiUsage.purpose, ApiUsage.model)).all()
+        runs = len(s.scalars(select(Decision.id).where(Decision.kind == "diligence_run", Decision.ts >= since)).all())
+    total = dil = 0.0
+    print(f"{'purpose':24} {'model':18} {'calls':>5} {'in':>9} {'cached':>9} {'out':>8} {'search':>6} {'usd':>8}")
+    for p, m, n, i, c, o, w, usd in sorted(rows, key=lambda r: -(r[7] or 0)):
+        total += usd or 0
+        if p.startswith("diligence"):
+            dil += usd or 0
+        print(f"{p:24} {m:18} {n:>5} {i or 0:>9} {c or 0:>9} {o or 0:>8} {w or 0:>6} {usd or 0:>8.2f}")
+    print(f"\nTotal ${total:.2f} over {days} days. Diligence ${dil:.2f} across {runs} runs"
+          + (f" = ${dil / runs:.2f} per run." if runs else "."))
+
+
+@app.command()
 def brief():
     from .reflection import daily_brief
     print(daily_brief())
