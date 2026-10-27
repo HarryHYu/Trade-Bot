@@ -1,0 +1,22 @@
+# Armed playbook: fires when the eyes see a confirming event. Orders are pre-built; no thinking at trigger time.
+name: ebola_outside_africa
+state: armed
+thesis: Bundibugyo Ebola outbreak (no vaccine) produces a confirmed case outside Africa; Western PPE panic buying re-rates micro-cap PPE makers as in 2014.
+speculative_stage:   # allowed now, before confirmation
+  instruments: [APT]
+  max_risk_pct_of_equity: 1.0
+  notes: APT has net cash and no debt; downside is mostly the premium of a failed thesis.
+confirm_triggers:
+  - source_tier: 1
+    match: "confirmed Ebola case in (United States|Europe|UK|Canada|Australia|India|China)"
+  - source_tier: 1
+    match: "Alpha Pro Tech .* Ebola"
+on_confirm:
+  instruments: [APT, LAKE]
+  max_risk_pct_of_equity: 2.0
+  entry: market within 60s of tier-1 confirmation; never chase more than +40% from pre-news close
+reaction_stage:
+  fade_if: move > 150% within 3 sessions and no company-confirmed orders
+kill:
+  - weekly new confirmed cases falling 4 consecutive weeks and no exported cases
+  - WHO ends PHEIC
