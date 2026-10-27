@@ -156,6 +156,30 @@ def roblox_games(universe_ids: list[int]) -> int:
     return store(out)
 
 
+def roblox_charts(pages: int = 20) -> int:
+    """Roblox explore charts: 'top-earning' (ranked by Robux spent in the last 7 days) and 'top-playing-now'.
+    One snapshot item per chart per hour, so spend concentration and new-game share become time series."""
+    now = dt.datetime.now(dt.UTC).replace(tzinfo=None)
+    out = []
+    with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=30) as c:
+        for sort_id in ("top-earning", "top-playing-now"):
+            games, tok = [], ""
+            for _ in range(pages):
+                params = {"sessionId": "tradebot", "sortId": sort_id, "device": "all", "country": "all"}
+                if tok:
+                    params["pageToken"] = tok
+                r = c.get("https://apis.roblox.com/explore-api/v1/get-sort-content", params=params).json()
+                games += [{"id": g["universeId"], "name": g["name"], "ccu": g.get("playerCount")} for g in r.get("games", [])]
+                tok = r.get("nextPageToken") or ""
+                if not tok:
+                    break
+            top = ", ".join(f"{i + 1}. {g['name']} ({g['ccu']})" for i, g in enumerate(games[:10]))
+            out.append(dict(source=f"roblox/{sort_id}", source_tier=1, external_id=f"{sort_id}:{now:%Y%m%d%H}",
+                            title=f"Roblox {sort_id} snapshot", text=top, published_at=now, triaged=True,
+                            meta={"kind": "metric", "games": games[:500]}))
+    return store(out)
+
+
 def steam_players(apps: list[dict[str, Any]]) -> int:
     """Live concurrent players per Steam game, one item per poll, so retention is a time series.
     Free, no key. Pair each game with the listed company that earns from it."""
@@ -187,6 +211,7 @@ def run_all() -> dict[str, int]:
         "alpaca_news": alpaca_news,
         "roblox": lambda: roblox_games(cfg.get("roblox_universes", [])),
         "steam": lambda: steam_players(cfg.get("steam_apps", [])),
+        "roblox_charts": roblox_charts,
     }
     counts = {}
     for name, fn in jobs.items():
