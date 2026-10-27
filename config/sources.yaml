@@ -1,0 +1,18 @@
+# Tier: 1 primary/first-party, 2 established reporting, 3 expert communities, 4 general social.
+rss:
+  - {name: reuters-business, url: "https://news.google.com/rss/search?q=site:reuters.com+business&hl=en-US", tier: 2}
+  - {name: gnews-roblox, url: "https://news.google.com/rss/search?q=roblox&hl=en-US", tier: 2}
+  - {name: gnews-oil, url: "https://news.google.com/rss/search?q=oil+supply+OR+opec+OR+refinery&hl=en-US", tier: 2}
+  - {name: eia-today, url: "https://www.eia.gov/rss/todayinenergy.xml", tier: 1}
+reddit:
+  - {name: roblox, tier: 4}
+  - {name: RobloxDevelopers, tier: 3}
+  - {name: GrowAGarden, tier: 4}
+  - {name: stocks, tier: 4}
+  - {name: wallstreetbets, tier: 4}
+  - {name: oil, tier: 3}
+  - {name: geopolitics, tier: 3}
+  - {name: OSINT, tier: 3}
+sec_forms: ["8-K", "4"]
+youtube: []   # - {id: UCxxxx, name: channel, tier: 3}
+roblox_universes: []   # universe IDs of top games to track concurrents for
