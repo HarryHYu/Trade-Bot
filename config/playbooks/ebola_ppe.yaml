@@ -3,7 +3,7 @@ name: ebola_outside_africa
 state: armed
 thesis: Bundibugyo Ebola outbreak (no vaccine) produces a confirmed case outside Africa; Western PPE panic buying re-rates micro-cap PPE makers as in 2014.
 speculative_stage:   # allowed now, before confirmation
-  instruments: [APT]
+  instruments: [OSUR, APT]   # OSUR first: only FDA-EUA Bundibugyo rapid test, ~$2.33/sh cash, activist sale pressure
   max_risk_pct_of_equity: 1.0
   notes: APT has net cash and no debt; downside is mostly the premium of a failed thesis.
 confirm_triggers:
@@ -11,8 +11,10 @@ confirm_triggers:
     match: "confirmed Ebola case in (United States|Europe|UK|Canada|Australia|India|China)"
   - source_tier: 1
     match: "Alpha Pro Tech .* Ebola"
+  - source_tier: 1
+    match: "OraSure .* (Ebola|OraQuick Ebola) .* (order|contract|procure|BARDA|shipment)"
 on_confirm:
-  instruments: [APT, LAKE]
+  instruments: [OSUR, APT, LAKE]
   max_risk_pct_of_equity: 2.0
   entry: market within 60s of tier-1 confirmation; never chase more than +40% from pre-news close
 reaction_stage:
@@ -20,3 +22,4 @@ reaction_stage:
 kill:
   - weekly new confirmed cases falling 4 consecutive weeks and no exported cases
   - WHO ends PHEIC
+earnings_dates: {OSUR: 2026-11-04, APT: 2026-11-04}
