@@ -16,6 +16,7 @@ class Settings(BaseSettings):
 
     # Claude: comma-separated keys, one per Console org. Rotated by month-to-date spend.
     anthropic_api_keys: str = ""
+    anthropic_workspace_id: str = ""  # only for Console keys that span several workspaces
     monthly_credit_usd_per_key: float = 200.0
     # Hard ceiling on total API spend per calendar month, credits plus paid. Raise it when you want.
     monthly_spend_cap_usd: float = 600.0
@@ -76,7 +77,7 @@ EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max
                      "max_research_per_day", "approval_mode", "auto_approve_max_usd", "proposal_ttl_minutes",
                      "research_effort", "diligence_effort", "chat_effort", "triage_model", "research_model",
                      "prediction_model", "diligence_model", "verifier_model", "judge_model", "chat_model",
-                     "sec_user_agent", "reddit_user_agent"}
+                     "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id"}
 # Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).
 OVERRIDES_FILE = Path("data/settings_overrides.json")
 

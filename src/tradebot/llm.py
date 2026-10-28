@@ -58,8 +58,19 @@ class Claude:
         keys = self.s.api_keys
         if not keys:
             raise RuntimeError("No Anthropic API key yet. In Telegram send: /setkey ANTHROPIC_API_KEYS key1,key2")
-        self.clients = [anthropic.Anthropic(api_key=k, max_retries=3, timeout=900) for k in keys]
+        self.keys = keys
+        self.clients = [self._make(k, both=False) for k in keys]
+        self._both: set[int] = set()  # keys switched to x-api-key + Bearer after a 401
         self._skip: set[int] = set()
+
+    def _make(self, key: str, both: bool) -> anthropic.Anthropic:
+        """Console user/service keys (sk-ant-usr-, sk-ant-svc-) may need a Bearer header as well as x-api-key.
+        Standard keys use x-api-key only. An optional workspace id is sent for multi-workspace keys."""
+        headers = {"anthropic-workspace-id": self.s.anthropic_workspace_id} if self.s.anthropic_workspace_id else {}
+        if both:  # Bearer as the credential, x-api-key added explicitly (the SDK accepts only one credential)
+            return anthropic.Anthropic(auth_token=key, max_retries=3, timeout=900,
+                                       default_headers=headers | {"x-api-key": key})
+        return anthropic.Anthropic(api_key=key, max_retries=3, timeout=900, default_headers=headers or None)
 
     def _pick(self) -> int:
         spend = spend_by_key()
@@ -83,10 +94,21 @@ class Claude:
             ))
 
     def _call(self, purpose: str, model: str, fn: Any) -> Any:
-        for _ in range(len(self.clients) + 1):
+        for _ in range(2 * len(self.clients) + 1):
             idx = self._pick()
             try:
                 resp = fn(self.clients[idx])
+            except anthropic.AuthenticationError as e:
+                if idx not in self._both and not self.keys[idx].startswith("sk-ant-api"):
+                    self._both.add(idx)
+                    self.clients[idx] = self._make(self.keys[idx], both=True)
+                    last = e
+                    continue  # retry the same key with both auth headers
+                self._skip.add(idx)
+                last = e
+                if len(self._skip) >= len(self.clients):
+                    raise RuntimeError(f"Every Anthropic key was rejected (401). Check them in the Console. Last: {e}")
+                continue
             except (anthropic.RateLimitError, anthropic.PermissionDeniedError) as e:
                 self._skip.add(idx)
                 last = e
