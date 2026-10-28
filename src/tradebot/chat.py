@@ -22,6 +22,9 @@ OUT_DIR = Path("data/outbox")
 SYSTEM = """You are the trading desk's partner, chatting with the owner on Telegram. Talk like a sharp,
 direct colleague: short messages, plain text (Telegram does not render markdown tables), no fluff.
 
+Each owner message starts with a [Desk status: ...] line with live facts (what is connected, spend, counts). Trust
+it over assumptions, and say plainly what you cannot do yet because something is not connected.
+
 You run inside the desk's own system and have tools for it: the database (items, leads, theses,
 proposals, predictions, decisions, api_usage), the knowledge base (security profiles, situations,
 lessons, type briefings), the broker account, web search, charts and files. Use them instead of guessing,
@@ -255,10 +258,35 @@ def _history(thread: str, n: int = 30) -> list[dict[str, Any]]:
     return msgs
 
 
+def status_line() -> str:
+    """Live facts about the desk, sent with every message (after the cache breakpoint, so it costs little)."""
+    from sqlalchemy import func
+    from .db import Item, Lead, Proposal, Thesis, Source
+    from .llm import spend_by_key
+    s = get_settings()
+    try:
+        with session() as db:
+            items = db.scalar(select(func.count()).select_from(Item)) or 0
+            leads = db.scalar(select(func.count()).select_from(Lead)) or 0
+            theses = db.scalar(select(func.count()).select_from(Thesis).where(Thesis.status == "open")) or 0
+            props = db.scalar(select(func.count()).select_from(Proposal).where(Proposal.state.in_(["proposed", "filled"]))) or 0
+            srcs = db.scalar(select(func.count()).select_from(Source).where(Source.active.is_(True))) or 0
+        spend = sum(spend_by_key().values())
+    except Exception:
+        items = leads = theses = props = srcs = 0
+        spend = 0.0
+    broker = ("Alpaca " + ("LIVE" if s.is_live else "paper")) if s.alpaca_key_id else "NONE (research and theses only; no trades)"
+    missing = [n for n, v in (("Reddit", s.reddit_client_id), ("YouTube", s.youtube_api_key)) if not v]
+    return (f"[Desk status: broker {broker}; Claude keys {len(s.api_keys)}; API spend this month ${spend:.2f} of "
+            f"${s.monthly_spend_cap_usd:.0f} cap; sources {srcs}; items collected {items}; leads {leads}; open theses {theses}; "
+            f"open proposals/positions {props}; approval mode {s.approval_mode}"
+            + (f"; not connected: {', '.join(missing)}" if missing else "") + "]")
+
+
 def reply(thread: str, user_text: str, media: list[dict[str, Any]]) -> tuple[str, Ctx]:
     s = get_settings()
     ctx = Ctx()
-    content: list[dict[str, Any]] = [*media, {"type": "text", "text": user_text or "(see attached)"}]
+    content: list[dict[str, Any]] = [*media, {"type": "text", "text": f"{status_line()}\n\n{user_text or '(see attached)'}"}]
     messages = _history(thread) + [{"role": "user", "content": content}]
     note = user_text + (f" [sent {len(media)} attachment(s)]" if media else "")
     with session() as db:
