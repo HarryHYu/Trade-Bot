@@ -24,13 +24,13 @@ class Settings(BaseSettings):
     monthly_spend_cap_usd: float = 600.0
     triage_model: str = "claude-haiku-5-5"
     research_model: str = "claude-sonnet-5-5"
-    prediction_model: str = "claude-fable-5-1"
+    prediction_model: str = "claude-opus-5-5"
     research_effort: str = "high"
     max_research_per_day: int = 40
     # Multi-agent diligence on any thesis that clears the first pass
     diligence_model: str = "claude-sonnet-5-5"
     verifier_model: str = "claude-sonnet-5-5"
-    judge_model: str = "claude-fable-5-1"
+    judge_model: str = "claude-opus-5-5"
     diligence_effort: str = "high"
     max_diligence_per_day: int = 2  # ~$10 per full run (8 agents + verifier + judge); 2/day is ~$600/month
 
