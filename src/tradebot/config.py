@@ -69,9 +69,52 @@ class Settings(BaseSettings):
         return (not self.alpaca_paper) and self.trading_live_confirm.lower() == "yes"
 
 
+# Settings the owner can change from Telegram. Secrets are set with /setkey (message deleted, never sent to Claude).
+SECRET_SETTINGS = {"anthropic_api_keys", "alpaca_key_id", "alpaca_secret_key", "reddit_client_id",
+                   "reddit_client_secret", "youtube_api_key", "finnhub_api_key", "heartbeat_url"}
+EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max_diligence_per_day",
+                     "max_research_per_day", "approval_mode", "auto_approve_max_usd", "proposal_ttl_minutes",
+                     "research_effort", "diligence_effort", "chat_effort", "triage_model", "research_model",
+                     "prediction_model", "diligence_model", "verifier_model", "judge_model", "chat_model",
+                     "sec_user_agent", "reddit_user_agent"}
+# Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).
+OVERRIDES_FILE = Path("data/settings_overrides.json")
+
+
+def _overrides() -> dict[str, Any]:
+    import json
+    try:
+        return json.loads(OVERRIDES_FILE.read_text())
+    except Exception:
+        return {}
+
+
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    """.env values, with anything the owner changed from Telegram layered on top."""
+    return Settings(**_overrides())
+
+
+def set_override(name: str, value: Any) -> Any:
+    """Validate and persist one setting, then reload everything that depends on it. Returns the parsed value."""
+    import json
+    import os
+    name = name.lower()
+    if name not in SECRET_SETTINGS | EDITABLE_SETTINGS:
+        raise ValueError(f"{name} cannot be changed from Telegram")
+    data = _overrides()
+    data[name] = value
+    parsed = getattr(Settings(**data), name)  # raises if the value is invalid
+    OVERRIDES_FILE.parent.mkdir(parents=True, exist_ok=True)
+    OVERRIDES_FILE.write_text(json.dumps(data, indent=1))
+    os.chmod(OVERRIDES_FILE, 0o600)
+    get_settings.cache_clear()
+    try:
+        from . import llm
+        llm._claude = None  # rebuild API clients with new keys or models
+    except Exception:
+        pass
+    return parsed
 
 
 def load_yaml(name: str, settings: Settings | None = None) -> dict[str, Any]:

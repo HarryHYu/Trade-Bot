@@ -57,7 +57,7 @@ class Claude:
         self.s = get_settings()
         keys = self.s.api_keys
         if not keys:
-            raise RuntimeError("ANTHROPIC_API_KEYS is empty")
+            raise RuntimeError("No Anthropic API key yet. In Telegram send: /setkey ANTHROPIC_API_KEYS key1,key2")
         self.clients = [anthropic.Anthropic(api_key=k, max_retries=3, timeout=900) for k in keys]
         self._skip: set[int] = set()
 

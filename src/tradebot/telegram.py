@@ -127,8 +127,36 @@ def announce_new_theses() -> None:
             th.meta = (th.meta or {}) | {"announced": True}
 
 
+def _setkey(text: str) -> str:
+    from .config import SECRET_SETTINGS, set_override
+    parts = text.split(maxsplit=2)
+    if len(parts) < 3:
+        return "Usage: /setkey NAME value  (e.g. /setkey ANTHROPIC_API_KEYS key1,key2). Your message was deleted."
+    name = parts[1].lower()
+    if name not in SECRET_SETTINGS:
+        return f"/setkey is for secrets: {', '.join(sorted(n.upper() for n in SECRET_SETTINGS))}. Use /set for others."
+    try:
+        set_override(name, parts[2].strip())
+    except Exception as e:
+        return f"Could not save {name.upper()}: {e}"
+    with session() as db:
+        log_decision(db, "setting_changed", name, secret=True)
+    return f"Saved {name.upper()} (hidden). Your message was deleted."
+
+
+def _settings_text() -> str:
+    from .config import EDITABLE_SETTINGS, SECRET_SETTINGS
+    s = get_settings()
+    lines = ["SETTINGS (change with /set NAME value, or ask in Chat)"]
+    lines += [f"{n.upper()} = {getattr(s, n)}" for n in sorted(EDITABLE_SETTINGS)]
+    lines.append("\nKEYS (set with /setkey NAME value)")
+    lines += [f"{n.upper()}: {'set' if getattr(s, n) else 'missing'}" for n in sorted(SECRET_SETTINGS)]
+    return "\n".join(lines)
+
+
 HELP = ("Just talk to me, or send photos and files.\n"
-        "/status  /positions  /halt  /flatten  /resume  /mode manual|threshold|auto  /new (fresh chat)")
+        "/status  /positions  /halt  /flatten  /resume  /mode manual|threshold|auto  /new (fresh chat)\n"
+        "/settings  /set NAME value  /setkey NAME value (secrets; message auto-deleted)")
 
 
 def _command(text: str, thread: str) -> str:
@@ -152,6 +180,19 @@ def _command(text: str, thread: str) -> str:
             kv_set(db, "approval_mode", args[0])
             log_decision(db, "mode", args[0])
         return f"Approval mode is now {args[0]}."
+    if cmd == "/settings":
+        return _settings_text()
+    if cmd == "/set":
+        from .config import EDITABLE_SETTINGS, set_override
+        if len(args) < 2 or args[0].lower() not in EDITABLE_SETTINGS:
+            return "Usage: /set NAME value. Names: " + ", ".join(sorted(n.upper() for n in EDITABLE_SETTINGS))
+        try:
+            v = set_override(args[0], " ".join(args[1:]))
+        except Exception as e:
+            return f"Could not set {args[0].upper()}: {e}"
+        with session() as db:
+            log_decision(db, "setting_changed", args[0].lower(), value=str(v))
+        return f"{args[0].upper()} = {v}"
     if cmd == "/new":
         from .db import ChatTurn
         with session() as db:
@@ -226,7 +267,7 @@ def handle(u: dict[str, Any]) -> None:
         act, ref = cq["data"].split(":", 1)
         if act in ("a", "r"):
             out = decide(int(ref), act == "a", by=f"telegram:{cq['from']['id']}")
-        elif act == "c":
+        elif act in ("c", "s"):
             out = apply_change(ref, by=f"telegram:{cq['from']['id']}")
         else:
             with session() as db:
@@ -240,6 +281,11 @@ def handle(u: dict[str, Any]) -> None:
         return
     text = msg.get("text") or ""
     tid = msg.get("message_thread_id")
+    if text.split(" ")[0].split("@")[0] == "/setkey":
+        # Secrets never reach Claude or chat history: save, delete the message, confirm without echoing.
+        _api("deleteMessage", chat_id=msg["chat"]["id"], message_id=msg["message_id"])
+        send(_setkey(text), topic=None, thread_id=tid)
+        return
     if text.startswith("/"):
         send(_command(text, str(tid or "dm")), topic=None, thread_id=tid)
     else:

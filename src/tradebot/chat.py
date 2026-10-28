@@ -32,8 +32,9 @@ You can start or stop watching any source (add_source/list_sources/remove_source
 conversation shows something worth tracking. If a source needs an account or API key, tell the owner exactly where
 to sign up and which .env variable the key goes in.
 
-You never place trades or change rules directly. To change a risk limit or setting, call
-propose_change; the owner confirms with a button. Paper vs live is never changed from chat."""
+You never place trades or change rules directly. To change any setting, risk limit or strategy rule, call
+propose_change; the owner confirms with a button. API keys are never handled in chat: tell the owner to send
+/setkey NAME value (the bot deletes that message). Paper vs live is never changed from chat."""
 
 TOOLS: list[dict[str, Any]] = [
     {"type": "web_search_20260209", "name": "web_search", "max_uses": 10},
@@ -64,9 +65,14 @@ TOOLS: list[dict[str, Any]] = [
      "input_schema": {"type": "object", "properties": {}}},
     {"name": "remove_source", "description": "Stop watching a source by id.",
      "input_schema": {"type": "object", "properties": {"id": {"type": "integer"}}, "required": ["id"]}},
-    {"name": "propose_change", "description": "Propose changing a value in config/risk.yaml. The owner confirms by button.",
-     "input_schema": {"type": "object", "properties": {"key": {"type": "string"}, "value": {},
-                                                       "reason": {"type": "string"}}, "required": ["key", "value", "reason"]}},
+    {"name": "propose_change", "description": "Propose changing any bot setting. target is 'risk' (config/risk.yaml), "
+     "'strategy' (config/strategy.yaml) or 'setting' (spend cap, diligence per day, models, efforts, approval mode, etc.; "
+     "see show_settings). The owner confirms by button. API keys are never set here: tell the owner to use /setkey.",
+     "input_schema": {"type": "object", "properties": {"target": {"type": "string", "enum": ["risk", "strategy", "setting"]},
+                                                       "key": {"type": "string"}, "value": {}, "reason": {"type": "string"}},
+                      "required": ["target", "key", "value", "reason"]}},
+    {"name": "show_settings", "description": "Current settings, risk limits and strategy rules, and which API keys are set.",
+     "input_schema": {"type": "object", "properties": {}}},
 ]
 
 
@@ -156,16 +162,30 @@ def run_tool(name: str, inp: dict[str, Any], ctx: Ctx) -> str:
     if name == "remove_source":
         from . import sources as reg
         return reg.remove(int(inp["id"]))
+    if name == "show_settings":
+        from .config import EDITABLE_SETTINGS, SECRET_SETTINGS
+        s = get_settings()
+        return json.dumps({"settings": {n: getattr(s, n) for n in sorted(EDITABLE_SETTINGS)},
+                           "keys_set": {n: bool(getattr(s, n)) for n in sorted(SECRET_SETTINGS)},
+                           "risk": load_yaml("risk.yaml"), "strategy": load_yaml("strategy.yaml")}, default=str)
     if name == "propose_change":
-        risk = load_yaml("risk.yaml")
-        if inp["key"] not in risk:
-            return f"Unknown key. Valid keys: {', '.join(risk)}"
+        from .config import EDITABLE_SETTINGS
+        target = inp.get("target", "risk")
+        if target == "setting":
+            if inp["key"].lower() not in EDITABLE_SETTINGS:
+                return f"Not changeable here. Settings: {', '.join(sorted(EDITABLE_SETTINGS))}. Keys use /setkey."
+            old = getattr(get_settings(), inp["key"].lower())
+        else:
+            cfg = load_yaml(f"{target}.yaml")
+            if inp["key"] not in cfg:
+                return f"Unknown key. Valid {target} keys: {', '.join(cfg)}"
+            old = cfg[inp["key"]]
         cid = uuid.uuid4().hex[:8]
         with session() as db:
-            kv_set(db, f"cfg:{cid}", json.dumps(inp))
+            kv_set(db, f"cfg:{cid}", json.dumps(inp | {"target": target}))
         ctx.buttons = [[{"text": f"Set {inp['key']} = {inp['value']}", "callback_data": f"c:{cid}"},
                         {"text": "Cancel", "callback_data": f"x:{cid}"}]]
-        return f"Proposal shown to the owner: {inp['key']} {risk[inp['key']]} -> {inp['value']}."
+        return f"Proposal shown to the owner: {target}.{inp['key']} {old} -> {inp['value']}."
     return f"Unknown tool {name}"
 
 
@@ -179,14 +199,24 @@ def apply_change(cid: str, by: str) -> str:
             return "That change expired or was already handled."
         ch = json.loads(raw)
         kv_set(db, f"cfg:{cid}", "")
-        path = get_settings().config_dir / "risk.yaml"
-        data = yaml.safe_load(path.read_text())
-        old = data.get(ch["key"])
-        data[ch["key"]] = ch["value"]
-        path.write_text(yaml.safe_dump(data, sort_keys=False))
-        log_decision(db, "config_change", ch["key"], old=old, new=ch["value"], reason=ch["reason"], by=by)
-    commit(f"risk.yaml: {ch['key']} {old} -> {ch['value']} ({ch['reason']})")
-    return f"Done: {ch['key']} {old} -> {ch['value']}"
+        target = ch.get("target", "risk")
+        if target == "setting":
+            from .config import set_override
+            old = getattr(get_settings(), ch["key"].lower())
+            try:
+                new = set_override(ch["key"], ch["value"])
+            except Exception as e:
+                return f"Could not apply: {e}"
+        else:
+            path = get_settings().config_dir / f"{target}.yaml"
+            data = yaml.safe_load(path.read_text())
+            old, new = data.get(ch["key"]), ch["value"]
+            data[ch["key"]] = new
+            path.write_text(yaml.safe_dump(data, sort_keys=False))
+        log_decision(db, "config_change", ch["key"], target=target, old=old, new=new, reason=ch["reason"], by=by)
+    if target != "setting":
+        commit(f"{target}.yaml: {ch['key']} {old} -> {new} ({ch['reason']})")
+    return f"Done: {ch['key']} {old} -> {new}"
 
 
 def media_block(data: bytes, filename: str, mime: str | None) -> dict[str, Any] | None:

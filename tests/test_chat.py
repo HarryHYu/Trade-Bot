@@ -37,7 +37,7 @@ def test_knowledge_paths_are_sandboxed():
 
 def test_rule_change_needs_confirmation(tmp_path):
     ctx = chat.Ctx()
-    chat.run_tool("propose_change", {"key": "max_risk_per_trade_pct", "value": 0.5, "reason": "test"}, ctx)
+    chat.run_tool("propose_change", {"target": "risk", "key": "max_risk_per_trade_pct", "value": 0.5, "reason": "test"}, ctx)
     assert "1.0" in (tmp_path / "config" / "risk.yaml").read_text()
     cid = ctx.buttons[0][0]["callback_data"].split(":")[1]
     assert "0.5" in chat.apply_change(cid, by="t")
@@ -70,3 +70,25 @@ def test_strangers_are_ignored(monkeypatch):
     monkeypatch.setattr(telegram._pool, "submit", lambda *a: called.append(a))
     telegram.handle({"update_id": 1, "message": {"chat": {"id": 999}, "text": "hi", "from": {"id": 5}}})
     assert not called
+
+
+def test_settings_from_telegram(tmp_path, monkeypatch):
+    from tradebot import config
+    monkeypatch.setattr(config, "OVERRIDES_FILE", tmp_path / "ov.json")
+    config.get_settings.cache_clear()
+    sent, deleted = [], []
+    monkeypatch.setattr(telegram, "_api", lambda m, files=None, **b: (deleted.append(b) if m == "deleteMessage" else sent.append(b)) or {"ok": True})
+    monkeypatch.setattr(config.Settings, "model_config", config.Settings.model_config | {"env_file": None})
+    s = config.get_settings()
+    monkeypatch.setattr(s, "telegram_chat_id", "42", raising=False)
+    # /set changes a normal setting
+    assert "MAX_DILIGENCE_PER_DAY = 1" in telegram._command("/set MAX_DILIGENCE_PER_DAY 1", "dm")
+    assert config.get_settings().max_diligence_per_day == 1
+    # invalid values are rejected
+    assert "Could not set" in telegram._command("/set MAX_DILIGENCE_PER_DAY lots", "dm")
+    # telegram and live-trading settings are not changeable
+    assert "Usage" in telegram._command("/set TELEGRAM_BOT_TOKEN x", "dm")
+    # /setkey stores a secret, deletes the message, and never echoes the value
+    out = telegram._setkey("/setkey ANTHROPIC_API_KEYS sk-ant-secret1,sk-ant-secret2")
+    assert "secret1" not in out and config.get_settings().api_keys == ["sk-ant-secret1", "sk-ant-secret2"]
+    config.get_settings.cache_clear()
