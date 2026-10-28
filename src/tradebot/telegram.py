@@ -155,7 +155,7 @@ def _settings_text() -> str:
 
 
 HELP = ("Just talk to me, or send photos and files.\n"
-        "/status  /positions  /halt  /flatten  /resume  /mode manual|threshold|auto  /new (fresh chat)\n"
+        "/status  /positions  /halt  /flatten  /resume  /pause  /unpause (research)  /mode manual|threshold|auto  /new (fresh chat)\n"
         "/settings  /set NAME value  /setkey NAME value (secrets; message auto-deleted)")
 
 
@@ -175,6 +175,14 @@ def _command(text: str, thread: str) -> str:
             kv_set(db, "halted", "0")
             log_decision(db, "resume", "")
         return "Resumed."
+    if cmd in ("/pause", "/unpause"):
+        on = cmd == "/pause"
+        with session() as db:
+            kv_set(db, "research_paused", "1" if on else "0")
+            log_decision(db, "research_paused" if on else "research_unpaused", "")
+        return ("Research paused: no triage, research, diligence, inbox imports, earnings calls or reviews. "
+                "Chat, collectors and open-position exits keep running. /unpause to restart."
+                if on else "Research running again.")
     if cmd == "/mode" and args and args[0] in ("manual", "threshold", "auto"):
         with session() as db:
             kv_set(db, "approval_mode", args[0])

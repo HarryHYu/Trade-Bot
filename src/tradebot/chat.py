@@ -13,7 +13,7 @@ from typing import Any
 from sqlalchemy import text as sqltext
 
 from .config import get_settings, load_yaml
-from .db import ChatTurn, kv_set, log_decision, select, session
+from .db import ChatTurn, kv_get, kv_set, log_decision, select, session
 from .llm import claude
 
 log = logging.getLogger(__name__)
@@ -271,15 +271,18 @@ def status_line() -> str:
             theses = db.scalar(select(func.count()).select_from(Thesis).where(Thesis.status == "open")) or 0
             props = db.scalar(select(func.count()).select_from(Proposal).where(Proposal.state.in_(["proposed", "filled"]))) or 0
             srcs = db.scalar(select(func.count()).select_from(Source).where(Source.active.is_(True))) or 0
+            paused = kv_get(db, "research_paused", "1") == "1"
         spend = sum(spend_by_key().values())
     except Exception:
         items = leads = theses = props = srcs = 0
+        paused = False
         spend = 0.0
     broker = ("Alpaca " + ("LIVE" if s.is_live else "paper")) if s.alpaca_key_id else "NONE (research and theses only; no trades)"
     missing = [n for n, v in (("Reddit", s.reddit_client_id), ("YouTube", s.youtube_api_key)) if not v]
     return (f"[Desk status: broker {broker}; Claude keys {len(s.api_keys)}; API spend this month ${spend:.2f} of "
             f"${s.monthly_spend_cap_usd:.0f} cap; sources {srcs}; items collected {items}; leads {leads}; open theses {theses}; "
             f"open proposals/positions {props}; approval mode {s.approval_mode}"
+            + ("; RESEARCH PAUSED by owner (/unpause to restart)" if paused else "")
             + (f"; not connected: {', '.join(missing)}" if missing else "") + "]")
 
 

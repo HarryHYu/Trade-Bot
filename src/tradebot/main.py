@@ -14,6 +14,21 @@ from .db import init_db, kv_get, session
 log = logging.getLogger("tradebot")
 
 
+def _paused() -> bool:
+    with session() as db:
+        return kv_get(db, "research_paused", "1") == "1"
+
+
+def _research(fn):
+    """Jobs that spend Claude tokens. Skipped while /pause is on; chat and trading keep running."""
+    def run():
+        if _paused():
+            return
+        fn()
+    run.__name__ = getattr(fn, "__name__", "job")
+    return run
+
+
 def _safe(fn):
     def run():
         try:
@@ -75,20 +90,20 @@ def run() -> None:
     from zoneinfo import ZoneInfo
     now = dt.datetime.now(ZoneInfo(s.timezone))
     sch.add_job(_safe(collectors.run_all), "interval", minutes=10, max_instances=1, next_run_time=now)
-    sch.add_job(_safe(brain.triage_pending), "interval", minutes=5, max_instances=1,
+    sch.add_job(_safe(_research(brain.triage_pending)), "interval", minutes=5, max_instances=1,
                 next_run_time=now + dt.timedelta(minutes=2))
-    sch.add_job(_safe(fast_cycle), "interval", minutes=2, max_instances=1)
-    sch.add_job(_safe(inbox_cycle), "interval", minutes=5, max_instances=1, next_run_time=now + dt.timedelta(minutes=1))
-    sch.add_job(_safe(research_cycle), "interval", minutes=30, max_instances=1)
+    sch.add_job(_safe(_research(fast_cycle)), "interval", minutes=2, max_instances=1)
+    sch.add_job(_safe(_research(inbox_cycle)), "interval", minutes=5, max_instances=1, next_run_time=now + dt.timedelta(minutes=1))
+    sch.add_job(_safe(_research(research_cycle)), "interval", minutes=30, max_instances=1)
     sch.add_job(_safe(trade_cycle), "interval", minutes=1, max_instances=1)
     sch.add_job(_safe(heartbeat), "interval", minutes=5)
-    sch.add_job(_safe(reflection.post_mortems), "cron", hour=7, minute=0)
-    sch.add_job(_safe(earnings.run_protocol), "cron", hour=6, minute=0)
-    sch.add_job(_safe(earnings.run_protocol), "date", run_date=now + dt.timedelta(minutes=5))
+    sch.add_job(_safe(_research(reflection.post_mortems)), "cron", hour=7, minute=0)
+    sch.add_job(_safe(_research(earnings.run_protocol)), "cron", hour=6, minute=0)
+    sch.add_job(_safe(_research(earnings.run_protocol)), "date", run_date=now + dt.timedelta(minutes=5))
     def daily_brief() -> None:
         telegram.send(reflection.daily_brief(), topic="Brief")
     sch.add_job(_safe(daily_brief), "cron", hour=7, minute=30)
-    sch.add_job(_safe(reflection.weekly_review), "cron", day_of_week="sat", hour=9)
+    sch.add_job(_safe(_research(reflection.weekly_review)), "cron", day_of_week="sat", hour=9)
     telegram.start_listener()
     telegram.send(f"Tradebot started. paper={not s.is_live} mode={s.approval_mode}")
     sch.start()
