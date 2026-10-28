@@ -205,6 +205,7 @@ def init_db(url: str | None = None) -> None:
         from pathlib import Path
         Path(url.removeprefix("sqlite:///")).parent.mkdir(parents=True, exist_ok=True)
     _engine = create_engine(url, pool_pre_ping=True)
+    from . import simbroker  # noqa: F401  registers the paper-broker tables
     Base.metadata.create_all(_engine)
     _Session = sessionmaker(_engine, expire_on_commit=False)
 

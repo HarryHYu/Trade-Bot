@@ -35,6 +35,8 @@ class Settings(BaseSettings):
     max_diligence_per_day: int = 2  # ~$10 per full run (8 agents + verifier + judge); 2/day is ~$600/month
 
     # Broker (Alpaca). Paper by default; live requires ALPACA_PAPER=false AND TRADING_LIVE_CONFIRM=yes.
+    broker: str = "sim"              # sim = built-in paper simulator; alpaca = Alpaca (needs keys)
+    sim_starting_cash: float = 10000.0
     alpaca_key_id: str = ""
     alpaca_secret_key: str = ""
     alpaca_paper: bool = True
@@ -92,7 +94,7 @@ EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max
                      "research_effort", "diligence_effort", "chat_effort", "triage_model", "research_model",
                      "prediction_model", "diligence_model", "verifier_model", "judge_model", "chat_model",
                      "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id",
-                     "anthropic_workspace_ids", "anthropic_key_credits_usd"}
+                     "anthropic_workspace_ids", "anthropic_key_credits_usd", "broker", "sim_starting_cash"}
 # Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).
 OVERRIDES_FILE = Path("data/settings_overrides.json")
 

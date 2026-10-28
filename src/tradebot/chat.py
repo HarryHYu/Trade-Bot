@@ -118,8 +118,8 @@ def run_tool(name: str, inp: dict[str, Any], ctx: Ctx) -> str:
     if name == "read_knowledge":
         return _safe_path(inp["path"]).read_text()[:40000]
     if name == "account":
-        from .broker import Alpaca
-        b = Alpaca()
+        from .broker import Alpaca, get_broker
+        b = get_broker()
         a = b.account()
         return json.dumps({"equity": a["equity"], "last_equity": a["last_equity"], "cash": a["cash"],
                            "positions": [{k: p[k] for k in ("symbol", "qty", "avg_entry_price", "market_value", "unrealized_pl")}
@@ -128,9 +128,10 @@ def run_tool(name: str, inp: dict[str, Any], ctx: Ctx) -> str:
         import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
-        from .broker import Alpaca
+        from .broker import Alpaca, get_broker
         sym = inp["symbol"].upper()
-        bars = Alpaca().daily_bars(sym, int(inp.get("days") or 120))
+        from . import market
+        bars = [{"t": b["t"].isoformat(), "c": b["c"]} for b in market.bars(sym, "1y")][-int(inp.get("days") or 120):]
         if not bars:
             return f"No bars for {sym}."
         OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -275,7 +276,8 @@ def status_line() -> str:
     except Exception:
         items = leads = theses = props = srcs = 0
         spend = 0.0
-    broker = ("Alpaca " + ("LIVE" if s.is_live else "paper")) if s.alpaca_key_id else "NONE (research and theses only; no trades)"
+    from .broker import broker_label
+    broker = broker_label()
     missing = [n for n, v in (("Reddit", s.reddit_client_id), ("YouTube", s.youtube_api_key)) if not v]
     return (f"[Desk status: broker {broker}; Claude keys {len(s.api_keys)}; API spend this month ${spend:.2f} of "
             f"${s.monthly_spend_cap_usd:.0f} cap; sources {srcs}; items collected {items}; leads {leads}; open theses {theses}; "

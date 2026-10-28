@@ -82,9 +82,8 @@ def check():
     from .config import get_settings
     s = get_settings()
     print("anthropic keys:", len(s.api_keys), " paper:", not s.is_live)
-    if s.alpaca_key_id:
-        from .broker import Alpaca
-        print("alpaca equity:", Alpaca().account()["equity"])
+    from .broker import broker_label, get_broker
+    print("broker:", broker_label(), " equity:", get_broker().account()["equity"])
     if s.telegram_bot_token:
         from .telegram import send
         send("tradebot check: Telegram works")

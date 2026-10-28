@@ -29,7 +29,7 @@ def research_cycle() -> None:
     s = get_settings()
     brain.followup_diligence()
     for tid in brain.research_top(5):
-        if s.alpaca_key_id:  # no broker connected yet: theses still reach the phone
+        if True:  # the built-in simulator is always available
             execution.propose_for_thesis(tid)
     telegram.announce_new_theses()
     telegram.announce_new_proposals()
@@ -38,7 +38,7 @@ def research_cycle() -> None:
 def fast_cycle() -> None:
     s = get_settings()
     for tid in brain.fast_lane():
-        if s.alpaca_key_id:
+        if True:
             execution.propose_for_thesis(tid)
     telegram.announce_new_theses()
     telegram.announce_new_proposals()
@@ -47,15 +47,14 @@ def fast_cycle() -> None:
 def inbox_cycle() -> None:
     s = get_settings()
     for tid in inbox.import_inbox():
-        if s.alpaca_key_id:
+        if True:
             execution.propose_for_thesis(tid)
     telegram.announce_new_theses()
     telegram.announce_new_proposals()
 
 
 def trade_cycle() -> None:
-    if not get_settings().alpaca_key_id:
-        return
+    pass
     execution.execute_approved()
     execution.sync_fills()
     execution.manage_exits()

@@ -156,11 +156,11 @@ def _settings_text() -> str:
 
 HELP = ("Just talk to me, or send photos and files.\n"
         "/status  /positions  /halt  /flatten  /resume  /mode manual|threshold|auto  /new (fresh chat)\n"
-        "/settings  /set NAME value  /setkey NAME value (secrets; message auto-deleted)")
+        "/settings  /set NAME value  /setkey NAME value (secrets; message auto-deleted)  /resetpaper [cash]")
 
 
 def _command(text: str, thread: str) -> str:
-    from .broker import Alpaca
+    from .broker import Alpaca, get_broker
     from .execution import halt
     cmd, *args = text.strip().split()
     cmd = cmd.split("@")[0]
@@ -180,6 +180,12 @@ def _command(text: str, thread: str) -> str:
             kv_set(db, "approval_mode", args[0])
             log_decision(db, "mode", args[0])
         return f"Approval mode is now {args[0]}."
+    if cmd == "/resetpaper":
+        from .simbroker import SimBroker
+        SimBroker().reset(float(args[0]) if args else None)
+        with session() as db:
+            log_decision(db, "paper_reset", "", cash=args[0] if args else None)
+        return f"Paper account reset to ${float(args[0]) if args else get_settings().sim_starting_cash:,.0f}. Positions cleared."
     if cmd == "/settings":
         return _settings_text()
     if cmd == "/set":
@@ -200,16 +206,16 @@ def _command(text: str, thread: str) -> str:
             kv_set(db, f"chat_reset:{thread}", str(int(time.time())))
         return "Fresh start."
     if cmd == "/status":
-        a = Alpaca().account()
+        a = get_broker().account()
         with session() as db:
             halted = kv_get(db, "halted") == "1"
             mode = kv_get(db, "approval_mode", get_settings().approval_mode)
             open_th = len(db.scalars(select(Thesis.id).where(Thesis.status == "open")).all())
         day = float(a["equity"]) - float(a["last_equity"])
         return (f"Equity ${float(a['equity']):,.0f}  day {day:+,.0f}\nOpen theses {open_th}  mode {mode}  "
-                f"{'HALTED' if halted else 'running'}  paper={not get_settings().is_live}")
+                f"{'HALTED' if halted else 'running'}\nBroker: {__import__('tradebot.broker', fromlist=['x']).broker_label()}")
     if cmd == "/positions":
-        ps = Alpaca().positions()
+        ps = get_broker().positions()
         return "\n".join(f"{p['symbol']} {p['qty']} pnl {float(p['unrealized_pl']):+,.0f}" for p in ps) or "Flat."
     return HELP
 
