@@ -249,6 +249,9 @@ def _history(thread: str, n: int = 30) -> list[dict[str, Any]]:
             msgs.append({"role": r.role, "content": r.text})
     if msgs and msgs[-1]["role"] == "user":
         msgs.pop()
+    # Cap history by size too (~40k chars, about 10k tokens): drop the oldest exchanges first.
+    while sum(len(m["content"]) for m in msgs) > 40000 and len(msgs) > 2:
+        msgs = msgs[2:]
     return msgs
 
 
@@ -266,7 +269,7 @@ def reply(thread: str, user_text: str, media: list[dict[str, Any]]) -> tuple[str
         def call(c: Any) -> Any:
             return c.beta.messages.create(
                 model=s.chat_model, max_tokens=16000, system=system, tools=TOOLS, messages=messages,
-                output_config={"effort": s.chat_effort},
+                output_config={"effort": s.chat_effort}, cache_control={"type": "ephemeral"},
                 betas=["server-side-fallback-2026-07-01"], fallbacks="default")
         resp = claude()._call("chat", s.chat_model, call)
         messages.append({"role": "assistant", "content": resp.content})

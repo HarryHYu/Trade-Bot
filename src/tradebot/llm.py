@@ -156,7 +156,7 @@ class Claude:
             with c.beta.messages.stream(
                 model=model, max_tokens=64000, tools=tools, messages=messages,
                 system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
-                output_config={"effort": effort}, **extra,
+                output_config={"effort": effort}, cache_control={"type": "ephemeral"}, **extra,
             ) as st:
                 return st.get_final_message()
 
@@ -186,7 +186,8 @@ class Claude:
         for _ in range(max_turns):
             def call(c: anthropic.Anthropic) -> Any:
                 with c.beta.messages.stream(model=model, max_tokens=32000, system=sys_blocks, tools=all_tools,
-                                            messages=messages, output_config={"effort": effort}, **extra) as st:
+                                            messages=messages, output_config={"effort": effort},
+                                            cache_control={"type": "ephemeral"}, **extra) as st:
                     return st.get_final_message()
             resp = self._call(purpose, model, call)
             messages.append({"role": "assistant", "content": resp.content})
