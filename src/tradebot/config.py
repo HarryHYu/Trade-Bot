@@ -67,8 +67,9 @@ class Settings(BaseSettings):
         return [k.strip() for k in self.anthropic_api_keys.split(",") if k.strip()]
 
     def workspace_for(self, index: int) -> str:
-        ids = [w.strip() for w in self.anthropic_workspace_ids.split(",") if w.strip()]
-        return ids[index] if index < len(ids) else self.anthropic_workspace_id
+        # Positions matter: ",wrkspc_B" means key 1 needs no workspace header and key 2 uses wrkspc_B.
+        ids = [w.strip() for w in self.anthropic_workspace_ids.split(",")] if self.anthropic_workspace_ids else []
+        return (ids[index] if index < len(ids) else "") or self.anthropic_workspace_id
 
     @property
     def is_live(self) -> bool:

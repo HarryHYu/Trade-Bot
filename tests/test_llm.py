@@ -54,3 +54,10 @@ def test_each_key_gets_its_own_workspace_header(monkeypatch, tmp_path):
     c = llm.Claude()
     assert c.clients[0]._custom_headers["anthropic-workspace-id"] == "wrkspc_A"
     assert c.clients[1]._custom_headers["anthropic-workspace-id"] == "wrkspc_B"
+
+
+def test_blank_workspace_position_is_kept(monkeypatch):
+    s = llm.get_settings()
+    monkeypatch.setattr(s, "anthropic_workspace_ids", ",wrkspc_B")
+    monkeypatch.setattr(s, "anthropic_workspace_id", "")
+    assert s.workspace_for(0) == "" and s.workspace_for(1) == "wrkspc_B"
