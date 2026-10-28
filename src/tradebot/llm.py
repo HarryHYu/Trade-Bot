@@ -59,14 +59,15 @@ class Claude:
         if not keys:
             raise RuntimeError("No Anthropic API key yet. In Telegram send: /setkey ANTHROPIC_API_KEYS key1,key2")
         self.keys = keys
-        self.clients = [self._make(k, both=False) for k in keys]
+        self.clients = [self._make(k, both=False, index=i) for i, k in enumerate(keys)]
         self._both: set[int] = set()  # keys switched to x-api-key + Bearer after a 401
         self._skip: set[int] = set()
 
-    def _make(self, key: str, both: bool) -> anthropic.Anthropic:
+    def _make(self, key: str, both: bool, index: int = 0) -> anthropic.Anthropic:
         """Console user/service keys (sk-ant-usr-, sk-ant-svc-) may need a Bearer header as well as x-api-key.
         Standard keys use x-api-key only. An optional workspace id is sent for multi-workspace keys."""
-        headers = {"anthropic-workspace-id": self.s.anthropic_workspace_id} if self.s.anthropic_workspace_id else {}
+        ws = self.s.workspace_for(index)
+        headers = {"anthropic-workspace-id": ws} if ws else {}
         if both:  # Bearer as the credential, x-api-key added explicitly (the SDK accepts only one credential)
             return anthropic.Anthropic(auth_token=key, max_retries=3, timeout=900,
                                        default_headers=headers | {"x-api-key": key})
@@ -101,7 +102,7 @@ class Claude:
             except anthropic.AuthenticationError as e:
                 if idx not in self._both and not self.keys[idx].startswith("sk-ant-api"):
                     self._both.add(idx)
-                    self.clients[idx] = self._make(self.keys[idx], both=True)
+                    self.clients[idx] = self._make(self.keys[idx], both=True, index=idx)
                     last = e
                     continue  # retry the same key with both auth headers
                 self._skip.add(idx)
@@ -114,6 +115,11 @@ class Claude:
                 last = e
                 continue
             except anthropic.BadRequestError as e:
+                if "not scoped to a workspace" in str(e):
+                    raise RuntimeError(
+                        "These keys are organisation-scoped, so each needs its workspace ID. In the Console open "
+                        "Settings > Workspaces, copy each org's workspace ID (wrkspc_...), then send: "
+                        "/set ANTHROPIC_WORKSPACE_IDS wrkspc_first,wrkspc_second (same order as your keys)") from e
                 if "credit" in str(e).lower() and len(self._skip) < len(self.clients):
                     self._skip.add(idx)
                     last = e

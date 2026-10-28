@@ -16,7 +16,8 @@ class Settings(BaseSettings):
 
     # Claude: comma-separated keys, one per Console org. Rotated by month-to-date spend.
     anthropic_api_keys: str = ""
-    anthropic_workspace_id: str = ""  # only for Console keys that span several workspaces
+    anthropic_workspace_id: str = ""   # one workspace id for all keys (organisation-scoped keys need one)
+    anthropic_workspace_ids: str = ""  # or one per key, comma-separated, same order as ANTHROPIC_API_KEYS
     monthly_credit_usd_per_key: float = 200.0
     # Hard ceiling on total API spend per calendar month, credits plus paid. Raise it when you want.
     monthly_spend_cap_usd: float = 600.0
@@ -65,6 +66,10 @@ class Settings(BaseSettings):
     def api_keys(self) -> list[str]:
         return [k.strip() for k in self.anthropic_api_keys.split(",") if k.strip()]
 
+    def workspace_for(self, index: int) -> str:
+        ids = [w.strip() for w in self.anthropic_workspace_ids.split(",") if w.strip()]
+        return ids[index] if index < len(ids) else self.anthropic_workspace_id
+
     @property
     def is_live(self) -> bool:
         return (not self.alpaca_paper) and self.trading_live_confirm.lower() == "yes"
@@ -77,7 +82,8 @@ EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max
                      "max_research_per_day", "approval_mode", "auto_approve_max_usd", "proposal_ttl_minutes",
                      "research_effort", "diligence_effort", "chat_effort", "triage_model", "research_model",
                      "prediction_model", "diligence_model", "verifier_model", "judge_model", "chat_model",
-                     "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id"}
+                     "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id",
+                     "anthropic_workspace_ids"}
 # Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).
 OVERRIDES_FILE = Path("data/settings_overrides.json")
 

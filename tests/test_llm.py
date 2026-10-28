@@ -43,3 +43,14 @@ def test_standard_key_401_is_not_retried_forever(monkeypatch, tmp_path):
         assert False
     except RuntimeError as e:
         assert "rejected" in str(e)
+
+
+def test_each_key_gets_its_own_workspace_header(monkeypatch, tmp_path):
+    from tradebot import db
+    db.init_db(f"sqlite:///{tmp_path}/l3.db")
+    s = llm.get_settings()
+    monkeypatch.setattr(s, "anthropic_api_keys", "sk-ant-usr-a,sk-ant-usr-b")
+    monkeypatch.setattr(s, "anthropic_workspace_ids", "wrkspc_A, wrkspc_B")
+    c = llm.Claude()
+    assert c.clients[0]._custom_headers["anthropic-workspace-id"] == "wrkspc_A"
+    assert c.clients[1]._custom_headers["anthropic-workspace-id"] == "wrkspc_B"
