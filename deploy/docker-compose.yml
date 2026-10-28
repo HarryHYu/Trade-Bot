@@ -7,3 +7,4 @@ services:
       - ../data:/app/data
       - ../knowledge:/app/knowledge
       - ../config:/app/config
+      - ../inbox:/app/inbox
