@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     anthropic_workspace_id: str = ""   # one workspace id for all keys (organisation-scoped keys need one)
     anthropic_workspace_ids: str = ""  # or one per key, comma-separated, same order as ANTHROPIC_API_KEYS
     monthly_credit_usd_per_key: float = 200.0
+    anthropic_key_credits_usd: str = ""  # per-key credit, comma-separated in key order, e.g. "350,200"
     # Hard ceiling on total API spend per calendar month, credits plus paid. Raise it when you want.
     monthly_spend_cap_usd: float = 600.0
     triage_model: str = "claude-haiku-5-5"
@@ -66,6 +67,13 @@ class Settings(BaseSettings):
     def api_keys(self) -> list[str]:
         return [k.strip() for k in self.anthropic_api_keys.split(",") if k.strip()]
 
+    def credit_for(self, index: int) -> float:
+        vals = [v.strip() for v in self.anthropic_key_credits_usd.split(",") if v.strip()]
+        try:
+            return float(vals[index]) if index < len(vals) else self.monthly_credit_usd_per_key
+        except ValueError:
+            return self.monthly_credit_usd_per_key
+
     def workspace_for(self, index: int) -> str:
         # Positions matter: ",wrkspc_B" means key 1 needs no workspace header and key 2 uses wrkspc_B.
         ids = [w.strip() for w in self.anthropic_workspace_ids.split(",")] if self.anthropic_workspace_ids else []
@@ -84,7 +92,7 @@ EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max
                      "research_effort", "diligence_effort", "chat_effort", "triage_model", "research_model",
                      "prediction_model", "diligence_model", "verifier_model", "judge_model", "chat_model",
                      "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id",
-                     "anthropic_workspace_ids"}
+                     "anthropic_workspace_ids", "anthropic_key_credits_usd"}
 # Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).
 OVERRIDES_FILE = Path("data/settings_overrides.json")
 

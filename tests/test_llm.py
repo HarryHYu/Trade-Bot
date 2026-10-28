@@ -61,3 +61,16 @@ def test_blank_workspace_position_is_kept(monkeypatch):
     monkeypatch.setattr(s, "anthropic_workspace_ids", ",wrkspc_B")
     monkeypatch.setattr(s, "anthropic_workspace_id", "")
     assert s.workspace_for(0) == "" and s.workspace_for(1) == "wrkspc_B"
+
+
+def test_pick_uses_key_with_most_credit_left(monkeypatch, tmp_path):
+    from tradebot import db
+    db.init_db(f"sqlite:///{tmp_path}/l4.db")
+    s = llm.get_settings()
+    monkeypatch.setattr(s, "anthropic_api_keys", "sk-ant-a,sk-ant-b")
+    monkeypatch.setattr(s, "anthropic_key_credits_usd", "350,200")
+    c = llm.Claude()
+    monkeypatch.setattr(llm, "spend_by_key", lambda: {0: 100.0, 1: 0.0})
+    assert c._pick() == 0      # 250 left vs 200 left
+    monkeypatch.setattr(llm, "spend_by_key", lambda: {0: 200.0, 1: 0.0})
+    assert c._pick() == 1      # 150 left vs 200 left

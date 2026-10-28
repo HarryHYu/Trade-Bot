@@ -78,7 +78,8 @@ class Claude:
         if sum(spend.values()) >= self.s.monthly_spend_cap_usd:
             raise BudgetExceeded(f"monthly cap ${self.s.monthly_spend_cap_usd} reached")
         live = [i for i in range(len(self.clients)) if i not in self._skip] or list(range(len(self.clients)))
-        return min(live, key=lambda i: spend.get(i, 0.0))
+        # Use the key with the most credit left; once every key's credit is used, spend paid up to the cap.
+        return max(live, key=lambda i: self.s.credit_for(i) - spend.get(i, 0.0))
 
     def _record(self, idx: int, model: str, purpose: str, resp: Any) -> None:
         searches = 0
