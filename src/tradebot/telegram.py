@@ -242,7 +242,13 @@ def _chat(msg: dict[str, Any]) -> None:
                 send(f"I can't read {d.get('file_name')} (binary format). Send PDF, image or text.", topic=None, thread_id=tid)
                 return
             media.append(blk)
-        text, ctx = reply(thread, msg.get("text") or msg.get("caption") or "", [m for m in media if m])
+        user_text = msg.get("text") or msg.get("caption") or ""
+        rt = msg.get("reply_to_message") or {}
+        quoted = rt.get("text") or rt.get("caption") or ""
+        if quoted and not rt.get("forum_topic_created"):
+            who = "the bot" if (rt.get("from") or {}).get("is_bot") else "the owner"
+            user_text = f"[Replying to this message from {who}:]\n{quoted[:3000]}\n\n{user_text}"
+        text, ctx = reply(thread, user_text, [m for m in media if m])
         send(text, buttons=ctx.buttons or None, topic=None, thread_id=tid)
         for path, cap in ctx.files:
             send_file(path, cap, topic=None, thread_id=tid)

@@ -92,3 +92,12 @@ def test_settings_from_telegram(tmp_path, monkeypatch):
     out = telegram._setkey("/setkey ANTHROPIC_API_KEYS sk-ant-secret1,sk-ant-secret2")
     assert "secret1" not in out and config.get_settings().api_keys == ["sk-ant-secret1", "sk-ant-secret2"]
     config.get_settings.cache_clear()
+
+
+def test_reply_includes_quoted_bot_message(monkeypatch):
+    seen = {}
+    monkeypatch.setattr(telegram, "_api", lambda m, files=None, **b: {"ok": True, "result": {}})
+    monkeypatch.setattr("tradebot.chat.reply", lambda thread, text, media: (seen.setdefault("t", text), chat.Ctx()))
+    telegram._chat({"chat": {"id": 42}, "text": "why this one?", "from": {"id": 1},
+                    "reply_to_message": {"text": "[SMALL] OSUR LONG ...", "from": {"is_bot": True}}})
+    assert "OSUR LONG" in seen["t"] and "why this one?" in seen["t"]
