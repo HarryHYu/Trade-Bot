@@ -22,4 +22,4 @@ reaction_stage:
 kill:
   - weekly new confirmed cases falling 4 consecutive weeks and no exported cases
   - WHO ends PHEIC
-earnings_dates: {OSUR: 2026-11-04, APT: 2026-11-04}
+earnings_dates: {OSUR: 2026-11-09, APT: 2026-11-04}

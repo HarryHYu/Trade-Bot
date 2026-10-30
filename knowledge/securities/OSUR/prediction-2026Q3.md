@@ -1,4 +1,4 @@
-# OSUR Q3 2026 earnings prediction (report 2026-11-04). Frozen 2026-10-27, score after print.
+# OSUR Q3 2026 earnings prediction (report moved to 2026-11-09 after close (announced Oct 26)). Frozen 2026-10-27, score after print.
 
 ## Inputs
 - Q2 2026: revenue $30.6M (Diagnostics $19.4M, Sample Mgmt Solutions $9.9M, rest other/BARDA). Non-GAAP op loss $14.7M; GAAP NI $6.2M only because of a $22.6M non-cash contingent-consideration release (CT/NG FDA submission withdrawn). Cash $161M, no debt. Buybacks paused. G&A inflated by activism costs, guided to normalise from Q3.
@@ -28,3 +28,10 @@
 
 ## Thesis tier update
 Downgraded from standard to SMALL. Ebola leg weaker than first thought (lab-only EUA, not WHO-listed). Floor (cash ~$2.33/sh) and two activist groups remain the main support.
+
+## Update 2026-10-30 (pre-print check, rules from RBLX Q3)
+- Report date is Nov 9 after close (not Nov 4). Q3 consensus drifted up to $31.02M (our $31.4M: edge ~1%). Q4 consensus $31.70M;
+  our Q4 guide estimate ~$30-33M (mid ~31.5), ~40% chance midpoint >= consensus. Q3->Q4 seasonally flat to down.
+- Last 8 reactions: 6 of 8 down, avg |move| ~8%, driven by the next-quarter guide (Aug 2026: beat above range, still -3.6% on flat guide).
+- No orders, WHO listing, 8-K or 13D/A since Oct 1. BioFire got WHO EUL Oct 22 (PCR competitor). DRC 10,141 confirmed cases (ECDC Oct 28).
+- Plan: hold for Ebola headlines, EXIT by Nov 6 close (T-1). Stop: close < $3.85. Override: a confirmed Ebola order, WHO listing, or sale process.
