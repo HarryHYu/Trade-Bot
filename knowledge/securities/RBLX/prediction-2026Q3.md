@@ -89,3 +89,19 @@ bookings per hour keep falling even as engagement recovers.
   standalone apps widen reach and can shift purchases away from app-store fees (margin), while Build and the
   discovery changes keep growing content supply and engagement faster than spending per hour.
 - Call unchanged: engagement beat (smaller than headline peaks imply), bookings in line, bookings per DAU down. PASS.
+
+## Scored 2026-10-30 (source: 8-K ex99.1 shareholder letter, accepted 2026-10-29 16:10 ET)
+| Metric | Ours (mid, range) | Actual | Result |
+|---|---|---|---|
+| Bookings | $1.64B ($1.60-1.68B) | $1,697M (-12% YoY), above guide high $1,653M | Direction right (beat), size wrong: above our high |
+| DAU | 134M (130-140M) | 138M (+12% QoQ, -9% YoY) | Right |
+| Hours | 33.5B (32-35B) | ~34B (+17% QoQ) | Right |
+| Bookings per DAU | ~$12.24 | ~$12.30 | Right (down YoY from ~$12.68) |
+| Bookings per hour | assumed still falling | +4% YoY globally, +2% US/Canada | Wrong |
+| Q4 bookings guide | $1.90-2.05B (-7% to -14%) | $1.89-2.00B (-10% to -15%) | Close; top end lower than ours |
+| Reaction | no edge beyond ~14% implied | ~-17% after hours ($52.46 -> ~$43.75) | Passed; a short would have paid |
+- Payers (MUPs) 30M, -16% YoY; bookings per payer +5%. Fewer people pay, payers spend a bit more.
+- Company confirms the AI-content thesis: "explosion of content"; Steal an Egg and Huss Valley built almost entirely with AI, both top 20.
+- Lesson: we estimated the Q4 guide well but never pinned down what the Street expected for Q4, so we could not see the guide
+  would disappoint. For guide-driven reactions, the consensus for NEXT quarter is the number that matters.
+- Day of print volume was 21.2M (about 3x normal) with the stock -1.5% before the release. Worth checking pre-print volume as a signal.
