@@ -19,3 +19,7 @@ Each entry: what we saw, which check it failed, and what would change the verdic
 - [2026-10-30] WATCH: BRBR (whey costs easing from June record; needs FY27 cost commentary, report Nov 17). Lean hogs at 2020 lows (SFD priced).
 - [2026-10-30] AION 2 (3393110) daily peak 217,600 on Oct 29, ~55% of launch peak: retention supports NCSoft idea.
 - [2026-10-30] Oil after midterms (Nov 3): White House says war/oil premium ends after the election; Brent ~$115. WATCH short oil Nov 4 if Hormuz/peace headlines firm. Kill: WTI > $106.
+- [2026-11-01] tinyBuild update: Probably Stolen daily peak 140,480 on Oct 31 (Steam chart, rank 29), live 119,430 on Nov 1 ~UTC night: still GROWING
+  (Oct 29 112k). TBLD.L closed 13.0p Oct 30 (+6%). Thesis strengthening; ride target 15-16p unchanged.
+- [2026-11-01] Oct 30: Nasdaq -2.9% (Intel -29% on Q4 guide, AMZN/GOOGL AI capex fears). RBLX closed 42.99 (-18%). OSUR 3.94 (stop 3.85 close).
+  Oil weekend two-sided: IRGC claims 4 tankers hit mines (unverified) vs Iran saying strait could reopen within two days under new proposal.
