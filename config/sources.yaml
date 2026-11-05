@@ -23,6 +23,35 @@ news_queries:
   - {q: "\"emergency use authorization\" OR \"FDA approves\"", name: fda, tier: 2}
   - {q: "\"activist investor\" OR \"13D\" stake", name: activists, tier: 2}
   - {q: "viral OR \"sold out\" OR \"record sales\"", name: consumer-heat, tier: 3}
+  # Wide, cheap net for Haiku (things-first themes, any market)
+  - {q: "outbreak OR \"cases rise\" OR quarantine virus", name: outbreaks, tier: 2}
+  - {q: "\"bird flu\" OR H5N1 OR \"swine fever\" OR screwworm", name: animal-disease, tier: 2}
+  - {q: "drought OR flood OR frost crop damage", name: crop-weather, tier: 2}
+  - {q: "\"price spike\" OR \"prices soar\" OR \"record high\" commodity", name: price-spikes, tier: 2}
+  - {q: "strike OR walkout OR lockout port OR plant OR union", name: strikes, tier: 2}
+  - {q: "\"plant fire\" OR explosion OR outage factory OR refinery OR mine", name: plant-outages, tier: 2}
+  - {q: "\"voluntary administration\" OR receivership OR \"chapter 11\" OR insolvency", name: collapses, tier: 2}
+  - {q: "\"store closures\" OR \"closing stores\" OR liquidation retailer", name: closures, tier: 2}
+  - {q: "ban OR tariff OR \"export controls\" OR sanctions new", name: trade-rules, tier: 2}
+  - {q: "\"contract award\" OR \"awarded a contract\" OR \"selected by\" government", name: contracts, tier: 2}
+  - {q: "\"takeover bid\" OR \"acquisition proposal\" OR \"non-binding offer\"", name: takeovers, tier: 2}
+  - {q: "\"short seller\" OR \"short report\"", name: short-reports, tier: 2}
+  - {q: "\"phase 3\" OR \"topline results\" OR \"FDA rejects\" OR \"complete response letter\"", name: biotech, tier: 2}
+  - {q: "\"steam\" \"concurrent players\" record OR \"most played\"", name: steam-records, tier: 2}
+  - {q: "\"top of the app store\" OR \"No. 1 on the App Store\" OR \"viral app\"", name: app-charts, tier: 3}
+  - {q: "\"sold out\" OR \"waitlist\" OR shortage product demand", name: sellouts, tier: 3}
+  - {q: "\"data breach\" OR cyberattack OR ransomware company", name: cyber, tier: 2}
+  - {q: "recall vehicles OR products OR food", name: recalls, tier: 2}
+  - {q: "\"guidance cut\" OR \"profit warning\" OR \"trading update\"", name: warnings, tier: 2}
+  - {q: "\"raises guidance\" OR \"ahead of expectations\" OR \"record quarter\"", name: upgrades, tier: 2}
+  - {q: "ASX announcement shares surge OR plunge", name: asx-movers, tier: 2}
+  - {q: "\"Strait of Hormuz\" OR OPEC OR \"oil supply\"", name: oil-supply, tier: 2}
+  - {q: "shipping rates OR \"container rates\" OR \"freight rates\" surge", name: freight, tier: 2}
+  - {q: "\"lithium\" OR \"rare earths\" OR \"uranium\" OR \"copper\" supply", name: critical-minerals, tier: 2}
+  - {q: "\"semiconductor shortage\" OR \"memory prices\" OR DRAM OR HBM", name: chips, tier: 2}
+  - {q: "\"data center\" moratorium OR permit OR power demand", name: datacenters, tier: 2}
+  - {q: "TikTok trend OR \"going viral\" brand sales", name: viral-brands, tier: 3}
+  - {q: "\"box office\" record OR \"opening weekend\"", name: box-office, tier: 2}
 web_pages: []   # - {url: https://example.com/status, name: thing, tier: 1, ticker: XYZ}
 sec_tickers: []
 steam_apps:   # hourly concurrent players; ticker = who earns from it

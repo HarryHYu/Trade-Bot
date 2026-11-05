@@ -271,7 +271,7 @@ def status_line() -> str:
             theses = db.scalar(select(func.count()).select_from(Thesis).where(Thesis.status == "open")) or 0
             props = db.scalar(select(func.count()).select_from(Proposal).where(Proposal.state.in_(["proposed", "filled"]))) or 0
             srcs = db.scalar(select(func.count()).select_from(Source).where(Source.active.is_(True))) or 0
-            paused = kv_get(db, "research_paused", "1") == "1"
+            paused = kv_get(db, "research_paused", "0") == "1"
         spend = sum(spend_by_key().values())
     except Exception:
         items = leads = theses = props = srcs = 0
@@ -282,7 +282,7 @@ def status_line() -> str:
     return (f"[Desk status: broker {broker}; Claude keys {len(s.api_keys)}; API spend this month ${spend:.2f} of "
             f"${s.monthly_spend_cap_usd:.0f} cap; sources {srcs}; items collected {items}; leads {leads}; open theses {theses}; "
             f"open proposals/positions {props}; approval mode {s.approval_mode}"
-            + ("; RESEARCH PAUSED by owner (/unpause to restart)" if paused else "")
+            + ("; ALL AI JOBS PAUSED by owner (/unpause to restart)" if paused else f"; AI jobs on: {s.enabled_jobs}")
             + (f"; not connected: {', '.join(missing)}" if missing else "") + "]")
 
 

@@ -50,6 +50,12 @@ class Settings(BaseSettings):
     telegram_allowed_user_ids: str = ""  # comma-separated; empty = anyone in the chat
     chat_model: str = "claude-sonnet-5-5"
     chat_effort: str = "medium"
+    # Which token-spending jobs run. Heavy research now happens in Claude Code sessions on the Max plan;
+    # add research,fast,diligence,earnings,reviews to switch the API versions back on.
+    enabled_jobs: str = "triage,digest,inbox"
+    collator_model: str = "claude-sonnet-5-5"
+    github_feed_token: str = ""
+    github_feed_repo: str = "HarryHYu/Trade-Bot"
 
     reddit_client_id: str = ""
     reddit_client_secret: str = ""
@@ -62,6 +68,9 @@ class Settings(BaseSettings):
 
     knowledge_dir: Path = Path("knowledge")
     config_dir: Path = Path("config")
+
+    def job_on(self, name: str) -> bool:
+        return name in {j.strip() for j in self.enabled_jobs.split(",")}
 
     @property
     def api_keys(self) -> list[str]:
@@ -86,13 +95,15 @@ class Settings(BaseSettings):
 
 # Settings the owner can change from Telegram. Secrets are set with /setkey (message deleted, never sent to Claude).
 SECRET_SETTINGS = {"anthropic_api_keys", "alpaca_key_id", "alpaca_secret_key", "reddit_client_id",
-                   "reddit_client_secret", "youtube_api_key", "finnhub_api_key", "heartbeat_url"}
+                   "reddit_client_secret", "youtube_api_key", "finnhub_api_key", "heartbeat_url",
+                   "github_feed_token"}
 EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max_diligence_per_day",
                      "max_research_per_day", "approval_mode", "auto_approve_max_usd", "proposal_ttl_minutes",
                      "research_effort", "diligence_effort", "chat_effort", "triage_model", "research_model",
                      "prediction_model", "diligence_model", "verifier_model", "judge_model", "chat_model",
                      "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id",
-                     "anthropic_workspace_ids", "anthropic_key_credits_usd"}
+                     "anthropic_workspace_ids", "anthropic_key_credits_usd",
+                     "enabled_jobs", "collator_model"}
 # Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).
 OVERRIDES_FILE = Path("data/settings_overrides.json")
 

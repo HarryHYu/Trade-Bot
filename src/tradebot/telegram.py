@@ -180,9 +180,8 @@ def _command(text: str, thread: str) -> str:
         with session() as db:
             kv_set(db, "research_paused", "1" if on else "0")
             log_decision(db, "research_paused" if on else "research_unpaused", "")
-        return ("Research paused: no triage, research, diligence, inbox imports, earnings calls or reviews. "
-                "Chat, collectors and open-position exits keep running. /unpause to restart."
-                if on else "Research running again.")
+        return ("All AI jobs paused (triage, digests and any research). Chat, collectors and exits keep running. /unpause to restart."
+                if on else f"AI jobs running: {get_settings().enabled_jobs}. Change with /set ENABLED_JOBS.")
     if cmd == "/mode" and args and args[0] in ("manual", "threshold", "auto"):
         with session() as db:
             kv_set(db, "approval_mode", args[0])

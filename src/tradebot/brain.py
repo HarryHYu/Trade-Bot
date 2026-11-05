@@ -23,12 +23,15 @@ For each item decide:
 - kind: witness (first-hand observation, original media, concrete specifics), analysis (interpretation of
   public info), recap_or_promo (rehash, course-selling, engagement bait), rumour (second-hand, no specifics),
   official (company/government/regulator), data (a metric reading).
-- tickers: listed securities plausibly affected at first or second order (US tickers or commodity ETFs).
-- driver: one sentence naming the mechanism, if any. Empty if there is none.
+- driver: one sentence naming the real-world thing and its mechanism (what is happening, who it touches), if any.
+  Empty if there is none. Think things-first: a shortage, outbreak, viral product, collapse, ruling or data spike
+  matters even if you cannot name a ticker.
+- tickers: listed securities plausibly affected at first or second order (suppliers, buyers, competitors,
+  substitutes, landlords, lenders), any exchange (e.g. MYR.AX, TBLD.L). May be empty.
 - novelty 0-1: how unlikely it is that the market already knows. Mainstream wire coverage = low.
 - materiality 0-1: size of the effect relative to the affected company's business.
 - urgency: now (breaking, confirmed, tradable today), soon, slow.
-Be harsh. Most items are noise; noise gets materiality near 0. Never invent tickers."""
+Be harsh. Most items are noise; noise gets materiality near 0. Never invent tickers. Prefer drivers measurable in first-hand data."""
 
 
 class TriageOut(BaseModel):
@@ -51,7 +54,7 @@ def triage_pending(limit: int = 200) -> int:
         items = db.scalars(select(Item).where(Item.triaged.is_(False)).order_by(Item.observed_at).limit(limit)).all()
     made = 0
     for it in items:
-        body = f"SOURCE: {it.source} (tier {it.source_tier})\nTITLE: {it.title}\nMETA: {json.dumps(it.meta)[:500]}\n\n{it.text[:6000]}"
+        body = f"SOURCE: {it.source} (tier {it.source_tier})\nTITLE: {it.title}\nMETA: {json.dumps(it.meta)[:500]}\n\n{it.text[:3000]}"
         try:
             t = claude().parse("triage", s.triage_model, TRIAGE_SYSTEM, body, TriageOut, max_tokens=2000)
         except Exception as e:
@@ -61,7 +64,8 @@ def triage_pending(limit: int = 200) -> int:
         with session() as db:
             row = db.get(Item, it.id)
             row.triaged, row.triage = True, t.model_dump()
-            if t.driver and t.tickers and priority >= 0.12:
+            # Ticker-less drivers are kept too: the collator and the research sessions trace the links.
+            if t.driver and priority >= (0.12 if t.tickers else 0.2):
                 db.add(Lead(item_id=it.id, tickers=t.tickers, theme=t.driver, signal_kind=t.kind,
                             priority=priority, urgency=t.urgency, summary=t.reason))
                 made += 1
@@ -272,7 +276,8 @@ def research_top(n: int | None = None) -> list[int]:
     s = get_settings()
     n = n or s.max_research_per_day
     with session() as db:
-        ids = db.scalars(select(Lead.id).where(Lead.status == "new").order_by(Lead.priority.desc()).limit(n)).all()
+        rows = db.scalars(select(Lead).where(Lead.status == "new").order_by(Lead.priority.desc()).limit(n * 5)).all()
+        ids = [r.id for r in rows if r.tickers][:n]  # ticker-less drivers wait for a human/Max-plan session
     done = []
     for lid in ids:
         try:
@@ -299,7 +304,8 @@ def fast_lane() -> list[int]:
             return []
         ids = db.scalars(select(Lead.id).where(Lead.status == "new", Lead.urgency.in_(cfg.get("urgency", ["now"])),
                                                Lead.priority >= cfg.get("min_priority", 0.25))
-                         .order_by(Lead.priority.desc()).limit(room)).all()
+                         .order_by(Lead.priority.desc()).limit(room * 5)).all()
+        ids = [i for i in ids if db.get(Lead, i).tickers][:room]
     done = []
     for lid in ids:
         with session() as db:
