@@ -176,14 +176,21 @@ class Claude:
 
 
     def agent(self, purpose: str, model: str, system: str, user: str, tools: list[dict[str, Any]],
-              run_tool: Any, effort: str = "high", max_turns: int = 30, max_searches: int = 12) -> str:
+              run_tool: Any, effort: str = "high", max_turns: int = 30, max_searches: int = 12,
+              max_fetches: int | None = None) -> str:
         """Agent loop: server web tools plus our own data tools. Returns the final text.
         run_tool(name, input) -> str executes client-side tools; errors go back as is_error results."""
-        all_tools = [
-            {"type": "web_search_20260209", "name": "web_search", "max_uses": max_searches},
-            {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": max_searches},
-            *tools,
-        ]
+        # Dynamic-filtering web tools need Opus/Sonnet; Haiku gets the basic versions.
+        basic = "haiku" in model
+        server = []
+        if max_searches:
+            server.append({"type": "web_search_20250305" if basic else "web_search_20260209", "name": "web_search",
+                           "max_uses": max_searches})
+        fetches = max_searches if max_fetches is None else max_fetches
+        if fetches:
+            server.append({"type": "web_fetch_20250910" if basic else "web_fetch_20260209", "name": "web_fetch",
+                           "max_uses": fetches})
+        all_tools = [*server, *tools]
         messages: list[dict[str, Any]] = [{"role": "user", "content": user}]
         extra: dict[str, Any] = {}
         if model in FALLBACK_MODELS:

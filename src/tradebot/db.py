@@ -194,6 +194,22 @@ class ChatTurn(Base):
     text: Mapped[str] = mapped_column(Text)
 
 
+class Mission(Base):
+    """One exploration job: Sonnet picks the angle, a Haiku explorer digs and files a dossier."""
+    __tablename__ = "missions"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    created_at: Mapped[dt.datetime] = mapped_column(DateTime, default=utcnow, index=True)
+    angle: Mapped[str] = mapped_column(Text)
+    brief: Mapped[str] = mapped_column(Text, default="")
+    seeds: Mapped[list[Any]] = mapped_column(default=list)
+    kind: Mapped[str] = mapped_column(String(16), default="theme")
+    status: Mapped[str] = mapped_column(String(16), default="queued", index=True)  # queued|running|done|failed
+    started_at: Mapped[dt.datetime | None] = mapped_column(DateTime)
+    finished_at: Mapped[dt.datetime | None] = mapped_column(DateTime, index=True)
+    dossier: Mapped[dict[str, Any] | None] = mapped_column(JSON)
+    notes: Mapped[str] = mapped_column(Text, default="")
+
+
 _engine = None
 _Session: sessionmaker[Session] | None = None
 
@@ -204,7 +220,16 @@ def init_db(url: str | None = None) -> None:
     if url.startswith("sqlite:///"):
         from pathlib import Path
         Path(url.removeprefix("sqlite:///")).parent.mkdir(parents=True, exist_ok=True)
-    _engine = create_engine(url, pool_pre_ping=True)
+    if url.startswith("sqlite"):
+        # Explorer threads write concurrently: wait for locks instead of failing, and let readers run during writes.
+        from sqlalchemy import event
+        _engine = create_engine(url, pool_pre_ping=True, connect_args={"timeout": 30, "check_same_thread": False})
+
+        @event.listens_for(_engine, "connect")
+        def _wal(conn, _):
+            conn.execute("PRAGMA journal_mode=WAL")
+    else:
+        _engine = create_engine(url, pool_pre_ping=True)
     Base.metadata.create_all(_engine)
     _Session = sessionmaker(_engine, expire_on_commit=False)
 

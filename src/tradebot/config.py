@@ -52,8 +52,16 @@ class Settings(BaseSettings):
     chat_effort: str = "medium"
     # Which token-spending jobs run. Heavy research now happens in Claude Code sessions on the Max plan;
     # add research,fast,diligence,earnings,reviews to switch the API versions back on.
-    enabled_jobs: str = "triage,digest,inbox"
+    enabled_jobs: str = "triage,digest,inbox,direct,explore"
     collator_model: str = "claude-sonnet-5-5"
+    # Exploration swarm: Sonnet picks angles, many Haiku explorers dig. Paced to spend this much a month.
+    director_model: str = "claude-sonnet-5-5"
+    explorer_model: str = "claude-haiku-5-5"
+    pipeline_budget_usd_month: float = 450.0
+    explorer_concurrency: int = 6
+    explorer_max_turns: int = 30
+    explorer_web_searches: int = 4
+    missions_per_direction: int = 12
     github_feed_token: str = ""
     github_feed_repo: str = "HarryHYu/Trade-Bot"
 
@@ -103,7 +111,9 @@ EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max
                      "prediction_model", "diligence_model", "verifier_model", "judge_model", "chat_model",
                      "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id",
                      "anthropic_workspace_ids", "anthropic_key_credits_usd",
-                     "enabled_jobs", "collator_model"}
+                     "enabled_jobs", "collator_model", "director_model", "explorer_model",
+                     "pipeline_budget_usd_month", "explorer_concurrency", "explorer_max_turns",
+                     "explorer_web_searches", "missions_per_direction"}
 # Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).
 OVERRIDES_FILE = Path("data/settings_overrides.json")
 

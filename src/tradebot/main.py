@@ -7,7 +7,7 @@ import logging
 import httpx
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from . import brain, collectors, digest, earnings, execution, inbox, reflection, telegram
+from . import brain, collectors, digest, earnings, execution, explore, inbox, reflection, telegram
 from .config import get_settings
 from .db import init_db, kv_get, session
 
@@ -103,6 +103,11 @@ def run() -> None:
     sch.add_job(_safe(_job("earnings", earnings.run_protocol)), "date", run_date=now + dt.timedelta(minutes=5))
     # Collated to-do list for the Max-plan research sessions: before the evening scan, pre-open, mid-session, morning
     sch.add_job(_safe(_job("digest", digest.run)), "cron", hour="3,6,12,19,22", minute=30)
+    # Exploration swarm: Sonnet picks angles hourly, Haiku explorers run continuously within the daily allowance
+    explore.recover()
+    sch.add_job(_safe(_job("direct", explore.direct)), "interval", minutes=60, max_instances=1,
+                next_run_time=now + dt.timedelta(minutes=4))
+    sch.add_job(_safe(_job("explore", explore.dispatch)), "interval", minutes=1, max_instances=1)
     def daily_brief() -> None:
         telegram.send(reflection.daily_brief(), topic="Brief")
     sch.add_job(_safe(daily_brief), "cron", hour=7, minute=30)

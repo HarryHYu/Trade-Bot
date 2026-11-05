@@ -108,3 +108,15 @@ uv run pytest
 Earnings protocol timeline (T-21 to T+1), commodities fast-lane playbooks with armed orders,
 options instruments, watch-mode active re-search, browser tool for Claude, collector auto-writing,
 shadow-mode parameter testing, web portal, voice notes in chat. The schema already has `Prediction` for earnings.
+
+## Exploration swarm (default mode)
+The API does the wide, cheap work; deep research and trade decisions happen in Claude Code sessions on the Max plan.
+- **Haiku triage** reads every collected item (33+ news searches, RSS, Steam, SEC) and flags drivers, ticker or not.
+- **Sonnet director** (hourly) reads the flags, recent dossiers and the watch list, and issues ~12 missions: angles to dig into
+  (events, themes, single companies, who-wins/who-loses chains, broad sweeps). It does not judge trades.
+- **Haiku explorers** (6 at a time) run each mission: Bing/Google News, GDELT, page reading with link-following, SEC filings,
+  prices, Steam, a few paid web searches. Each files a dossier: facts with sources, companies touched, surprises, follow-ups.
+- **Sonnet collator** (5x a day) turns flags + dossiers into a ranked to-do list: Telegram Research topic, `data/digests/`,
+  and the `desk-feed` branch if `GITHUB_FEED_TOKEN` is set.
+- Spend is paced: `PIPELINE_BUDGET_USD_MONTH` (default 450) is spread evenly over the days left in the month.
+  `/missions` shows today's allowance and the latest missions; `/set ENABLED_JOBS ...` and `/pause` switch jobs off.

@@ -155,7 +155,7 @@ def _settings_text() -> str:
 
 
 HELP = ("Just talk to me, or send photos and files.\n"
-        "/status  /positions  /halt  /flatten  /resume  /pause  /unpause (research)  /mode manual|threshold|auto  /new (fresh chat)\n"
+        "/status  /positions  /halt  /flatten  /resume  /pause  /unpause  /missions  /mode manual|threshold|auto  /new (fresh chat)\n"
         "/settings  /set NAME value  /setkey NAME value (secrets; message auto-deleted)")
 
 
@@ -182,6 +182,13 @@ def _command(text: str, thread: str) -> str:
             log_decision(db, "research_paused" if on else "research_unpaused", "")
         return ("All AI jobs paused (triage, digests and any research). Chat, collectors and exits keep running. /unpause to restart."
                 if on else f"AI jobs running: {get_settings().enabled_jobs}. Change with /set ENABLED_JOBS.")
+    if cmd == "/missions":
+        from .db import Mission
+        from .explore import allowance_left
+        with session() as db:
+            ms = db.scalars(select(Mission).order_by(Mission.id.desc()).limit(12)).all()
+        rows = [f"{m.status[:4]} {(m.dossier or {}).get('interest', '-')} {m.kind[:5]} {m.angle[:70]}" for m in ms]
+        return f"Today's allowance left ${allowance_left():.2f}\n" + ("\n".join(rows) or "No missions yet.")
     if cmd == "/mode" and args and args[0] in ("manual", "threshold", "auto"):
         with session() as db:
             kv_set(db, "approval_mode", args[0])

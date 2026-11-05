@@ -33,7 +33,8 @@ Rules:
 - For each entry say exactly what the analyst should check first to kill or confirm it.
 - Drop noise, promotions, recaps and anything already obviously priced (mainstream headline moves).
 - Copy source URLs exactly from the input. Never invent numbers or URLs.
-Return at most 15 entries, best first."""
+Explorer dossiers are deeper digs and usually carry the best material; use their surprises and affected companies.
+Return at most 20 entries, best first."""
 
 
 class TodoItem(BaseModel):
@@ -97,8 +98,10 @@ def run() -> str | None:
     with session() as db:
         last = kv_get(db, "digest_last")
     since = dt.datetime.fromisoformat(last) if last else now - dt.timedelta(hours=12)
-    batch = _batch(since)
-    if not batch:
+    from .explore import recent_dossiers
+    dossiers = recent_dossiers(since)
+    batch = _batch(since) + ("\n\nEXPLORER DOSSIERS (deeper digs on chosen angles):\n" + dossiers if dossiers else "")
+    if not batch.strip():
         return None
     d = claude().parse("collate", s.collator_model, COLLATOR_SYSTEM, batch, Digest, max_tokens=8000)
     text = render(d, now)
