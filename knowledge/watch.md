@@ -35,3 +35,11 @@ Each entry: what we saw, which check it failed, and what would change the verdic
   * No listed supplier, lender, card partner (Latitude; Amex ended 2024) or freehold owner materially exposed. No supplier short.
   * Possible DJ buyers (pre-VA contacts, secondary): Frasers, Brand Collective/Kestelman, Brett Blundy, Authentic Brands, Myer.
     Precedent: buyer of a distressed chain falls (Frasers after HoF -11%/20d); brand-buyer pops fade in 1-2 days (Boohoo).
+- [2026-11-06] Scorecard of Oct 30 calls: OIL-AFTER-MIDTERMS right (Dems swept House+Senate; Vance blamed war; Brent -8.7% to 94.62 Nov 4,
+  bounced +4% Nov 5; no deal yet, Khamenei says US shift "gravely mistaken"). RIG exit-by-Nov-2 saved ~-18% (6.94 -> ~5.14). W exit-by-T-1
+  missed an +11% print pop (then -8% next day). FIGS exit-by-T-1 saved ~-9%. RBLX recovered 42.99 -> 49.31 in 3 days (post-earnings
+  drift did NOT persist; the "drift" claim is weak, don't rely on it).
+- [2026-11-06] Nov 5 US: S&P ~-4%, Nasdaq ~-5%, VIX ~26 (highest since March): AI/chip wipeout on fears of slower data-centre build after
+  the midterms (NVDA -8%, AMD -16%, PLTR -10%). ~2 in 5 S&P names rose: rotation, not panic everywhere. Gold +1%, BTC -5%.
+- [2026-11-06] tinyBuild: Probably Stolen daily peak 174,382 on Nov 4 (Steam rank 13, up from 140k Oct 31): driver still rising in week 2,
+  but TBLD.L slipped 13.75p -> 13.0p (risk-off). Driver/price divergence: hold; consider adding on a milestone RNS.
