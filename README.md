@@ -118,5 +118,6 @@ The API does the wide, cheap work; deep research and trade decisions happen in C
   prices, Steam, a few paid web searches. Each files a dossier: facts with sources, companies touched, surprises, follow-ups.
 - **Sonnet collator** (5x a day) turns flags + dossiers into a ranked to-do list: Telegram Research topic, `data/digests/`,
   and the `desk-feed` branch if `GITHUB_FEED_TOKEN` is set.
-- Spend is paced: `PIPELINE_BUDGET_USD_MONTH` (default 450) is spread evenly over the days left in the month.
+- Spend is paced: all monthly key credit (`ANTHROPIC_KEY_CREDITS_USD`, capped by `MONTHLY_SPEND_CAP_USD`) minus `PIPELINE_RESERVE_USD`
+  (default 15) is spread evenly over the days left in the month. `PIPELINE_BUDGET_USD_MONTH` overrides it with a fixed number.
   `/missions` shows today's allowance and the latest missions; `/set ENABLED_JOBS ...` and `/pause` switch jobs off.

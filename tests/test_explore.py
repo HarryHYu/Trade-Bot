@@ -34,6 +34,14 @@ def test_allowance_spreads_monthly_budget(tmp_path, monkeypatch):
     assert explore.allowance_left() < 0
 
 
+def test_auto_budget_uses_all_key_credit_minus_reserve():
+    s = Settings(anthropic_api_keys="a,b", anthropic_key_credits_usd="350,200", monthly_spend_cap_usd=600)
+    assert s.pipeline_budget == 535
+    assert Settings(anthropic_api_keys="a,b", monthly_spend_cap_usd=600).pipeline_budget == 385   # normal month: 200+200
+    assert Settings(anthropic_api_keys="a,b", anthropic_key_credits_usd="350,200",
+                    monthly_spend_cap_usd=300).pipeline_budget == 285   # never above the hard cap
+
+
 def test_director_queues_missions_and_dispatch_runs_them(tmp_path, monkeypatch):
     _setup(tmp_path, monkeypatch, missions_per_direction=2, explorer_concurrency=1, knowledge_dir=str(tmp_path))
     direction = explore.Direction(missions=[explore.MissionSpec(angle=f"a{i}", kind="theme", brief="b", seeds=["q"])
@@ -54,7 +62,7 @@ def test_director_queues_missions_and_dispatch_runs_them(tmp_path, monkeypatch):
 
 
 def test_no_spend_when_allowance_used(tmp_path, monkeypatch):
-    _setup(tmp_path, monkeypatch, pipeline_budget_usd_month=0)
+    _setup(tmp_path, monkeypatch, monthly_spend_cap_usd=0)
     monkeypatch.setattr(explore, "claude", lambda: (_ for _ in ()).throw(AssertionError("should not call")))
     assert explore.direct() == 0 and explore.dispatch() == 0
 

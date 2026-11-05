@@ -41,7 +41,7 @@ def allowance_left() -> float:
     next_month = (month_start + dt.timedelta(days=32)).replace(day=1)
     days_left = max((next_month - day_start).days, 1)
     spent_before_today = _spent_since(month_start) - _spent_since(day_start)
-    today = (s.pipeline_budget_usd_month - spent_before_today) / days_left
+    today = (s.pipeline_budget - spent_before_today) / days_left
     return today - _spent_since(day_start)
 
 

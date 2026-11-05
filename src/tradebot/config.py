@@ -57,7 +57,8 @@ class Settings(BaseSettings):
     # Exploration swarm: Sonnet picks angles, many Haiku explorers dig. Paced to spend this much a month.
     director_model: str = "claude-sonnet-5-5"
     explorer_model: str = "claude-haiku-5-5"
-    pipeline_budget_usd_month: float = 450.0
+    pipeline_budget_usd_month: float = 0.0   # 0 = auto: all monthly key credit minus the reserve below
+    pipeline_reserve_usd: float = 15.0      # kept back for Telegram chat and the emergency lane
     explorer_concurrency: int = 6
     explorer_max_turns: int = 30
     explorer_web_searches: int = 4
@@ -91,6 +92,13 @@ class Settings(BaseSettings):
         except ValueError:
             return self.monthly_credit_usd_per_key
 
+    @property
+    def pipeline_budget(self) -> float:
+        if self.pipeline_budget_usd_month > 0:
+            return self.pipeline_budget_usd_month
+        credit = sum(self.credit_for(i) for i in range(max(len(self.api_keys), 1)))
+        return max(min(credit, self.monthly_spend_cap_usd) - self.pipeline_reserve_usd, 0.0)
+
     def workspace_for(self, index: int) -> str:
         # Positions matter: ",wrkspc_B" means key 1 needs no workspace header and key 2 uses wrkspc_B.
         ids = [w.strip() for w in self.anthropic_workspace_ids.split(",")] if self.anthropic_workspace_ids else []
@@ -112,7 +120,7 @@ EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max
                      "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id",
                      "anthropic_workspace_ids", "anthropic_key_credits_usd",
                      "enabled_jobs", "collator_model", "director_model", "explorer_model",
-                     "pipeline_budget_usd_month", "explorer_concurrency", "explorer_max_turns",
+                     "pipeline_budget_usd_month", "pipeline_reserve_usd", "explorer_concurrency", "explorer_max_turns",
                      "explorer_web_searches", "missions_per_direction"}
 # Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).
 OVERRIDES_FILE = Path("data/settings_overrides.json")
