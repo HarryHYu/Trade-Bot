@@ -23,3 +23,15 @@ Each entry: what we saw, which check it failed, and what would change the verdic
   (Oct 29 112k). TBLD.L closed 13.0p Oct 30 (+6%). Thesis strengthening; ride target 15-16p unchanged.
 - [2026-11-01] Oct 30: Nasdaq -2.9% (Intel -29% on Q4 guide, AMZN/GOOGL AI capex fears). RBLX closed 42.99 (-18%). OSUR 3.94 (stop 3.85 close).
   Oil weekend two-sided: IRGC claims 4 tankers hit mines (unverified) vs Iran saying strait could reopen within two days under new proposal.
+- [2026-11-05] DAVID JONES administration (McGrathNicol VA; Hilco secured lender -> FTI receivers; stores trading through Christmas,
+  closure update expected this week; flagged closures Parramatta, Hornsby, Carousel, Woden, Southland, network maybe 12-15 of 38).
+  Telegraphed for weeks (suppliers exited from July, Gucci/Dior out), so mostly priced. Findings:
+  * MYR 0.20 -> 0.25 (+~A$85m) already prices the base case; precedent (Harris Scarfe 2019: MYR -7% over 20d) says first pop fades.
+    Hilco = clearance specialist -> DJ discounting hurts MYR margin in Dec. WATCH: buy 0.21-0.22 pullback or on a closure list with
+    10+ Myer-overlap stores; AGM trading update ~Dec 10. Kill < 0.20.
+  * SCG: DJ = 1.8% gross rent / 3.6% FFO, 17 stores, rent $352/sqm vs $942 portfolio avg, ~$30m guarantees (8 months), guidance
+    reaffirmed (ASX 4 Nov). Closures hand back cheap space (Tuggerah DJ box -> JD/rebel/Timezone, visits +6.2%). WATCH long on closure list.
+  * ABY (A$23m cap, prestige beauty online): 1% of DJ sales ~ 10% of ABY revenue; not moved; illiquid. WATCH: closure list / AGM 19 Nov.
+  * No listed supplier, lender, card partner (Latitude; Amex ended 2024) or freehold owner materially exposed. No supplier short.
+  * Possible DJ buyers (pre-VA contacts, secondary): Frasers, Brand Collective/Kestelman, Brett Blundy, Authentic Brands, Myer.
+    Precedent: buyer of a distressed chain falls (Frasers after HoF -11%/20d); brand-buyer pops fade in 1-2 days (Boohoo).
