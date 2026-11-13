@@ -43,3 +43,14 @@ Each entry: what we saw, which check it failed, and what would change the verdic
   the midterms (NVDA -8%, AMD -16%, PLTR -10%). ~2 in 5 S&P names rose: rotation, not panic everywhere. Gold +1%, BTC -5%.
 - [2026-11-06] tinyBuild: Probably Stolen daily peak 174,382 on Nov 4 (Steam rank 13, up from 140k Oct 31): driver still rising in week 2,
   but TBLD.L slipped 13.75p -> 13.0p (risk-off). Driver/price divergence: hold; consider adding on a milestone RNS.
+- [2026-11-13] NVIDIA / MEGASPEED: Jensen Huang resigned as CEO and director Nov 11 (8-K); CFO Colette Kress interim CEO (keeps CFO),
+  Harvey Jones chair; CEO search. Board probe (Wachtell) into foreign-intelligence targeting; Q3 FY27 results Tue Nov 17.
+  Megaspeed (ex-7Road International, Singapore; owner SwiftData; director Tan Yong Pong) + Malaysian unit Speedmatrix bought ~$4.8B Nvidia
+  gear Jun-2024 to Feb-2026 (NYT trade records); The Information alleges >=$7.5B to Chinese firms (unverified). Culper (May 2026) alleges
+  Alibaba-linked Apex prepaid ~$4.1B (denied). US criminal probe of smuggling; Singapore police probe since Oct 2025; Taiwan revoked
+  Alice Huang's permit, Singapore barred entry; she is reportedly in Beijing. Rep. Himes doubts the spy claim after briefing.
+  Megaspeed Australia: shell (virtual office, sole director, no activity). No Australian market exposure.
+  Moves since Nov 3: NVDA 206.7 -> 166.2; AMD 483.9 -> 585.3 (earnings + Google + rotation); SMCI separate case (Liaw trial Mar 2027);
+  BABA -7% and GDS -11% on Nov 12, Gigabyte -12% over the week (causes unverified).
+  Watch: Nov 17 print (China/SEA exposure, Singapore billing, guidance under interim CEO), any SEA export-rule tightening, DOJ scope
+  (does it reach Nvidia?), Alibaba/GDS named in filings, CEO pick.
