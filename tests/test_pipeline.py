@@ -84,13 +84,16 @@ def test_full_autonomous_chain(world):
     assert models["triage"].startswith("claude-haiku") and models["evaluate"].startswith("claude-sonnet")
     assert models["research"].startswith("claude-opus")
     # the thesis is on the record before any trade
-    assert ledger.load("leads")[0]["thesis_id"] == tids[0]
+    leads = {l["source"]: l for l in ledger.load("leads")}
+    assert leads["sonnet"]["stance"] == "watch_long"          # Sonnet's pick is scored on its own
+    assert leads["opus"]["thesis_id"] == tids[0]
     assert ledger.load("predictions")[0]["auto"]["op"] == "move_pct_ge"
     ids = execution.propose_for_thesis(tids[0])
     assert execution.execute_approved() == 1      # paper autotrade: no human needed
     execution.sync_fills()
     trade = ledger.load("trades")[0]
-    assert trade["status"] == "open" and trade["managed_by"] == "bot" and ledger.load("leads")[0]["acted"] is True
+    opus = next(l for l in ledger.load("leads") if l["source"] == "opus")
+    assert trade["status"] == "open" and trade["managed_by"] == "bot" and opus["acted"] is True
     with db.session() as s:
         stop = s.get(db.Proposal, ids[0]).stop_price
     prices["XYZ"] = stop - 1
@@ -98,4 +101,5 @@ def test_full_autonomous_chain(world):
     trade = ledger.load("trades")[0]
     assert trade["status"] == "closed" and trade["exit_reason"] == "stop"
     text = review.build()
+    assert "sonnet" in ledger.source_summary() and "opus" in ledger.source_summary()
     assert "DAILY REVIEW" in text and "Opus theses" in text and "Scorecard: 1 closed" in text

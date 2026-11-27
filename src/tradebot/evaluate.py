@@ -76,7 +76,26 @@ def _context(since: dt.datetime) -> tuple[str, list[int]]:
     watch = Path(get_settings().knowledge_dir) / "watch.md"
     if watch.exists():
         parts.append("\nDESK WATCH LIST (latest):\n" + watch.read_text()[-4000:])
+    parts.append("\nWHAT HAS AND HASN'T WORKED (scorecard by source, recent lessons):\n" + _track_record())
     return "\n".join(parts), [l.id for l, _ in leads]
+
+
+def _track_record() -> str:
+    from . import ledger
+    out = []
+    try:
+        out.append(ledger.source_summary())
+    except Exception:
+        pass
+    with session() as db:
+        done = db.scalars(select(Thesis).where(Thesis.outcome.is_not(None)).order_by(Thesis.closed_at.desc()).limit(8)).all()
+        out += [f"- {t.ticker}: {(t.outcome or {}).get('lesson_for_security', '')[:200]}" for t in done]
+    refl = Path(get_settings().knowledge_dir) / "reflections"
+    if refl.exists():
+        for f in sorted(refl.glob("*.md"))[-2:]:
+            text = f.read_text()
+            out.append(text[text.find("## Rules"):][:1500] if "## Rules" in text else "")
+    return "\n".join(x for x in out if x) or "no record yet"
 
 
 def run(max_candidates: int = 4) -> int:
@@ -118,4 +137,15 @@ def run(max_candidates: int = 4) -> int:
                 row.status = "reviewed"
         kv_set(db, "evaluate_last", now.isoformat())
         log_decision(db, "evaluated", "", candidates=[c.model_dump() for c in out.candidates], passed_on=out.passed_on)
+    # Score Sonnet's picks on their own, whatever Opus later decides, so the weekly review can judge each stage.
+    from . import ledger
+    for c in out.candidates[:max_candidates]:
+        if not c.tickers:
+            continue
+        stance = {"long": "watch_long", "short": "watch_short"}.get(c.direction_lean, "watch")
+        try:
+            ledger.add_lead(c.tickers[0].upper(), stance, ledger._today(), c.driver[:240], source="sonnet",
+                            ref=ledger.last_close(c.tickers[0].upper())[1])
+        except Exception:
+            log.exception("could not record shortlist pick %s", c.tickers)
     return made

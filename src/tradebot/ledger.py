@@ -313,6 +313,22 @@ def _lead_score(lead: dict[str, Any], today: str) -> dict[str, Any]:
     return dict(now=now, move=move, bench=bmove, edge=(move - bmove) * sign if sign else None, raw=move * sign if sign else None)
 
 
+def source_summary(today: str | None = None) -> str:
+    """Directional hit rate and average edge of ideas, split by who produced them (sonnet shortlist, opus thesis, manual)."""
+    today = today or _today()
+    groups: dict[str, list[float]] = {}
+    for lead in load("leads"):
+        if not STANCE_SIGN.get(lead["stance"], 0):
+            continue
+        try:
+            e = _lead_score(lead, today)["edge"]
+        except Exception:
+            continue
+        groups.setdefault(lead.get("source", "manual"), []).append(e)
+    return "\n".join(f"- {src}: {sum(x > 0 for x in v)}/{len(v)} right vs benchmark, average edge {st.mean(v) * 100:+.1f}%"
+                     for src, v in sorted(groups.items())) or "no scored ideas yet"
+
+
 # ---------- report ----------
 
 def _fmt(x: float | None, pct: bool = True) -> str:
@@ -419,6 +435,7 @@ def report(today: str | None = None, chart: bool = True) -> str:
         right = sum(1 for _, s in scored if s["edge"] > 0)
         out += ["", f"**Directional leads:** {right}/{len(scored)} right vs benchmark | average edge "
                 f"{_fmt(st.mean(s['edge'] for _, s in scored))}"]
+        out.append("By source:\n" + source_summary(today))
         for name, keep in (("acted on", True), ("not acted on", False)):
             grp = [s for lead, s in scored if lead["acted"] == keep]
             if grp:

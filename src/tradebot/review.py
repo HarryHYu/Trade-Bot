@@ -102,6 +102,7 @@ def build(hours: int = 24) -> str:
                 pass
     if edges:
         lines.append(f"Ideas: {sum(e > 0 for e in edges)}/{len(edges)} directional calls right vs benchmark, average edge {_pct(st.mean(edges))}")
+        lines.append("By who picked them:\n" + ledger.source_summary(today))
 
     # spend
     lines.append(f"\nAPI: month ${sum(spend_by_key().values()):.2f}; {budget.status().splitlines()[0]}")
