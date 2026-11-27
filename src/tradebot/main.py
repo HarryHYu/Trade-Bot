@@ -41,11 +41,18 @@ def _safe(fn):
     return run
 
 
+def _propose(tid: int) -> None:
+    try:
+        execution.propose_for_thesis(tid)
+    except Exception:
+        log.exception("proposal failed for thesis %s", tid)
+
+
 def research_cycle() -> None:
     s = get_settings()
     brain.followup_diligence()
     for tid in brain.research_top(2):
-        execution.propose_for_thesis(tid)
+        _propose(tid)
     telegram.announce_new_theses()
     telegram.announce_new_proposals()
 
@@ -53,7 +60,7 @@ def research_cycle() -> None:
 def fast_cycle() -> None:
     s = get_settings()
     for tid in brain.fast_lane():
-        execution.propose_for_thesis(tid)
+        _propose(tid)
     telegram.announce_new_theses()
     telegram.announce_new_proposals()
 
@@ -61,7 +68,7 @@ def fast_cycle() -> None:
 def inbox_cycle() -> None:
     s = get_settings()
     for tid in inbox.import_inbox():
-        execution.propose_for_thesis(tid)
+        _propose(tid)
     telegram.announce_new_theses()
     telegram.announce_new_proposals()
 

@@ -161,7 +161,7 @@ class SimBroker:
     def _fill(self, db, o: SimOrder) -> None:
         px = quote(o.symbol)
         px = px * (1 + SLIPPAGE) if o.side == "buy" else px * (1 - SLIPPAGE)
-        fee = max(COMMISSION_MIN, COMMISSION_PER_SHARE * abs(o.qty))
+        fee = max(COMMISSION_MIN, min(COMMISSION_PER_SHARE * abs(o.qty), 0.01 * abs(o.qty) * px))  # IBKR-style, capped at 1%
         signed = o.qty if o.side == "buy" else -o.qty
         pos = db.get(SimPosition, o.symbol)
         if pos is None:
