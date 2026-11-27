@@ -3,6 +3,7 @@ A thesis is one driver plus the interrogation: every check gets a verdict, so po
 exactly which check failed."""
 from __future__ import annotations
 
+import datetime as dt
 import json
 import logging
 from typing import Literal
@@ -272,6 +273,35 @@ def research_lead(lead_id: int, fast: bool = False) -> int | None:
     from . import recorder
     recorder.on_thesis(tid)
     return tid
+
+
+def recheck_watch(days: int = 5, limit: int = 2) -> int:
+    """Watch-tier theses don't just sit there: after `days` they go back to Opus as a fresh lead with the old note, so a
+    trigger that fired (a report, a data release, a price move) turns into a trade or a closed idea."""
+    cutoff = utcnow() - dt.timedelta(days=days)
+    made = 0
+    with session() as db:
+        rows = db.scalars(select(Thesis).where(Thesis.tier == "watch", Thesis.status == "open", Thesis.opened_at < cutoff)
+                          .order_by(Thesis.opened_at)).all()
+        for th in rows:
+            if made >= limit:
+                break
+            if (th.meta or {}).get("rechecked"):
+                continue
+            note = (th.evidence or [{}])[0].get("note", "")[:6000]
+            item = Item(source="watch_recheck", source_tier=2, external_id=f"recheck-{th.id}", title=f"Re-check watch: {th.ticker}",
+                        text=f"WATCH THESIS #{th.id} from {th.opened_at:%Y-%m-%d}, re-check whether its trigger fired.\n"
+                             f"DRIVER: {th.driver}\nCATALYSTS: {'; '.join(th.catalysts or [])}\n"
+                             f"KILL: {'; '.join(th.kill_criteria or [])}\nEARLIER NOTE:\n{note}",
+                        published_at=th.opened_at, triaged=True)
+            db.add(item)
+            db.flush()
+            db.add(Lead(item_id=item.id, tickers=[th.ticker], theme=f"Re-check: {th.driver}", signal_kind="evaluated",
+                        priority=0.55, urgency="soon", summary="watch re-check"))
+            th.meta = (th.meta or {}) | {"rechecked": utcnow().isoformat()}
+            th.status = "closed"   # the re-check produces a new thesis if it is still alive
+            made += 1
+    return made
 
 
 def research_top(n: int = 2) -> list[int]:

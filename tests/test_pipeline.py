@@ -103,3 +103,17 @@ def test_full_autonomous_chain(world):
     text = review.build()
     assert "sonnet" in ledger.source_summary() and "opus" in ledger.source_summary()
     assert "DAILY REVIEW" in text and "Opus theses" in text and "Scorecard: 1 closed" in text
+
+
+def test_watch_theses_go_back_to_opus(tmp_path):
+    import datetime as dt
+    db.init_db(f"sqlite:///{tmp_path}/w.db")
+    with db.session() as s:
+        s.add(db.Thesis(ticker="BRBR", driver="whey costs easing", mechanism="m", direction="long", probability=0.5,
+                        expected_move_pct=20, horizon_days=20, tier="watch", checks=[], summary="s",
+                        catalysts=["Nov 17 report"], opened_at=db.utcnow() - dt.timedelta(days=6)))
+    assert brain.recheck_watch() == 1
+    assert brain.recheck_watch() == 0     # only once
+    with db.session() as s:
+        lead = s.scalars(db.select(db.Lead)).one()
+        assert lead.signal_kind == "evaluated" and lead.tickers == ["BRBR"]

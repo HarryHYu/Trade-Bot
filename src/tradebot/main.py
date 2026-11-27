@@ -51,6 +51,7 @@ def _propose(tid: int) -> None:
 def research_cycle() -> None:
     s = get_settings()
     brain.followup_diligence()
+    brain.recheck_watch()
     for tid in brain.research_top(2):
         _propose(tid)
     telegram.announce_new_theses()
