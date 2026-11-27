@@ -73,7 +73,12 @@ def weekly_review() -> WeeklyReview | None:
     with session() as db:
         rows = db.scalars(select(Thesis).where(Thesis.outcome.is_not(None))).all()
         prior = [d.payload for d in db.scalars(select(Decision).where(Decision.kind == "weekly_finding"))]
-    if len(rows) < 10:
+    from . import ledger
+    try:
+        scorecard = ledger.report(chart=False)
+    except Exception as e:
+        scorecard = f"(ledger unavailable: {e})"
+    if len(rows) < 3 and "| L1 |" not in scorecard:
         return None
     data = [dict(id=t.id, ticker=t.ticker, type=t.security_type, tier=t.tier, direction=t.direction,
                  p=t.probability, move=t.expected_move_pct, horizon=t.horizon_days, checks=t.checks,
@@ -83,8 +88,14 @@ def weekly_review() -> WeeklyReview | None:
            "cluster in a bucket with at least 20 outcomes; smaller is a hypothesis. A hypothesis from earlier weeks "
            "becomes confirmed only if NEW outcomes since then agree. Explain the mechanism (why), never just the number. "
            "Record what you checked and found nothing in. Propose changes; never adopt them.")
+    sys += (" You also get the desk's ledger scorecard: every trade, every prediction with its score, and every idea it "
+            "looked at (traded or not) with what the price did since, relative to a benchmark. Look for where the desk's "
+            "judgement is systematically off: ideas it skipped that worked, stances that keep failing, poorly calibrated "
+            "probabilities, stages of the pipeline (Haiku flags, explorer dossiers, Sonnet shortlist, Opus calls) that add "
+            "or destroy value.")
     out = claude().parse("weekly_review", s.research_model, sys,
-                         f"PRIOR FINDINGS:\n{json.dumps(prior)[-20000:]}\n\nOUTCOMES:\n{json.dumps(data)[-150000:]}",
+                         f"PRIOR FINDINGS:\n{json.dumps(prior)[-20000:]}\n\nLEDGER SCORECARD:\n{scorecard[-60000:]}\n\n"
+                         f"OUTCOMES:\n{json.dumps(data)[-100000:]}",
                          WeeklyReview, effort="high")
     with session() as db:
         for f in out.findings:
@@ -93,6 +104,11 @@ def weekly_review() -> WeeklyReview | None:
         if f.status == "confirmed":
             append_type_briefing(f.security_type, f.pattern, f.mechanism_why, f"n={f.sample_size}; bucket {f.bucket}")
     commit("Weekly review findings")
+    from .telegram import send
+    send("WEEKLY SELF-REVIEW\n" + "\n".join(f"- [{f.status}, n={f.sample_size}] {f.pattern}\n  why: {f.mechanism_why[:200]}\n"
+                                             f"  proposed: {f.proposed_change[:200]}" for f in out.findings)
+         + ("\nChecked, nothing found: " + "; ".join(out.looked_and_found_nothing)[:800] if out.looked_and_found_nothing else ""),
+         topic="Brief")
     return out
 
 

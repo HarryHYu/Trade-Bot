@@ -23,10 +23,10 @@ class Settings(BaseSettings):
     # Hard ceiling on total API spend per calendar month, credits plus paid. Raise it when you want.
     monthly_spend_cap_usd: float = 600.0
     triage_model: str = "claude-haiku-5-5"
-    research_model: str = "claude-sonnet-5-5"
+    research_model: str = "claude-opus-5-5"
     prediction_model: str = "claude-opus-5-5"
     research_effort: str = "high"
-    max_research_per_day: int = 40
+    max_research_per_day: int = 8
     # Multi-agent diligence on any thesis that clears the first pass
     diligence_model: str = "claude-sonnet-5-5"
     verifier_model: str = "claude-sonnet-5-5"
@@ -54,7 +54,10 @@ class Settings(BaseSettings):
     chat_effort: str = "medium"
     # Which token-spending jobs run. Heavy research now happens in Claude Code sessions on the Max plan;
     # add research,fast,diligence,earnings,reviews to switch the API versions back on.
-    enabled_jobs: str = "triage,digest,inbox,direct,explore"
+    enabled_jobs: str = "triage,digest,inbox,direct,explore,evaluate,research,fast,earnings,reviews,ledger"
+    evaluator_model: str = "claude-sonnet-5-5"
+    paper_autotrade: bool = True          # with the built-in simulator, proposals are approved automatically
+    ledger_dir: Path = Path("ledger")     # the server keeps its live ledger in data/ledger
     collator_model: str = "claude-sonnet-5-5"
     # Exploration swarm: Sonnet picks angles, many Haiku explorers dig. Paced to spend this much a month.
     director_model: str = "claude-sonnet-5-5"
@@ -121,7 +124,7 @@ EDITABLE_SETTINGS = {"monthly_spend_cap_usd", "monthly_credit_usd_per_key", "max
                      "prediction_model", "diligence_model", "verifier_model", "judge_model", "chat_model",
                      "sec_user_agent", "reddit_user_agent", "anthropic_workspace_id",
                      "anthropic_workspace_ids", "anthropic_key_credits_usd", "broker", "sim_starting_cash",
-                     "enabled_jobs", "collator_model", "director_model", "explorer_model",
+                     "enabled_jobs", "collator_model", "evaluator_model", "paper_autotrade", "director_model", "explorer_model",
                      "pipeline_budget_usd_month", "pipeline_reserve_usd", "explorer_concurrency", "explorer_max_turns",
                      "explorer_web_searches", "missions_per_direction"}
 # Never changeable from chat: telegram_* (would cut the connection), alpaca_paper/trading_live_confirm (live trading).

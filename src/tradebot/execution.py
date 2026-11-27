@@ -65,6 +65,8 @@ def auto_approve(ids: list[int]) -> None:
     s = get_settings()
     with session() as db:
         mode = kv_get(db, "approval_mode", s.approval_mode)  # /mode from Telegram overrides .env
+        if s.broker == "sim" and s.paper_autotrade:
+            mode = "auto"   # paper money: the desk trades by itself and is judged by the ledger
         if mode == "manual":
             return
         for pid in ids:
@@ -94,9 +96,9 @@ def execute_approved() -> int:
         for p in db.scalars(select(Proposal).where(Proposal.state == "proposed", Proposal.expires_at < utcnow())):
             p.state = "expired"
         approved = db.scalars(select(Proposal).where(Proposal.state == "approved")).all()
-    if not approved or not br.clock()["is_open"]:
-        return 0
     for p in approved:
+        if not br.clock(p.symbol)["is_open"]:
+            continue   # each exchange on its own hours; the order waits for the open
         try:
             # Plain market entry. Stops, trailing, targets and time stops are managed by manage_exits.
             o = br.submit_bracket(p.symbol, p.side, p.qty, None, None, p.client_order_id)
@@ -113,8 +115,10 @@ def execute_approved() -> int:
 
 
 def sync_fills() -> None:
+    from . import recorder
     br = get_broker()
     held = {p["symbol"] for p in br.positions()}
+    filled, closed = [], []
     with session() as db:
         for p in db.scalars(select(Proposal).where(Proposal.state.in_(["submitted", "filled"]))):
             o = br.order_by_client_id(p.client_order_id)
@@ -125,6 +129,7 @@ def sync_fills() -> None:
                 p.filled_at, p.peak_price = utcnow(), p.fill_price
                 days = load_yaml("strategy.yaml").get("default_time_stop_days", 5)
                 p.hold_until = p.filled_at + dt.timedelta(days=round(days * 7 / 5))  # trading days -> calendar
+                filled.append(p.id)
             elif p.state == "submitted" and o["status"] in ("canceled", "expired", "rejected"):
                 p.state = "canceled"
             elif p.state == "filled" and p.symbol not in held:
@@ -135,6 +140,11 @@ def sync_fills() -> None:
                     sign = 1 if p.side == "buy" else -1
                     p.pnl_usd = (p.exit_price - p.fill_price) * p.qty * sign
                 log_decision(db, "closed", p.id, pnl=p.pnl_usd)
+                closed.append(p.id)
+    for pid in filled:
+        recorder.on_fill(pid)
+    for pid in closed:
+        recorder.on_close(pid)
 
 
 def halt(flatten: bool = False) -> None:
@@ -150,15 +160,13 @@ def manage_exits() -> int:
     """Every minute while the market is open: update best price, move stops to breakeven and trail them,
     and exit on stop, trailing stop, target, time stop, or a killed thesis. Hedge legs close with their main leg."""
     br = get_broker()
-    if not br.clock()["is_open"]:
-        return 0
     st = load_yaml("strategy.yaml")
     held = {p["symbol"]: p for p in br.positions()}
     n = 0
     with session() as db:
         rows = db.scalars(select(Proposal).where(Proposal.state == "filled", Proposal.role == "main")).all()
     for p in rows:
-        if p.symbol not in held or not p.fill_price:
+        if p.symbol not in held or not p.fill_price or not br.clock(p.symbol)["is_open"]:
             continue
         px = float(held[p.symbol]["current_price"])
         with session() as db:
@@ -189,6 +197,8 @@ def manage_exits() -> int:
                 except Exception:
                     log.exception("hedge close failed %s", h.symbol)
                 h.state, h.closed_at, h.exit_reason = "closed", utcnow(), f"main_{reason}"
+        from . import recorder
+        recorder.on_close(p.id)
         from .telegram import send
         send(f"EXIT {p.symbol} ({reason}) @ {px:.2f}  pnl ${(px - p.fill_price) * p.qty * (1 if p.side == 'buy' else -1):,.0f}",
              topic="Alerts")

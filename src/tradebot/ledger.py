@@ -15,17 +15,28 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
+import shutil
+import threading
+
 import httpx
 
-DIR = Path("ledger")
 START_EQUITY = 10_000.0
 UA = {"User-Agent": "Mozilla/5.0"}
+LOCK = threading.RLock()   # scheduler jobs run in threads; every read-modify-write holds this
+
+
+def _dir() -> Path:
+    try:
+        from .config import get_settings
+        return Path(get_settings().ledger_dir)
+    except Exception:
+        return Path("ledger")
 
 
 # ---------- storage ----------
 
 def _path(name: str) -> Path:
-    return DIR / f"{name}.json"
+    return _dir() / f"{name}.json"
 
 
 def load(name: str) -> list[dict[str, Any]]:
@@ -34,8 +45,28 @@ def load(name: str) -> list[dict[str, Any]]:
 
 
 def save(name: str, rows: list[dict[str, Any]]) -> None:
-    DIR.mkdir(exist_ok=True)
-    _path(name).write_text(json.dumps(rows, indent=2, default=str) + "\n")
+    _dir().mkdir(parents=True, exist_ok=True)
+    tmp = _path(name).with_suffix(".tmp")
+    tmp.write_text(json.dumps(rows, indent=2, default=str) + "\n")
+    tmp.replace(_path(name))
+
+
+def seed(from_dir: Path = Path("ledger")) -> None:
+    """First start on the server: copy the repo's ledger history into the live ledger directory."""
+    d = _dir()
+    if d.resolve() == from_dir.resolve() or (d / "trades.json").exists() or not from_dir.exists():
+        return
+    d.mkdir(parents=True, exist_ok=True)
+    for f in from_dir.glob("*.json"):
+        shutil.copy(f, d / f.name)
+
+
+def _locked(fn):
+    def wrapper(*a, **k):
+        with LOCK:
+            return fn(*a, **k)
+    wrapper.__name__, wrapper.__doc__ = fn.__name__, fn.__doc__
+    return wrapper
 
 
 def _next_id(rows: list[dict[str, Any]], prefix: str) -> str:
@@ -86,20 +117,25 @@ def benchmark_for(symbol: str) -> str:
 
 # ---------- trades ----------
 
+@_locked
 def open_trade(ticker: str, side: str, entry: float | None = None, stop: float | None = None, target: float | None = None,
                thesis: str = "", conviction: float = 3, notional: float = 1000, time_stop_days: int = 10,
-               tags: list[str] | None = None, opened: str | None = None, exit_by: str | None = None) -> dict[str, Any]:
+               tags: list[str] | None = None, opened: str | None = None, exit_by: str | None = None,
+               **extra: Any) -> dict[str, Any]:
+    """extra: e.g. managed_by='bot' (the bot runs its own exits; check() leaves it alone) and proposal_id."""
     rows = load("trades")
     opened = opened or _today()
     entry = entry if entry is not None else close_on(ticker, opened)
     t = dict(id=_next_id(rows, "T"), ticker=ticker, side=side, opened=opened, entry=entry, stop=stop, target=target,
              time_stop_days=time_stop_days, exit_by=exit_by, conviction=conviction, notional=notional, thesis=thesis,
-             tags=tags or [], benchmark=benchmark_for(ticker), status="open", closed=None, exit=None, exit_reason=None)
+             tags=tags or [], benchmark=benchmark_for(ticker), status="open", closed=None, exit=None, exit_reason=None,
+             **extra)
     rows.append(t)
     save("trades", rows)
     return t
 
 
+@_locked
 def close_trade(tid: str, price: float | None = None, reason: str = "manual", when: str | None = None) -> dict[str, Any]:
     rows = load("trades")
     t = next(r for r in rows if r["id"] == tid)
@@ -128,13 +164,14 @@ def _dead_money(t: dict[str, Any], price: float) -> bool:
     return rm < 1 if rm is not None else _ret(t, price) < 0.05
 
 
+@_locked
 def check(today: str | None = None) -> list[str]:
     """Apply stops, targets, exit-by dates and time stops to open trades, using daily bars after entry.
     Stop is assumed hit before target on a day that touches both (conservative); a gap through the stop fills at the open."""
     rows, events = load("trades"), []
     today = today or _today()
     for t in rows:
-        if t["status"] != "open":
+        if t["status"] != "open" or t.get("managed_by") == "bot":
             continue
         bars = [b for b in history(t["ticker"]) if t["opened"] < b[0] <= today]
         long = t["side"] == "long"
@@ -160,19 +197,26 @@ def check(today: str | None = None) -> list[str]:
 
 # ---------- predictions ----------
 
+@_locked
 def predict(subject: str, question: str, kind: str, resolve_by: str, made: str | None = None, low: float | None = None,
             high: float | None = None, point: float | None = None, consensus: float | None = None,
-            direction: str | None = None, probability: float | None = None, notes: str = "") -> dict[str, Any]:
-    """kind: 'range' (low/high/point, optional consensus), 'direction' (up/down/yes/no) or 'probability' (0-1 that it happens)."""
+            direction: str | None = None, probability: float | None = None, notes: str = "",
+            auto: dict[str, Any] | None = None, **extra: Any) -> dict[str, Any]:
+    """kind: 'range' (low/high/point, optional consensus), 'direction' (up/down/yes/no) or 'probability' (0-1 that it happens).
+    auto: price condition that resolves a probability prediction by itself, e.g.
+    {"symbol": "^GSPC", "op": "close_below", "level": 7037, "mode": "any"} (any day before resolve_by) or mode "on"
+    (on the resolve date). ops: close_below, close_above, move_pct_ge / move_pct_le (vs "ref", level in %)."""
     rows = load("predictions")
     p = dict(id=_next_id(rows, "P"), subject=subject, question=question, kind=kind, made=made or _today(),
              resolve_by=resolve_by, low=low, high=high, point=point, consensus=consensus, direction=direction,
-             probability=probability, notes=notes, status="open", actual=None, outcome=None, score=None)
+             probability=probability, notes=notes, status="open", actual=None, outcome=None, score=None,
+             auto=auto, **extra)
     rows.append(p)
     save("predictions", rows)
     return p
 
 
+@_locked
 def resolve(pid: str, actual: float | None = None, outcome: str | bool | None = None, when: str | None = None) -> dict[str, Any]:
     rows = load("predictions")
     p = next(r for r in rows if r["id"] == pid)
@@ -195,20 +239,70 @@ def resolve(pid: str, actual: float | None = None, outcome: str | bool | None = 
     return p
 
 
+def _met(spec: dict[str, Any], close: float) -> bool:
+    op, level = spec["op"], float(spec["level"])
+    if op == "close_below":
+        return close < level
+    if op == "close_above":
+        return close > level
+    move = (close / float(spec["ref"]) - 1) * 100
+    return move >= level if op == "move_pct_ge" else move <= -abs(level)
+
+
+def auto_resolve(today: str | None = None) -> list[str]:
+    """Resolve probability predictions that carry a price condition."""
+    today = today or _today()
+    done = []
+    for p in [p for p in load("predictions") if p["status"] == "open" and p.get("auto")]:
+        spec = p["auto"]
+        try:
+            end = min(today, p["resolve_by"])
+            bars = [b for b in history(spec["symbol"]) if p["made"] < b[0] <= end]
+        except Exception:
+            continue
+        hit = next((b for b in bars if _met(spec, b[4])), None) if spec.get("mode", "any") == "any" else None
+        if hit:
+            resolve(p["id"], actual=hit[4], outcome="yes", when=hit[0])
+        elif today >= p["resolve_by"] and bars:
+            last = bars[-1][4]
+            happened = _met(spec, last) if spec.get("mode") == "on" else False
+            resolve(p["id"], actual=last, outcome="yes" if happened else "no", when=p["resolve_by"])
+        else:
+            continue
+        done.append(p["id"])
+    return done
+
+
 # ---------- leads ----------
 
 STANCE_SIGN = {"long": 1, "watch_long": 1, "short": -1, "watch_short": -1, "avoid": -1, "pass": 0, "watch": 0}
 
 
-def add_lead(ticker: str, stance: str, flagged: str, idea: str, acted: bool = False, ref: float | None = None) -> dict[str, Any]:
+@_locked
+def add_lead(ticker: str, stance: str, flagged: str, idea: str, acted: bool = False, ref: float | None = None,
+             **extra: Any) -> dict[str, Any]:
     """stance: long / short / watch_long / watch_short (direction we leaned, maybe not traded) / avoid (said do not buy now)
     / pass or watch (no directional view; recorded but not scored)."""
     rows = load("leads")
     lead = dict(id=_next_id(rows, "L"), ticker=ticker, stance=stance, flagged=flagged, idea=idea, acted=acted,
-                ref=ref if ref is not None else close_on(ticker, flagged), benchmark=benchmark_for(ticker))
+                ref=ref if ref is not None else close_on(ticker, flagged), benchmark=benchmark_for(ticker), **extra)
     rows.append(lead)
     save("leads", rows)
     return lead
+
+
+@_locked
+def update(name: str, match: dict[str, Any], **fields: Any) -> int:
+    """Set fields on every row whose keys equal `match` (e.g. mark a lead acted)."""
+    rows = load(name)
+    n = 0
+    for r in rows:
+        if all(r.get(k) == v for k, v in match.items()):
+            r.update(fields)
+            n += 1
+    if n:
+        save(name, rows)
+    return n
 
 
 def _lead_score(lead: dict[str, Any], today: str) -> dict[str, Any]:
@@ -245,6 +339,7 @@ def _equity_curve(trades: list[dict[str, Any]], today: str) -> list[tuple[str, f
     return curve
 
 
+@_locked
 def report(today: str | None = None, chart: bool = True) -> str:
     today = today or _today()
     trades, preds, leads = load("trades"), load("predictions"), load("leads")
@@ -329,8 +424,8 @@ def report(today: str | None = None, chart: bool = True) -> str:
             if grp:
                 out.append(f"- {name}: {sum(1 for s in grp if s['edge'] > 0)}/{len(grp)} right, average edge {_fmt(st.mean(s['edge'] for s in grp))}")
     text = "\n".join(out) + "\n"
-    DIR.mkdir(exist_ok=True)
-    (DIR / "REPORT.md").write_text(text)
+    _dir().mkdir(parents=True, exist_ok=True)
+    (_dir() / "REPORT.md").write_text(text)
     if chart and curve:
         import matplotlib
         matplotlib.use("Agg")
@@ -343,6 +438,6 @@ def report(today: str | None = None, chart: bool = True) -> str:
         ax.set_title("Paper equity vs SPY")
         ax.legend()
         fig.tight_layout()
-        fig.savefig(DIR / "equity.png", dpi=120)
+        fig.savefig(_dir() / "equity.png", dpi=120)
         plt.close(fig)
     return text

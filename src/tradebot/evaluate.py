@@ -1,0 +1,121 @@
+"""Sonnet evaluator: the step between the cheap swarm and Opus. Reads what Haiku triage flagged and what the explorers
+dug up, and shortlists the few candidates worth an Opus deep dive. It does not make trade calls; it decides where the
+expensive attention goes, with an angle for each. Shortlisted candidates become Leads (signal_kind 'evaluated') that
+research_top hands to Opus."""
+from __future__ import annotations
+
+import datetime as dt
+import json
+import logging
+from pathlib import Path
+from typing import Literal
+
+from pydantic import BaseModel, Field
+
+from . import budget
+from .config import get_settings
+from .db import Item, Lead, Mission, Thesis, kv_get, kv_set, log_decision, select, session, utcnow
+from .llm import claude
+
+log = logging.getLogger(__name__)
+
+EVALUATE_SYSTEM = """You are the desk's evaluator. Below are raw flags from a cheap scanning model and dossiers from
+research explorers. Pick the few candidates that deserve a senior analyst's deep dive today, and say how to attack each.
+
+What earns a slot (the desk's rules, learned from losses):
+- An "act now" driver: visible today, the repricing underway or likely within about six weeks. Nothing that needs an
+  event months away.
+- Measurable in first-hand data (player counts, prices, orders, filings, contract awards, official statistics), not a
+  "might". A story without data is a watch, not a candidate.
+- A clear buyer/transmission: who pays whom, and is it material relative to the company's size?
+- Not already priced: check the price action and coverage notes you are given; a stock that already ran on the news
+  needs new information to qualify.
+- Non-obvious links (suppliers, competitors, substitutes, landlords, lenders) beat the headline name.
+- Shorts are allowed and often better in a falling market.
+Skip anything the desk already holds or researched in the last week (listed below) unless something material changed.
+Be selective: zero candidates is fine. Never invent tickers, numbers or URLs."""
+
+
+class Candidate(BaseModel):
+    tickers: list[str] = Field(description="listed securities, best first, Yahoo symbols (e.g. MYR.AX, TBLD.L)")
+    direction_lean: Literal["long", "short", "unclear"]
+    driver: str
+    why_now: str
+    angle: str = Field(description="how the analyst should attack it: what to verify first, what would kill it")
+    measurable_by: str = Field(description="the first-hand data series or document that tracks the driver")
+    sources: list[str]
+    urgency: Literal["now", "soon", "slow"]
+    priority: int = Field(ge=1, le=5)
+    from_leads: list[int] = Field(default_factory=list)
+    from_missions: list[int] = Field(default_factory=list)
+
+
+class Shortlist(BaseModel):
+    candidates: list[Candidate]
+    passed_on: list[str] = Field(description="notable things you looked at and rejected, one line each with the reason")
+
+
+def _context(since: dt.datetime) -> tuple[str, list[int]]:
+    with session() as db:
+        leads = db.execute(select(Lead, Item).join(Item, Item.id == Lead.item_id)
+                           .where(Lead.created_at >= since, Lead.status == "new", Lead.signal_kind != "evaluated")
+                           .order_by(Lead.priority.desc()).limit(80)).all()
+        missions = db.scalars(select(Mission).where(Mission.status == "done", Mission.finished_at >= since)
+                              .order_by(Mission.id.desc()).limit(40)).all()
+        recent = db.scalars(select(Thesis).where(Thesis.opened_at >= utcnow() - dt.timedelta(days=7))).all()
+    parts = ["RAW FLAGS (Haiku triage):"]
+    parts += [f"- lead#{l.id} [{l.urgency} p={l.priority:.2f} {l.signal_kind}] {l.theme} | tickers {','.join(l.tickers) or '-'} | "
+              f"{(i.title or '')[:160]} | {i.url or ''}" for l, i in leads]
+    parts.append("\nEXPLORER DOSSIERS:")
+    for m in missions:
+        d = m.dossier or {}
+        parts.append(f"- mission#{m.id} [{m.kind}, interest {d.get('interest', '?')}/5] {m.angle}\n  {d.get('summary', '')[:700]}\n"
+                     f"  affected: {'; '.join(d.get('affected', [])[:8])}\n  surprises: {'; '.join(d.get('surprises', [])[:5])}\n"
+                     f"  sources: {' '.join(f.get('source', '') for f in d.get('findings', [])[:6])}")
+    parts.append("\nALREADY RESEARCHED OR HELD (last 7 days): " + (", ".join(f"{t.ticker} ({t.tier}, {t.status})" for t in recent) or "none"))
+    watch = Path(get_settings().knowledge_dir) / "watch.md"
+    if watch.exists():
+        parts.append("\nDESK WATCH LIST (latest):\n" + watch.read_text()[-4000:])
+    return "\n".join(parts), [l.id for l, _ in leads]
+
+
+def run(max_candidates: int = 4) -> int:
+    s = get_settings()
+    if budget.left("evaluate") <= 0:
+        return 0
+    with session() as db:
+        last = kv_get(db, "evaluate_last")
+    since = dt.datetime.fromisoformat(last) if last else utcnow() - dt.timedelta(hours=12)
+    ctx, lead_ids = _context(since)
+    if not lead_ids and "mission#" not in ctx:
+        return 0
+    out = claude().parse("evaluate", s.evaluator_model, EVALUATE_SYSTEM,
+                         ctx + f"\n\nShortlist at most {max_candidates} candidates.", Shortlist,
+                         effort="medium", max_tokens=12000)
+    now = utcnow()
+    made = 0
+    with session() as db:
+        for c in out.candidates[:max_candidates]:
+            if not c.tickers:
+                continue
+            text = (f"EVALUATOR SHORTLIST (Sonnet). Direction lean: {c.direction_lean}\nDRIVER: {c.driver}\nWHY NOW: {c.why_now}\n"
+                    f"ANGLE: {c.angle}\nMEASURABLE BY: {c.measurable_by}\nSOURCES: {' '.join(c.sources)}\n")
+            for mid in c.from_missions[:3]:
+                m = db.get(Mission, mid)
+                if m and m.dossier:
+                    text += f"\nDOSSIER mission#{mid} {m.angle}:\n{json.dumps(m.dossier)[:5000]}\n"
+            item = Item(source="evaluator", source_tier=2, external_id=f"eval-{now.isoformat()}-{made}",
+                        url=(c.sources or [None])[0], title=c.driver[:300], text=text, published_at=now,
+                        triaged=True, meta={"candidate": c.model_dump()})
+            db.add(item)
+            db.flush()
+            db.add(Lead(item_id=item.id, tickers=[t.upper() for t in c.tickers], theme=c.driver, signal_kind="evaluated",
+                        priority=0.5 + 0.1 * c.priority, urgency=c.urgency, summary=c.angle))
+            made += 1
+        for lid in lead_ids:
+            row = db.get(Lead, lid)
+            if row and row.status == "new":
+                row.status = "reviewed"
+        kv_set(db, "evaluate_last", now.isoformat())
+        log_decision(db, "evaluated", "", candidates=[c.model_dump() for c in out.candidates], passed_on=out.passed_on)
+    return made

@@ -1,0 +1,101 @@
+"""End to end with fake models and prices: Haiku flag -> Sonnet shortlist -> Opus thesis -> paper trade -> exit -> ledger."""
+import shutil
+from pathlib import Path
+
+import pytest
+
+from tradebot import brain, db, evaluate, execution, ledger, review, simbroker
+from tradebot.config import Settings
+
+REPO = Path(__file__).resolve().parents[1]
+CHECKS = ["real_and_size", "noticed", "transmission", "reversal", "override", "reaction"]
+
+
+class FakeClaude:
+    def __init__(self):
+        self.calls = []
+
+    def parse(self, purpose, model, system, user, schema, **kw):
+        self.calls.append((purpose, model))
+        if purpose == "triage":
+            return brain.TriageOut(kind="data", tickers=["XYZ"], driver="Record players for XYZ's new game",
+                                   novelty=0.9, materiality=0.8, urgency="soon", reason="first-hand counts")
+        if purpose == "evaluate":
+            return evaluate.Shortlist(candidates=[evaluate.Candidate(
+                tickers=["XYZ"], direction_lean="long", driver="Record players for XYZ's new game", why_now="week 2 still rising",
+                angle="check revenue share vs size", measurable_by="Steam player counts", sources=["https://example.com/a"],
+                urgency="soon", priority=4)], passed_on=[])
+        if purpose == "thesis_extract":
+            return brain.ThesisOut(
+                has_thesis=True, ticker="XYZ", security_type="consumer-gaming", driver="Record players", mechanism="sales",
+                direction="long", probability=0.6, expected_move_pct=20, horizon_days=10,
+                checks=[brain.Check(name=n, verdict="pass", reasoning="") for n in CHECKS], catalysts=["update"],
+                kill_criteria=["players fade"], hedge_idea="", monitor=[], situation_updates=[], summary="buy XYZ",
+                diligence=brain.Diligence(filings_reviewed="x", earnings_quality="x", product_scope="x", buyer_channel="x",
+                                          materiality="x", competition="x", consensus_and_guidance="x", unverified=[]))
+        raise AssertionError(purpose)
+
+    def research(self, purpose, model, system, user, **kw):
+        self.calls.append((purpose, model))
+        assert "EVALUATOR SHORTLIST" in user   # Opus sees Sonnet's angle
+        return "note: thesis holds"
+
+
+@pytest.fixture
+def world(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    shutil.copytree(REPO / "config", tmp_path / "config")
+    (tmp_path / "knowledge").mkdir()
+    s = Settings(pipeline_budget_usd_month=300, knowledge_dir=tmp_path / "knowledge", ledger_dir=tmp_path / "ledger")
+    for mod in ("tradebot.config", "tradebot.brain", "tradebot.evaluate", "tradebot.execution", "tradebot.budget",
+                "tradebot.broker", "tradebot.simbroker", "tradebot.ledger", "tradebot.review"):
+        monkeypatch.setattr(f"{mod}.get_settings", lambda: s, raising=False)
+    db.init_db(f"sqlite:///{tmp_path}/p.db")
+    fake = FakeClaude()
+    monkeypatch.setattr(brain, "claude", lambda: fake)
+    monkeypatch.setattr(evaluate, "claude", lambda: fake)
+    monkeypatch.setattr(brain, "diligence_budget_left", lambda: False)
+    prices = {"XYZ": 100.0, "SPY": 500.0}
+    monkeypatch.setattr(simbroker, "quote", lambda sym: prices[sym])
+    monkeypatch.setattr(simbroker, "fx_to_usd", lambda sym: 1.0)
+    monkeypatch.setattr(simbroker, "market_open", lambda sym=None, now=None: True)
+    monkeypatch.setattr(simbroker.SimBroker, "daily_bars", lambda self, sym, limit=120: [dict(h=101, l=99, c=100)] * 30)
+    monkeypatch.setattr("tradebot.market.snapshot", lambda t: {"symbol": t, "last": prices[t]})
+    monkeypatch.setattr("tradebot.market.move_since", lambda t, since: 0.0)
+    bars = tuple((f"2026-11-{d:02d}", 100, 101, 99, 100) for d in range(1, 28))
+    monkeypatch.setattr(ledger, "history", lambda sym: bars)
+    monkeypatch.setattr("tradebot.telegram.send", lambda *a, **k: None)
+    simbroker.SimBroker().reset(10000)
+    return fake, prices
+
+
+def test_full_autonomous_chain(world):
+    fake, prices = world
+    with db.session() as s:
+        s.add(db.Item(source="steam", source_tier=1, external_id="1", title="XYZ game record", text="players 170k"))
+    assert brain.triage_pending() == 1
+    assert evaluate.run() == 1
+    with db.session() as s:
+        raw = s.scalars(db.select(db.Lead).where(db.Lead.signal_kind != "evaluated")).one()
+        assert raw.status == "reviewed"          # Haiku's flag was looked at by Sonnet
+    tids = brain.research_top()
+    assert len(tids) == 1
+    models = {p: m for p, m in fake.calls}
+    assert models["triage"].startswith("claude-haiku") and models["evaluate"].startswith("claude-sonnet")
+    assert models["research"].startswith("claude-opus")
+    # the thesis is on the record before any trade
+    assert ledger.load("leads")[0]["thesis_id"] == tids[0]
+    assert ledger.load("predictions")[0]["auto"]["op"] == "move_pct_ge"
+    ids = execution.propose_for_thesis(tids[0])
+    assert execution.execute_approved() == 1      # paper autotrade: no human needed
+    execution.sync_fills()
+    trade = ledger.load("trades")[0]
+    assert trade["status"] == "open" and trade["managed_by"] == "bot" and ledger.load("leads")[0]["acted"] is True
+    with db.session() as s:
+        stop = s.get(db.Proposal, ids[0]).stop_price
+    prices["XYZ"] = stop - 1
+    assert execution.manage_exits() == 1
+    trade = ledger.load("trades")[0]
+    assert trade["status"] == "closed" and trade["exit_reason"] == "stop"
+    text = review.build()
+    assert "DAILY REVIEW" in text and "Opus theses" in text and "Scorecard: 1 closed" in text

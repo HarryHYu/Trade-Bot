@@ -7,7 +7,7 @@ import logging
 import httpx
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from . import brain, collectors, digest, earnings, execution, explore, inbox, reflection, telegram
+from . import brain, collectors, digest, earnings, evaluate, execution, explore, inbox, ledger, reflection, review, telegram
 from .config import get_settings
 from .db import init_db, kv_get, session
 
@@ -44,7 +44,7 @@ def _safe(fn):
 def research_cycle() -> None:
     s = get_settings()
     brain.followup_diligence()
-    for tid in brain.research_top(5):
+    for tid in brain.research_top(2):
         execution.propose_for_thesis(tid)
     telegram.announce_new_theses()
     telegram.announce_new_proposals()
@@ -103,10 +103,17 @@ def run() -> None:
     sch.add_job(_safe(_job("direct", explore.direct)), "interval", minutes=60, max_instances=1,
                 next_run_time=now + dt.timedelta(minutes=4))
     sch.add_job(_safe(_job("explore", explore.dispatch)), "interval", minutes=1, max_instances=1)
-    def daily_brief() -> None:
-        telegram.send(reflection.daily_brief(), topic="Brief")
-    sch.add_job(_safe(daily_brief), "cron", hour=7, minute=30)
+    # Sonnet shortlists for Opus every hour, after the explorers have had time to file
+    sch.add_job(_safe(_job("evaluate", evaluate.run)), "interval", minutes=60, max_instances=1,
+                next_run_time=now + dt.timedelta(minutes=25))
+    # Daily performance review after the US close (08:20 Sydney covers both daylight-saving settings)
+    ledger.seed()
+    sch.add_job(_safe(review.send_daily), "cron", hour=8, minute=20)
+    sch.add_job(_safe(ledger.auto_resolve), "cron", hour="*/6", minute=5)
     sch.add_job(_safe(_job("reviews", reflection.weekly_review)), "cron", day_of_week="sat", hour=9)
     telegram.start_listener()
-    telegram.send(f"Tradebot started. paper={not s.is_live} mode={s.approval_mode}")
+    from .broker import broker_label
+    telegram.send(f"Tradebot started. Broker: {broker_label()}. AI jobs: {s.enabled_jobs}.\n"
+                  f"Models: triage {s.triage_model}, explore {s.explorer_model}, evaluate {s.evaluator_model}, "
+                  f"research {s.research_model}, judge {s.judge_model}.\nPaper autotrade: {s.paper_autotrade and s.broker == 'sim'}")
     sch.start()

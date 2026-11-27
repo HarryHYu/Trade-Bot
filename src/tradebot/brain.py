@@ -269,17 +269,31 @@ def research_lead(lead_id: int, fast: bool = False) -> int | None:
     for m in out.monitor[:5]:
         kind = "web_page" if m.startswith("http") else "news_query"
         reg.add(kind, m, ticker=out.ticker, reason=f"thesis {tid}: {out.driver[:120]}", added_by="research")
+    from . import recorder
+    recorder.on_thesis(tid)
     return tid
 
 
-def research_top(n: int | None = None) -> list[int]:
+def research_top(n: int = 2) -> list[int]:
+    """Opus deep dives on the evaluator's shortlist (best first), within the research budget and the daily cap."""
+    from . import budget
     s = get_settings()
-    n = n or s.max_research_per_day
+    day_start = utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
     with session() as db:
-        rows = db.scalars(select(Lead).where(Lead.status == "new").order_by(Lead.priority.desc()).limit(n * 5)).all()
-        ids = [r.id for r in rows if r.tickers][:n]  # ticker-less drivers wait for a human/Max-plan session
+        done_today = len(db.scalars(select(Lead.id).where(Lead.resolved_at >= day_start)).all())
+        room = min(n, s.max_research_per_day - done_today)
+        if room <= 0:
+            return []
+        kinds = ["evaluated"] if s.job_on("evaluate") else None
+        q = select(Lead).where(Lead.status == "new")
+        if kinds:
+            q = q.where(Lead.signal_kind.in_(kinds))
+        rows = db.scalars(q.order_by(Lead.priority.desc()).limit(room * 5)).all()
+        ids = [r.id for r in rows if r.tickers][:room]  # ticker-less drivers wait for a human/Max-plan session
     done = []
     for lid in ids:
+        if budget.left("research") <= 0:
+            break
         try:
             tid = research_lead(lid)
             if tid:

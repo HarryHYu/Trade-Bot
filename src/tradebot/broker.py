@@ -26,7 +26,7 @@ class Alpaca:
     def positions(self) -> list[dict[str, Any]]:
         return self._j(self.t.get("/v2/positions"))
 
-    def clock(self) -> dict[str, Any]:
+    def clock(self, symbol: str | None = None) -> dict[str, Any]:
         return self._j(self.t.get("/v2/clock"))
 
     def last_price(self, symbol: str) -> float:

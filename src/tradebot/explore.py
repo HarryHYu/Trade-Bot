@@ -27,22 +27,9 @@ UA = {"User-Agent": "Mozilla/5.0 (tradebot research)"}
 
 # ---------- budget pacing ----------
 
-def _spent_since(t: dt.datetime) -> float:
-    with session() as db:
-        return float(db.scalar(select(func.sum(ApiUsage.cost_usd)).where(ApiUsage.ts >= t)) or 0)
-
-
 def allowance_left() -> float:
-    """Today's share of what is left of the monthly pipeline budget, minus what today already spent."""
-    s = get_settings()
-    now = utcnow()
-    month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    day_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
-    next_month = (month_start + dt.timedelta(days=32)).replace(day=1)
-    days_left = max((next_month - day_start).days, 1)
-    spent_before_today = _spent_since(month_start) - _spent_since(day_start)
-    today = (s.pipeline_budget - spent_before_today) / days_left
-    return today - _spent_since(day_start)
+    from . import budget
+    return budget.left("explore")
 
 
 # ---------- free tools for explorers ----------

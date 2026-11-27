@@ -71,4 +71,6 @@ def import_inbox() -> list[int]:
         for u in out.situation_updates:
             append_lesson(out.ticker, out.security_type, "situation", u)
         made.append(tid)
+        from . import recorder
+        recorder.on_thesis(tid)
     return made

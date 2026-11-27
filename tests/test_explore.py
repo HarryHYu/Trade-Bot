@@ -21,14 +21,16 @@ class Fake:
 def _setup(tmp_path, monkeypatch, **kw):
     db.init_db(f"sqlite:///{tmp_path}/e.db")
     s = Settings(**kw)
+    from tradebot import budget
     monkeypatch.setattr(explore, "get_settings", lambda: s)
+    monkeypatch.setattr(budget, "get_settings", lambda: s)
     return s
 
 
 def test_allowance_spreads_monthly_budget(tmp_path, monkeypatch):
     _setup(tmp_path, monkeypatch, pipeline_budget_usd_month=300)
     full = explore.allowance_left()
-    assert 9 < full <= 300   # a day's share, not the whole month
+    assert 2 < full <= 300 * 0.3   # explore's share of a day's allowance, not the whole month
     with db.session() as s:
         s.add(db.ApiUsage(key_index=0, model="m", purpose="explore", cost_usd=full + 1))
     assert explore.allowance_left() < 0

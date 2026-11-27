@@ -10,7 +10,8 @@ def sim(tmp_path, monkeypatch):
     db.init_db(f"sqlite:///{tmp_path}/sim.db")
     prices = {"XYZ": 100.0, "SPY": 500.0}
     monkeypatch.setattr(simbroker, "quote", lambda s: prices[s])
-    monkeypatch.setattr(simbroker, "us_market_open", lambda now=None: True)
+    monkeypatch.setattr(simbroker, "fx_to_usd", lambda s: 1.0)
+    monkeypatch.setattr(simbroker, "market_open", lambda s=None, now=None: True)
     b = simbroker.SimBroker()
     b.reset(10000)
     return b, prices
@@ -40,9 +41,9 @@ def test_short_and_idempotent_orders(sim):
 
 def test_closed_market_queues_then_fills(sim, monkeypatch):
     b, _ = sim
-    monkeypatch.setattr(simbroker, "us_market_open", lambda now=None: False)
+    monkeypatch.setattr(simbroker, "market_open", lambda s=None, now=None: False)
     assert b.submit_bracket("XYZ", "buy", 1, None, None, "q1")["status"] == "new"
-    monkeypatch.setattr(simbroker, "us_market_open", lambda now=None: True)
+    monkeypatch.setattr(simbroker, "market_open", lambda s=None, now=None: True)
     assert b.order_by_client_id("q1")["status"] == "filled"
 
 
@@ -68,7 +69,8 @@ def test_full_flow_propose_approve_fill_exit(sim, monkeypatch):
         tid = th.id
     ids = execution.propose_for_thesis(tid)
     assert len(ids) == 1
-    assert "approved" in execution.decide(ids[0], True, by="test")
+    with db.session() as s:
+        assert s.get(db.Proposal, ids[0]).state == "approved"   # paper autotrade: approved without a human
     assert execution.execute_approved() == 1
     execution.sync_fills()
     with db.session() as s:
@@ -81,3 +83,7 @@ def test_full_flow_propose_approve_fill_exit(sim, monkeypatch):
         p = s.get(db.Proposal, ids[0])
         assert p.state == "closed" and p.exit_reason == "stop" and p.pnl_usd < 0
     assert b.positions() == []
+    from tradebot import ledger
+    trades = ledger.load("trades")
+    assert len(trades) == 1 and trades[0]["managed_by"] == "bot" and trades[0]["status"] == "closed"
+    assert trades[0]["exit_reason"] == "stop" and trades[0]["proposal_id"] == ids[0]

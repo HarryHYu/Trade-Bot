@@ -201,10 +201,20 @@
     "direction": null,
     "probability": 0.3,
     "notes": "",
-    "status": "open",
-    "actual": null,
-    "outcome": null,
-    "score": null
+    "status": "resolved",
+    "actual": 6910.39013671875,
+    "outcome": "yes",
+    "score": {
+      "happened": true,
+      "brier": 0.49
+    },
+    "auto": {
+      "symbol": "^GSPC",
+      "op": "close_below",
+      "level": 7037.04,
+      "mode": "any"
+    },
+    "resolved": "2026-11-20"
   },
   {
     "id": "P10",
@@ -223,7 +233,13 @@
     "status": "open",
     "actual": null,
     "outcome": null,
-    "score": null
+    "score": null,
+    "auto": {
+      "symbol": "^GSPC",
+      "op": "close_below",
+      "level": 6255.14,
+      "mode": "any"
+    }
   },
   {
     "id": "P11",
@@ -242,7 +258,13 @@
     "status": "open",
     "actual": null,
     "outcome": null,
-    "score": null
+    "score": null,
+    "auto": {
+      "symbol": "^GSPC",
+      "op": "close_below",
+      "level": 5473.25,
+      "mode": "any"
+    }
   },
   {
     "id": "P12",
@@ -261,7 +283,13 @@
     "status": "open",
     "actual": null,
     "outcome": null,
-    "score": null
+    "score": null,
+    "auto": {
+      "symbol": "SMH",
+      "op": "close_below",
+      "level": 486.75,
+      "mode": "on"
+    }
   },
   {
     "id": "P13",
@@ -280,7 +308,13 @@
     "status": "open",
     "actual": null,
     "outcome": null,
-    "score": null
+    "score": null,
+    "auto": {
+      "symbol": "BTC-USD",
+      "op": "close_below",
+      "level": 58500,
+      "mode": "any"
+    }
   },
   {
     "id": "P14",
@@ -299,6 +333,12 @@
     "status": "open",
     "actual": null,
     "outcome": null,
-    "score": null
+    "score": null,
+    "auto": {
+      "symbol": "BTC-USD",
+      "op": "close_above",
+      "level": 82000,
+      "mode": "on"
+    }
   }
 ]

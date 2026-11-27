@@ -42,24 +42,73 @@ class SimPosition(Base):
 
 
 _px_cache: dict[str, tuple[float, float]] = {}
+_fx_cache: dict[str, tuple[float, float]] = {}
+
+# Exchange hours by Yahoo suffix: (timezone, open, close). Everything else trades on New York hours.
+EXCHANGES = {
+    ".AX": ("Australia/Sydney", dt.time(10, 0), dt.time(16, 0)),
+    ".L": ("Europe/London", dt.time(8, 0), dt.time(16, 30)),
+    ".KS": ("Asia/Seoul", dt.time(9, 0), dt.time(15, 30)),
+    ".KQ": ("Asia/Seoul", dt.time(9, 0), dt.time(15, 30)),
+    ".TW": ("Asia/Taipei", dt.time(9, 0), dt.time(13, 30)),
+    ".T": ("Asia/Tokyo", dt.time(9, 0), dt.time(15, 0)),
+    ".HK": ("Asia/Hong_Kong", dt.time(9, 30), dt.time(16, 0)),
+    ".TO": ("America/Toronto", dt.time(9, 30), dt.time(16, 0)),
+    ".PA": ("Europe/Paris", dt.time(9, 0), dt.time(17, 30)),
+    ".DE": ("Europe/Berlin", dt.time(9, 0), dt.time(17, 30)),
+}
+
+
+def _exchange(symbol: str) -> tuple[str, dt.time, dt.time] | None:
+    if "-USD" in symbol or symbol.endswith("=F") or symbol.endswith("=X"):
+        return None   # crypto, futures and FX: treated as always open
+    for suffix, ex in EXCHANGES.items():
+        if symbol.upper().endswith(suffix):
+            return ex
+    return ("America/New_York", dt.time(9, 30), dt.time(16, 0))
+
+
+def market_open(symbol: str, now: dt.datetime | None = None) -> bool:
+    ex = _exchange(symbol)
+    if ex is None:
+        return True
+    n = (now or dt.datetime.now(dt.UTC)).astimezone(ZoneInfo(ex[0]))
+    return n.weekday() < 5 and ex[1] <= n.time() < ex[2]
+
+
+def _chart(symbol: str) -> dict[str, Any]:
+    r = httpx.get(f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}",
+                  params={"range": "1d", "interval": "1m"}, headers={"User-Agent": "Mozilla/5.0"}, timeout=15).json()
+    return r["chart"]["result"][0]
+
+
+def fx_to_usd(symbol: str) -> float:
+    """Multiplier from the symbol's quote currency to USD (pence and other minor units handled). Cached for an hour."""
+    hit = _fx_cache.get(symbol)
+    if hit and time.time() - hit[0] < 3600:
+        return hit[1]
+    cur = (_chart(symbol)["meta"].get("currency") or "USD")
+    minor = {"GBp": ("GBP", 0.01), "GBX": ("GBP", 0.01), "ZAc": ("ZAR", 0.01), "ILA": ("ILS", 0.01)}
+    base, mult = minor.get(cur, (cur.upper(), 1.0))
+    rate = 1.0 if base == "USD" else float(_chart(f"{base}USD=X")["meta"]["regularMarketPrice"])
+    _fx_cache[symbol] = (time.time(), rate * mult)
+    return rate * mult
 
 
 def quote(symbol: str) -> float:
+    """Latest price in USD."""
     hit = _px_cache.get(symbol)
     if hit and time.time() - hit[0] < 20:
         return hit[1]
-    r = httpx.get(f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}",
-                  params={"range": "1d", "interval": "1m"}, headers={"User-Agent": "Mozilla/5.0"}, timeout=15).json()
-    res = r["chart"]["result"][0]
+    res = _chart(symbol)
     closes = [c for c in (res.get("indicators", {}).get("quote", [{}])[0].get("close") or []) if c]
-    px = float(closes[-1] if closes else res["meta"]["regularMarketPrice"])
+    px = float(closes[-1] if closes else res["meta"]["regularMarketPrice"]) * fx_to_usd(symbol)
     _px_cache[symbol] = (time.time(), px)
     return px
 
 
 def us_market_open(now: dt.datetime | None = None) -> bool:
-    n = (now or dt.datetime.now(dt.UTC)).astimezone(NY)
-    return n.weekday() < 5 and dt.time(9, 30) <= n.time() < dt.time(16, 0)
+    return market_open("SPY", now)
 
 
 class SimBroker:
@@ -97,15 +146,16 @@ class SimBroker:
                             "unrealized_pl": str((px - p.avg_price) * p.qty)})
         return out
 
-    def clock(self) -> dict[str, Any]:
-        return {"is_open": us_market_open()}
+    def clock(self, symbol: str | None = None) -> dict[str, Any]:
+        return {"is_open": market_open(symbol or "SPY")}
 
     def last_price(self, symbol: str) -> float:
         return quote(symbol)
 
     def daily_bars(self, symbol: str, limit: int = 120) -> list[dict[str, Any]]:
         from . import market
-        return [{"t": b["t"].isoformat(), "o": b["o"], "h": b["h"], "l": b["l"], "c": b["c"], "v": b["v"]}
+        k = fx_to_usd(symbol)   # all bot maths runs in USD
+        return [{"t": b["t"].isoformat(), "o": b["o"] * k, "h": b["h"] * k, "l": b["l"] * k, "c": b["c"] * k, "v": b["v"]}
                 for b in market.bars(symbol, "1y")][-limit:]
 
     def _fill(self, db, o: SimOrder) -> None:
@@ -133,7 +183,7 @@ class SimBroker:
             o = db.get(SimOrder, cid)
             if o is None:
                 return None
-            if o.status == "new" and us_market_open():
+            if o.status == "new" and market_open(o.symbol):
                 self._fill(db, o)
             return {"id": o.client_order_id, "status": o.status, "filled_avg_price": o.filled_avg_price,
                     "symbol": o.symbol, "legs": []}
@@ -147,7 +197,7 @@ class SimBroker:
                 o = SimOrder(client_order_id=client_order_id, symbol=symbol.upper(), side=side, qty=float(qty))
                 db.add(o)
                 db.flush()
-                if us_market_open():
+                if market_open(o.symbol):
                     self._fill(db, o)
             return {"id": o.client_order_id, "status": o.status, "filled_avg_price": o.filled_avg_price}
 

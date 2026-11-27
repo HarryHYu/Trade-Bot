@@ -3,6 +3,8 @@ services:
     build: {context: .., dockerfile: deploy/Dockerfile}
     restart: unless-stopped
     env_file: ../.env
+    environment:
+      - LEDGER_DIR=data/ledger   # live ledger on the data volume; seeded from the repo's ledger/ on first start
     volumes:
       - ../data:/app/data
       - ../knowledge:/app/knowledge

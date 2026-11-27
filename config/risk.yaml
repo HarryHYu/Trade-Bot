@@ -10,7 +10,7 @@ dry_powder_pct: 15                 # cash kept back for big-tier opportunities
 hedge_beta_with: SPY               # default market hedge
 hedge_ratio: 0.5                   # fraction of beta exposure hedged
 hedge_on_tiers: []                 # short-term catalyst trades are unhedged by default; add [big] to hedge
-allowed_symbols_regex: "^[A-Z]{1,5}$"
+allowed_symbols_regex: "^[A-Z0-9]{1,6}([.][A-Z]{1,2})?$"   # US tickers plus exchange suffixes (MYR.AX, TBLD.L, 036570.KS)
 
 # Small-account mode (equity below this): long only, fractional shares, no hedge legs,
 # bot-managed stops. Alpaca blocks shorting under ~US$2k, and fractional orders may not take brackets.
