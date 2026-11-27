@@ -90,3 +90,38 @@ def on_close(proposal_id: int) -> None:
     for t in match:
         price = (exit_px / _fx(symbol)) if exit_px else None
         ledger.close_trade(t["id"], price, reason)
+
+
+@_safe
+def on_earnings_call(prediction_id: int) -> None:
+    """Earnings protocol made its call: record each KPI range and the expected reaction as ledger predictions."""
+    from .db import Prediction, session
+    with session() as db:
+        p = db.get(Prediction, prediction_id)
+        sym, event, pay = p.ticker, p.event_date, p.payload or {}
+    resolve_by = (event + dt.timedelta(days=3)).isoformat()
+    for k in pay.get("kpis", []):
+        if k.get("ours_low") is None or k.get("ours_high") is None:
+            continue
+        ledger.predict(sym, f"{k['name']} ({event} report)", "range", resolve_by, low=k["ours_low"], high=k["ours_high"],
+                       point=k.get("ours_mid"), consensus=k.get("consensus"), earnings_prediction_id=prediction_id,
+                       kpi=k["name"], source="opus")
+    if pay.get("expected_reaction_pct"):
+        ledger.predict(sym, f"Stock reaction to {event} report", "direction", resolve_by,
+                       direction="up" if pay["expected_reaction_pct"] > 0 else "down",
+                       earnings_prediction_id=prediction_id, kpi="_reaction", source="opus")
+
+
+@_safe
+def on_earnings_scored(prediction_id: int) -> None:
+    from .db import Prediction, session
+    with session() as db:
+        p = db.get(Prediction, prediction_id)
+        actual = p.actual or {}
+    for row in [r for r in ledger.load("predictions")
+                if r.get("earnings_prediction_id") == prediction_id and r["status"] == "open"]:
+        if row.get("kpi") == "_reaction":
+            if actual.get("reaction_pct") is not None:
+                ledger.resolve(row["id"], actual=actual["reaction_pct"], outcome="up" if actual["reaction_pct"] > 0 else "down")
+        elif row.get("kpi") in (actual.get("kpis") or {}):
+            ledger.resolve(row["id"], actual=actual["kpis"][row["kpi"]])

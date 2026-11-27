@@ -174,6 +174,8 @@ def _score(sym: str, p: Prediction) -> None:
         row = db.get(Prediction, p.id)
         row.actual, row.score, row.stage, row.scored_at = act.model_dump(), score, "scored", utcnow()
         log_decision(db, "earnings_scored", p.id, ticker=sym, **score)
+    from . import recorder
+    recorder.on_earnings_scored(p.id)
     cfg = load_yaml("watchlist.yaml")["core"].get(sym, {})
     append_lesson(sym, cfg.get("type", "_default"), "lesson",
                   f"Earnings {p.event_date}: called {pay.get('stance')} / {exp}% vs actual {real}%. KPI errors {json.dumps(kpi_err)}",
@@ -223,7 +225,19 @@ def run_protocol() -> None:
                                 summary=call.summary, situation_snapshot=profile_context(sym),
                                 meta={"hedge_idea": call.trade_idea, "earnings_prediction": p.id})
                     db.add(th)
+                    db.flush()
+                    new_thesis = th.id
+                else:
+                    new_thesis = None
                 log_decision(db, "earnings_predicted", sym, tier=tier, stance=call.stance)
+            from . import execution, recorder
+            recorder.on_earnings_call(p.id)
+            if new_thesis:
+                recorder.on_thesis(new_thesis)
+                try:
+                    execution.propose_for_thesis(new_thesis)
+                except Exception:
+                    log.exception("earnings proposal failed %s", sym)
             kp = "; ".join(f"{k.name} {k.ours_mid:g} vs {k.consensus}" for k in call.kpis)
             send(f"EARNINGS CALL {sym} ({event}, {days}d): {call.stance.upper()} guidance {call.guidance}\n"
                  f"Expect {call.expected_reaction_pct:+.1f}% vs implied {(im or {}).get('implied_move_pct')}%  "
