@@ -18,7 +18,7 @@ Paper ledger: fixed notional per trade, prices from Yahoo closes. Regenerate wit
 
 ## Predictions
 
-Resolved 8: hit rate 5/8 | leaned the right way vs consensus 6/6
+Resolved 9: hit rate 5/8 | leaned the right way vs consensus 6/6 | mean Brier 0.490 (0 perfect, 0.25 = coin flip)
 
 | id | made | subject | question | call | resolve by | status | actual | score |
 |---|---|---|---|---|---|---|---|---|
@@ -30,7 +30,7 @@ Resolved 8: hit rate 5/8 | leaned the right way vs consensus 6/6
 | P6 | 2026-10-27 | OSUR | Q3 revenue $M (called a beat) | 31.0-31.8 (pt 31.4, cons 30.87) | 2026-11-09 | resolved | 30.9 | hit=False, error_pct=-1.59, beat_consensus_call=True |
 | P7 | 2026-10-30 | OSUR | Q4 revenue guide midpoint $M | 30-33 (pt 31.5, cons 31.7) | 2026-11-09 | resolved | 31.0 | hit=True, error_pct=-1.59, beat_consensus_call=True |
 | P8 | 2026-10-30 | Brent | Oil falls after the midterms (by Nov 6) | down | 2026-11-06 | resolved | down | hit=True |
-| P9 | 2026-11-13 | S&P 500 | Closes >=10% below its 2026 closing high (7818.93) by 2027-02-13 | p=0.3 | 2027-02-13 | open | - | - |
+| P9 | 2026-11-13 | S&P 500 | Closes >=10% below its 2026 closing high (7818.93) by 2027-02-13 | p=0.3 | 2027-02-13 | resolved | 6910.39013671875 | happened=True, brier=0.49 |
 | P10 | 2026-11-13 | S&P 500 | Closes >=20% below its 2026 closing high by 2027-11-13 | p=0.25 | 2027-11-13 | open | - | - |
 | P11 | 2026-11-13 | S&P 500 | Closes >=30% below its 2026 closing high by 2027-11-13 | p=0.1 | 2027-11-13 | open | - | - |
 | P12 | 2026-11-13 | SMH | Below its 2026-11-13 close (486.75) on 2027-05-13 (AI stocks lose or go nowhere) | p=0.55 | 2027-05-13 | open | - | - |
@@ -60,10 +60,10 @@ Edge = move relative to the benchmark in the direction of our stance (avoid coun
 | L15 | 2026-10-27 | APT | watch_long | no | 5.44 | 5.78 | +6.3% | -6.9% | +13.1% | Ebola outside Africa would re-rate PPE micro-caps (armed playbook) |
 | L16 | 2026-10-27 | LAKE | watch_long | no | 9.16 | 8.39 | -8.4% | -6.9% | -1.5% | Ebola PPE playbook |
 | L17 | 2026-10-27 | OSUR | long | yes | 4.16 | 3.41 | -18.0% | -6.9% | -11.1% | Ebola rapid test + cash floor + activist |
-| L18 | 2026-10-30 | TBLD.L | long | yes | 13 | 9.5 | -26.9% | -0.4% | -26.6% | Probably Stolen Steam record |
+| L18 | 2026-10-30 | TBLD.L | long | yes | 13 | 9.5 | -26.9% | -0.4% | -26.5% | Probably Stolen Steam record |
 | L19 | 2026-10-29 | BRBR | watch_long | no | 9.06 | 15.66 | +72.8% | -6.8% | +79.7% | Whey protein costs easing from June record; needs FY27 cost commentary (Nov 17) |
 | L20 | 2026-10-29 | SFD | pass | no | 18.55 | 19.03 | +2.6% | -6.8% | - | Lean hogs at 2020 lows, packer already priced |
-| L21 | 2026-11-03 | BZ=F | watch_short | no | 103.6 | 91.98 | -11.2% | -5.0% | +6.2% | Oil falls after the midterms on peace/Hormuz headlines (planned Nov 4 entry) |
+| L21 | 2026-11-03 | BZ=F | watch_short | no | 103.6 | 92.21 | -11.0% | -5.0% | +6.0% | Oil falls after the midterms on peace/Hormuz headlines (planned Nov 4 entry) |
 | L22 | 2026-10-29 | RIG | long | yes | 6.69 | 5.03 | -24.8% | -6.8% | -18.0% | Oil beta ride, exit by Nov 2 |
 | L23 | 2026-10-29 | W | long | yes | 120.1 | 97.11 | -19.2% | -6.8% | -12.3% | Momentum ride, exit by Nov 3 |
 | L24 | 2026-10-29 | FIGS | long | yes | 21.56 | 20.88 | -3.2% | -6.8% | +3.7% | Momentum ride, exit by Nov 4 |
@@ -83,8 +83,10 @@ Edge = move relative to the benchmark in the direction of our stance (avoid coun
 | L38 | 2026-11-12 | AMD | avoid | no | 585.3 | 406 | -30.6% | -5.3% | +25.3% | Rotation winner already priced after +21% week |
 | L39 | 2026-11-12 | GDS | pass | no | 20.05 | 13.8 | -31.2% | -5.3% | - | Possible Megaspeed data-centre link (speculative) |
 | L40 | 2026-11-12 | CRCL | watch_long | no | 63.82 | 48.27 | -24.4% | -5.3% | -19.0% | Stablecoin rule effective Jan 18 vs beaten-down issuer |
-| L41 | 2026-11-13 | BTC-USD | pass | no | 6.825e+04 | 6.162e+04 | -9.7% | -5.0% | - | No position: long on weekly close > 75k, risk-off < 58.5k |
+| L41 | 2026-11-13 | BTC-USD | pass | no | 6.825e+04 | 6.17e+04 | -9.6% | -5.0% | - | No position: long on weekly close > 75k, risk-off < 58.5k |
 
 **Directional leads:** 19/30 right vs benchmark | average edge +5.9%
+By source:
+- manual: 19/30 right vs benchmark, average edge +5.9%
 - acted on: 1/5 right, average edge -12.9%
 - not acted on: 18/25 right, average edge +9.6%
