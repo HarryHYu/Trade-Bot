@@ -89,3 +89,12 @@ def test_exit_rules_breakeven_trail_target_time():
     assert r is None and stop == 98
     # killed thesis exits immediately
     assert risk.exit_decision("buy", 100, 97, 110, 100, 101, now, None, False, st)[0] == "thesis_killed"
+
+
+def test_regime_cuts_size_against_the_index_trend():
+    falling = [dict(c=100 - i * 0.5) for i in range(60)]
+    r = {"regime": {"enabled": True, "ma_days": 50, "against_trend_multiplier": 0.5}}
+    assert risk.regime_multiplier("long", falling, r)[0] == 0.5
+    assert risk.regime_multiplier("short", falling, r)[0] == 1.0
+    rising = [dict(c=100 + i) for i in range(60)]
+    assert risk.regime_multiplier("long", rising, r)[0] == 1.0

@@ -106,3 +106,19 @@ def exit_decision(side: str, entry: float, stop: float, target: float | None, pe
     if hold_until and now >= hold_until and best_r < st.get("trail_activate_r", 1.0):
         return "time_stop", new_stop, peak  # dead money only; winners ride the trailing stop
     return None, new_stop, peak
+
+
+def regime_multiplier(direction: str, index_bars: list[dict[str, Any]], r: dict[str, Any] | None = None) -> tuple[float, str]:
+    """Trade with the tape: when the index closes below its moving average, longs are sized down (and vice versa)."""
+    r = r or load_yaml("risk.yaml")
+    cfg = r.get("regime", {})
+    n = cfg.get("ma_days", 50)
+    if not cfg.get("enabled", True) or len(index_bars) < n:
+        return 1.0, ""
+    closes = [b["c"] for b in index_bars]
+    ma = sum(closes[-n:]) / n
+    down = closes[-1] < ma
+    against = (direction == "long" and down) or (direction == "short" and not down)
+    if against:
+        return cfg.get("against_trend_multiplier", 0.5), f"index {'below' if down else 'above'} {n}-day average: size cut"
+    return 1.0, ""

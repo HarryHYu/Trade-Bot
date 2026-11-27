@@ -28,6 +28,16 @@ def propose_for_thesis(thesis_id: int) -> list[int]:
     sz = size(th.tier, th.direction, price, equity, br.daily_bars(th.ticker), th.expected_move_pct)
     if not sz:
         return []
+    from .risk import regime_multiplier
+    try:
+        rcfg = load_yaml("risk.yaml")
+        mult, why = regime_multiplier(th.direction, br.daily_bars(rcfg.get("regime", {}).get("index", "SPY")), rcfg)
+    except Exception:
+        mult, why = 1.0, ""
+    if mult != 1.0:
+        sz.qty = round(sz.qty * mult, 4) if sz.qty % 1 else max(int(sz.qty * mult), 1)
+        sz.notional, sz.risk_usd = sz.notional * mult, sz.risk_usd * mult
+        sz.reasons.append(why)
     violations = check_portfolio(th.ticker, sz.notional, equity, br.positions(), day_pnl_pct, th.tier, th.direction)
     with session() as db:
         if violations:
