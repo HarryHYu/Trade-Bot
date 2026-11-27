@@ -78,3 +78,15 @@ def test_auto_resolve_price_conditions(tmp_path, monkeypatch):
     rows = {r["id"]: r for r in ledger.load("predictions")}
     assert rows[a["id"]]["outcome"] == "yes" and rows[a["id"]]["resolved"] == "2026-11-03"
     assert rows[b["id"]]["outcome"] == "no" and rows[c["id"]]["status"] == "open"
+
+
+def test_judged_calls_rank_by_reasoning_not_just_price(tmp_path, monkeypatch):
+    rising = tuple((f"2026-10-{d:02d}", 100, 101, 99, 100 + (d % 2) * 0.5) for d in range(1, 31)) + \
+             tuple((f"2026-11-{d:02d}", 120, 121, 119, 120) for d in range(1, 5))
+    _setup(tmp_path, monkeypatch, bars=rising)
+    a = ledger.add_lead("AAA", "rejected", "2026-10-30", "idea a", ref=100, implied="long", stage="sonnet", reason="priced in")
+    b = ledger.add_lead("BBB", "rejected", "2026-10-30", "idea b", ref=100, implied="long", stage="sonnet", reason="no data")
+    ledger.judge(a["id"], "signal_missed", "played_out", "driver", "the report confirmed it", 0.8)
+    ledger.judge(b["id"], "unrelated", "failed", "other_news", "takeover rumour, nothing to do with the idea")
+    lines = ledger.biggest_calls(today="2026-11-04", n=2)
+    assert lines[0].startswith("  SIGNAL_MISSED AAA") and "UNRELATED BBB" in lines[1]

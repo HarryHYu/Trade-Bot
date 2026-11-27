@@ -21,6 +21,21 @@ Also read `knowledge/tuning_log.md` (what was changed before and why) so changes
 - **Every stage separately** (REPORT "By source" and "Rejected ideas"): Haiku discards, Sonnet shortlist vs Sonnet passes,
   Opus theses vs Opus dismissals, risk blocks. Which stage adds value, which throws away winners? Read the rejection reasons
   of the biggest misses.
+- **Judge the calls that matter** (`uv run tradebot ledger tojudge` against the exported ledger, or REPORT's "TO JUDGE" lines).
+  The list is ranked by surprise: the market-adjusted move in units of the stock's own normal volatility (sigma), so a 6%
+  move in a utility can outrank a 40% move in a crypto miner. For each one, find out what actually happened and judge the
+  call on its signal and reasoning, not the price:
+  - did the driver itself happen? (`signal`: played_out / failed / unclear)
+  - what really moved the price? (`cause`: driver / market / other_news / unknown)
+  - given what we knew then, was the reasoning (or the reason for rejecting) sound? (`verdict`: reasoning_error,
+    signal_missed, right_reason, lucky, unlucky, unrelated)
+  Record it: `uv run tradebot ledger judge L12 signal_missed played_out driver "Rejected as priced in; the Nov 17 report
+  confirmed cost relief and the stock re-rated" --confidence 0.6`. Ranking afterwards = surprise x verdict weight x confidence
+  ("Calls that teach the most"): a confident call that was wrong for a reason we could have seen ranks highest; a move caused
+  by something unrelated ranks near zero. To judge server ideas, first copy the export into a local ledger
+  (`mkdir -p /tmp/l && git show origin/desk-feed:feed/ledger/leads.json > /tmp/l/leads.json` etc., then
+  `LEDGER_DIR=/tmp/l uv run tradebot ledger judge ...`). Every judgement is also written to `knowledge/judgements.json`;
+  commit that file and the server merges it into its live ledger.
 - **Calibration:** resolved probability predictions (Brier, hit rate by probability bucket). Are Opus's probabilities and
   expected moves too high or too low? Earnings KPI ranges: hit rate and lean vs consensus.
 - **Patterns:** cluster errors by security type, tier, direction, horizon, driver kind, market regime. Fewer than ~20 cases

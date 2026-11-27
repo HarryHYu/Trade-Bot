@@ -165,7 +165,7 @@ def run(max_candidates: int = 4) -> int:
         stance = {"long": "watch_long", "short": "watch_short"}.get(c.direction_lean, "watch")
         try:
             ledger.add_lead(c.tickers[0].upper(), stance, ledger._today(), c.driver[:240], source="sonnet",
-                            ref=ledger.last_close(c.tickers[0].upper())[1])
+                            ref=ledger.last_close(c.tickers[0].upper())[1], confidence=c.priority / 5)
         except Exception:
             log.exception("could not record shortlist pick %s", c.tickers)
     return made

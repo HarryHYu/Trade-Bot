@@ -49,7 +49,7 @@ def on_thesis(thesis_id: int) -> None:
     long = t["direction"] == "long"
     stance = ("long" if long else "short") if t["tier"] in ("small", "standard", "big") else ("watch_long" if long else "watch_short")
     ledger.add_lead(t["ticker"], stance, today, t["driver"][:240], acted=False, ref=ref, thesis_id=thesis_id, tier=t["tier"],
-                    source="opus")
+                    source="opus", confidence=t["p"])
     if t["p"] and t["move"]:
         days = max(int(round((t["horizon"] or 10) * 7 / 5)), 1)
         ledger.predict(t["ticker"], f"{'Rises' if long else 'Falls'} {abs(t['move']):.0f}% within {t['horizon']} trading days "

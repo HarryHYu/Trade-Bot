@@ -139,6 +139,22 @@ def ledger_lead(ticker: str, stance: str, idea: str, flagged: str = typer.Option
     print(ledger.add_lead(ticker, stance, flagged or ledger._today(), idea, acted))
 
 
+@ledger_app.command("judge")
+def ledger_judge(lead_id: str, verdict: str, signal: str, cause: str, notes: str,
+                 confidence: float = typer.Option(None, help="how confident the call was, 0-1, if known")):
+    """Judge an idea on its signal and reasoning. verdict: reasoning_error | signal_missed | right_reason | lucky | unlucky |
+    unrelated. signal: played_out | failed | unclear. cause: driver | market | other_news | unknown."""
+    from . import ledger
+    print(ledger.judge(lead_id, verdict, signal, cause, notes, confidence))
+
+
+@ledger_app.command("tojudge")
+def ledger_tojudge(n: int = 15):
+    """The biggest unjudged surprises, kept or rejected, for a review shift to judge."""
+    from . import ledger
+    print("\n".join(ledger.biggest_calls(n=n)) or "Nothing to judge.")
+
+
 @ledger_app.command("report")
 def ledger_report():
     """Run exits, then write ledger/REPORT.md and ledger/equity.png."""

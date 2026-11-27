@@ -334,12 +334,88 @@ def update(name: str, match: dict[str, Any], **fields: Any) -> int:
     return n
 
 
+def _daily_vol(symbol: str, before: str, n: int = 60) -> float | None:
+    closes = [r[4] for r in history(symbol) if r[0] <= before][-(n + 1):]
+    if len(closes) < 20:
+        return None
+    rets = [closes[i] / closes[i - 1] - 1 for i in range(1, len(closes))]
+    return st.pstdev(rets) or None
+
+
 def _lead_score(lead: dict[str, Any], today: str) -> dict[str, Any]:
+    """move/edge in %, plus sigma: the market-adjusted move in units of the stock's own normal volatility over the period,
+    so a 6% move in a utility and a 40% move in a crypto miner compare fairly. |sigma| > 2 is a real surprise."""
     now = close_on(lead["ticker"], today)
     move = now / lead["ref"] - 1
     bmove = close_on(lead["benchmark"], today) / close_on(lead["benchmark"], lead["flagged"]) - 1
     sign = sign_of(lead)
-    return dict(now=now, move=move, bench=bmove, edge=(move - bmove) * sign if sign else None, raw=move * sign if sign else None)
+    days = max(len([r for r in history(lead["ticker"]) if lead["flagged"] < r[0] <= today]), 1)
+    vol = _daily_vol(lead["ticker"], lead["flagged"])
+    sigma = ((move - bmove) * sign / (vol * days ** 0.5)) if (sign and vol) else None
+    return dict(now=now, move=move, bench=bmove, edge=(move - bmove) * sign if sign else None,
+                raw=move * sign if sign else None, sigma=sigma, days=days)
+
+
+# How wrong or right a call was, judged by a review shift on the signal and the reasoning, not the price alone.
+VERDICT_WEIGHT = {"reasoning_error": 1.0, "signal_missed": 0.8, "right_reason": 1.0, "unlucky": 0.2, "lucky": 0.2, "unrelated": 0.0}
+
+
+@_locked
+def judge(lead_id: str, verdict: str, signal: str, cause: str, notes: str, confidence_at_call: float | None = None,
+          when: str | None = None) -> dict[str, Any]:
+    """Record a review shift's judgement of an idea (kept or rejected).
+    verdict: reasoning_error (our reasoning was wrong given what we knew), signal_missed (the evidence was there, we did not
+             weigh it), right_reason (right, and for the reason we gave), lucky (right for the wrong reason),
+             unlucky (sound call, an unforeseeable event decided it), unrelated (the move had nothing to do with the idea).
+    signal: played_out | failed | unclear  (did the driver itself happen: the players, the order, the report...)
+    cause: driver | market | other_news | unknown  (what actually moved the price)"""
+    rows = load("leads")
+    lead = next(r for r in rows if r["id"] == lead_id)
+    lead["judgement"] = dict(verdict=verdict, signal=signal, cause=cause, notes=notes[:600],
+                             confidence_at_call=confidence_at_call, judged=when or _today())
+    save("leads", rows)
+    # Also keep it in the knowledge base (git-tracked, mounted on the server) so the server's live ledger picks it up.
+    jf = _judgements_file()
+    allj = json.loads(jf.read_text()) if jf.exists() else {}
+    allj[lead_id] = lead["judgement"] | {"ticker": lead["ticker"], "flagged": lead["flagged"]}
+    jf.parent.mkdir(parents=True, exist_ok=True)
+    jf.write_text(json.dumps(allj, indent=1) + "\n")
+    return lead
+
+
+def _judgements_file() -> Path:
+    try:
+        from .config import get_settings
+        return Path(get_settings().knowledge_dir) / "judgements.json"
+    except Exception:
+        return Path("knowledge/judgements.json")
+
+
+@_locked
+def merge_judgements() -> int:
+    """Server side: copy judgements committed by review shifts (knowledge/judgements.json) into the live ledger."""
+    jf = _judgements_file()
+    if not jf.exists():
+        return 0
+    allj = json.loads(jf.read_text())
+    rows, n = load("leads"), 0
+    for r in rows:
+        j = allj.get(r["id"])
+        if j and j.get("ticker") == r["ticker"] and r.get("judgement") != {k: v for k, v in j.items() if k not in ("ticker", "flagged")}:
+            r["judgement"] = {k: v for k, v in j.items() if k not in ("ticker", "flagged")}
+            n += 1
+    if n:
+        save("leads", rows)
+    return n
+
+
+def significance(lead: dict[str, Any], s: dict[str, Any]) -> float:
+    """How much a call matters for learning: surprise size (|sigma|) x how much it reflects on our judgement x how confident
+    we were. Unjudged ideas rank by surprise alone and are flagged for judging."""
+    j = lead.get("judgement") or {}
+    w = VERDICT_WEIGHT.get(j.get("verdict"), 0.5)
+    conf = j.get("confidence_at_call") or lead.get("confidence") or 0.5
+    return abs(s.get("sigma") or 0) * w * (0.5 + conf)
 
 
 def source_summary(today: str | None = None) -> str:
@@ -356,6 +432,35 @@ def source_summary(today: str | None = None) -> str:
         groups.setdefault(lead.get("source", "manual"), []).append(e)
     return "\n".join(f"- {src}: {sum(x > 0 for x in v)}/{len(v)} right vs benchmark, average edge {st.mean(v) * 100:+.1f}%"
                      for src, v in sorted(groups.items())) or "no scored ideas yet"
+
+
+def biggest_calls(today: str | None = None, n: int = 5, rejected_only: bool = False) -> list[str]:
+    """The calls that teach the most: judged errors and successes ranked by significance (surprise in sigma x verdict weight
+    x confidence), then the biggest unjudged surprises, which a review shift should judge next."""
+    today = today or _today()
+    judged, unjudged = [], []
+    for lead in load("leads"):
+        if (rejected_only and lead["stance"] != "rejected") or not sign_of(lead):
+            continue
+        try:
+            s = _lead_score(lead, today)
+        except Exception:
+            continue
+        if s["sigma"] is None:
+            continue
+        (judged if lead.get("judgement") else unjudged).append((significance(lead, s), lead, s))
+    out = []
+    for sig, lead, s in sorted(judged, key=lambda x: -x[0])[:n]:
+        j = lead["judgement"]
+        out.append(f"  {j['verdict'].upper()} {lead['ticker']} {lead['stance']}{'/' + lead['implied'] if lead.get('implied') else ''} "
+                   f"({lead.get('stage') or lead.get('source', 'manual')}, {lead['flagged']}): {s['sigma']:+.1f} sigma, signal {j['signal']}, "
+                   f"moved by {j['cause']}. {j['notes'][:160]}")
+    for sig, lead, s in sorted(unjudged, key=lambda x: -x[0])[: max(n - len(out), 2)]:
+        if abs(s["sigma"]) >= 1.5:
+            out.append(f"  TO JUDGE {lead['ticker']} {lead['stance']}{'/' + lead['implied'] if lead.get('implied') else ''} "
+                       f"({lead.get('stage') or lead.get('source', 'manual')}, {lead['flagged']}): {s['sigma']:+.1f} sigma "
+                       f"({s['edge'] * 100:+.1f}% vs benchmark). Reason given: {(lead.get('reason') or lead['idea'])[:140]}")
+    return out
 
 
 def rejection_summary(today: str | None = None, misses: int = 3) -> str:
@@ -378,11 +483,7 @@ def rejection_summary(today: str | None = None, misses: int = 3) -> str:
         right = sum(e > 0 for e, _ in rows)
         lines.append(f"- {stage}: {right}/{len(rows)} rejections right, average {st.mean(e for e, _ in rows) * 100:+.1f}% "
                      f"(negative = we threw away winners)")
-    worst = sorted((x for rows in by.values() for x in rows), key=lambda x: x[0])[:misses]
-    for e, lead in worst:
-        if e < 0:
-            lines.append(f"  missed: {lead['ticker']} {lead.get('implied')} ({lead.get('stage')}, {lead['flagged']}) "
-                         f"{e * 100:+.1f}% vs benchmark; rejected because: {lead.get('reason', '')[:140]}")
+    lines += biggest_calls(today, misses, rejected_only=True)
     if unscored:
         lines.append(f"- {unscored} rejected ideas tracked without a direction (moves recorded, not scored)")
     return "\n".join(lines) or "no rejected ideas yet"
@@ -497,6 +598,8 @@ def report(today: str | None = None, chart: bool = True) -> str:
         out += ["", f"**Directional leads:** {right}/{len(scored)} right vs benchmark | average edge "
                 f"{_fmt(st.mean(s['edge'] for _, s in scored))}"]
         out.append("By source:\n" + source_summary(today))
+        out.append("Calls that teach the most (judged by a review shift on signal and reasoning, ranked by surprise x verdict x confidence):\n"
+                   + ("\n".join(biggest_calls(today, 8)) or "  none yet"))
         for name, keep in (("acted on", True), ("not acted on", False)):
             grp = [s for lead, s in scored if lead["acted"] == keep]
             if grp:

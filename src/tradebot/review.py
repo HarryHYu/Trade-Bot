@@ -112,6 +112,7 @@ def build(hours: int = 24) -> str:
 
 def send_daily() -> None:
     from . import telegram
+    ledger.merge_judgements()
     ledger.auto_resolve()
     ledger.check()
     ledger.report()

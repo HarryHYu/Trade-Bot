@@ -30,6 +30,7 @@ def bundle(days: int = 30) -> dict[str, str | bytes]:
     """Everything a reviewer needs, as files: ledger, theses with their reasoning, trades, the pipeline's choices, spend."""
     since = utcnow() - dt.timedelta(days=days)
     files: dict[str, str | bytes] = {}
+    ledger.merge_judgements()
     ledger.auto_resolve()
     files["REPORT.md"] = ledger.report()
     for name in ("trades", "predictions", "leads"):
