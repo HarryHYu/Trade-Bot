@@ -68,3 +68,19 @@ class Alpaca:
 
     def close_all(self) -> Any:
         return self._j(self.t.delete("/v2/positions", params={"cancel_orders": "true"}))
+
+
+def get_broker():
+    """The active broker: built-in paper simulator (default) or Alpaca when BROKER=alpaca and keys are set."""
+    s = get_settings()
+    if s.broker == "alpaca" and s.alpaca_key_id:
+        return Alpaca()
+    from .simbroker import SimBroker
+    return SimBroker()
+
+
+def broker_label() -> str:
+    s = get_settings()
+    if s.broker == "alpaca" and s.alpaca_key_id:
+        return "Alpaca " + ("LIVE" if s.is_live else "paper")
+    return f"built-in paper simulator (start ${s.sim_starting_cash:,.0f})"

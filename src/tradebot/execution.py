@@ -6,7 +6,7 @@ import datetime as dt
 import logging
 import uuid
 
-from .broker import Alpaca
+from .broker import Alpaca, get_broker
 from .config import get_settings, load_yaml
 from .db import Proposal, Thesis, is_halted, log_decision, select, session, utcnow
 from .risk import check_portfolio, exit_decision, size
@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 
 def propose_for_thesis(thesis_id: int) -> list[int]:
     s = get_settings()
-    br = Alpaca()
+    br = get_broker()
     with session() as db:
         th = db.get(Thesis, thesis_id)
         if th.tier in ("watch", "none") or is_halted(db):
@@ -86,7 +86,7 @@ def decide(proposal_id: int, approve: bool, by: str) -> str:
 
 
 def execute_approved() -> int:
-    br = Alpaca()
+    br = get_broker()
     n = 0
     with session() as db:
         if is_halted(db):
@@ -113,7 +113,7 @@ def execute_approved() -> int:
 
 
 def sync_fills() -> None:
-    br = Alpaca()
+    br = get_broker()
     held = {p["symbol"] for p in br.positions()}
     with session() as db:
         for p in db.scalars(select(Proposal).where(Proposal.state.in_(["submitted", "filled"]))):
@@ -143,13 +143,13 @@ def halt(flatten: bool = False) -> None:
         kv_set(db, "halted", "1")
         log_decision(db, "halt", "", flatten=flatten)
     if flatten:
-        Alpaca().close_all()
+        get_broker().close_all()
 
 
 def manage_exits() -> int:
     """Every minute while the market is open: update best price, move stops to breakeven and trail them,
     and exit on stop, trailing stop, target, time stop, or a killed thesis. Hedge legs close with their main leg."""
-    br = Alpaca()
+    br = get_broker()
     if not br.clock()["is_open"]:
         return 0
     st = load_yaml("strategy.yaml")

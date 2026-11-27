@@ -220,6 +220,7 @@ def init_db(url: str | None = None) -> None:
     if url.startswith("sqlite:///"):
         from pathlib import Path
         Path(url.removeprefix("sqlite:///")).parent.mkdir(parents=True, exist_ok=True)
+    from . import simbroker  # noqa: F401  registers the paper-broker tables
     if url.startswith("sqlite"):
         # Explorer threads write concurrently: wait for locks instead of failing, and let readers run during writes.
         from sqlalchemy import event
