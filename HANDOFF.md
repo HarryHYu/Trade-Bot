@@ -8,7 +8,13 @@ A research-driven paper-trading desk for the owner (Harry). Style: "act now": tr
 weeks, cut dead money fast. Find real-world THINGS first (outbreaks, shortages, viral games, collapses, rulings, data spikes), then
 link them to listed companies. Primary sources over press and broker claims. Paper trading only.
 
-## How the work is split
+## Current mode (2026-11-28): fully autonomous on the API
+The server bot now does everything itself: Haiku scans, Sonnet shortlists, Opus researches and makes the calls, the
+built-in simulator paper-trades them automatically, and every idea, prediction and trade is recorded in the ledger
+(`data/ledger/` on the server, seeded from `ledger/` here) and scored. Daily review at 08:20 Sydney on Telegram.
+See README "Autonomous paper desk". Claude Code sessions are optional now (inbox/ still works for hand-made theses).
+
+## How the work was split before
 - **Server (24/7, API credit):** a DigitalOcean droplet runs the bot in Docker (`deploy/`). Collectors (free), Haiku triage, an
   exploration swarm (Sonnet director picks angles hourly, Haiku explorers dig and file dossiers), and a Sonnet collator that posts a
   ranked to-do list to the Telegram "Research" topic 5x a day. Spend is paced to the monthly key credit (`/missions` shows it).

@@ -51,6 +51,9 @@ TOOLS: list[dict[str, Any]] = [
      "input_schema": {"type": "object", "properties": {"path": {"type": "string"}}, "required": ["path"]}},
     {"name": "account", "description": "Broker account equity, day P&L and open positions.",
      "input_schema": {"type": "object", "properties": {}}},
+    {"name": "scorecard", "description": "The desk's paper ledger: every trade, prediction and idea with how it scored "
+     "(full markdown report), plus the daily review and today's API budget.",
+     "input_schema": {"type": "object", "properties": {}}},
     {"name": "price_chart", "description": "Make a daily price chart PNG for a US ticker and send it to the owner.",
      "input_schema": {"type": "object", "properties": {"symbol": {"type": "string"}, "days": {"type": "integer"}},
                       "required": ["symbol"]}},
@@ -117,6 +120,9 @@ def run_tool(name: str, inp: dict[str, Any], ctx: Ctx) -> str:
         return "\n".join(str(p.relative_to(_kroot())) for p in sorted(_kroot().rglob("*")) if p.is_file())[:20000]
     if name == "read_knowledge":
         return _safe_path(inp["path"]).read_text()[:40000]
+    if name == "scorecard":
+        from . import budget, ledger, review
+        return (review.build() + "\n\n" + budget.status() + "\n\n" + ledger.report(chart=False))[:60000]
     if name == "account":
         from .broker import Alpaca, get_broker
         b = get_broker()

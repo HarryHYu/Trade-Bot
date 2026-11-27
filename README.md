@@ -121,3 +121,24 @@ The API does the wide, cheap work; deep research and trade decisions happen in C
 - Spend is paced: all monthly key credit (`ANTHROPIC_KEY_CREDITS_USD`, capped by `MONTHLY_SPEND_CAP_USD`) minus `PIPELINE_RESERVE_USD`
   (default 15) is spread evenly over the days left in the month. `PIPELINE_BUDGET_USD_MONTH` overrides it with a fixed number.
   `/missions` shows today's allowance and the latest missions; `/set ENABLED_JOBS ...` and `/pause` switch jobs off.
+
+
+## Autonomous paper desk (default since 2026-11-28)
+Everything runs on the server by itself; the API does all of it and the ledger judges it.
+
+| Stage | Model | Cadence | Output |
+|---|---|---|---|
+| Collectors | none | every 10 min | items (news searches, RSS, SEC, Steam, Roblox, web pages) |
+| Triage | Haiku | every 5 min | flags (drivers, with or without tickers) |
+| Director + explorers | Sonnet + Haiku swarm | hourly / continuous | missions and dossiers (facts with sources) |
+| Evaluator | Sonnet | hourly | shortlist of candidates with an angle (also scored as ideas, source "sonnet") |
+| Research + diligence | Opus (specialists Sonnet, judge Opus) | every 30 min, 2 at a time, daily cap | theses with tier, probability, move, horizon (scored, source "opus") |
+| Earnings protocol | Opus | daily | KPI ranges and reaction calls (scored after the report) |
+| Execution | code | every minute | paper trades in the built-in simulator, auto-approved (`PAPER_AUTOTRADE`) with stops, trailing, targets, time stops |
+| Ledger | code | on every thesis, fill and exit | `data/ledger/` on the server: trades, predictions (self-resolving from prices), ideas |
+| Daily review | code | 08:20 Sydney | Telegram Brief: account, positions, last 24h, scorecard by source, budget, equity chart |
+| Post-mortems / weekly self-review | Opus | daily / Saturday | lessons into the knowledge base; findings to Telegram |
+
+Spend is paced by `budget.py`: the month's credit (minus `PIPELINE_RESERVE_USD`) is spread over the days left and split
+explore 30% / evaluate 7% / research 48% / review 8%. Telegram: `/scorecard`, `/ledger` (full report + chart), `/budget`,
+`/missions`, `/positions`, `/pause` (stops every AI job), `/set ENABLED_JOBS ...`.
