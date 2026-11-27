@@ -150,10 +150,10 @@ class Claude:
     def research(self, purpose: str, model: str, system: str, user: str,
                  effort: str = "high", max_searches: int = 15, max_continuations: int = 5) -> str:
         """Agentic research turn with server-side web search and fetch. Returns the final text."""
-        tools = [
-            {"type": "web_search_20260209", "name": "web_search", "max_uses": max_searches},
-            {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": max_searches},
-        ]
+        basic = "haiku" in model   # dynamic-filtering web tools need Opus/Sonnet
+        tools = [{"type": "web_search_20250305" if basic else "web_search_20260209", "name": "web_search", "max_uses": max_searches}]
+        if not basic:
+            tools.append({"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": max_searches})
         messages: list[dict[str, Any]] = [{"role": "user", "content": user}]
         extra: dict[str, Any] = {}
         if model in FALLBACK_MODELS:
