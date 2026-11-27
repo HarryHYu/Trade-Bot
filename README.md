@@ -137,7 +137,8 @@ Everything runs on the server by itself; the API does all of it and the ledger j
 | Execution | code | every minute | paper trades in the built-in simulator, auto-approved (`PAPER_AUTOTRADE`) with stops, trailing, targets, time stops |
 | Ledger | code | on every thesis, fill and exit | `data/ledger/` on the server: trades, predictions (self-resolving from prices), ideas |
 | Daily review | code | 08:20 Sydney | Telegram Brief: account, positions, last 24h, scorecard by source, budget, equity chart |
-| Post-mortems / weekly self-review | Opus | daily / Saturday | lessons into the knowledge base; findings to Telegram |
+| Export | code | 08:28 Sydney | everything above to the `desk-feed` branch for the review shift |
+| Review and tuning | Claude Code (Ultra plan), see REVIEW.md | daily | lessons, config and prompt changes committed to main; the server pulls them |
 
 Spend is paced by `budget.py`: the month's credit (minus `PIPELINE_RESERVE_USD`) is spread over the days left and split
 explore 30% / evaluate 7% / research 48% / review 8%. Telegram: `/scorecard`, `/ledger` (full report + chart), `/budget`,
