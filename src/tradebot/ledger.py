@@ -11,7 +11,6 @@ from __future__ import annotations
 import datetime as dt
 import json
 import statistics as st
-from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -79,9 +78,21 @@ def _today() -> str:
 
 # ---------- prices ----------
 
-@lru_cache(maxsize=256)
+_hist_cache: dict[str, tuple[float, tuple]] = {}
+
+
 def history(symbol: str) -> tuple[tuple[str, float, float, float, float], ...]:
-    """Daily (date, open, high, low, close) for the last two years."""
+    """Daily (date, open, high, low, close) for the last two years. Cached for 30 minutes (the server runs for weeks)."""
+    import time
+    hit = _hist_cache.get(symbol)
+    if hit and time.time() - hit[0] < 1800:
+        return hit[1]
+    rows = _fetch_history(symbol)
+    _hist_cache[symbol] = (time.time(), rows)
+    return rows
+
+
+def _fetch_history(symbol: str) -> tuple[tuple[str, float, float, float, float], ...]:
     j = httpx.get(f"https://query2.finance.yahoo.com/v8/finance/chart/{symbol}?range=2y&interval=1d",
                   headers=UA, timeout=30).json()["chart"]["result"][0]
     q = j["indicators"]["quote"][0]
@@ -278,6 +289,24 @@ def auto_resolve(today: str | None = None) -> list[str]:
 STANCE_SIGN = {"long": 1, "watch_long": 1, "short": -1, "watch_short": -1, "avoid": -1, "pass": 0, "watch": 0}
 
 
+def sign_of(lead: dict[str, Any]) -> int:
+    """Direction we effectively bet. A rejection bets against the direction the idea implied, so a positive edge means
+    the rejection was right and a negative edge means we threw away a winner."""
+    if lead["stance"] == "rejected":
+        return {"long": -1, "short": 1}.get(lead.get("implied") or "", 0)
+    return STANCE_SIGN.get(lead["stance"], 0)
+
+
+def reject(ticker: str, implied: str | None, stage: str, reason: str, idea: str, **extra: Any) -> dict[str, Any] | None:
+    """Record an idea we threw away (stage: haiku, sonnet, opus, risk) so it is paper-tracked like the ones we kept."""
+    try:
+        ref = last_close(ticker)[1]
+    except Exception:
+        return None   # not a priceable symbol
+    return add_lead(ticker, "rejected", _today(), idea[:240], ref=ref, implied=implied, stage=stage, reason=reason[:400],
+                    source=stage, **extra)
+
+
 @_locked
 def add_lead(ticker: str, stance: str, flagged: str, idea: str, acted: bool = False, ref: float | None = None,
              **extra: Any) -> dict[str, Any]:
@@ -309,7 +338,7 @@ def _lead_score(lead: dict[str, Any], today: str) -> dict[str, Any]:
     now = close_on(lead["ticker"], today)
     move = now / lead["ref"] - 1
     bmove = close_on(lead["benchmark"], today) / close_on(lead["benchmark"], lead["flagged"]) - 1
-    sign = STANCE_SIGN.get(lead["stance"], 0)
+    sign = sign_of(lead)
     return dict(now=now, move=move, bench=bmove, edge=(move - bmove) * sign if sign else None, raw=move * sign if sign else None)
 
 
@@ -318,7 +347,7 @@ def source_summary(today: str | None = None) -> str:
     today = today or _today()
     groups: dict[str, list[float]] = {}
     for lead in load("leads"):
-        if not STANCE_SIGN.get(lead["stance"], 0):
+        if not sign_of(lead) or lead["stance"] == "rejected":
             continue
         try:
             e = _lead_score(lead, today)["edge"]
@@ -327,6 +356,36 @@ def source_summary(today: str | None = None) -> str:
         groups.setdefault(lead.get("source", "manual"), []).append(e)
     return "\n".join(f"- {src}: {sum(x > 0 for x in v)}/{len(v)} right vs benchmark, average edge {st.mean(v) * 100:+.1f}%"
                      for src, v in sorted(groups.items())) or "no scored ideas yet"
+
+
+def rejection_summary(today: str | None = None, misses: int = 3) -> str:
+    """How good our rejections are, by stage: right = the idea's implied direction lost vs the benchmark."""
+    today = today or _today()
+    by: dict[str, list[tuple[float, dict[str, Any]]]] = {}
+    unscored = 0
+    for lead in load("leads"):
+        if lead["stance"] != "rejected":
+            continue
+        if not sign_of(lead):
+            unscored += 1
+            continue
+        try:
+            by.setdefault(lead.get("stage", "?"), []).append((_lead_score(lead, today)["edge"], lead))
+        except Exception:
+            continue
+    lines = []
+    for stage, rows in sorted(by.items()):
+        right = sum(e > 0 for e, _ in rows)
+        lines.append(f"- {stage}: {right}/{len(rows)} rejections right, average {st.mean(e for e, _ in rows) * 100:+.1f}% "
+                     f"(negative = we threw away winners)")
+    worst = sorted((x for rows in by.values() for x in rows), key=lambda x: x[0])[:misses]
+    for e, lead in worst:
+        if e < 0:
+            lines.append(f"  missed: {lead['ticker']} {lead.get('implied')} ({lead.get('stage')}, {lead['flagged']}) "
+                         f"{e * 100:+.1f}% vs benchmark; rejected because: {lead.get('reason', '')[:140]}")
+    if unscored:
+        lines.append(f"- {unscored} rejected ideas tracked without a direction (moves recorded, not scored)")
+    return "\n".join(lines) or "no rejected ideas yet"
 
 
 # ---------- report ----------
@@ -421,7 +480,9 @@ def report(today: str | None = None, chart: bool = True) -> str:
             "| id | flagged | ticker | stance | acted | ref | now | move | benchmark | edge | idea |",
             "|---|---|---|---|---|---|---|---|---|---|---|"]
     scored = []
-    for lead in leads:
+    kept = [l for l in leads if l["stance"] != "rejected"]
+    rejected = [l for l in leads if l["stance"] == "rejected"]
+    for lead in kept:
         try:
             s = _lead_score(lead, today)
         except Exception:
@@ -440,6 +501,20 @@ def report(today: str | None = None, chart: bool = True) -> str:
             grp = [s for lead, s in scored if lead["acted"] == keep]
             if grp:
                 out.append(f"- {name}: {sum(1 for s in grp if s['edge'] > 0)}/{len(grp)} right, average edge {_fmt(st.mean(s['edge'] for s in grp))}")
+    if rejected:
+        out += ["", "## Rejected ideas (paper-tracked so we learn whether rejecting them was right)", "",
+                "Edge here is a bet AGAINST the idea's implied direction: positive = good rejection, negative = we threw away a winner.", "",
+                rejection_summary(today), "",
+                "| id | flagged | ticker | implied | stage | ref | now | move | edge | why rejected | idea |",
+                "|---|---|---|---|---|---|---|---|---|---|---|"]
+        for lead in rejected[-150:]:
+            try:
+                s = _lead_score(lead, today)
+            except Exception:
+                continue
+            out.append(f"| {lead['id']} | {lead['flagged']} | {lead['ticker']} | {lead.get('implied') or '-'} | {lead.get('stage')} | "
+                       f"{lead['ref']:.4g} | {s['now']:.4g} | {_fmt(s['move'])} | {_fmt(s['edge'])} | "
+                       f"{lead.get('reason', '')[:120]} | {lead['idea'][:120]} |")
     text = "\n".join(out) + "\n"
     _dir().mkdir(parents=True, exist_ok=True)
     (_dir() / "REPORT.md").write_text(text)

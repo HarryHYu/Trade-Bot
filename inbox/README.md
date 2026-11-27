@@ -1,6 +1,6 @@
 # Research inbox
 
-Scheduled Claude Code research sessions (run on the Max plan, not API credits) write findings here.
+Scheduled Claude Code research sessions (run on the Ultra plan, not API credits) write findings here.
 The bot imports every new `*.json` file, opens a thesis, posts it to Telegram Research, adds the listed
 monitoring sources, and runs it through normal risk rules. Imported files are recorded, never re-imported.
 

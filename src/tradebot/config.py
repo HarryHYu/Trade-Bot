@@ -52,9 +52,10 @@ class Settings(BaseSettings):
     telegram_allowed_user_ids: str = ""  # comma-separated; empty = anyone in the chat
     chat_model: str = "claude-sonnet-5-5"
     chat_effort: str = "medium"
-    # Which token-spending jobs run. Heavy research now happens in Claude Code sessions on the Max plan;
-    # add research,fast,diligence,earnings,reviews to switch the API versions back on.
-    enabled_jobs: str = "triage,digest,inbox,direct,explore,evaluate,research,fast,earnings,reviews,ledger"
+    # Which token-spending jobs run (the API does all research and trade calls)...
+    enabled_jobs: str = "triage,inbox,direct,explore,evaluate,research,fast,earnings"
+    # Reflection and tuning happen in Claude Code review sessions (Ultra plan) from the daily export, not on the API.
+    # Add "reviews" (API post-mortems + weekly review) or "digest" (Sonnet to-do list) to switch those back on.
     evaluator_model: str = "claude-sonnet-5-5"
     paper_autotrade: bool = True          # with the built-in simulator, proposals are approved automatically
     ledger_dir: Path = Path("ledger")     # the server keeps its live ledger in data/ledger

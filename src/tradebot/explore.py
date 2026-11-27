@@ -1,6 +1,6 @@
 """Exploration swarm. Sonnet (the director) reads what Haiku triage flagged and picks angles worth digging into;
 many Haiku explorers then dig: cover the main ground, follow links down rabbit holes, and file a dossier of facts
-with sources. Nobody here decides trades: the dossiers feed the collator's to-do list for the Max-plan sessions.
+with sources. Nobody here decides trades: the dossiers feed the collator's to-do list for the Ultra-plan sessions.
 Spend is paced by a daily allowance so the month's pipeline budget is used evenly, never blown in an hour."""
 from __future__ import annotations
 

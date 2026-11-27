@@ -104,7 +104,7 @@ def run() -> None:
     sch.add_job(_safe(_job("reviews", reflection.post_mortems)), "cron", hour=7, minute=0)
     sch.add_job(_safe(_job("earnings", earnings.run_protocol)), "cron", hour=6, minute=0)
     sch.add_job(_safe(_job("earnings", earnings.run_protocol)), "date", run_date=now + dt.timedelta(minutes=5))
-    # Collated to-do list for the Max-plan research sessions: before the evening scan, pre-open, mid-session, morning
+    # Collated to-do list for the Ultra-plan research sessions: before the evening scan, pre-open, mid-session, morning
     sch.add_job(_safe(_job("digest", digest.run)), "cron", hour="3,6,12,19,22", minute=30)
     # Exploration swarm: Sonnet picks angles hourly, Haiku explorers run continuously within the daily allowance
     explore.recover()
@@ -117,6 +117,11 @@ def run() -> None:
     # Daily performance review after the US close (08:20 Sydney covers both daylight-saving settings)
     ledger.seed()
     sch.add_job(_safe(review.send_daily), "cron", hour=8, minute=20)
+    def daily_export() -> None:
+        from . import feed
+        if get_settings().github_feed_token:
+            feed.export()
+    sch.add_job(_safe(daily_export), "cron", hour=8, minute=28)
     sch.add_job(_safe(ledger.auto_resolve), "cron", hour="*/6", minute=5)
     sch.add_job(_safe(_job("reviews", reflection.weekly_review)), "cron", day_of_week="sat", hour=9)
     telegram.start_listener()

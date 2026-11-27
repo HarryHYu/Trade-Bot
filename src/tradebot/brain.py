@@ -32,6 +32,7 @@ For each item decide:
 - novelty 0-1: how unlikely it is that the market already knows. Mainstream wire coverage = low.
 - materiality 0-1: size of the effect relative to the affected company's business.
 - urgency: now (breaking, confirmed, tradable today), soon, slow.
+- direction: up or down for the first ticker if the driver clearly implies one, else unclear.
 Be harsh. Most items are noise; noise gets materiality near 0. Never invent tickers. Prefer drivers measurable in first-hand data."""
 
 
@@ -43,6 +44,7 @@ class TriageOut(BaseModel):
     materiality: float = Field(ge=0, le=1)
     urgency: Literal["now", "soon", "slow"]
     reason: str
+    direction: Literal["up", "down", "unclear"] = "unclear"
 
 
 TIER_WEIGHT = {1: 1.0, 2: 0.8, 3: 0.7, 4: 0.45}
@@ -54,6 +56,7 @@ def triage_pending(limit: int = 200) -> int:
     with session() as db:
         items = db.scalars(select(Item).where(Item.triaged.is_(False)).order_by(Item.observed_at).limit(limit)).all()
     made = 0
+    discards: list[tuple] = []
     for it in items:
         body = f"SOURCE: {it.source} (tier {it.source_tier})\nTITLE: {it.title}\nMETA: {json.dumps(it.meta)[:500]}\n\n{it.text[:3000]}"
         try:
@@ -70,7 +73,25 @@ def triage_pending(limit: int = 200) -> int:
                 db.add(Lead(item_id=it.id, tickers=t.tickers, theme=t.driver, signal_kind=t.kind,
                             priority=priority, urgency=t.urgency, summary=t.reason))
                 made += 1
+            elif t.driver and t.tickers and priority >= 0.05:
+                discards.append((t.tickers[0], t.direction, priority, t.driver, t.reason))
+    _track_discards(discards)
     return made
+
+
+def _track_discards(discards: list[tuple], per_day: int = 30) -> None:
+    """Paper-track the best of what Haiku threw away (a driver and a ticker, but below the bar), capped per day."""
+    from . import ledger
+    from .db import kv_get, kv_set
+    key = f"haiku_discards:{utcnow():%Y-%m-%d}"
+    with session() as db:
+        used = int(kv_get(db, key, "0"))
+    for tk, d, pr, driver, reason in sorted(discards, key=lambda x: -x[2])[: max(per_day - used, 0)]:
+        implied = {"up": "long", "down": "short"}.get(d)
+        if ledger.reject(tk.upper(), implied, "haiku", f"priority {pr:.2f} below bar: {reason}", driver):
+            used += 1
+    with session() as db:
+        kv_set(db, key, str(used))
 
 
 RESEARCH_SYSTEM = """You are the research lead of a small, disciplined trading desk that takes LOTS of trades on drivers
@@ -247,7 +268,15 @@ def research_lead(lead_id: int, fast: bool = False) -> int | None:
         if tier == "none":
             lead.status = "dismissed"
             log_decision(db, "lead_dismissed", lead_id, reason=out.summary)
-            return None
+            dismissed = True
+        else:
+            dismissed = False
+    if dismissed:
+        from . import ledger
+        ledger.reject((out.ticker or ticker).upper(), out.direction, "opus", out.summary, out.driver or lead.theme, lead_id=lead_id)
+        return None
+    with session() as db:
+        lead = db.get(Lead, lead_id)
         th = Thesis(lead_id=lead_id, ticker=out.ticker.upper(), security_type=out.security_type,
                     driver=out.driver, mechanism=out.mechanism, direction=out.direction,
                     probability=out.probability, expected_move_pct=out.expected_move_pct,
@@ -319,7 +348,7 @@ def research_top(n: int = 2) -> list[int]:
         if kinds:
             q = q.where(Lead.signal_kind.in_(kinds))
         rows = db.scalars(q.order_by(Lead.priority.desc()).limit(room * 5)).all()
-        ids = [r.id for r in rows if r.tickers][:room]  # ticker-less drivers wait for a human/Max-plan session
+        ids = [r.id for r in rows if r.tickers][:room]  # ticker-less drivers wait for a human/Ultra-plan session
     done = []
     for lid in ids:
         if budget.left("research") <= 0:

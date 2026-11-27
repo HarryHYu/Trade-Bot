@@ -50,9 +50,16 @@ class Candidate(BaseModel):
     from_missions: list[int] = Field(default_factory=list)
 
 
+class Passed(BaseModel):
+    ticker: str = Field(description="Yahoo symbol, or empty if there is no listed security")
+    lean: Literal["long", "short", "unclear"] = Field(description="the direction the idea implied")
+    reason: str
+    idea: str
+
+
 class Shortlist(BaseModel):
     candidates: list[Candidate]
-    passed_on: list[str] = Field(description="notable things you looked at and rejected, one line each with the reason")
+    passed_on: list[Passed] = Field(description="the notable ideas you rejected, each with the direction it implied and why")
 
 
 def _context(since: dt.datetime) -> tuple[str, list[int]]:
@@ -131,14 +138,27 @@ def run(max_candidates: int = 4) -> int:
             db.add(Lead(item_id=item.id, tickers=[t.upper() for t in c.tickers], theme=c.driver, signal_kind="evaluated",
                         priority=0.5 + 0.1 * c.priority, urgency=c.urgency, summary=c.angle))
             made += 1
+        picked = {tk.upper() for c in out.candidates for tk in c.tickers} | {x.ticker.upper() for x in out.passed_on if x.ticker}
+        quiet_rejects = []
         for lid in lead_ids:
             row = db.get(Lead, lid)
             if row and row.status == "new":
                 row.status = "reviewed"
+                item = db.get(Item, row.item_id)
+                if row.tickers and row.tickers[0].upper() not in picked and len(quiet_rejects) < 20:
+                    d = ((item.triage or {}) if item else {}).get("direction")
+                    quiet_rejects.append((row.tickers[0].upper(), {"up": "long", "down": "short"}.get(d), row.theme, row.id))
         kv_set(db, "evaluate_last", now.isoformat())
-        log_decision(db, "evaluated", "", candidates=[c.model_dump() for c in out.candidates], passed_on=out.passed_on)
-    # Score Sonnet's picks on their own, whatever Opus later decides, so the weekly review can judge each stage.
+        log_decision(db, "evaluated", "", candidates=[c.model_dump() for c in out.candidates],
+                     passed_on=[x.model_dump() for x in out.passed_on])
+    # Score Sonnet's picks on their own, whatever Opus later decides, so the review can judge each stage; and paper-track
+    # what Sonnet threw away, with why.
     from . import ledger
+    for x in out.passed_on:
+        if x.ticker:
+            ledger.reject(x.ticker.upper(), x.lean if x.lean != "unclear" else None, "sonnet", x.reason, x.idea)
+    for tk, implied, theme, lid in quiet_rejects:
+        ledger.reject(tk, implied, "sonnet", "not shortlisted (no reason given)", theme, lead_id=lid)
     for c in out.candidates[:max_candidates]:
         if not c.tickers:
             continue

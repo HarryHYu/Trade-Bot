@@ -1,4 +1,4 @@
-"""Imports research written by scheduled Claude Code sessions (on the Max plan) into the desk.
+"""Imports research written by scheduled Claude Code sessions (on the Ultra plan) into the desk.
 Heavy thinking happens there; here we only validate, apply hard caps, and hand the thesis to the normal flow."""
 from __future__ import annotations
 

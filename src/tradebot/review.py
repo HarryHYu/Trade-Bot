@@ -95,7 +95,7 @@ def build(hours: int = 24) -> str:
         lines.append(f"  resolved {p['id']} {p['subject']}: {p['question'][:80]} -> {p['outcome'] or p['actual']}")
     edges = []
     for lead in ledger.load("leads"):
-        if ledger.STANCE_SIGN.get(lead["stance"], 0):
+        if lead["stance"] != "rejected" and ledger.sign_of(lead):
             try:
                 edges.append(ledger._lead_score(lead, today)["edge"])
             except Exception:
@@ -103,6 +103,7 @@ def build(hours: int = 24) -> str:
     if edges:
         lines.append(f"Ideas: {sum(e > 0 for e in edges)}/{len(edges)} directional calls right vs benchmark, average edge {_pct(st.mean(edges))}")
         lines.append("By who picked them:\n" + ledger.source_summary(today))
+    lines.append("Rejected ideas:\n" + ledger.rejection_summary(today))
 
     # spend
     lines.append(f"\nAPI: month ${sum(spend_by_key().values()):.2f}; {budget.status().splitlines()[0]}")

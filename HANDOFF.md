@@ -19,7 +19,7 @@ See README "Autonomous paper desk". Claude Code sessions are optional now (inbox
   exploration swarm (Sonnet director picks angles hourly, Haiku explorers dig and file dossiers), and a Sonnet collator that posts a
   ranked to-do list to the Telegram "Research" topic 5x a day. Spend is paced to the monthly key credit (`/missions` shows it).
   Expensive API research jobs are OFF (`ENABLED_JOBS`). Telegram bot "Caplet" in the group "trading desk" is the control panel.
-- **Claude Code on the Max plan (this kind of session):** the deep research, diligence and trade calls. Start from the latest to-do
+- **Claude Code on the Ultra plan (this kind of session):** the deep research, diligence and trade calls. Start from the latest to-do
   list (Telegram, or the `desk-feed` branch once `GITHUB_FEED_TOKEN` is set), the watch list and open positions.
 
 ## Rules learned the hard way (see knowledge/reflections)

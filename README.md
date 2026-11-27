@@ -110,7 +110,7 @@ options instruments, watch-mode active re-search, browser tool for Claude, colle
 shadow-mode parameter testing, web portal, voice notes in chat. The schema already has `Prediction` for earnings.
 
 ## Exploration swarm (default mode)
-The API does the wide, cheap work; deep research and trade decisions happen in Claude Code sessions on the Max plan.
+The API does the wide, cheap work; deep research and trade decisions happen in Claude Code sessions on the Ultra plan.
 - **Haiku triage** reads every collected item (33+ news searches, RSS, Steam, SEC) and flags drivers, ticker or not.
 - **Sonnet director** (hourly) reads the flags, recent dossiers and the watch list, and issues ~12 missions: angles to dig into
   (events, themes, single companies, who-wins/who-loses chains, broad sweeps). It does not judge trades.

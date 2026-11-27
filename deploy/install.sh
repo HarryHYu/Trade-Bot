@@ -8,8 +8,8 @@ mkdir -p data
 docker compose -f deploy/docker-compose.yml up -d --build
 # Nightly DB backup, kept 14 days. Point this at off-site storage later.
 ( crontab -l 2>/dev/null; echo "15 3 * * * sqlite3 $(pwd)/data/tradebot.db \".backup $(pwd)/data/backup-\$(date +\\%a).db\"" ) | sort -u | crontab -
-# Nightly commit of the knowledge base so every lesson and situation change is versioned on the server.
-( crontab -l 2>/dev/null; echo "30 3 * * * cd $(pwd) && git add knowledge && git -c user.name=tradebot -c user.email=bot@localhost commit -qm 'Nightly knowledge snapshot' || true" ) | sort -u | crontab -
+# Knowledge and config are tuned from Claude Code review sessions and arrive by git pull; the server no longer commits them.
+( crontab -l 2>/dev/null | grep -v "Nightly knowledge snapshot" ) | crontab -
 # Auto-update every 10 minutes: pull new research (inbox/) and code; rebuild only when code changed.
 cat > deploy/auto_update.sh <<'UPD'
 #!/usr/bin/env bash

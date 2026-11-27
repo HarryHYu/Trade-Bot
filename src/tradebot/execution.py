@@ -27,6 +27,7 @@ def propose_for_thesis(thesis_id: int) -> list[int]:
     price = br.last_price(th.ticker)
     sz = size(th.tier, th.direction, price, equity, br.daily_bars(th.ticker), th.expected_move_pct)
     if not sz:
+        _risk_reject(th, "could not size the position (no stop distance or below minimum size)")
         return []
     from .risk import regime_multiplier
     try:
@@ -42,7 +43,13 @@ def propose_for_thesis(thesis_id: int) -> list[int]:
     with session() as db:
         if violations:
             log_decision(db, "proposal_blocked", thesis_id, violations=violations)
-            return []
+            blocked = True
+        else:
+            blocked = False
+    if blocked:
+        _risk_reject(th, "; ".join(violations))
+        return []
+    with session() as db:
         expires = utcnow() + dt.timedelta(minutes=s.proposal_ttl_minutes)
         main = Proposal(thesis_id=thesis_id, symbol=th.ticker, side="buy" if th.direction == "long" else "sell",
                         qty=sz.qty, entry_ref_price=price, stop_price=sz.stop, take_profit=sz.take_profit,
@@ -68,6 +75,14 @@ def propose_for_thesis(thesis_id: int) -> list[int]:
         log_decision(db, "proposed", thesis_id, proposals=ids, sizing=sz.__dict__)
     auto_approve(ids)
     return ids
+
+
+def _risk_reject(th: Thesis, why: str) -> None:
+    from . import ledger
+    try:
+        ledger.reject(th.ticker, th.direction, "risk", why, th.driver, thesis_id=th.id)
+    except Exception:
+        log.exception("could not record risk rejection")
 
 
 def auto_approve(ids: list[int]) -> None:

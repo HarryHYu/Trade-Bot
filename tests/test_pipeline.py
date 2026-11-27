@@ -117,3 +117,27 @@ def test_watch_theses_go_back_to_opus(tmp_path):
     with db.session() as s:
         lead = s.scalars(db.select(db.Lead)).one()
         assert lead.signal_kind == "evaluated" and lead.tickers == ["BRBR"]
+
+
+def test_rejections_are_paper_tracked_at_every_stage(world, monkeypatch):
+    fake, prices = world
+
+    def parse(purpose, model, system, user, schema, **kw):
+        if purpose == "triage":
+            return brain.TriageOut(kind="data", tickers=["XYZ"], driver="weak hint", novelty=0.5, materiality=0.4,
+                                   urgency="slow", reason="minor", direction="up")
+        if purpose == "evaluate":
+            return evaluate.Shortlist(candidates=[], passed_on=[evaluate.Passed(ticker="ABC", lean="short",
+                                                                                reason="already priced", idea="ABC loses share")])
+        return FakeClaude.parse(fake, purpose, model, system, user, schema, **kw)
+    monkeypatch.setattr(fake, "parse", parse)
+    with db.session() as s:
+        s.add(db.Item(source="news", source_tier=4, external_id="2", title="t", text="x"))
+    brain.triage_pending()                  # priority below the bar -> Haiku discard, tracked
+    prices["ABC"] = 50.0
+    with db.session() as s:
+        s.add(db.Lead(item_id=1, tickers=["XYZ"], theme="t", signal_kind="data", priority=0.3, urgency="soon"))
+    evaluate.run()                          # Sonnet passes on ABC and quietly drops XYZ
+    stages = sorted((l["stage"], l["ticker"], l.get("implied")) for l in ledger.load("leads") if l["stance"] == "rejected")
+    assert ("haiku", "XYZ", "long") in stages and ("sonnet", "ABC", "short") in stages and ("sonnet", "XYZ", "long") in stages
+    assert "rejections right" in ledger.rejection_summary() or "without a direction" in ledger.rejection_summary()

@@ -1,5 +1,5 @@
 """Collator: Sonnet turns the day's Haiku leads into a ranked research to-do list.
-No web tools, so a run costs cents. The heavy research happens in Claude Code sessions on the Max plan,
+No web tools, so a run costs cents. The heavy research happens in Claude Code sessions on the Ultra plan,
 which read the list from Telegram, data/digests/ or the desk-feed branch on GitHub."""
 from __future__ import annotations
 
