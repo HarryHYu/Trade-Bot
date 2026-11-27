@@ -31,9 +31,14 @@ def post_mortems() -> int:
         done = {d.ref for d in db.scalars(select(Decision).where(Decision.kind == "post_mortem"))}
         closed = [p for p in db.scalars(select(Proposal).where(Proposal.state == "closed", Proposal.role == "main"))
                   if str(p.id) not in done]
+    from . import budget
     for p in closed:
+        if budget.left("review") <= 0:
+            break
         with session() as db:
             th = db.get(Thesis, p.thesis_id)
+        if th is None:
+            continue
         prompt = (f"Closed trade: {p.side} {p.qty:g} {p.symbol} filled {p.fill_price} exit {p.exit_price} pnl {p.pnl_usd}.\n"
                   f"Thesis: {th.driver}\nMechanism: {th.mechanism}\nChecks at entry: {json.dumps(th.checks)}\n"
                   f"Situation at entry:\n{th.situation_snapshot[-4000:]}\n\nResearch note:\n{(th.evidence or [{}])[0].get('note', '')[:8000]}\n\n"

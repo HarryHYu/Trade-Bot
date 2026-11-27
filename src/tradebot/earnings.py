@@ -199,6 +199,9 @@ def run_protocol() -> None:
                 db.add(Prediction(ticker=sym, event="earnings", event_date=event, consensus=c))
                 log_decision(db, "earnings_opened", sym, event=c["date"])
         if p is not None and p.stage == "opened" and days <= 7:
+            from . import budget
+            if budget.left("research") <= 0:
+                continue
             try:
                 call, note, im = _predict(sym, core.get(sym, {}), c, event)
             except Exception:

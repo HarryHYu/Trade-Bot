@@ -93,7 +93,10 @@ def push_feed(path: str, text: str) -> None:
 
 
 def run() -> str | None:
+    from . import budget
     s = get_settings()
+    if budget.left("review") <= 0:
+        return None
     now = utcnow()
     with session() as db:
         last = kv_get(db, "digest_last")

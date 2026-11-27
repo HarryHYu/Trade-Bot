@@ -143,6 +143,18 @@ def sync_fills() -> None:
                 closed.append(p.id)
     for pid in filled:
         recorder.on_fill(pid)
+        try:
+            from .telegram import send
+            with session() as db:
+                p = db.get(Proposal, pid)
+                th = db.get(Thesis, p.thesis_id) if p.thesis_id else None
+                msg = (f"PAPER {'BUY' if p.side == 'buy' else 'SHORT'} {p.symbol} {p.qty:g} @ {p.fill_price:.2f} "
+                       f"(${p.notional or 0:,.0f}, stop {p.stop_price or 0:.2f}, target {p.take_profit or 0:.2f})"
+                       + (f"\n[{th.tier}] {th.driver[:200]}" if th else ""))
+            if p.role == "main":
+                send(msg, topic="Alerts")
+        except Exception:
+            log.exception("fill alert failed")
     for pid in closed:
         recorder.on_close(pid)
 

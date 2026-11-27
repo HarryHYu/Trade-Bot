@@ -321,7 +321,10 @@ def fast_lane() -> list[int]:
                          .order_by(Lead.priority.desc()).limit(room * 5)).all()
         ids = [i for i in ids if db.get(Lead, i).tickers][:room]
     done = []
+    from . import budget
     for lid in ids:
+        if budget.left("research") <= 0:
+            break
         with session() as db:
             log_decision(db, "fast_lane", lid)
         try:
