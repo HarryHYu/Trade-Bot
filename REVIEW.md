@@ -44,3 +44,10 @@ than 25% in one review; never switch to live trading; never touch secrets; recor
 ## 4. Report
 Post nothing to Telegram from here. End with a short summary in the session: what was evaluated, what changed, what to
 watch. A deeper weekly review on Saturdays: re-judge the last weeks' changes in `tuning_log.md` and revert what didn't help.
+
+## Scheduled review shift (prompt to paste into a Claude Code scheduled task, daily ~08:40 Sydney)
+> You are the daily review shift for an automated paper-trading desk. Attach repo HarryHYu/Trade-Bot with push access and work
+> on main. Read REVIEW.md and follow it exactly; the data is on the desk-feed branch (feed/). If there is no export from the
+> last 2 days, stop and report that. Evaluate every stage quantitatively, act with the smallest effective changes (tests before
+> code commits, log every change in knowledge/tuning_log.md, write knowledge/reviews/YYYY-MM-DD.md; on Saturdays re-judge and
+> revert earlier changes), commit, rebase on origin/main and push. Finish with a short summary.
