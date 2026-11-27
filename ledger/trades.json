@@ -1,0 +1,117 @@
+[
+  {
+    "id": "T1",
+    "ticker": "OSUR",
+    "side": "long",
+    "opened": "2026-10-27",
+    "entry": 4.17,
+    "stop": 3.5,
+    "target": 5.0,
+    "time_stop_days": 0,
+    "exit_by": null,
+    "conviction": 3,
+    "notional": 1000,
+    "thesis": "Only FDA-EUA Bundibugyo rapid test; cash floor; activist sale pressure",
+    "tags": [
+      "ebola",
+      "event"
+    ],
+    "benchmark": "SPY",
+    "status": "closed",
+    "closed": "2026-11-02",
+    "exit": 3.46,
+    "exit_reason": "stop (3.85 close rule and 3.50 stop)"
+  },
+  {
+    "id": "T2",
+    "ticker": "RIG",
+    "side": "long",
+    "opened": "2026-10-30",
+    "entry": 6.76,
+    "stop": 6.05,
+    "target": null,
+    "time_stop_days": 0,
+    "exit_by": "2026-11-02",
+    "conviction": 2,
+    "notional": 1000,
+    "thesis": "Oil beta ride into Nov 2 print and midterms",
+    "tags": [
+      "oil",
+      "momentum"
+    ],
+    "benchmark": "SPY",
+    "status": "closed",
+    "closed": "2026-11-02",
+    "exit": 6.230000019073486,
+    "exit_reason": "exit_by"
+  },
+  {
+    "id": "T3",
+    "ticker": "W",
+    "side": "long",
+    "opened": "2026-10-30",
+    "entry": 118.59,
+    "stop": null,
+    "target": null,
+    "time_stop_days": 0,
+    "exit_by": null,
+    "conviction": 2.5,
+    "notional": 1000,
+    "thesis": "Momentum ride on target raises, exit before Nov 4 print",
+    "tags": [
+      "momentum",
+      "earnings-runup"
+    ],
+    "benchmark": "SPY",
+    "status": "closed",
+    "closed": "2026-11-03",
+    "exit": 111.32,
+    "exit_reason": "stop (close below 112) / T-1"
+  },
+  {
+    "id": "T4",
+    "ticker": "FIGS",
+    "side": "long",
+    "opened": "2026-10-30",
+    "entry": 21.44,
+    "stop": 19.5,
+    "target": null,
+    "time_stop_days": 0,
+    "exit_by": "2026-11-04",
+    "conviction": 2,
+    "notional": 1000,
+    "thesis": "Momentum ride, exit before Nov 5 print",
+    "tags": [
+      "momentum",
+      "earnings-runup"
+    ],
+    "benchmark": "SPY",
+    "status": "closed",
+    "closed": "2026-11-04",
+    "exit": 21.940000534057617,
+    "exit_reason": "exit_by"
+  },
+  {
+    "id": "T5",
+    "ticker": "TBLD.L",
+    "side": "long",
+    "opened": "2026-10-30",
+    "entry": 12.25,
+    "stop": 10.6,
+    "target": 15.5,
+    "time_stop_days": 0,
+    "exit_by": null,
+    "conviction": 3,
+    "notional": 1000,
+    "thesis": "Probably Stolen record Steam players; Q4 revenue step-up not in expectations",
+    "tags": [
+      "gaming",
+      "measured-driver"
+    ],
+    "benchmark": "^FTSE",
+    "status": "closed",
+    "closed": "2026-11-17",
+    "exit": 10.6,
+    "exit_reason": "stop"
+  }
+]

@@ -1,0 +1,412 @@
+[
+  {
+    "id": "L1",
+    "ticker": "RBLX",
+    "stance": "pass",
+    "flagged": "2026-10-27",
+    "idea": "Q3 print: engagement beat noticed, no edge on the move",
+    "acted": false,
+    "ref": 54.470001220703125,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L2",
+    "ticker": "CAPR",
+    "stance": "pass",
+    "flagged": "2026-10-27",
+    "idea": "FDA decision Nov 22 priced as a lottery, no probability edge",
+    "acted": false,
+    "ref": 6.099999904632568,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L3",
+    "ticker": "RAPP",
+    "stance": "watch_long",
+    "flagged": "2026-10-27",
+    "idea": "Cluster insider buying after bipolar Ph2 dip; long-horizon only",
+    "acted": false,
+    "ref": 27.540000915527344,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L4",
+    "ticker": "PSX",
+    "stance": "watch_short",
+    "flagged": "2026-10-27",
+    "idea": "Refiners price peak cracks as durable while diesel cracks fall",
+    "acted": false,
+    "ref": 268.5299987792969,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L5",
+    "ticker": "VLO",
+    "stance": "watch_short",
+    "flagged": "2026-10-27",
+    "idea": "Refiners price peak cracks as durable while diesel cracks fall",
+    "acted": false,
+    "ref": 387.3399963378906,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L6",
+    "ticker": "MPC",
+    "stance": "watch_short",
+    "flagged": "2026-10-27",
+    "idea": "Refiners price peak cracks as durable while diesel cracks fall",
+    "acted": false,
+    "ref": 435.9800109863281,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L7",
+    "ticker": "DINO",
+    "stance": "watch_short",
+    "flagged": "2026-10-27",
+    "idea": "Refiners price peak cracks as durable while diesel cracks fall",
+    "acted": false,
+    "ref": 114.20999908447266,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L8",
+    "ticker": "PBF",
+    "stance": "watch_short",
+    "flagged": "2026-10-27",
+    "idea": "Refiners price peak cracks as durable while diesel cracks fall",
+    "acted": false,
+    "ref": 73.62999725341797,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L9",
+    "ticker": "CVI",
+    "stance": "watch_short",
+    "flagged": "2026-10-27",
+    "idea": "Refiners price peak cracks as durable while diesel cracks fall",
+    "acted": false,
+    "ref": 57.43000030517578,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L10",
+    "ticker": "DK",
+    "stance": "watch_short",
+    "flagged": "2026-10-27",
+    "idea": "Refiners price peak cracks as durable while diesel cracks fall",
+    "acted": false,
+    "ref": 70.30000305175781,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L11",
+    "ticker": "URA",
+    "stance": "watch_long",
+    "flagged": "2026-10-27",
+    "idea": "Uranium term price 19-yr high vs miners -42%; sulfur/acid chain not the trigger yet",
+    "acted": false,
+    "ref": 35.86000061035156,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L12",
+    "ticker": "MOS",
+    "stance": "pass",
+    "flagged": "2026-10-27",
+    "idea": "Sulfur shock losers already priced",
+    "acted": false,
+    "ref": 18.790000915527344,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L13",
+    "ticker": "036570.KS",
+    "stance": "watch_long",
+    "flagged": "2026-10-27",
+    "idea": "AION 2 retention better than past NCSoft launches; market prices a fade",
+    "acted": false,
+    "ref": 198700.0,
+    "benchmark": "^KS11"
+  },
+  {
+    "id": "L14",
+    "ticker": "ALI=F",
+    "stance": "watch",
+    "flagged": "2026-10-27",
+    "idea": "Aluminium falling despite Gulf supply risk: unexplained",
+    "acted": false,
+    "ref": 3285.25,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L15",
+    "ticker": "APT",
+    "stance": "watch_long",
+    "flagged": "2026-10-27",
+    "idea": "Ebola outside Africa would re-rate PPE micro-caps (armed playbook)",
+    "acted": false,
+    "ref": 5.440000057220459,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L16",
+    "ticker": "LAKE",
+    "stance": "watch_long",
+    "flagged": "2026-10-27",
+    "idea": "Ebola PPE playbook",
+    "acted": false,
+    "ref": 9.15999984741211,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L17",
+    "ticker": "OSUR",
+    "stance": "long",
+    "flagged": "2026-10-27",
+    "idea": "Ebola rapid test + cash floor + activist",
+    "acted": true,
+    "ref": 4.159999847412109,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L18",
+    "ticker": "TBLD.L",
+    "stance": "long",
+    "flagged": "2026-10-30",
+    "idea": "Probably Stolen Steam record",
+    "acted": true,
+    "ref": 13.0,
+    "benchmark": "^FTSE"
+  },
+  {
+    "id": "L19",
+    "ticker": "BRBR",
+    "stance": "watch_long",
+    "flagged": "2026-10-29",
+    "idea": "Whey protein costs easing from June record; needs FY27 cost commentary (Nov 17)",
+    "acted": false,
+    "ref": 9.0600004196167,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L20",
+    "ticker": "SFD",
+    "stance": "pass",
+    "flagged": "2026-10-29",
+    "idea": "Lean hogs at 2020 lows, packer already priced",
+    "acted": false,
+    "ref": 18.549999237060547,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L21",
+    "ticker": "BZ=F",
+    "stance": "watch_short",
+    "flagged": "2026-11-03",
+    "idea": "Oil falls after the midterms on peace/Hormuz headlines (planned Nov 4 entry)",
+    "acted": false,
+    "ref": 103.5999984741211,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L22",
+    "ticker": "RIG",
+    "stance": "long",
+    "flagged": "2026-10-29",
+    "idea": "Oil beta ride, exit by Nov 2",
+    "acted": true,
+    "ref": 6.690000057220459,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L23",
+    "ticker": "W",
+    "stance": "long",
+    "flagged": "2026-10-29",
+    "idea": "Momentum ride, exit by Nov 3",
+    "acted": true,
+    "ref": 120.12000274658203,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L24",
+    "ticker": "FIGS",
+    "stance": "long",
+    "flagged": "2026-10-29",
+    "idea": "Momentum ride, exit by Nov 4",
+    "acted": true,
+    "ref": 21.559999465942383,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L25",
+    "ticker": "EL",
+    "stance": "pass",
+    "flagged": "2026-10-29",
+    "idea": "Run-up into print, no edge either way",
+    "acted": false,
+    "ref": 108.80999755859375,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L26",
+    "ticker": "CART",
+    "stance": "pass",
+    "flagged": "2026-10-29",
+    "idea": "DoorDash deal spread, not an earnings trade",
+    "acted": false,
+    "ref": 57.11000061035156,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L27",
+    "ticker": "PLNT",
+    "stance": "avoid",
+    "flagged": "2026-10-29",
+    "idea": "Rebound fading into print",
+    "acted": false,
+    "ref": 53.720001220703125,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L28",
+    "ticker": "MRNA",
+    "stance": "pass",
+    "flagged": "2026-10-29",
+    "idea": "Cancer vaccine win fully priced",
+    "acted": false,
+    "ref": 222.75999450683594,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L29",
+    "ticker": "TTWO",
+    "stance": "avoid",
+    "flagged": "2026-10-29",
+    "idea": "Falling into GTA VI launch, no run-up to ride",
+    "acted": false,
+    "ref": 193.38999938964844,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L30",
+    "ticker": "IREN",
+    "stance": "avoid",
+    "flagged": "2026-10-29",
+    "idea": "AI/miner rebound: wait for earnings/CPI/NVDA",
+    "acted": false,
+    "ref": 26.25,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L31",
+    "ticker": "CIFR",
+    "stance": "avoid",
+    "flagged": "2026-10-29",
+    "idea": "AI/miner rebound: wait",
+    "acted": false,
+    "ref": 8.100000381469727,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L32",
+    "ticker": "COHR",
+    "stance": "avoid",
+    "flagged": "2026-10-29",
+    "idea": "AI optics rebound: wait",
+    "acted": false,
+    "ref": 237.22000122070312,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L33",
+    "ticker": "SITM",
+    "stance": "avoid",
+    "flagged": "2026-10-29",
+    "idea": "AI rebound: wait",
+    "acted": false,
+    "ref": 488.0799865722656,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L34",
+    "ticker": "MYR.AX",
+    "stance": "avoid",
+    "flagged": "2026-11-05",
+    "idea": "David Jones collapse: don't chase Myer at 0.25, buy 0.21-0.22 or on closure list",
+    "acted": false,
+    "ref": 0.25,
+    "benchmark": "^AXJO"
+  },
+  {
+    "id": "L35",
+    "ticker": "SCG.AX",
+    "stance": "watch_long",
+    "flagged": "2026-11-05",
+    "idea": "DJ closures hand Scentre back cheap space (needs closure list)",
+    "acted": false,
+    "ref": 3.609999895095825,
+    "benchmark": "^AXJO"
+  },
+  {
+    "id": "L36",
+    "ticker": "ABY.AX",
+    "stance": "watch_long",
+    "flagged": "2026-11-05",
+    "idea": "Prestige beauty share from DJ; tiny cap (needs closure list/AGM)",
+    "acted": false,
+    "ref": 0.26499998569488525,
+    "benchmark": "^AXJO"
+  },
+  {
+    "id": "L37",
+    "ticker": "NVDA",
+    "stance": "pass",
+    "flagged": "2026-11-12",
+    "idea": "CEO resignation/Megaspeed: stay out until the Nov 17 print",
+    "acted": false,
+    "ref": 166.19000244140625,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L38",
+    "ticker": "AMD",
+    "stance": "avoid",
+    "flagged": "2026-11-12",
+    "idea": "Rotation winner already priced after +21% week",
+    "acted": false,
+    "ref": 585.2999877929688,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L39",
+    "ticker": "GDS",
+    "stance": "pass",
+    "flagged": "2026-11-12",
+    "idea": "Possible Megaspeed data-centre link (speculative)",
+    "acted": false,
+    "ref": 20.049999237060547,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L40",
+    "ticker": "CRCL",
+    "stance": "watch_long",
+    "flagged": "2026-11-12",
+    "idea": "Stablecoin rule effective Jan 18 vs beaten-down issuer",
+    "acted": false,
+    "ref": 63.81999969482422,
+    "benchmark": "SPY"
+  },
+  {
+    "id": "L41",
+    "ticker": "BTC-USD",
+    "stance": "pass",
+    "flagged": "2026-11-13",
+    "idea": "No position: long on weekly close > 75k, risk-off < 58.5k",
+    "acted": false,
+    "ref": 68249.2734375,
+    "benchmark": "SPY"
+  }
+]

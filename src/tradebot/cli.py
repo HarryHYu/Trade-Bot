@@ -91,5 +91,63 @@ def check():
         print("telegram: sent test message")
 
 
+ledger_app = typer.Typer(help="Paper ledger: trades, predictions and leads, scored against real prices (no API keys).")
+app.add_typer(ledger_app, name="ledger")
+
+
+@ledger_app.command("open")
+def ledger_open(ticker: str, side: str = "long", entry: float = typer.Option(None), stop: float = typer.Option(None),
+                target: float = typer.Option(None), thesis: str = "", conviction: float = 3, notional: float = 1000,
+                time_stop_days: int = 10, exit_by: str = typer.Option(None), opened: str = typer.Option(None),
+                tag: list[str] = typer.Option(None)):
+    """Open a paper trade (entry defaults to the latest close)."""
+    from . import ledger
+    print(ledger.open_trade(ticker, side, entry, stop, target, thesis, conviction, notional, time_stop_days, tag, opened, exit_by))
+
+
+@ledger_app.command("close")
+def ledger_close(trade_id: str, price: float = typer.Option(None), reason: str = "manual", when: str = typer.Option(None)):
+    from . import ledger
+    print(ledger.close_trade(trade_id, price, reason, when))
+
+
+@ledger_app.command("check")
+def ledger_check():
+    """Apply stops, targets, exit-by dates and time stops to open trades."""
+    from . import ledger
+    print("\n".join(ledger.check()) or "No exits.")
+
+
+@ledger_app.command("predict")
+def ledger_predict(subject: str, question: str, kind: str, resolve_by: str, low: float = typer.Option(None),
+                   high: float = typer.Option(None), point: float = typer.Option(None), consensus: float = typer.Option(None),
+                   direction: str = typer.Option(None), probability: float = typer.Option(None), notes: str = ""):
+    """kind: range | direction | probability."""
+    from . import ledger
+    print(ledger.predict(subject, question, kind, resolve_by, None, low, high, point, consensus, direction, probability, notes))
+
+
+@ledger_app.command("resolve")
+def ledger_resolve(prediction_id: str, actual: float = typer.Option(None), outcome: str = typer.Option(None)):
+    from . import ledger
+    print(ledger.resolve(prediction_id, actual, outcome))
+
+
+@ledger_app.command("lead")
+def ledger_lead(ticker: str, stance: str, idea: str, flagged: str = typer.Option(None), acted: bool = False):
+    """Record an idea we looked at. stance: long | short | watch_long | watch_short | avoid | watch."""
+    from . import ledger
+    print(ledger.add_lead(ticker, stance, flagged or ledger._today(), idea, acted))
+
+
+@ledger_app.command("report")
+def ledger_report():
+    """Run exits, then write ledger/REPORT.md and ledger/equity.png."""
+    from . import ledger
+    for e in ledger.check():
+        print(e)
+    print(ledger.report())
+
+
 def main():
     app()
