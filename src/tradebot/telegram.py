@@ -155,7 +155,7 @@ def _settings_text() -> str:
 
 
 HELP = ("Just talk to me, or send photos and files.\n"
-        "/status  /positions  /halt  /flatten  /resume  /pause  /unpause  /missions  /scorecard  /ledger  /budget  /mode manual|threshold|auto  /new (fresh chat)\n"
+        "/status  /positions  /halt  /flatten  /resume  /pause  /unpause  /missions  /scorecard  /ledger  /budget  /selftest  /mode manual|threshold|auto  /new (fresh chat)\n"
         "/settings  /set NAME value  /setkey NAME value (secrets; message auto-deleted)  /resetpaper [cash]")
 
 
@@ -228,6 +228,9 @@ def _command(text: str, thread: str) -> str:
         day = float(a["equity"]) - float(a["last_equity"])
         return (f"Equity ${float(a['equity']):,.0f}  day {day:+,.0f}\nOpen theses {open_th}  mode {mode}  "
                 f"{'HALTED' if halted else 'running'}\nBroker: {__import__('tradebot.broker', fromlist=['x']).broker_label()}")
+    if cmd == "/selftest":
+        from .selftest import run
+        return run()
     if cmd == "/scorecard":
         from .review import build
         return build()

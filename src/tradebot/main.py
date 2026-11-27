@@ -116,4 +116,8 @@ def run() -> None:
     telegram.send(f"Tradebot started. Broker: {broker_label()}. AI jobs: {s.enabled_jobs}.\n"
                   f"Models: triage {s.triage_model}, explore {s.explorer_model}, evaluate {s.evaluator_model}, "
                   f"research {s.research_model}, judge {s.judge_model}.\nPaper autotrade: {s.paper_autotrade and s.broker == 'sim'}")
+    def startup_selftest() -> None:
+        from . import selftest
+        telegram.send(selftest.run(), topic="Alerts")
+    sch.add_job(_safe(startup_selftest), "date", run_date=now + dt.timedelta(minutes=1))
     sch.start()
