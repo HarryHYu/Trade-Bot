@@ -19,7 +19,10 @@ class Ping(BaseModel):
 
 def run() -> str:
     s = get_settings()
-    c = claude()
+    try:
+        c = claude()
+    except Exception as e:
+        return f"SELF-TEST\nFAIL no usable Anthropic key: {e}"
     checks = []
 
     def attempt(label: str, fn) -> None:
