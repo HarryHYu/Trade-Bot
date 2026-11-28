@@ -17,7 +17,23 @@
     "idea": "FDA decision Nov 22 priced as a lottery, no probability edge",
     "acted": false,
     "ref": 6.099999904632568,
-    "benchmark": "SPY"
+    "benchmark": "SPY",
+    "judgement": {
+      "verdict": "signal_missed",
+      "signal": "played_out",
+      "cause": "driver",
+      "notes": "We called the FDA decision a coin flip; the evidence was skewed (9-3 AdCom against, a prior CRL for the same deficiency, an indication narrowed to rescue the filing). Passing avoided the loss but the skew argued for a bearish stance.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Nov 20: second Complete Response Letter for deramiocel (no substantial evidence of effectiveness) plus FDA allegations of data integrity violations; $7.59 -> $1.92 (-75%).",
+      "driver_type": "regulatory_or_legal",
+      "early_signs": "July 2026 AdCom 9-3 against; July 2025 CRL citing the same deficiency; PDUFA extension only after narrowing the indication; +76% run-up into the decision (cause unverified).",
+      "look_for": "PDUFA after a negative AdCom plus a prior CRL: assume the FDA leans to rejection and treat the event as skewed, not a coin flip; a run-up into it adds downside.",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/0001133869/000110465926130730/capr-ex99d1.htm",
+        "https://www.biopharmadive.com/news/capricor-fda-duchenne-cell-therapy-deramiocel/875384/"
+      ]
+    }
   },
   {
     "id": "L3",
@@ -67,7 +83,24 @@
     "idea": "Refiners price peak cracks as durable while diesel cracks fall",
     "acted": false,
     "ref": 114.20999908447266,
-    "benchmark": "SPY"
+    "benchmark": "SPY",
+    "judgement": {
+      "verdict": "right_reason",
+      "signal": "played_out",
+      "cause": "driver",
+      "notes": "Played out as stated: cracks fell from the peak and the market stopped capitalising peak margins despite a huge Q3 beat; moves tracked peers on sector days with no company news. We were right and did not trade it (watch_short).",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Refining margin normalisation: Russian diesel output recovering after export quotas (Reuters ~Oct 27), diesel crack $102 mid-Oct -> $83 by Nov 5, Brent -18.5% in two weeks to ~Nov 15, US diesel below $6; Oct 28 Q3 beat (adj. EPS $11.75 vs ~$7.8) ignored on peak-earnings worries; sector selloff Nov 18 with no news.",
+      "driver_type": "commodity_price",
+      "early_signs": "Diesel/jet cracks already off mid-October peaks ($102 -> $92 by Oct 23); refiner equities peaked ~Oct 13; peers selling off on beats (Valero Oct 22); supply response visible (Russian export quotas).",
+      "look_for": "Refiners selling off on record beats while cracks are off their peak and a supply response is visible (export quotas, restarts) = confirmation for a short; track the weekly diesel crack and the CRAK ETF.",
+      "sources": [
+        "https://offshoresource.com/business-wire/hf-sinclair-reports-2026-third-quarter-results-and-announces-regular-cash-dividend/",
+        "https://www.trefis.com/stock/vlo/articles/626950/what-sent-valero-energy-stock-lower/2026-11-19",
+        "https://hydrocarbonprocessing.com/news/2026/11/us-diesel-below-6-a-gallon-at-2-month-low-on-easing-tensions-weaker-demand/"
+      ]
+    }
   },
   {
     "id": "L8",
@@ -87,7 +120,24 @@
     "idea": "Refiners price peak cracks as durable while diesel cracks fall",
     "acted": false,
     "ref": 57.43000030517578,
-    "benchmark": "SPY"
+    "benchmark": "SPY",
+    "judgement": {
+      "verdict": "lucky",
+      "signal": "played_out",
+      "cause": "other_news",
+      "notes": "Our driver happened (cracks fell, refiners de-rated: about the half of the drop it shares with DINO's -24%), but the biggest leg came from a levered, dilutive acquisition our thesis did not anticipate.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Nov 3: record Q3 (adj. EPS $4.00 vs ~$2.5-2.9) plus a $4.2B purchase of Marathon's St. Paul Park and Mandan refineries funded by a $2.5B secured bridge, $500M from Icahn Enterprises, $800M from Trafigura and a $750M share offering ($250M secondary by an IEP unit); dividend held at $0.10. -13% that day, $38 by Nov 6; then the refiner selloff (diesel crack $102 -> $83, Brent -18.5%) took it to ~$30.",
+      "driver_type": "m_and_a",
+      "early_signs": "Cracks rolling over from mid-October and Russian diesel export quotas (Reuters ~Oct 27) were visible; the deal itself was not signalled, but Icahn's history of using CVI for deals plus a windfall cash pile were standing risks.",
+      "look_for": "Controlled refiners (Icahn/IEP) sitting on a windfall quarter: price in a levered, dilutive deal or the controlling holder selling into strength on the print date, on top of cracks normalising.",
+      "sources": [
+        "https://finviz.com/news/414996/cvr-energy-posts-a-record-refining-quarter-and-bets-the-windfall-on-a-levered-marathon-deal",
+        "https://www.ibtimes.com.au/cvr-energy-shares-fall-marathon-refinery-deal-1877874",
+        "https://investinglive.com/commodities/oil-cracks-are-beginning-to-fall-and-refineries-are-pointing-to-more-normalization/"
+      ]
+    }
   },
   {
     "id": "L10",
@@ -177,7 +227,24 @@
     "idea": "Probably Stolen Steam record",
     "acted": true,
     "ref": 13.0,
-    "benchmark": "^FTSE"
+    "benchmark": "^FTSE",
+    "judgement": {
+      "verdict": "reasoning_error",
+      "signal": "played_out",
+      "cause": "other_news",
+      "notes": "Driver happened and was confirmed (Nov 12 RNS: >1M copies, >180k peak CCU, FY26 guided ahead), yet the stock fell 11.5% that day and kept falling to our stop. Error: assuming a step-up visible in public Steam data was 'not in expectations' after the stock had already run ~30% on that same data, with brokers at hold/sell and targets ~9p.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Nov 12 07:00 Trading Update: FY26 revenue $54-56m, adj. EBITDA $7-8m 'ahead of market expectations', Probably Stolen >1M copies, ReStory and Graveyard Keeper 2 >500k each. Sell-the-news: 13.0p -> 11.5p on the heaviest volume of the period, then 9.25p by Nov 25. No placing or director dealing; Probably Stolen live players ~21k on Nov 28 (-88% from peak).",
+      "driver_type": "short_squeeze_or_positioning",
+      "early_signs": "Run 10.6p -> 13.75p (Oct 27 -> Nov 3) on 10x volume = the public CCU news was already bought; broker targets ~9p below price; a dated confirming RNS was likely after record CCUs; CCU decay after the Nov 4 peak was visible on Steam.",
+      "look_for": "When the driver is public data (Steam CCU, app ranks) and the stock has already re-rated, treat the confirming announcement as sell-the-news; compare broker targets with the price before entry.",
+      "sources": [
+        "https://www.investegate.co.uk/announcement/rns/tinybuild-inc-di-reg-s-cat-3---tbld/trading-update/9871218",
+        "https://www.londonstockexchange.com/en/news/article/TBLD/trading-update/a290-e2-6f-01-d4-4469a2",
+        "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=4348910"
+      ]
+    }
   },
   {
     "id": "L19",
@@ -187,7 +254,24 @@
     "idea": "Whey protein costs easing from June record; needs FY27 cost commentary (Nov 17)",
     "acted": false,
     "ref": 9.0600004196167,
-    "benchmark": "SPY"
+    "benchmark": "SPY",
+    "judgement": {
+      "verdict": "lucky",
+      "signal": "failed",
+      "cause": "other_news",
+      "notes": "Re-rated for a different reason than ours: management did NOT confirm cost relief (FY27 protein inflation guided high single digits, proteins ~70% hedged). Stock rose on self-help margin repair (pricing, $100M+ supply-chain savings, lapping $37M inventory charges) and EBITDA guided back to growth from a crushed base. Report was Nov 18, not Nov 17.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Nov 18 FY26 Q4: sales +7% to $692.0M (beat); FY27 adj. EBITDA guided $310-350M vs $288.8M despite flat-to-down sales, via low double-digit shake price increases, >=$100M 3-yr supply-chain savings, ~400bp gross margin expansion and lapping ~$37M inventory charges; new CEO trades growth for margin. +24% on the day ($11.01 -> $13.66), $16.08 by Nov 27. Nov 16 7-Eleven distribution deal helped into the print.",
+      "driver_type": "guidance_change",
+      "early_signs": "52-week low $7.33 on Oct 1 (crushed multiple); already +20% from our flag into the print; 7-Eleven deal Nov 16; dated print with a new CEO. Whey relief was never the swing factor: Aug Q3 call already pointed to continued inflation and price actions.",
+      "look_for": "Crushed multiple + dated print + new CEO: watch for EBITDA guided back to growth via self-help (pricing + savings) rather than waiting for input costs; check hedge cover before assuming spot commodity relief reaches the P&L.",
+      "sources": [
+        "https://www.sec.gov/Archives/edgar/data/0001772016/000162828026074645/brbrexh991-q42026earningsr.htm",
+        "https://www.nasdaq.com/articles/bellring-brbr-q4-2026-earnings-call-transcript",
+        "https://www.fool.com/investing/2026/11/18/why-bellring-brands-stock-surged-today/"
+      ]
+    }
   },
   {
     "id": "L20",
@@ -287,7 +371,24 @@
     "idea": "Falling into GTA VI launch, no run-up to ride",
     "acted": false,
     "ref": 193.38999938964844,
-    "benchmark": "SPY"
+    "benchmark": "SPY",
+    "judgement": {
+      "verdict": "signal_missed",
+      "signal": "failed",
+      "cause": "driver",
+      "notes": "We avoided because it was drifting lower into earnings/launch, but both catalysts were dated and public and the evidence pointed up (record pre-order trackers, launch date confirmed since May, stock -19% YTD = washed-out sentiment). The catalysts we named produced the move, in the opposite direction.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Nov 9 Q2 FY27: revenue miss but FY revenue forecast raised and CEO said GTA VI pre-orders 'far in excess of our initial expectations' (+8.3% Nov 10); near-perfect reviews Nov 18 (+6.2%); launch Nov 19 with third-party estimates of ~17M copies / $1.65-1.84B day-one (unofficial).",
+      "driver_type": "product_launch",
+      "early_signs": "Launch date confirmed May 22; pre-launch Sensor Tower estimate ~9.7M units / $942M, already above GTA V's record; 31M-viewer Netflix preview; stock -19% YTD into the print.",
+      "look_for": "A dated mega-launch with record third-party pre-order data: a stock drifting lower into it is a setup, not a reason to avoid.",
+      "sources": [
+        "https://www.fool.com/investing/2026/11/10/why-take-two-stock-s-got-game-today/",
+        "https://www.trefis.com/stock/ttwo/articles/626934/what-moved-take-two-stock/2026-11-19",
+        "https://www.fox5ny.com/news/gta-vi-pulls-estimated-1-84-billion-release-day-more-than-double-gta-vs-launch-record"
+      ]
+    }
   },
   {
     "id": "L30",
@@ -297,7 +398,24 @@
     "idea": "AI/miner rebound: wait for earnings/CPI/NVDA",
     "acted": false,
     "ref": 26.25,
-    "benchmark": "SPY"
+    "benchmark": "SPY",
+    "judgement": {
+      "verdict": "right_reason",
+      "signal": "played_out",
+      "cause": "other_news",
+      "notes": "'Wait for confirmation' was right: confirmation never came (unfunded capex gap, slipped ARR target) and even Nvidia's beat did not stop the slide. The bulk of the fall was sector-wide AI data-centre financing fear, so 'avoid' would have been better than 'wait'.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Nov 4 report that Childress site delays made Microsoft defer capex (-11.4%); Nov 5 post-midterm chip wipeout (-17%) and Q1 FY27 results showing ~$15B remaining FY27 capex with ~$6B unfunded and the >$4B ARR target slipping to early 2027; from Nov 9 bank reluctance to finance data centres (Reuters) and peer target slips (Nebius) drove the slide.",
+      "driver_type": "financing_or_dilution",
+      "early_signs": "Microsoft's late-October capex shortfall from delayed third-party capacity; Applied Digital saying ~800MW still needed financing; neocloud group -13% Oct 26 - Nov 2; The Information's Childress delay story the day before results.",
+      "look_for": "Capex-heavy neoclouds/miners: hyperscaler 'delayed third-party capacity' comments, peers' unfunded-capex disclosures and bank-lending headlines turning sour = move from wait to avoid (or short).",
+      "sources": [
+        "https://stocktwits.com/news-articles/markets/equity/iren-stock-drops-after-report-says-it-s-behind-microsoft-s-ai-spending-delay-as-investors-turn-to-earnings/cNG15gfR9Ef",
+        "https://www.analyticsinsight.net/news/iren-stock-falls-17-as-bitcoin-mining-revenue-drops-58-and-ai-expansion-accelerates",
+        "https://www.tikr.com/blog/iren-sinks-13-in-a-week-as-big-techs-results-rattle-neoclouds-already-popping"
+      ]
+    }
   },
   {
     "id": "L31",
@@ -357,7 +475,23 @@
     "idea": "Prestige beauty share from DJ; tiny cap (needs closure list/AGM)",
     "acted": false,
     "ref": 0.26499998569488525,
-    "benchmark": "^AXJO"
+    "benchmark": "^AXJO",
+    "judgement": {
+      "verdict": "signal_missed",
+      "signal": "failed",
+      "cause": "other_news",
+      "notes": "Share-gain thesis failed outright (revenue -8%, no mention of David Jones). Execution risk was visible in the August FY26 report: EBITDA -39%, a new distribution centre and ERP cut over in July, and stretch FY27 guidance. We waited for the Nov 19 AGM; the update came Nov 16. Watch status avoided the loss.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Nov 16 FY27 trading update: product revenue -8.0% over 20 weeks; new National Distribution Centre ramp caused out-of-stocks; FY27 EBITDA guidance cut to $4.0-6.5m from $9-13m, revenue guidance withdrawn. A$0.265 -> A$0.15.",
+      "driver_type": "guidance_change",
+      "early_signs": "FY26 Appendix 4E (Aug 24): EBITDA -39% to $3.8m, weak Q4, DC and ERP cutover in July 2026, FY27 guidance needing 2.4-3.4x EBITDA; thin volume meant any miss would gap.",
+      "look_for": "Micro-caps mid-way through a DC/ERP cutover tend to warn before the AGM; discount 'share gain from a competitor's collapse' until the company reports revenue growth.",
+      "sources": [
+        "https://kalkine.com.au/news/announcements/adore-beauty-group-cuts-fy27-underlying-ebitda-guidance-to-4065m-at-2026-agm",
+        "https://announcements.asx.com.au/asxpdf/20260824/pdf/07332lpnhbk2rp.pdf"
+      ]
+    }
   },
   {
     "id": "L37",
@@ -377,7 +511,24 @@
     "idea": "Rotation winner already priced after +21% week",
     "acted": false,
     "ref": 585.2999877929688,
-    "benchmark": "SPY"
+    "benchmark": "SPY",
+    "judgement": {
+      "verdict": "lucky",
+      "signal": "played_out",
+      "cause": "other_news",
+      "notes": "'Already priced' played out for the first leg (-8.8% the next day, -9% by Nov 18), but about two thirds of the fall came from an unforeseeable short-seller report on China exports. Right direction, mostly for a different reason.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Nov 13 reversal of the post-Huang-resignation rally as the 10-year hit ~5.17% on hot PPI and OpenAI (AMD's big customer) reported a $10.9B quarterly operating loss; Nov 16 sector selloff on export-control talk; Nov 19 Hunterbrook short report alleging blacklisted IEIT kept receiving AMD firmware (22.4% of 2025 revenue billed to China/HK), days after tighter US chip rules for Southeast Asia; AMD disputes it.",
+      "driver_type": "fraud_or_short_report",
+      "early_signs": "One-event +21% week into rising yields; for the short report none, though Southeast Asia export tightening and Dec 1 House hearings on chip exports were visible days earlier.",
+      "look_for": "Fade a one-event 20%+ surge in a mega-cap chip stock into rising yields; flag China/HK revenue share plus fresh export-rule headlines as short-report tail risk.",
+      "sources": [
+        "https://www.tikr.com/blog/amd-sinks-9-marvell-down-5-as-chip-rally-reverses-and-treasury-yields-hit-5",
+        "https://www.ibtimes.com/amd-shares-fall-hunterbrook-china-export-risks-3809979",
+        "https://fool.com/investing/2026/11/19/why-amd-stock-was-plunging-on-thursday"
+      ]
+    }
   },
   {
     "id": "L39",
@@ -397,7 +548,23 @@
     "idea": "Stablecoin rule effective Jan 18 vs beaten-down issuer",
     "acted": false,
     "ref": 63.81999969482422,
-    "benchmark": "SPY"
+    "benchmark": "SPY",
+    "judgement": {
+      "verdict": "unrelated",
+      "signal": "unclear",
+      "cause": "market",
+      "notes": "The catalyst (rule effective Jan 18) has not happened; the move was crypto beta (BTC -16%, COIN -18%) with flat T-bill yields. Weak fundamentals were already in the Nov 4 Q3 report before our flag.",
+      "confidence_at_call": null,
+      "judged": "2026-11-28",
+      "actual_driver": "Crypto selloff (BTC 71.3k -> 59.8k, Nov 12-28) plus the Nov 4 Q3 overhang: reserve income -8% on a ~3.5% reserve yield, USDC flat y/y at $73.9B, revenue flattered by a one-off $182m token presale; World Bank/Citi USDC news on Nov 17 did not help.",
+      "driver_type": "sector_rotation",
+      "early_signs": "BTC already rolling over on the flag day; Q3 showed flat USDC and falling reserve income; CRCL in a steady downtrend from $81.",
+      "look_for": "Crypto-adjacent longs with a distant regulatory catalyst: gate entry on BTC/COIN trend and USDC supply growth; a far-off rule date does not offset crypto beta.",
+      "sources": [
+        "https://www.tikr.com/blog/circle-sinks-10-as-crypto-stocks-slide-and-mizuho-calls-q3-uneventful",
+        "https://www.mitrade.com/insights/news/live-news/article-3-2261353-20261118"
+      ]
+    }
   },
   {
     "id": "L41",

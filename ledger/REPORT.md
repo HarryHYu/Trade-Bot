@@ -1,4 +1,4 @@
-# Desk scorecard (2026-11-27)
+# Desk scorecard (2026-11-28)
 
 Paper ledger: fixed notional per trade, prices from Yahoo closes. Regenerate with `tradebot ledger report`.
 
@@ -55,15 +55,15 @@ Edge = move relative to the benchmark in the direction of our stance (avoid coun
 | L10 | 2026-10-27 | DK | watch_short | no | 70.3 | 52.87 | -24.8% | -6.9% | +17.9% | Refiners price peak cracks as durable while diesel cracks fall |
 | L11 | 2026-10-27 | URA | watch_long | no | 35.86 | 27.71 | -22.7% | -6.9% | -15.8% | Uranium term price 19-yr high vs miners -42%; sulfur/acid chain not the trigger yet |
 | L12 | 2026-10-27 | MOS | pass | no | 18.79 | 20.35 | +8.3% | -6.9% | - | Sulfur shock losers already priced |
-| L13 | 2026-10-27 | 036570.KS | watch_long | no | 1.987e+05 | 1.89e+05 | -4.9% | -12.8% | +7.9% | AION 2 retention better than past NCSoft launches; market prices a fade |
-| L14 | 2026-10-27 | ALI=F | watch | no | 3285 | 2839 | -13.6% | -6.9% | - | Aluminium falling despite Gulf supply risk: unexplained |
+| L13 | 2026-10-27 | 036570.KS | watch_long | no | 1.987e+05 | 1.89e+05 | -4.9% | -16.4% | +11.6% | AION 2 retention better than past NCSoft launches; market prices a fade |
+| L14 | 2026-10-27 | ALI=F | watch | no | 3285 | 2786 | -15.2% | -6.9% | - | Aluminium falling despite Gulf supply risk: unexplained |
 | L15 | 2026-10-27 | APT | watch_long | no | 5.44 | 5.78 | +6.3% | -6.9% | +13.1% | Ebola outside Africa would re-rate PPE micro-caps (armed playbook) |
 | L16 | 2026-10-27 | LAKE | watch_long | no | 9.16 | 8.39 | -8.4% | -6.9% | -1.5% | Ebola PPE playbook |
 | L17 | 2026-10-27 | OSUR | long | yes | 4.16 | 3.41 | -18.0% | -6.9% | -11.1% | Ebola rapid test + cash floor + activist |
-| L18 | 2026-10-30 | TBLD.L | long | yes | 13 | 9.5 | -26.9% | -0.4% | -26.5% | Probably Stolen Steam record |
+| L18 | 2026-10-30 | TBLD.L | long | yes | 13 | 9.5 | -26.9% | -1.1% | -25.8% | Probably Stolen Steam record |
 | L19 | 2026-10-29 | BRBR | watch_long | no | 9.06 | 15.66 | +72.8% | -6.8% | +79.7% | Whey protein costs easing from June record; needs FY27 cost commentary (Nov 17) |
 | L20 | 2026-10-29 | SFD | pass | no | 18.55 | 19.03 | +2.6% | -6.8% | - | Lean hogs at 2020 lows, packer already priced |
-| L21 | 2026-11-03 | BZ=F | watch_short | no | 103.6 | 92.21 | -11.0% | -5.0% | +6.0% | Oil falls after the midterms on peace/Hormuz headlines (planned Nov 4 entry) |
+| L21 | 2026-11-03 | BZ=F | watch_short | no | 103.6 | 90.84 | -12.3% | -5.0% | +7.3% | Oil falls after the midterms on peace/Hormuz headlines (planned Nov 4 entry) |
 | L22 | 2026-10-29 | RIG | long | yes | 6.69 | 5.03 | -24.8% | -6.8% | -18.0% | Oil beta ride, exit by Nov 2 |
 | L23 | 2026-10-29 | W | long | yes | 120.1 | 97.11 | -19.2% | -6.8% | -12.3% | Momentum ride, exit by Nov 3 |
 | L24 | 2026-10-29 | FIGS | long | yes | 21.56 | 20.88 | -3.2% | -6.8% | +3.7% | Momentum ride, exit by Nov 4 |
@@ -83,10 +83,19 @@ Edge = move relative to the benchmark in the direction of our stance (avoid coun
 | L38 | 2026-11-12 | AMD | avoid | no | 585.3 | 406 | -30.6% | -5.3% | +25.3% | Rotation winner already priced after +21% week |
 | L39 | 2026-11-12 | GDS | pass | no | 20.05 | 13.8 | -31.2% | -5.3% | - | Possible Megaspeed data-centre link (speculative) |
 | L40 | 2026-11-12 | CRCL | watch_long | no | 63.82 | 48.27 | -24.4% | -5.3% | -19.0% | Stablecoin rule effective Jan 18 vs beaten-down issuer |
-| L41 | 2026-11-13 | BTC-USD | pass | no | 6.825e+04 | 6.17e+04 | -9.6% | -5.0% | - | No position: long on weekly close > 75k, risk-off < 58.5k |
+| L41 | 2026-11-13 | BTC-USD | pass | no | 6.825e+04 | 5.989e+04 | -12.2% | -5.0% | - | No position: long on weekly close > 75k, risk-off < 58.5k |
 
-**Directional leads:** 19/30 right vs benchmark | average edge +5.9%
+**Directional leads:** 19/30 right vs benchmark | average edge +6.1%
 By source:
-- manual: 19/30 right vs benchmark, average edge +5.9%
-- acted on: 1/5 right, average edge -12.9%
-- not acted on: 18/25 right, average edge +9.6%
+- manual: 19/30 right vs benchmark, average edge +6.1%
+Calls that teach the most (judged by a review shift on signal and reasoning, ranked by surprise x verdict x confidence):
+  LUCKY BRBR watch_long (manual, 2026-10-29): +5.5 sigma, signal failed, moved by other_news. Re-rated for a different reason than ours: management did NOT confirm cost relief (FY27 protein inflation guided high single digits, proteins ~70% hedged). Stoc
+  SIGNAL_MISSED TTWO avoid (manual, 2026-10-29): -2.7 sigma, signal failed, moved by driver. We avoided because it was drifting lower into earnings/launch, but both catalysts were dated and public and the evidence pointed up (record pre-order trackers, 
+  RIGHT_REASON IREN avoid (manual, 2026-10-29): +2.0 sigma, signal played_out, moved by other_news. 'Wait for confirmation' was right: confirmation never came (unfunded capex gap, slipped ARR target) and even Nvidia's beat did not stop the slide. The bulk of t
+  LUCKY CVI watch_short (manual, 2026-10-27): +2.7 sigma, signal played_out, moved by other_news. Our driver happened (cracks fell, refiners de-rated: about the half of the drop it shares with DINO's -24%), but the biggest leg came from a levered, dilutive a
+  REASONING_ERROR TBLD.L long (manual, 2026-10-30): -1.6 sigma, signal played_out, moved by other_news. Driver happened and was confirmed (Nov 12 RNS: >1M copies, >180k peak CCU, FY26 guided ahead), yet the stock fell 11.5% that day and kept falling to our stop. E
+  RIGHT_REASON DINO watch_short (manual, 2026-10-27): +1.5 sigma, signal played_out, moved by driver. Played out as stated: cracks fell from the peak and the market stopped capitalising peak margins despite a huge Q3 beat; moves tracked peers on sector days with
+  SIGNAL_MISSED ABY.AX watch_long (manual, 2026-11-05): -1.7 sigma, signal failed, moved by other_news. Share-gain thesis failed outright (revenue -8%, no mention of David Jones). Execution risk was visible in the August FY26 report: EBITDA -39%, a new distributio
+  LUCKY AMD avoid (manual, 2026-11-12): +1.7 sigma, signal played_out, moved by other_news. 'Already priced' played out for the first leg (-8.8% the next day, -9% by Nov 18), but about two thirds of the fall came from an unforeseeable short-seller repo
+- acted on: 1/5 right, average edge -12.7%
+- not acted on: 18/25 right, average edge +9.8%

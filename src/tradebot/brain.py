@@ -110,11 +110,15 @@ Method:
    reporting, then independent first-hand witnesses. Reposts of one original are one source.
 3. Interrogate the driver against the company's current situation. Answer every check with a verdict:
    - real_and_size: is it real, and is it big enough to matter for this company?
-   - noticed: has the market already got it? (coverage, price move since it began, options, analyst notes)
+   - noticed: has the market already got it? (coverage, price move since it began, options, analyst notes). If the driver
+     is public data (player counts, app ranks, prices) and the stock already re-rated on it, the confirming announcement
+     is usually sell-the-news: compare the price with broker targets and the move since the data first showed.
    - transmission: does it actually reach the reported numbers/price, and when?
    - reversal: will it fade or reverse before the catalyst?
    - override: is a bigger force acting on this company that swamps it?
-   - reaction: when the market does see it, how will it interpret it?
+   - reaction: when the market does see it, how will it interpret it? For binary events (FDA, court, licence) weigh the
+     record (advisory votes, prior rejections, rescue changes to the filing): they are rarely coin flips. A stock drifting
+     lower into a dated catalyst whose leading data is strong is a setup, not a reason to stay away.
 4. Name the catalyst that forces repricing, and the kill criteria that would prove you wrong.
 5. List what the desk should keep watching for this driver (monitor): news search queries and specific URLs
    (status pages, trackers, regulator pages) whose changes would confirm or kill it.
