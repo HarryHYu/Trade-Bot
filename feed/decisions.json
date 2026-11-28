@@ -1,0 +1,2510 @@
+[
+ {
+  "ts": "2026-11-27 11:34:18.937189",
+  "kind": "lead_dismissed",
+  "ref": "342",
+  "payload": {
+   "reason": "Recommendation is to pass on CRMT: the driver is real and terminal for equity, but the price has already absorbed it and equity value now equals whatever the bankruptcy plan pays (about $0.30 per share vs $0.35 last price). The note states direction as none, which the schema cannot represent; direction is set to short only as the closest field value and no short is recommended. Probability and expected move were not stated in the note and are set to 0. Confidence: high that there is no tradable edge."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:36:06.991333",
+  "kind": "lead_dismissed",
+  "ref": "111",
+  "payload": {
+   "reason": "Verdict: pass on the restatement lead as framed; tier is watch with a watch on the long side. The restatement understated prior revenue and the accounting event is over. The short is already priced after a 33% decline on 3.8x normal volume. The live question is growth quality: Pharma Direct is flat sequentially and implied Q4 falls below Q3, while core discount revenue declines 20% year over year. Direction is stated as none (possible long later; short already priced); the long field is set to long only to satisfy the schema enum. Confidence 0.35 is the note's stated confidence, not a driver probability; no expected move was given. Source gap: news coverage, price-reaction timing and analyst notes could not be pulled, which caps the tier at watch. One clear driver: no."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:37:00.726032",
+  "kind": "lead_dismissed",
+  "ref": "337",
+  "payload": {
+   "reason": "Note verdict is REJECT: no long or short, no trade. Direction 'none' is not allowed by the schema, so 'long' is entered only as a placeholder and should be disregarded. The lead ticker RVRX is wrong; the traded quote is RVRC on OTC with no exchange-registered securities. The restatement is real but immaterial and non-cash, and the stock is too illiquid to trade. Confidence high that there is no trade."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:39:31.858629",
+  "kind": "lead_dismissed",
+  "ref": "127",
+  "payload": {
+   "reason": "Dead lead, no trade. Prepackaged Chapter 11 filed Nov 2, 2026 in S.D. Tex. with lender-led merger with Ayrmid (lead bidder; rival bids allowed; closing expected Q1 2027). Equity gets nothing; shares cancelled under plan. Nasdaq delisting notice Nov 4, no appeal; trading suspended Nov 11, moving OTC as KPTIQ. Last quote about $0.017 vs 52-week high about $10. Note's direction is none (pass); the direction field here is a schema placeholder and the short side is not tradable. Probability, expected move and horizon are not stated in the note (n/a), so zeros are placeholders. Confidence high that this is not tradable."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:40:48.874075",
+  "kind": "lead_dismissed",
+  "ref": "93",
+  "payload": {
+   "reason": "PASS. The DBGI default is real, but it is already priced in: the stock is down 80.6% since the filing and about 97% over 60 days. Debt of about $4.2M or more sits against about $0.1M of equity. No trade: shorting is priced in and impractical to borrow, and a buy is unjustified."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:44:17.981832",
+  "kind": "lead_dismissed",
+  "ref": "300",
+  "payload": {
+   "reason": "Rejected. The filing is real and serious, but the ticker OZ is wrong: it belongs to Belpointe PREP, an unrelated real-estate fund on NYSE American. The filer, OZ Vision Inc. (CIK 1751707), trades on OTC Pink as OZVN and is not realistically tradeable. The related-party fake-licence write-off ($12.6M against about $0.05M revenue) is material, but the trade cannot be put on. Direction is stated as none in the note; the schema field requires long or short, so short is entered only as a placeholder. Confidence in the reject: high."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:45:50.107754",
+  "kind": "lead_dismissed",
+  "ref": "346",
+  "payload": {
+   "reason": "Verdict: no_trade (watch only, because of the listing risk). Direction is 'none' in the note, which the schema cannot express, so 'long' is a placeholder. Probability 0.1 is confidence that a tradeable mispricing exists. Expected move is not stated in the note, so 0 is a placeholder. Key reason: the market had already priced it (-30.6% on day one). The non-reliance was effectively known since July 2026. Cash is unaffected and book equity changes only about 2%. Diligence is incomplete (Form 4s, 13D/13G filings, 2026 10-Qs and Nasdaq status unverified), which would cap any position at small anyway."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:47:04.331687",
+  "kind": "lead_dismissed",
+  "ref": "350",
+  "payload": {
+   "reason": "Bottom line: no trade. The market has already priced this driver, and the stock now trades over the counter where it cannot be traded in a disciplined way. Diligence is incomplete, but that does not change the outcome. Tier: reject. Direction: none (schema requires long or short; the note's direction is none and the short was judged impractical, so short is entered only to satisfy the enum). Probability and expected move are not stated in the note and are entered as 0. Confidence the driver is real: high. Confidence it is already priced: high. Diligence status: incomplete (filings unverified), so the cap would be small regardless."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:47:45.743771",
+  "kind": "lead_dismissed",
+  "ref": "265",
+  "payload": {
+   "reason": "Verdict: no thesis. The lead is dead. The 8-K reports a merger that has already closed, not one that is about to. ROKU shares have stopped trading, so there is nothing left to buy."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:48:49.757715",
+  "kind": "lead_dismissed",
+  "ref": "357",
+  "payload": {
+   "reason": "Pass. AREC restatement news is already priced in. No trade: short has fresh information already in the price, stock under $1 with 155% annualised volatility, likely hard or expensive borrow and squeeze risk; long rebound has no identifiable driver and open-ended delisting risk. Verdict: tier pass, direction none (any lean would be short, but already priced), horizon 0 days, confidence 0.75 that there is no edge left, diligence largely unverified from primary documents so capped at small in any case."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:50:30.101564",
+  "kind": "lead_dismissed",
+  "ref": "68",
+  "payload": {
+   "reason": "No thesis. PTHS (not PELT) is acquiring Castle Creek Biosciences for 5.2M shares with a PIPE of up to $80M. The deal is dilutive, already priced in after the roughly 35% drop on Oct 30, and has no revenue channel within the six-week horizon; the note's confidence is high that there is no edge now. Note's direction field was 'none', which the schema does not permit, so 'short' is a placeholder. Probability, expected move and horizon were not given in the note; 0 is a placeholder for 'n/a'."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:51:34.146370",
+  "kind": "lead_dismissed",
+  "ref": "81",
+  "payload": {
+   "reason": "Rejected. Alset (AEI) has no tradable driver: the Nasdaq $1 minimum-bid notice (Oct 28, 2026) is procedural, the company is fixing it via a 1-for-5 reverse split effective Nov 23, 2026, and the market had it about a month earlier. Compliance deadline is April 26, 2027; compliance confirmation expected around early to mid Dec 2026 and expected to be ignored. Reopen only if the post-split stock closes below $1, a delisting decision or hearing appears, or a new rule breach is filed. Confidence high that there is no thesis. Direction is stated as none in the note; the schema requires long or short, so long is entered with probability and expected move set to 0."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:52:43.610608",
+  "kind": "lead_dismissed",
+  "ref": "84",
+  "payload": {
+   "reason": "Kill. No tradeable driver from this lead. The NYSE notice is under Section 802.01B, not a Nasdaq notice or listing transfer, with a slow cure process and no near-term delisting trigger. The real driver, a stock sale raising about $21M, already happened and its dilution is in the price. Next real catalyst is the March 2027 Phase 3 readout, outside the six-week horizon. Direction is none (a short-side dilution worry exists but is crowded and already priced). Confidence high there is no trade; low on the unverified filings."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:53:16.865865",
+  "kind": "lead_dismissed",
+  "ref": "101",
+  "payload": {
+   "reason": "Verdict: reject. Tier: reject. Direction: none (schema requires long or short; recorded as long only to satisfy the enum). Horizon_days: 0. Confidence: high (based on the primary filing). The 8-K records Grant Thornton's completed cash takeover of CBIZ at $55 a share; the stock is delisted and there is nothing to trade."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:54:43.753053",
+  "kind": "lead_dismissed",
+  "ref": "131",
+  "payload": {
+   "reason": "Note passes on DRVN as a trade and puts it on watch. The driver (second restatement, fixed-asset errors) is real and moderate in size, but was disclosed November 3 and the stock is down 9.2% since. No forcing catalyst was found inside six weeks, and the company says there is no set timeline to finish the restatement. Operating business is fine (Take 5 same-store sales +4.9%). Confidence: medium on the facts, low on a tradable edge. Direction is stated as none with negative bias; probability, expected move and horizon are not stated in the note and are entered as 0, with direction set to short only to reflect the negative bias."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:56:25.003457",
+  "kind": "lead_dismissed",
+  "ref": "143",
+  "payload": {
+   "reason": "Recommend no trade. The Nov 2 8-K Vanquish note is a small toxic-style bridge loan ($0.33M net) that does not drive the stock. The -58.7% move since then came mainly from a separate priced $3M dilutive S-1 offering and the company's distressed restructuring. No thesis. Tier: reject. Direction: none (bias negative; not tradable). Confidence high that there is no thesis. Noticed: fully priced in."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:57:27.124360",
+  "kind": "lead_dismissed",
+  "ref": "248",
+  "payload": {
+   "reason": "Verdict: no trade. The delisting threat is real and serious, but the market has already priced it. TPST is down about 92% over the past year, and the remaining position is too small and too hard to trade to be worth it. Short was considered and rejected; no hedge idea stated. Probability, expected move and horizon were not quantified in the note (set to 0 / n/a)."
+  }
+ },
+ {
+  "ts": "2026-11-27 11:59:08.209031",
+  "kind": "lead_dismissed",
+  "ref": "269",
+  "payload": {
+   "reason": "PASS on the short. Watch only. The restatement is real but mostly accounting, not cash, and the market has already priced it. Stock trades at about half reported June 30 cash, so a short against that much cash is a bad trade. Possible long not verified; hold on watch until Q3 cash and capex plan are confirmed."
+  }
+ },
+ {
+  "ts": "2026-11-27 12:00:20.108521",
+  "kind": "lead_dismissed",
+  "ref": "288",
+  "payload": {
+   "reason": "No thesis (tier none). The NYSE American low-price notice led to a halt and a 1-for-5 reverse split, completed with trading resumed Nov 23. The event is fully known and has no route into earnings. The company is a ~$2.8M micro-cap with liquidity and control problems. Direction is none; any lean is down, but it cannot be traded. Horizon 0 days. Confidence high that there is no thesis."
+  }
+ },
+ {
+  "ts": "2026-11-27 12:06:36.430937",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "long",
+     "driver": "HRTX agreed on Nov 8 to sell substantially all assets to CorMedix for $145M cash, 14.58M CRMD shares and royalties/earn-outs. The cash repays the Hercules loan, and the unverified residual bridge is about $0.60-0.65 per share against a $0.33 price.",
+     "why_now": "The deal is signed and the SEC filings are public. A DFAN14A filed Nov 16 may signal shareholder opposition, and the proxy, vote timing and HSR clearance are all near-term filings. The wide gap to implied value may reflect closing risk, so it is not necessarily mispriced.",
+     "angle": "First read the DFAN14A and the merger proxy. Then rebuild the per-share bridge: cash less roughly $94.6M Hercules debt, plus CRMD shares at the current price net of the Rubric $35M note exchange, plus NOLs and royalties, less costs and the non-compete. Check the vote threshold and HSR timing. Kill if the opposition is credible and the vote looks likely to fail, since thin Q3 cash of $23.4M means a failed close leaves the company stranded. Confirm that HRTX volume is enough for the size rules. Also test CRMD as a buyer that dilutes and takes on a $150M Pharmakon loan.",
+     "measurable_by": "Heron 8-K of Nov 8 and 10-Q; DFAN14A and the merger proxy; HSR expiry; CRMD and HRTX prices; the Hercules payoff schedule",
+     "sources": [
+      "sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm",
+      "sec.gov/Archives/edgar/data/818033/000119312526452759/hrtx-20260930.htm"
+     ],
+     "urgency": "soon",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      349
+     ]
+    },
+    {
+     "tickers": [
+      "SCG.AX",
+      "MYR.AX"
+     ],
+     "direction_lean": "unclear",
+     "driver": "David Jones closes 19 of 38 stores. Scentre has 9 of 17 DJ centres closing, about $45m gross rent and roughly $30m of bank guarantees. Myer may gain sales (a broker estimates up to $180m), but it faces Hilco clearance discounting and is a possible bidder.",
+     "why_now": "The sale shortlist is due Dec 1, indicative bids about Nov 30, and Myer's AGM and trading update fall on Dec 10. The desk's own earlier notes say the base case was already priced for MYR.",
+     "angle": "Check the price action since the Nov 10 closure list. Test Myer overlap with the 19 closing sites against the desk's trigger of 10+ overlap stores. Confirm whether any bidder is named on Dec 1, since a Myer bid would be a negative. For SCG, check whether the rent loss is less than 3.6% of FFO and whether replacement tenants (JB Hi-Fi, Rebel) are signed. Look for a pullback entry rather than chasing. Kill MYR below 0.20 and if it confirms a bid.",
+     "measurable_by": "The FTI closure list; ASX announcements from SCG, VCX and GPT; Myer AGM statement and sales update; the Dec 1 shortlist",
+     "sources": [
+      "https://www.forbes.com.au/news/investing/david-jones-to-close-19-stores-by-end-of-year/",
+      "au.finance.yahoo.com/news/david-jones-confirms-19-stores-that-will-close-by-the-end-of-the-year-best-chance-042546430.html"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      381,
+      364,
+      357,
+      346
+     ]
+    },
+    {
+     "tickers": [
+      "FRO",
+      "DHT",
+      "STNG"
+     ],
+     "direction_lean": "short",
+     "driver": "Tanker earnings are lagged. Frontline Q4 VLCC fixtures are about 3.8x its Q3 average, locked at peak rates, while the Baltic index is down 64% from peak. Q1 2027 spot exposure is at risk if Hormuz normalizes. The war-risk insurance premium is also compressing.",
+     "why_now": "The spot-rate decline is already visible. The OPEC+ meeting is on Nov 29. Brent bounced only on attacks, not on diplomacy. The equities fell 11-14% over 20 days, so part of this is priced in.",
+     "angle": "Check Baltic Exchange TD3C VLCC rates and Q4 fixture cover from Frontline and DHT reports. Estimate Q1 earnings sensitivity per $10k/day of rate change. Verify that the decline is already priced via forward earnings estimates and NAV discounts. The risk to a short is relapse: Houthi attacks on the Saudi bypass route and on the East-West pipeline. Kill if rates re-rise or talks collapse.",
+     "measurable_by": "Baltic Exchange VLCC rates; Frontline and DHT fixture disclosures; Kpler and Vortexa Hormuz transits; Brent",
+     "sources": [
+      "Admiral Markets, 27 Nov",
+      "Kpler no-peace-no-war blog",
+      "Hindustan Times, 26 Nov"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      380,
+      365,
+      355
+     ]
+    },
+    {
+     "tickers": [
+      "CAPR",
+      "DYN",
+      "SLDB"
+     ],
+     "direction_lean": "unclear",
+     "driver": "FDA rejected Capricor on Nov 20 with a rare public statement on trial integrity and post-hoc statistical plan changes. CAPR fell about 79% to about $1.95, giving a market cap near $114M against $198.5M of cash at Sep 30. Read-across risk hits Dyne (PDUFA Jan 21 2027) and Solid Biosciences' open-label path.",
+     "why_now": "The crash is done, but the appeal, restructuring and cash-burn disclosures are near-term. DYN and SLDB rose over the past five sessions and may be pricing in no spillover.",
+     "angle": "Read the FDA statement and the 8-K. Model CAPR net cash after restructuring, the NS Pharma arbitration and the appeal costs. Check whether a CAPR cash-trading discount is a trap given Piper's runway downgrade. For the shorts, test whether the DYN and SLDB runs ignore the FDA's evidentiary stance. Note the Jan 21 PDUFA is an event two months away, so it does not qualify. Skip SLDB if the evidence only shows a meeting outcome that is months away.",
+     "measurable_by": "Capricor 8-K and the Dec 10-Q; FDA statement; Dyne and Solid FDA meeting disclosures",
+     "sources": [
+      "https://www.fda.gov/vaccines-blood-biologics/whats-new-biologics/statement-deramiocel-bla-duchenne-muscular-dystrophy",
+      "https://www.sec.gov/Archives/edgar/data/1133869/000110465926130730/capr-20261120x8k.htm"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": [
+      358,
+      345
+     ]
+    }
+   ],
+   "passed_on": [
+    "COGT: bezuclastinib approval was announced today by FDA and is covered by ten headlines. The approval is the news and the stock has likely already popped. The desk's no-sympathy-chase rule applies, so no entry without new data such as launch scripts or a pullback.",
+    "PYPD and BBIO approvals: headline events with no measured sales or launch data yet; BBIO is a large cap and its LGMD market is tiny.",
+    "BCP.BK: single-refinery fire; no first-hand data on the supply shortfall or restart time, and it is a Thai-listed refiner with no clear transmission.",
+    "tinyBuild (TBLD.L): the Steam peak has passed, concurrents are down about 70%, and the shares fell after the guidance raise. The driver is decaying and the story has been researched repeatedly.",
+    "BRBR and food input costs: it already printed Nov 18 and the stock has nearly doubled from its October low. The Hormel Dec 3 test is a watch, not an act-now item.",
+    "Intel -29% contagion: the drop was Oct 30, four weeks ago; it is priced and the supplier links are reported rather than confirmed.",
+    "Nvidia / Megaspeed chain: the facts are largely public and the equity has priced the governance discount. The SEA export question is unresolved, so it is a watch.",
+    "Ebola names (OSUR, CODX, LAKE): the orders are unquantified and the African procurement pathway takes months. CODX is a dilution and cash-floor story, which is a slow leg.",
+    "Post-midterm policy and data-centre capex names: attribution is confounded and the moves are largely done. The trigger was political and the exposure is slow.",
+    "Small-cap no-news sweeps (VANI, SVRE, RMIX): most moves had filings, and the liquidity is below the desk's rules for size. VANI is a control, takeover-style slow leg.",
+    "NCPL: the delisting deadline is Feb 9 2027, months away.",
+    "QTRX: guidance cut and CEO exit are known, and the M&A angle is a watch rather than a trade.",
+    "COUR/UDMY: the merger closed in May and the poison pill is a slow leg.",
+    "SSNC: a neutral refinancing with no mispricing."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 13:06:31.043238",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "long",
+     "driver": "Heron's asset sale to CorMedix pays $145M cash plus 14.58M CRMD shares (about $222.6M upfront at the Nov 6 CRMD close of $5.32). The explorer's rebuilt residual is $0.47-0.58 per HRTX share versus a $0.33 price. The bridge is the author's own arithmetic and the main unknowns are retained liabilities and the going-concern language.",
+     "why_now": "The deal is signed and the vote and close timing is live. An unidentified DFAN14A was filed Nov 16 and Heron insiders filed Form 4s on Nov 3, 10 and 23. CRMD has fallen about 45% since early September, which cuts the stock leg value daily.",
+     "angle": "First rebuild the bridge from the 8-K and 10-Q: the Hercules payoff of about $98.9M including PIK and end-of-term fee, the $37.6M Rubric note settled in CRMD stock, and the $52.2M of other accruals and $20.1M of clinical and manufacturing accruals that may stay with Heron. Then read the DFAN14A, the Heron and CRMD insider Form 4s, and the proxy for the vote date. Fix the CRMD price conflict ($4.66 vs $5.69). Kill if retained liabilities exceed about $60M or the vote looks likely to fail. Half size given liquidity. Consider hedging with a CRMD short to isolate the spread.",
+     "measurable_by": "HRTX 8-K and 10-Q (accession 0001193125-26-452672), the merger proxy and vote date, the DFAN14A filing, Form 4s, and the live CRMD price against HRTX.",
+     "sources": [
+      "8-K filed 2026-11-09, accession 0001193125-26-452672",
+      "10-Q for period ended 9/30/26, filed 2026-11-09",
+      "https://www.sec.gov/Archives/edgar/data/1410098/000121390026117213/ea0311423-8k_cormedix.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      385
+     ]
+    },
+    {
+     "tickers": [
+      "CRMT",
+      "CACC",
+      "CPSS"
+     ],
+     "direction_lean": "short",
+     "driver": "Car-Mart filed a prepackaged Chapter 11 with a Silver Point DIP and a Cardinal sale. The explorer sees a funding failure rather than a credit failure: retail units fell 81.9% in the July quarter, while collections held up. The more important read-across is Credit Acceptance's $291.2M cut to forecast cash flows, the largest subprime markdown in the set.",
+     "why_now": "The filing is fresh. Subprime lenders are shrinking, which shifts remarketing volume to Copart/ACV. Manheim prices fell faster than normal in early November.",
+     "angle": "CRMT equity is likely a zero, but the filing is public and the move has probably already happened, so skip it. Instead test CACC: confirm the $291.2M cut and its source, then check the Q3 forecast-vs-actual trend, ABS delinquency, and Manheim weekly prices. Also check CPSS as a possible share gainer. Verify the $37.7M sale figure against the 8-K. Kill if CACC has already de-rated fully, or if its collections are intact and the cut was a one-off.",
+     "measurable_by": "CRMT 8-K (Nov 24), the CACC forecast cash-flow disclosure, Manheim index, and subprime ABS delinquency reports.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/799850/000117184326007671/f8k_112426.htm"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [
+      380,
+      374,
+      375,
+      376,
+      377,
+      378,
+      379
+     ],
+     "from_missions": [
+      386
+     ]
+    },
+    {
+     "tickers": [
+      "AVIO.MI"
+     ],
+     "direction_lean": "unclear",
+     "driver": "ICEYE has made a \u20ac41 cash offer for Avio (about \u20ac2.05bn). The stock sits about 5-6% below the offer, so the market prices a real risk of failure. Italian golden power and Leonardo's 18.04% stake, which is state-linked, decide the outcome. There is a 66.67% acceptance threshold that ICEYE can waive.",
+     "why_now": "The offer document and Consob approval are pending and no dates are published. Leonardo's stance is the swing factor and could be announced in the next few weeks.",
+     "angle": "Check Leonardo and Ministry of Economy statements, any golden-power filing, and the Consob timeline. Estimate spread annualised against failure odds. Avio's stock rose 15% on 17 Nov, so downside if the bid fails is back to about \u20ac33.8. Probably a watch unless the data shows an imminent government decision. Check the Goldman conflict (5.33% holder and adviser).",
+     "measurable_by": "Consob filings, offer document, Presidency of Council golden-power notices, and Leonardo disclosures.",
+     "sources": [
+      "ICEYE primary release, 17 Nov: iceye.com",
+      "Il Sole 24 Ore",
+      "European Spaceflight"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [
+      383
+     ],
+     "from_missions": [
+      390,
+      392
+     ]
+    },
+    {
+     "tickers": [
+      "FRO",
+      "DHT",
+      "INSW"
+     ],
+     "direction_lean": "short",
+     "driver": "The November VLCC spot collapse (the Worldscale-points move was about 64%) has not yet hit reported earnings. Q4 booked rates were struck before the collapse. Equities are down 15-20% from highs while guidance stays strong, so there is a risk of Q1 guidance cuts.",
+     "why_now": "Q4 fixings roll off in December and Q1 2027 guidance will reveal the lag. The Swedish Club's Hormuz warning is a two-sided risk that could lift rates.",
+     "angle": "Reconcile the three VLCC TCE figures to dollars per day, not Worldscale points. Compare Q4 booked rates and coverage with current spot for each company. DHT's Mercuria TD3C-linked charter carries Baltic dispute risk. Obtain NAV data. Kill if war-risk premiums or a Hormuz closure lift spot. Prefer the most spot-levered name (FRO) against product tanker (ASC) as a hedge.",
+     "measurable_by": "Baltic Exchange TD3C and weekly reports, company Q3 releases showing Q4 booked rates, and war-risk premium quotes.",
+     "sources": [
+      "https://www.frontlineplc.cy/fro-third-quarter-and-nine-months-2026-results/",
+      "https://www.thedcn.com.au/news/baltic-exchange-weekly-report-20-november-2026"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [
+      392
+     ],
+     "from_missions": [
+      387
+     ]
+    }
+   ],
+   "passed_on": [
+    "CAPR: the CRL is out and the move has happened. Peers rose, so there is no contagion. The lease decision is slow (Dec 31).",
+    "COGT: it rose 17% and kept rising, and the dilution overhang offsets the launch. No new information, so it fails the sympathy-chase rule.",
+    "ARCUS/GILD (RCUS, GILD): no research notes, and the halt is already out.",
+    "Delivery Hero/Uber: the offer is effectively done on acceptances and the spread is a long-dated H2 2027 antitrust bet. That is a slow leg.",
+    "Bangchak (BCP.BK): the fire is confirmed but there is no documented supply shortage. Cracks were already falling, and restart timing is unknown.",
+    "David Jones/Myer (MYR, SCG): Myer store overlap is unverified and the move is mostly priced. It is on the watch list, and the 30 Nov to 1 Dec shortlist data is still pending.",
+    "Townsquare (TSQ): the bid was rejected and the takeover hope is a slow leg.",
+    "Azkoyen (AZK.MC): the offer is below market with a hard 50% threshold, which is a structural trade.",
+    "Helen of Troy (HELE): the spread is tight but the proposal is non-binding. The idea is interesting but unverified.",
+    "Capita (CPI.L): the equity raise is already announced.",
+    "PLBY, AFCG and VIVO: small-cap filed accumulations are slow legs under the liquidity rule."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 14:06:30.564561",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "Item 4.02 non-reliance on FY2025 and six unaudited quarters through Q2 2026. Cause is revenue recognition on China customers (about 88-99% of revenue). Q3 10-Q is late, DOJ/SEC inquiries are ongoing, going-concern doubt is disclosed, and receivables are badly aged (43% over 90 days past due, Customer C fully reserved).",
+     "why_now": "The 8-K was filed Nov 25. The Q3 10-Q is overdue, so a Nasdaq late-filing notice under Rule 5250(c)(1) is likely within weeks, on top of the existing bid-price problem and reverse-split preparation. Financing access is likely closed.",
+     "angle": "Check price action first: the stock is near $0.15, so much of the damage may be priced. Confirm the filing date and item number (the 8-K header says 5.02, the EDGAR index says 4.02). Read the 8-K for the restatement scope and the Customer A/C/D receivables, and look for a late-filing notice, auditor change or lender default. Check borrow availability and liquidity; the stock is likely illiquid and sub-$300M, so half size at most. Kill if the stock is already down more than 50% since the filing with no new information, or if a financing or strategic rescue is announced. A reverse split typically pressures the stock further.",
+     "measurable_by": "Blaize 8-K (0001871638-26-000094), NT 10-Q, a coming Nasdaq Item 3.01 8-K, reverse-split proxy/8-K, and borrow and short-interest data.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/0001871638-26-000094-index.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [
+      405
+     ],
+     "from_missions": [
+      404
+     ]
+    },
+    {
+     "tickers": [
+      "PWCM",
+      "LMFA"
+     ],
+     "direction_lean": "short",
+     "driver": "PowerCompute (apparently the former LM Funding America, unverified) received a Nasdaq delisting notice. Its 1:25 reverse split in July 2026 removed the compliance period, so this is an immediate hearing case rather than a 180-day cure window.",
+     "why_now": "The 8-K is dated Nov 20. The hearing request and the panel decision (typically within weeks) fall inside the six-week window. Delisting or a suspension would be a measurable event.",
+     "angle": "Verify the ticker and the entity (LMFA to PWCM) and the exact rule cited from the 8-K. Confirm the hearing request, whether the stock stays listed during the hearing, and the cash position and any ATM or financing. Check the price reaction since Nov 20 to avoid chasing, and whether the borrow is available. A small cap, so half size. Kill if the notice is about a curable issue such as a bid price, or if the company has a credible plan, such as a large equity raise, that would resolve it.",
+     "measurable_by": "Nasdaq 8-K Item 3.01 (0001193125-26-478631), the hearing panel decision, Nasdaq delisting notices, and price and volume data.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1640384/000119312526478631/0001193125-26-478631-index.htm",
+      "sec.gov/Archives/edgar/data/1640384/000119312526478631/lmfa-20261120.htm"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [
+      401
+     ],
+     "from_missions": [
+      405
+     ]
+    },
+    {
+     "tickers": [
+      "SMMT",
+      "9926.HK",
+      "BNTX"
+     ],
+     "direction_lean": "short",
+     "driver": "The FDA CRL for ivonescimab (dated Nov 13, announced Nov 15) cites no statistically significant OS benefit and cannot apply China-heavy PFS data to US patients (93% of PFS events from China). That reads as a class issue for PD-(L)1xVEGF bispecifics, particularly BioNTech's PFS-only redesign of ROSETTA Lung-02.",
+     "why_now": "Akeso already fell 22% on Nov 16. The non-obvious read-across to BNTX and other class holders (Pfizer/3SBio, Merck/LaNova, BMY) shows no visible de-rating yet, and any FDA or trial-design update would move them.",
+     "angle": "Parse the full CRL text for the China-applicability language. Compare BNTX's primary endpoints (PFS-only in first-line lung) against the FDA's OS stance. Check dated price action on BNTX, SMMT and 9926.HK since Nov 15, and look for sell-side notes on the class. Do not chase the already-moved SMMT or Akeso; the live question is the speed of re-pricing the class. Kill if BNTX holds up and the market treats it as a Summit-specific issue, or if BNTX confirms OS co-primary endpoints.",
+     "measurable_by": "The FDA-published CRL, Summit 10-Q and 8-Ks, BioNTech and BMY trial registry (ClinicalTrials.gov) endpoint changes, and dated price series.",
+     "sources": [
+      "https://www.pdufa.bio/fda-decision/SMMT-2026-11-15",
+      "https://www.fiercepharma.com/pharma/fdas-complete-response-letter-summit-ivonescimab-cites-china-heavy-data-beyond-survival-miss",
+      "https://www.sec.gov/Archives/edgar/data/1599298/000159929826000090/smmt-20260930.htm"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [
+      420,
+      421,
+      422,
+      423,
+      424
+     ],
+     "from_missions": [
+      403
+     ]
+    }
+   ],
+   "passed_on": [
+    "Other Nasdaq-deficiency names (OCGN, PCSA, PTN, DARE, DRMA, HDRN, VTIX, SDST, CRBU): mostly bid-price notices with 180-day cure windows, cash-rich or already suspended, or financing-driven; DARE and VTIX are watch only. CRBU is a wind-down trading at a cash box, so no catalyst within six weeks.",
+    "Norse Atlantic (NAS.OL): flights are suspended, but there is no listed lessor with concentrated exposure (BOC Aviation about 1.3% of fleet, AerCap not verified), the stock is already down 45-85%, and the bond is at the bankrupt subsidiary.",
+    "Deere and ag equipment (DE, AGCO, CNH): the guide miss is vs expectations, midpoint flat, and the move is already visible. Peer read-through was not verified.",
+    "Lukoil/Boehly deal: closing could take up to a year, OFAC licensing is unresolved, and the next dated catalyst (GL 131L expiry Dec 19) is a possible watch, but it is an event months away.",
+    "ICEYE/Avio: a takeover-spread situation hinging on golden power with no measured near-term repricing driver; the 5% spread is slow-leg.",
+    "David Jones closures: already on the desk watch list and mostly priced; the shortlist is due Dec 1 and MYR/SCG remain watch, with MYR bid unconfirmed.",
+    "Tanker spot vs earnings: basis mismatch explanation, price data conflicts, and NAV work incomplete; no clean measured driver.",
+    "Capricor: the cash floor is a slow leg, committed to a lease, and the read-across to DYN/SLDB is unproven.",
+    "Car-Mart and Heron/CorMedix dossiers: no verified findings or sources.",
+    "Financing 8-Ks (CVI, AVIR, INDP, PSEC, VIVK, VTGN, RRC 425): terms not disclosed, no identifiable driver."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 15:06:27.926640",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "Audit committee concluded on Nov 23 that FY2025 and five quarters through Q2 2026 financials should not be relied on, with revenue tied primarily to China customer agreements. DOJ and SEC subpoenas are outstanding.",
+     "why_now": "The 4.02 non-reliance and NT 10-Q landed within the last week. Restated numbers, a delayed 10-Q, a possible Nasdaq deficiency notice and covenant or financing consequences are likely to arrive within weeks. The desk has an open Megaspeed/Nvidia thread that gives context.",
+     "angle": "First, read the 8-K and the NT 10-Q for which periods, which customers and how much revenue is affected. Check price action since Nov 23, since a stock that has already collapsed has little left. Then check borrow availability and cost, cash runway, debt and warrant terms, and the Nasdaq late-filing clock (60 days for a plan). Kill the short if the stock is already down 50% or more with a heavy borrow cost, or if the company clarifies that the revenue is real and only its timing is affected. Also check the auditor overlap lead (Boladale Lawal) for other names.",
+     "measurable_by": "The 8-K Item 4.02 text, the NT 10-Q, a Nasdaq deficiency notice, the restated 10-Q/10-K filing, SEC/DOJ subpoena disclosures, and short interest and borrow data.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000081/blz-20261016.htm",
+      "https://www.techi.com/blaize-restatement-china-revenue/"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      410
+     ]
+    },
+    {
+     "tickers": [
+      "CACC"
+     ],
+     "direction_lean": "short",
+     "driver": "A $291.2M (2.5%) cut to forecast net cash flows in Q3 2026, concentrated in the 2022-2024 vintages. The 2026 vintage was also cut by about 1.8 pts versus June, and this is the second methodology reset in about 18 months.",
+     "why_now": "Q3 results are out and the 10-Q is filed. The stock's reaction and the follow-through (ABS spreads, analyst revisions, vintage data in monthly ABS reports) will play out over the next few weeks. Car-Mart's Chapter 11 is a company-specific sign of stress in the BHPH segment.",
+     "angle": "First, establish what the price did on the print and whether the cut is already priced. Then reconcile the 2.5% forecast cut with the flat-to-down subprime ABS delinquency. The comparison mixes a lifetime cash-flow forecast with a point-in-time pool metric, so check CACC's own ABS trustee reports for performance by vintage. Check funding capacity and the buyback pace against the lower forecast, and compare the CPSS counter-signal. Kill the thesis if the cut is already in the price, if the stock is trading below book-derived value, or if ABS data show no deterioration. A relative pair against CPSS is possible, but the credit boxes differ.",
+     "measurable_by": "CACC 10-Q forecast tables by vintage, monthly ABS trustee reports for CACC trusts, the stock's post-earnings price, and the CPSS/ALLY delinquency series.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/885550/000088555026000201/cacc-20260930.htm"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      409
+     ]
+    }
+   ],
+   "passed_on": [
+    "Clariane (CLARI.PA, lead#431 / mission#414): the stock trades at the \u20ac4.60 offer price with no spread, filing is not expected until H1 2027, and there is no squeeze-out. That makes it a slow leg with no measurable near-term repricing.",
+    "IPAS Indexo / DelfinGroup (IDX1R, lead#430): a small, illiquid Baltic takeover bid with no dossier and no data on spread or the price reaction. It fails the liquidity rule.",
+    "Skydance/Paramount (PSKY, lead#432): an Item 1.02 termination with no counterparty, terms or mechanism. Without the filing body it is a story with no data.",
+    "PetMed Express (PETS, lead#433): an 8-K whose body has not been read and whose mechanism is unknown, and the company is small. It stays a watch until the filing is read.",
+    "Townsquare Media (TSQ, lead#429): takeover hopes after a rejected unsolicited bid. That is a slow leg under desk rules and cannot be the reason to enter now.",
+    "Kenya Airways (lead#428): a profit warning on an illiquid East African listing with no dossier, no measured driver and no clear tradable ticker.",
+    "Lumibird (mission#419): the claim is user-supplied with no sources, and the \u20ac11.34 dividend is contingent on a sale of the medical division, which needs a later event.",
+    "David Jones aftermath (mission#418): this is already on the desk's watch list and mostly priced, and the shortlist outcome is not yet published. The MA Financial / IP Generation Bourke Street exposure is interesting, but it is unverified and based on one headline standfirst. Revisit after the Dec 1 shortlist.",
+    "FDA integrity read-across (mission#417): the PDUFA dates are Jan-Feb 2027 and no confirmed 483s were found at other sponsors. The events are months away.",
+    "PD-1xVEGF post-CRL (mission#416): Summit and Akeso have already fallen 60%. BNTX, PFE, MRK and 3SBio show no price reaction and the next catalysts are months away, so there is no measured driver in the next six weeks. The primary CRL PDF has not been fetched.",
+    "Nasdaq delisting hearings (mission#415): micro-caps with no liquidity, wind-down mechanics and slow legs. These fail the liquidity rule.",
+    "Bangchak outage / Asian refiners (mission#413): the driver is measurable, but the Thai refinery-gate formula and clawback cap upside, the cracks are weakening, and the Thai refiners rallied on an unrelated Saudi headline.",
+    "Hormuz normalization (mission#412): no normalization is visible, traffic data conflict, and the equities have already fallen heavily."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 16:06:32.113942",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "Non-reliance notice on FY2025 and five quarters of statements, mostly over China-customer revenue (about 88% of revenue). DOJ/SEC subpoenas, a late Q3 10-Q, a going-concern warning and about $36.8M cash against a $41.3M H1 operating outflow. A related-party channel and unpaid receivables add to the stress.",
+     "why_now": "The 23 Nov 2026 8-K and the late 10-Q are fresh. A Nasdaq late-filing notice is likely within days, and the CFO leaves on 30 Nov. Financing is likely to be dilutive. Still to check: whether the stock has already collapsed since 23 Nov.",
+     "angle": "First check the price action since 23 Nov and borrow availability and cost, because a move already made would fail the not-priced test. Then read the 8-K and the 10-Q NT notice, and look for a Nasdaq deficiency letter (8-K Item 3.01) due within about 4 business days of the filing deadline. Check the ATM and resale registrations (Cantor 769k shares) and the cash runway. Customer D (likely NeoTensr) was 81% of H1 2026 revenue and its receivable was extended into Q4, so a reserve charge is the key tell. Kill if there is a funded rescue or a clean restatement timetable. Check liquidity too; half size if the market cap is under $300M.",
+     "measurable_by": "EDGAR filings: 8-K Item 3.01 Nasdaq notice, the 10-Q and NT 10-Q, restated financials, receivable reserves, ATM or registration statements, plus short interest and borrow data.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000092/blaize-form12bx25q32026.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      431,
+      421
+     ]
+    },
+    {
+     "tickers": [
+      "MYR.AX",
+      "SCG.AX"
+     ],
+     "direction_lean": "unclear",
+     "driver": "The David Jones shortlist is due by 1 Dec 2026 and 19 of 38 stores are closing. Scentre has 9 of 17 centres affected (about 1.8% of gross rent, 3.6% of FFO), and Myer is reportedly a bidder. A closure list with the Myer-overlap count was the desk's trigger.",
+     "why_now": "The shortlist lands within days, and Hilco-led clearance discounting runs through December. The Myer AGM trading update is around 10 Dec.",
+     "angle": "Count the overlap between the 19 closing stores and Myer stores, and check for any Myer or administrator confirmation of a bid. Short or avoid MYR if it is confirmed as the bidder, since the precedent is that acquirers of distressed chains fall. Be long MYR only if the overlap is 10+ and the price pulls back to 0.21-0.22. For SCG, the closures hand back cheap space and the guarantees cushion rent until about mid-2027, so the news looks priced. Also check VCX, whose DJ stores carry about $34m of rent and about $2.2m unpaid. Check that the 19-closure list matches the watch-list notes. Kill MYR below 0.20.",
+     "measurable_by": "The administrators' store closure list, ASX announcements from MYR, SCG and VCX, Myer's AGM trading update, and Myer share price and volume.",
+     "sources": [
+      "Forbes Australia",
+      "AFR Street Talk",
+      "Ragtrader",
+      "ChannelNews"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      426
+     ]
+    },
+    {
+     "tickers": [
+      "AVIO.MI",
+      "LDO.MI"
+     ],
+     "direction_lean": "unclear",
+     "driver": "ICEYE's EUR 41 cash tender for Avio against a price of about EUR 39.09 gives a spread of about 4.9%. The market is pricing roughly a 22-34% chance of failure. The Italian golden power decision, Leonardo's stance (18.04%) and the Consob offer document are the open items.",
+     "why_now": "The Consob filing had not been confirmed as of 27 Nov. Golden power and Leonardo news can arrive within weeks, and stakeholders look more cautious than the market's early reaction implied.",
+     "angle": "Check whether the offer document has been filed with Consob and read the conditions, including the 66.67% threshold. Look at Leonardo's statements and the government's golden power signals. Verify the downside: the EUR 33-36 failure price is a sell-side estimate. Advent (about 6.5%) bought at EUR 33.40, so check its stance. The long case is the spread plus a possible bump. Kill if there is a government veto signal or Leonardo's opposition.",
+     "measurable_by": "The Consob offer document and calendar, Italian government golden power decrees, Leonardo and Avio filings, and the AVIO.MI price and spread.",
+     "sources": [
+      "Teleborsa",
+      "Websim",
+      "Milano Finanza"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      427
+     ]
+    },
+    {
+     "tickers": [
+      "HRTX"
+     ],
+     "direction_lean": "long",
+     "driver": "HRTX trades around $0.33 against a residual of about $0.47 per share after Hercules and the Rubric notes, or about $0.65 gross. The asset sale to CorMedix is signed (8 Nov), with $145M cash plus 14.58M CRMD shares.",
+     "why_now": "A proxy filing and vote date are due. The proxy will give the bridge and distribution details, but none exists yet.",
+     "angle": "This is a slow leg: the vote date is uncertain, and the rules say the thesis needs a measured driver. Verify the bridge from the APA: Hercules payoff of about $98.9M, the Rubric exchange, closing adjustments and costs. Check the Nasdaq status and the continuing tax preservation plan. Treat it as half size only if the market cap is under $300M, and note the 10-trading-day confirmation time stop if no proxy appears. Kill if the Rubric exchange eats the residual or no distribution is committed.",
+     "measurable_by": "The preliminary proxy (PREM14A), 8-K and APA exhibits, the Hercules payoff letter, and the CRMD share price against the 14.58M shares.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": [
+      423
+     ]
+    }
+   ],
+   "passed_on": [
+    "Oil, Hormuz and refiners (mission 432): the crude tape already prices a surplus and cracks have normalised. The data conflict on transit counts, and the CVI and BCP.BK drops are already done. OPEC+ and GL 131L are event-dependent and months away.",
+    "Post-CRL FDA names (DYN, CORT, SMMT and others, mission 428): the dated catalysts fall on 17 Dec and 21 Jan 2027, beyond the six-week window. No options data was available and the FDA is inconsistent.",
+    "Subprime auto (Car-Mart, CACC, CPSS, mission 424): the Car-Mart pain sits in the term loan and equity, the ABS is ring-fenced, CPSS delinquency is unverified and CACC is mixed.",
+    "Unread 8-Ks (mission 422): the Range/EQT spread is thin and noisy. The Skydance overhang is not until April 2027. PETS and VIVK data are not usable, and the rest has no tradable item.",
+    "PowerCompute/LMFA delisting cases (mission 430): no usable research was provided.",
+    "Cash-rich biotech below cash (mission 429): no figures were provided, so the test cannot be run.",
+    "Nvidia, Alibaba and Megaspeed names: already covered on the desk watch list (13 Nov), the move has happened, and the large caps are not catalysts for the Blaize idea itself."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 17:06:31.516791",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "Nov 23 non-reliance (4.02) on FY2025 and five quarters centred on China-customer revenue, with DOJ/SEC subpoenas and a Special Committee. Receivables of $8.8M (Starshine, no further orders) and $13.3M (NeoTensr, extended) are at risk. The $15.5M B. Riley equity line is blocked below $1 and ends on delisting. Stock is ~$0.15.",
+     "why_now": "Dec 1 annual meeting votes a 1-for-10 to 1-for-35 reverse split. NT 10-Q already filed, so a late-filing notice (Item 3.01) is likely within days to weeks. Reverse-split mechanics and dilution typically drive price in the next 2-4 weeks.",
+     "angle": "First check EDGAR for an Item 3.01 notice and the Nasdaq 10-Q cure deadline (60 days from the NT 10-Q due date), not just the Mar 29, 2027 bid-price date. Then check the post-split share count, Polar's net-cash-settlement warrant lever and the B. Riley line. Check borrow availability and cost, since a sub-$0.20 stock may be hard or expensive to short. Liquidity rule applies: half size at most. Kill: a quick clean restatement, a financing that does not dilute, or an extreme short squeeze on the split.",
+     "measurable_by": "EDGAR 8-Ks (Item 3.01, 4.02 follow-ups, 10-Q filing), Dec 1 proxy vote result, Nasdaq deficiency notices, short interest and borrow data",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000083/a2026-defproxy.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000046/blz-20260630.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      433
+     ]
+    },
+    {
+     "tickers": [
+      "VIVK"
+     ],
+     "direction_lean": "short",
+     "driver": "Direct Midstream acquisition pays $29M in Series B Preferred plus $1M common, stacked on serial reverse splits and dilution. The preferred's conversion terms have not yet been read.",
+     "why_now": "Fresh 8-Ks filed this month (accessions 0001829126-26-012880 and -012212). Repricing from dilution is typically fast in micro-caps, and the structure is the unread surprise.",
+     "angle": "Read the Series B certificate of designations and the purchase agreement: conversion price (fixed vs floating), floors, caps, blockers, and adjustment terms. Check the ATM and warrant overhang in the 10-Q (accession 0001829126-26-012700) and the current share count vs authorised. Check borrow and liquidity (likely under the $300M cap, so half size). Kill: fixed high conversion price, or the preferred being non-convertible or stockholder-approval-gated.",
+     "measurable_by": "8-K exhibits (certificate of designation, purchase agreement), 10-Q share count, daily volume, borrow data",
+     "sources": [
+      "8-K accession 0001829126-26-012880",
+      "8-K accession 0001829126-26-012212",
+      "10-Q accession 0001829126-26-012700"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      444
+     ]
+    },
+    {
+     "tickers": [
+      "MPC",
+      "VLO",
+      "PSX"
+     ],
+     "direction_lean": "unclear",
+     "driver": "Refiners sold off on crack compression while distillate stays tight and Brent swung from $88 to $96.57. OPEC+ meets Nov 29. Hormuz flows are contested (AIS counts low vs cargo measures high). The question is whether the selloff has overshot, or whether cracks keep compressing.",
+     "why_now": "The OPEC+ outcome lands Sunday, so Monday's tape reprices crude and cracks. The refiner derating is already underway.",
+     "angle": "Pull weekly EIA inventories, gasoline and distillate crack spreads (3-2-1 and ULSD) and refinery utilisation. Compare the refiners' drawdown with the crack move to see if the sell-off is excessive. Pair with the desk's oil views: oil already moved on the midterms, so only enter on the OPEC+ outcome plus crack data. Kill: no divergence between crack and price, or OPEC+ surprise.",
+     "measurable_by": "CME RBOB/ULSD vs Brent futures, EIA weekly report, OPEC+ communique, PortWatch transits",
+     "sources": [
+      "Nation Thailand",
+      "Energy News Beat",
+      "CNBC headline"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      441
+     ]
+    },
+    {
+     "tickers": [
+      "SCG.AX",
+      "MYR.AX"
+     ],
+     "direction_lean": "long",
+     "driver": "David Jones administration: the Dec 1 shortlist and closure list (19 of 38 stores) drive the outcome. Scentre has roughly $45m gross rent exposure but DJ pays about $352/sqm vs a $942 portfolio average, so closures hand back cheap space for re-letting. Myer is a reported but unconfirmed bidder.",
+     "why_now": "Shortlist is Dec 1, Myer AGM trading update is around Dec 10. Both are catalysts within six weeks.",
+     "angle": "The desk already has a watch on this (Nov 5), so only act on new data. Prefer SCG long on the confirmed closure list and any re-let announcements; the guarantee likely runs to mid-2027, so rent loss is slow. For MYR, the buyer-of-a-distressed-chain precedent argues against longs on a bid; a Myer ASX announcement of a DJ bid is a potential short signal, and Hilco clearance hurts December margins. Kill: SCG guidance cut, or no closure-list clarity.",
+     "measurable_by": "McGrathNicol/FTI announcements, ASX releases from SCG and MYR, Dec 10 Myer update, foot-traffic data",
+     "sources": [
+      "AFR, 22 Nov",
+      "ChannelNews",
+      "Research notes (Myer operational moves, Nov 2026)"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": [
+      438
+     ]
+    }
+   ],
+   "passed_on": [
+    "CRBU: trades near 0.39x cash but liquidation timing is unknown (only date is May 2027); slow leg per desk rules.",
+    "PWCM/SDST/DARE/DRMA: book is illiquid or impaired, price data conflicts, no near-term measured driver.",
+    "AVIO.MI (ICEYE tender): trades near the EUR 41 offer, no rival bid, offer document not yet filed; merger arb with little edge.",
+    "CRMT and subprime ABS: equity is already suspended and dead; CACC cut is company-specific and spreads are tight, which contradicts the premise.",
+    "Tanker names: no Q1 2027 cover or NAV data found, so the story has no measured edge yet; shares already down.",
+    "HRTX stub: no PREM14A filed, timing unknown, illiquid sub-$1 stub.",
+    "Post-CRL FDA names (CORT, VNDA, DYN, SRPT): the analogy is speculative with no options data; the Corcept decision on Dec 17 and Vanda on Dec 12 are binary and unmeasured.",
+    "Nvidia/Megaspeed chain: empty dossier, and the desk already holds notes on it.",
+    "Indaptus, Townsquare, PetMed, Range/EQT and other financing items: micro-cap, slow or no clear catalyst within six weeks."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 18:06:26.092020",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "VIVK"
+     ],
+     "direction_lean": "short",
+     "driver": "Series B preferred ($40M) converts at 5-day VWAP with no floor, about 276M shares against roughly 10.8M outstanding. Note conversions have already raised the share count about 17x since 9/30, and a 6% stock-settled dividend adds issuance.",
+     "why_now": "Dilution is already running through filed note conversions and a pending reverse-split chain. Each conversion tranche and the December split are filing-visible within weeks.",
+     "angle": "Read the Certificate of Designation and the Exchange Cap language first, including whether the cap is split-adjusted. Check the share count on the latest cover page against conversion 8-Ks. Check borrow availability and cost, since a micro-cap at about $0.105 may be hard to short. Kill if the cap binds hard, if the deal is renegotiated or cancelled, or if borrow is unavailable. Half size at most under the liquidity rule.",
+     "measurable_by": "8-K and 10-Q share counts, conversion notices, the Certificate of Designation, daily VWAP, and the reverse-split effective date.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1450704/000182912626012880/0001829126-26-012880.txt"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      455
+     ]
+    },
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "long",
+     "driver": "HRTX trades near $0.30 against a rebuilt residual of about $0.48-0.61 per share from CRMD stock, cash, NOLs and royalties. The Hercules payoff of about $99M and the Rubric share allocation are already netted in that figure.",
+     "why_now": "The PREM14A and the vote timetable should drive repricing. The Nasdaq compliance deadline of 22 Dec is a hard date inside the window.",
+     "angle": "Read the APA and the Hercules payoff mechanics to rebuild the residual net of retained liabilities, wind-down costs and the Rubric stock, which is worth about $0.04 per HRTX share per $1 of CRMD. Check whether the Nasdaq deadline forces a reverse split or delisting before closing. Kill if the residual after costs is below about $0.35 or if the deal is at risk. Treat the earn-out as worth zero. Size small given the liquidity rule.",
+     "measurable_by": "The PREM14A when filed, the APA, the CRMD price, 10-Q cash and liabilities, and the Nasdaq notice.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      446
+     ]
+    },
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "A non-reliance conclusion covers FY2025 and five quarters through Q2 2026, centred on China revenue, with DOJ and SEC inquiries. The Q3 10-Q is late, and the bid is under $1.00, which blocks the B. Riley funding line.",
+     "why_now": "The 8-K was filed 25 Nov and the late 10-Q is outstanding. The reverse-split vote and Nasdaq deficiency notices are the next filings. Financing is blocked while the stock is under $1.",
+     "angle": "Confirm the Nasdaq notice for the late 10-Q and the reverse-split vote result. Quantify cash runway against burn and the B. Riley $1.00 threshold. Size the China revenue share. Kill if the 10-Q is filed with a limited restatement, or if non-dilutive funding arrives. Check borrow cost and the squeeze risk of a reverse split.",
+     "measurable_by": "8-Ks, the Nasdaq deficiency letter, the Q3 10-Q or NT 10-Q, the proxy vote result, and cash in the last filed balance sheet.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000092/blaize-form12bx25q32026.htm"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      445
+     ]
+    }
+   ],
+   "passed_on": [
+    "JAGX Nasdaq notice: a known public-interest case with ATM dilution already visible, and no new data to explain why it earns a slot today.",
+    "Processa (PCSA): a $180M cash versus $4-5M market cap gap is dominated by preferred conversion terms, and it is a slow-leg cash-floor thesis.",
+    "Capricor/FDA integrity read-through (DYN, SLDB, CORT, VNDA): the integrity claim is unverified until the CRL text is read, and the PDUFA dates sit mostly outside six weeks (except CORT and VNDA, which are binary).",
+    "Summit/PD-1xVEGF class: the CRL is already priced, and the HARMONi-3 squamous readout is a binary event rather than a measured driver.",
+    "David Jones (MYR, SCG): the desk already has it on watch as mostly priced. The shortlist is unannounced and Myer's bid is unconfirmed, so nothing material has changed.",
+    "Avio/ICEYE: a merger-arb spread of about 5% with the Consob document, golden power review and Leonardo decision all pending; no measured edge.",
+    "Car-Mart/CACC: this looks like a funding failure, and the buyer assumes the securitization liabilities. Equity is already wiped out, and the CACC read-across is unproven.",
+    "Tanker Q1 2027 guidance risk: Q1 coverage is undisclosed, so there is no data to measure yet, and equities have only partly de-rated.",
+    "Refiners (VLO, MPC, PSX): the bull case is weakest in Q1 2027 and the call is interpretive rather than data-driven."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 19:06:33.111667",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "Blaize issued an Item 4.02 non-reliance notice covering FY2025 through Q2 2026 and its Q3 10-Q is late. It also has a Nasdaq bid-price notice. Most revenue comes from China customers, and two China receivables ($13.3M and $8.8M) appear to match the NeoTensr and Starshine contracts and were fully or heavily reserved. A related-party customer tied to the SPAC sponsor was 17.8% of H1 revenue.",
+     "why_now": "The 10-Q is overdue and the filing-delinquency clock is running. The contract manufacturer termination cutoff is 2026-12-14, with $12.7M in commitments. A reverse-split vote is pending, and the Series B votes about 1,000x per share.",
+     "angle": "First read the 4.02 8-K and the NT 10-Q for the restatement scope and cash runway. Then check the Nasdaq notice dates and the filing-delinquency deadline. Pull the DEF 14A for the reverse-split vote mechanics. Confirm the equity-line and warrant dilution terms. Check borrow cost and availability, since a heavily shorted stub can squeeze. Kill if the 10-Q lands clean with no further restatement, or if borrow is unavailable. The claimed B. Riley lender default was not found in filings, so do not use it.",
+     "measurable_by": "Blaize 8-Ks and 10-Q filings, Nasdaq notice letters, the DEF 14A, the contract manufacturer commitments schedule, and short interest and borrow data",
+     "sources": [
+      "sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm",
+      "sec.gov/Archives/edgar/data/1871638/000187163826000092/blaize-form12bx25q32026.htm",
+      "sec.gov/Archives/edgar/data/1871638/000187163826000059/blz-20260928.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": []
+    },
+    {
+     "tickers": [
+      "MYR.AX",
+      "SCG.AX",
+      "VCX.AX"
+     ],
+     "direction_lean": "unclear",
+     "driver": "David Jones is in receivership. A buyer shortlist of about six from 30 expressions of interest is expected by Dec 1, and 19 of 38 stores are confirmed closing by year end. Myer overlaps on nine closing stores, and its bid status is contested between AFR and The Australian. Landlord exposure is Scentre (nine closures, about $45m gross rent, 3.6% of earnings) and Vicinity (about 5% or $34m rent, only The Glen closing).",
+     "why_now": "The shortlist is due within days and the Premier AGM follows it. The desk's own watch list already flagged buying MYR on a pullback, or on a closure list with 10+ Myer-overlap stores. The closure list is now out, but the overlap is nine, not 10+.",
+     "angle": "Check whether MYR has made any primary ASX disclosure of a bid. A buyer of a distressed chain has historically fallen, so a confirmed Myer bid is more likely a short than a long. Compare MYR's price against the 0.20 to 0.25 range already priced in. Scentre's re-letting of cheap space (rent $352/sqm against a $942 portfolio average) is the long-landlord leg. Vicinity's earnings exposure is larger than Scentre's, which makes it the pair-trade short leg. The shortlist could slip. Kill if MYR spikes more than 10% on bid rumour with no disclosure.",
+     "measurable_by": "ASX announcements from MYR, SCG and VCX, FTI Consulting receiver statements, the shortlist news flow, and the MYR AGM trading update",
+     "sources": [
+      "https://www.afr.com/street-talk/myer-blundy-among-david-jones-tyrekickers-as-shortlist-takes-shape-20261122-p61g9a",
+      "https://www.smh.com.au/business/companies/david-jones-is-bleeding-out-here-s-what-can-save-it-20261127-p61h98.html",
+      "https://www.abc.net.au/news/2026-11-11/david-jones-to-close-stores/107372854"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": []
+    },
+    {
+     "tickers": [
+      "VIVK"
+     ],
+     "direction_lean": "short",
+     "driver": "The Series B issuance to Direct Midstream under the MIPA, executed 2026-11-21, appears to have no conversion floor. Conversion looks mutual rather than holder-optional. Dividends are paid in common at VWAP. The 19.99% cap shifts value into preferred rather than limiting it. The share count could rise from about 10M toward 264M or more at $0.11, and authorized shares may bind near $0.059.",
+     "why_now": "The deal just closed and the next filings should show conversions and issuance. Nasdaq Rule 5635 approval and the reverse-split timing are the near-term constraints.",
+     "angle": "Read Exhibit C, the certificate of designation, first. Terms so far come only from an MIPA summary, so check whether conversion is truly mutual and whether a floor exists. Verify the authorized share count and the quorum risk, since June turnout was about 3.35M votes against a base of about 10.5M. Check market cap and daily dollar volume against the desk's liquidity rule (under $300M cap means half size). Check borrow before sizing. Kill if Exhibit C shows a floor or holder-only conversion.",
+     "measurable_by": "Exhibit C certificate of designation, 8-Ks showing conversions and share issuance, the proxy filing, and the authorized share count",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1450704/000182912626012880/vivakor_ex10-1.htm",
+      "https://www.sec.gov/Archives/edgar/data/1450704/000182912626012700/vivakor_10q.htm"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": []
+    },
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "long",
+     "driver": "Heron is selling substantially all assets to CorMedix for $145M cash plus 14.58M CRMD shares. After Hercules (about $98.9M) and Rubric (about $37.8M in CRMD stock) are paid, the base-case residual is about $0.51 to $0.59 per HRTX share at CRMD $4.67 to $5.72. HRTX trades around $0.32.",
+     "why_now": "The merger proxy is due and the Nasdaq deadline of Dec 22 cannot be met without a reverse split. The Nov 8 amendment to the tax benefit plan was extended to August 2029, and Heron holds about $2.3B of NOLs.",
+     "angle": "First find the APA liability assumption schedule and the proxy filing. Rebuild the residual per share net of retained liabilities, Q4 burn and fees. CRMD has fallen about 25% in 20 sessions, which erodes the stock component. Hercules and Rubric take most of the headline value. Check vote risk, given about 22% of voting power is locked up. Do not count the NOLs as a reason to enter; they are a slow leg. Kill if retained liabilities exceed the residual.",
+     "measurable_by": "HRTX proxy, the APA exhibit, 8-K, CRMD price and Hercules payoff letter",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm",
+      "https://www.sec.gov/Archives/edgar/data/1410098/000121390026117213/ea0311423-8k_cormedix.htm",
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452759/hrtx-20260930.htm"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": []
+    }
+   ],
+   "passed_on": [
+    "Sol-Gel (SLGL) Phase 3 binary: pure coin-flip readout with no first-hand data edge, and the date is a conference call, not a measurable driver.",
+    "Eightco, Cardiff Oncology, Metagenomi Nasdaq notices: ordinary bid-price notices with cure windows into 2027, no near-term catalyst. MGX trading at a quarter of cash is a slow leg.",
+    "PowerCompute and Jaguar delisting determinations: real, but microcap with liquidity and borrow problems and a thin dossier.",
+    "Capricor CRL: the FDA letter is already public and the resubmission path is slow.",
+    "Allergy Therapeutics: the trial discontinuation is already announced and priced, with no new data.",
+    "Fulcrum 425: the lead shows no deal terms or counterparty.",
+    "Kenya Airways profit warning: the warning is out, with thin liquidity and a poor transmission route.",
+    "Tanker equities vs spot: no Q1 2027 TD3C FFA or consensus figure found, so the earnings edge cannot be measured.",
+    "Refiners/distillate: OPEC+ outcome is not yet out, and the case that the selloff overshot is mixed.",
+    "Avio/ICEYE: a 4.8% spread depends on golden power approval, which has no confirmed filing or date inside six weeks, and a slow regulatory leg.",
+    "PD-(L)1xVEGF read-across: the CRL is already priced and the dated catalyst is only a call. HARMONi-3 has no firm date.",
+    "Clariane, Townsquare, Capita, RRC/EQT special situations: the Townsquare bid was rejected, Capita fell about 74% in a day (already priced), and the others have slow legs.",
+    "China-revenue accounting stress beyond Blaize, and subprime auto funding chain: no sourced findings."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 20:06:32.251332",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "VIVK"
+     ],
+     "direction_lean": "short",
+     "driver": "Vivakor's 1-for-15 reverse split takes effect Dec 1. Each earlier split was followed by a 27-38% drop. Discount-to-VWAP notes and J.J. Astor conversions create unlegended supply. The Series B back-solves to about $0.11 per share, equal to the market, and would use about half the 500M authorized pool. The cumulative 900,000:1 ratio may trigger a Nasdaq delisting determination.",
+     "why_now": "The split is effective Dec 1, which is the next trading session, and the post-split pattern is already documented. The 8-K was filed Nov 25.",
+     "angle": "First, pull the Series B certificate of designation from the 8-K (0001829126-26-012880) and check for a conversion floor, the share count and any beneficial-ownership blocker. Second, check the Nasdaq rule on cumulative reverse-split ratios and whether a delisting determination is automatic. Third, check borrow availability and cost, because a micro-cap with a near-99% fall may be hard or expensive to borrow. Fourth, rebuild the dilution arithmetic against the authorized share count. Kill the idea if the Series B has a hard floor or a large blocker, or if borrow is unavailable. Half size under the liquidity rule.",
+     "measurable_by": "The SEC 8-K and 10-Q for the Series B terms and share counts, Nasdaq delisting notices, Form 4 and 144 filings, the daily price after Dec 1, and borrow data.",
+     "sources": [
+      "SEC 8-K, 0001829126-26-012880, filed 2026-11-25",
+      "https://www.stocktitan.net/news/VIVK/vivakor-announces-1-for-15-reverse-stock-qxyr1tah44v7.html",
+      "Kalkine summary of 10-Q"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": []
+    },
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "unclear",
+     "driver": "Blaize's audit committee concluded on Nov 23 that FY2025 and quarters through June 30, 2026 should no longer be relied on, because of China-customer revenue. DOJ and SEC inquiries are open and a special committee is investigating. Reverse split preparation is under way. Q2 gross margin was 8%.",
+     "why_now": "The stock has already fallen 67% in 60 days to $0.1554. The next catalysts are Nasdaq deficiency steps, the Form 12b-25 deadline and reverse split mechanics, all within weeks.",
+     "angle": "The restatement is largely priced, so this is a short-the-bounce or avoid decision, not a fresh short. Read the 4.02 8-K and the 12b-25 for the China revenue amount and the covenant and lender consequences. Check the cash runway, lender default triggers and the Nasdaq late-filing clock. Treat it as a short only after a bounce, and only if borrow exists. Kill the idea if there is no borrow or a rescue financing appears.",
+     "measurable_by": "The 8-K Item 4.02, the 12b-25 and the 10-Q filing status, Nasdaq notices, debt agreements, and the price and borrow data.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000092/blaize-form12bx25q32026.htm"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": []
+    },
+    {
+     "tickers": [
+      "CACC",
+      "CRMT"
+     ],
+     "direction_lean": "short",
+     "driver": "CACC cut its Q3 2026 forecast by 2.5% ($291.2M) in a real methodology change, with possible further cuts to the 2025 and 2026 vintages. Subprime auto ABS delinquencies are at record highs. The $694M AG settlement's debt-relief obligation is framed inconsistently between the AG release and the 8-K ($634M vs $388M/$246M). Management says none of the forecast cut relates to the litigation, yet the debt waivers may overlap with the forecast assumptions.",
+     "why_now": "The settlement and forecast changes have just been disclosed. Monthly ABS performance data and servicer reports will show whether the cuts were enough, and a further cut would come at the next quarterly report.",
+     "angle": "First reconcile the $634M waiver against the $388M/$246M relief in the 8-K, the AG release and the 10-Q, to see whether the waivers sit inside the forecast. Second, track CACC ABS trust performance for the 2025 and 2026 vintages against the new forecast. Third, check the price reaction to date and whether the cut is already priced. Kill the idea if the ABS data tracks the new forecast, or if the stock has already re-rated. Use CPSS as a cross-check and CRMT's bankruptcy as a read on ABS recoveries.",
+     "measurable_by": "CACC 8-K and 10-Q, monthly servicer reports and ABS trust data for the 2025 and 2026 vintages, Fitch subprime 60+ day delinquency index, and the AG settlement text.",
+     "sources": [
+      "ir.creditacceptance.com release",
+      "sec.gov 10-Q, 30 Sep 2026",
+      "Q3 2026 slides"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": []
+    },
+    {
+     "tickers": [
+      "SMMT",
+      "BNTX"
+     ],
+     "direction_lean": "short",
+     "driver": "The FDA's ivonescimab CRL turned on PFS without a significant OS gain and on 93% of events coming from China-enrolled patients. BioNTech and BMS's pumitamig ROSETTA Lung-02 reportedly moved to a PFS-only primary endpoint, the same path the FDA just rejected. Few commentators have linked the two.",
+     "why_now": "Summit's call on Nov 30 and the possible resubmission framing come first. Summit's own HARMONi-3 squamous PFS events are expected in Q4 2026, so the read-across should be tested within weeks.",
+     "angle": "The BNTX move was reported second-hand, so verify first in BioNTech filings and in ClinicalTrials.gov for the ROSETTA Lung-02 endpoint change and for the share of China enrollment. Then check the BNTX and BMY price reaction, and whether any analyst has priced a regional-representativeness risk. Also check SMMT's price after the CRL and the Nov 30 call content. This idea is weak if the BNTX trial has mostly Western enrollment, or if the endpoint change was not reported accurately. Read across to GILD and MRK is lower priority.",
+     "measurable_by": "ClinicalTrials.gov endpoint history for ROSETTA Lung-02, BioNTech and BMS filings, the Nov 30 Summit call transcript and 8-K, and the FDA CRL text if published.",
+     "sources": [
+      "https://www.fiercepharma.com/pharma/fdas-complete-response-letter-summit-ivonescimab-cites-china-heavy-data-beyond-survival-miss",
+      "https://www.sec.gov/Archives/edgar/data/1599298/000159929826000092/smmt-20261115.htm",
+      "https://www.sec.gov/Archives/edgar/data/1599298/000159929826000090/smmt-20260930.htm"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": []
+    }
+   ],
+   "passed_on": [
+    "Sol-Gel (SLGL): a binary readout on Nov 30 after a 35-44% run-up. Not a measured driver, and the desk rules out entering after a pop.",
+    "Capricor (CAPR): trades below cash, but the CRL is already priced and the cash floor is a slow leg.",
+    "Avio/ICEYE tender: merger arbitrage with a golden power condition. The spread is thin and the outcome depends on political events, so no edge.",
+    "David Jones sale and the SCG, VCX and MYR landlord angle: already on the desk watch list. The Dec 1 shortlist is unconfirmed, there is no Myer disclosure and the exposure is small.",
+    "Heron/CorMedix stub: slow mechanics, with a closing date of May 2027 and an unclear stub value.",
+    "Refiners (MPC, VLO, PSX): the thesis rests on an OPEC+ hold that is already expected, and the 2027 strip was not obtained. Multiples are not a clean cheapness signal.",
+    "DelfinGroup and other takeover names: slow legs and thin liquidity.",
+    "PWCM, MGX and ORBS cash-shell sweep: data is unreliable, prices lack timestamps, and the Panel outcome is a binary event.",
+    "Megaspeed chain (NVDA, SMCI, DELL, BABA): already on the desk watch list, mostly priced, and no new dated data beyond the Entity List savings clause (Dec 23).",
+    "Blaize lender and Nasdaq chain (mission 469): no notes provided."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 21:06:36.502050",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "Non-reliance 8-K (23 Nov) on FY2025 and Q1-Q2 2026 results, driven by China customer revenue. Starshine's $8.8M is with a collections agent and NeoTensr has paid only $0.2M of $13.3M due. A sponsor-chair lender is in default, and a 1-for-10 to 1-for-35 reverse split vote is set for 1 Dec. B. Riley's equity line is unavailable below $1.00, and the filings show class actions and a DOJ angle.",
+     "why_now": "The reverse split vote on 1 Dec, a likely late-filing notice, and an urgent financing need all land within weeks. Dilution and reverse-split pressure typically follow.",
+     "angle": "First, check the price against the $1.00 line and the borrow cost and availability (a short squeeze or a hard-to-borrow stock would kill the trade). Then read the 8-K and 12b-25 for the filing deadline, and the forbearance terms and Bess Ventures' early-termination trigger. Confirm the cash position: about 34% sits in Chinese banks. Check the warrant repricing and the ATM or offering after the vote. Kill if a financing is announced at a premium or the restatement is shown to be immaterial. Size is half given liquidity.",
+     "measurable_by": "Nasdaq deficiency 8-Ks, the 1 Dec vote result (8-K Item 5.07), NT 10-K/10-Q filings, the forbearance 8-K, the daily price versus $1.00, and short interest and borrow data.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000046/blz-20260630.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000092/blaize-form12bx25q32026.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      482,
+      483
+     ]
+    },
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "unclear",
+     "driver": "The Heron asset sale to CorMedix carries a $145M headline cash price, but about $99M goes to Hercules and about $38M to Rubric. The analyst's own arithmetic gives a residual of roughly $0.53-0.61 per HRTX share versus a price of $0.28-0.32. The deal needs a majority-of-outstanding vote with only about 22% locked up. There is no reverse-split authority and a Nasdaq deadline on 22 Dec.",
+     "why_now": "The vote, proxy filing, the Nasdaq 22 Dec date and any second 180-day period all fall within the window. The spread may be mispriced, or the residual may be near zero.",
+     "angle": "Rebuild the residual from the APA, using Hercules' payoff of about $98.9M, the Rubric amount, transaction costs and CRMD shares of 14.58M at the current CRMD price. The $0.47 low-end estimate implies about $11M of unexplained costs. Check the proxy for the vote date and the redacted Minimum Exchange Price. Compare CRMD's Pharmakon $75M term loan and assumed liabilities for the short-CRMD leg. Verify the Nasdaq status and the likelihood of a second compliance period. Kill if the proxy shows costs that push the residual below the price, or if the vote is clearly failing (then the HRTX long dies and the stub is a bankruptcy risk).",
+     "measurable_by": "HRTX DEF 14A/PREM 14A and the 8-K APA exhibit, CRMD's closing price, Nasdaq deficiency notices, and 8-K filings on the vote and the Hercules waiver.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-ex2_1.htm",
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      488
+     ]
+    },
+    {
+     "tickers": [
+      "CRMT",
+      "CACC"
+     ],
+     "direction_lean": "short",
+     "driver": "America's Car-Mart filed Chapter 11 with $60M of new capital and an asset sale, and Reuters reports the CACC forecast was cut. Together they point to subprime auto credit stress. Non-obvious links include OPENLANE (auction volumes), subprime lenders and ABS holders.",
+     "why_now": "The filing is fresh and the auction read-through is unassessed. The first-day orders and the bidding process are likely within weeks, and the read-through to CACC and other lenders may not yet be priced.",
+     "angle": "For CRMT, read the first-day declarations and the asset sale terms: what the equity recovers (likely little, so the stock is probably already near zero, and a short may not be tradable). The more tradable leg is the read-through. Open the $634M eligibility article and OPENLANE's Q3 release for the auction effects. Review CACC's forecast cut, recent ABS delinquency and loss data from subprime auto trusts, and the price action in CACC and others. Kill if CACC already fell hard on the cut, or the stress is idiosyncratic to Car-Mart (its own underwriting).",
+     "measurable_by": "CRMT's bankruptcy docket and 8-Ks, the CACC forecast 8-K, subprime auto ABS delinquency and loss reports, OPENLANE's Q3 release, and used-vehicle wholesale prices.",
+     "sources": [
+      "https://news.google.com/rss/articles/CBMimwFBVV95cUxPRHUyOGFWeDhmRzhwWDJPZlZjVTh2SzFHU3FDLTlPd2tsdS1RTWwwbUFuSUhFRlpEdnM0cThrcDZtWFpWU1JoRXNtd0o2M3BjXzYwQTM1WWtMY3hnMXdQV21jTFpZQ2E0NEduZnUzbG1idTgyOHUwaGhZYTMyUFBSbkpjYkxSM0llUURVUVFWNnpreUNVb2NUek50MA?oc=5"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [
+      465
+     ],
+     "from_missions": [
+      484
+     ]
+    },
+    {
+     "tickers": [
+      "AVIO.MI"
+     ],
+     "direction_lean": "long",
+     "driver": "ICEYE (via Iris 2) announced an all-cash EUR 41 tender for Avio. The price is EUR 39.13, about a 4.8% gross spread, implying roughly a 20% failure probability by the analyst's own estimate. Golden power from Palazzo Chigi, Leonardo's 18.04% stake and the 66.67% threshold decide the outcome.",
+     "why_now": "The Consob offer document and the golden-power ruling are the next catalysts. Reuters says Italy is seeking security safeguards, which suggests conditions rather than a block.",
+     "angle": "Check whether the offer document has been filed with Consob and read the conditions. Test the 66.67% threshold: the non-Leonardo holders need about 80% tendering. Get Leonardo's stance and any rival bid (Equita's target is EUR 69, a value floor). Weigh the CFIUS/ITAR issue and the 9M26 orders, down 8%. Kill if golden power imposes a block or tough conditions, or Leonardo refuses. Note that the cash-floor-style slow legs do not count, so only act on a dated catalyst.",
+     "measurable_by": "The Consob offer document, Palazzo Chigi golden-power decree, Leonardo disclosures, the Avio board's Article 103 statement and the AVIO.MI price versus EUR 41.",
+     "sources": [
+      "https://www.reuters.com/business/aerospace-defense/italy-seeks-security-safeguards-finnish-bid-rocket-maker-avio-sources-say-2026-11-20/",
+      "https://www.teleborsa.it/News/2026/11/17/iceye-accende-i-motori-su-avio-ma-il-countdown-lo-decide-palazzo-chigi-165.html"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": [
+      487
+     ]
+    }
+   ],
+   "passed_on": [
+    "TRNR: Nasdaq deficiency notice plus officer change, thin data and a micro-cap; no measured driver and liquidity too small.",
+    "VIVK: the 1-for-15 reverse split on 1 Dec is already scheduled and well telegraphed. Series B terms were not retrieved, so dilution cannot be modeled; a watch only.",
+    "SLGL/CAPR binary biotech readouts: SLGL's readout is on 30 Nov and the CAPR CRL has no readable text; the read-across is an open question and a binary bet is not an edge.",
+    "SMMT/BNTX/BMS: the CRL read-through is real, but the stocks have already moved sharply (SMMT about -25%) and the pumitamig exposure is unquantified; a watch.",
+    "Refiners (VLO/MPC/PSX/PBF): the setup hinges on OPEC+ on Nov 29 and the EIA print on Dec 2, neither yet known; the data conflict and an IEA gasoil surplus argue against a call now.",
+    "David Jones: Myer is already priced, with the desk's own research noting the pop fades. The shortlist is not confirmed and SCG and VCX exposure is small (3.6% and about 5% of earnings).",
+    "Nasdaq below-cash cases (MGX/ORBS/CRDF/JAGX): cash floors are slow legs and do not count as a reason to enter now; JAGX is dilution-driven and the crypto marks at ORBS are weakening.",
+    "FULC/LAB/TSQ/LSTA merger sweep: FULC is a cash-floor trade with an undisclosed ex-dividend date and price data conflicts; slow legs.",
+    "2CRSi (AL2SI) and the wider AI accounting contagion: interesting but thin evidence, and Super Micro's issues are older and already covered by the desk."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 22:06:30.820438",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "VVOS"
+     ],
+     "direction_lean": "short",
+     "driver": "Nasdaq notice that a sub-$0.10 bid triggers suspension with no compliance period. Vivos went from a routine bid-price notice in June to a suspension-grade case in November, and regaining equity compliance on 20 Oct did not help.",
+     "why_now": "The Item 3.01 8-K is filed. Suspension, a reverse split or a dilutive raise is likely inside six weeks, and the stock is already below $0.10.",
+     "angle": "Read the 8-K for the exact rule, the suspension date and any hearing rights. Then check the Q3 cash balance and going-concern language, the ATM or warrant overhang, and whether a reverse split needs a shareholder vote and when. Check borrow and liquidity first, since a sub-$0.10 name may be impossible to short or too illiquid to size beyond half. It is dead if the company announces a split with a quick vote or a financing that restores the price. Take the OTC fallback into account.",
+     "measurable_by": "Vivos 8-K Item 3.01 (0001493152-26-054507), Nasdaq halt and delisting notices, daily bid price, Q3 10-Q cash and going-concern note, any DEF 14A or 8-K for a reverse split.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1716166/000149315226054507/form8-k.htm",
+      "https://www.sec.gov/Archives/edgar/data/1716166/000149315226054507/0001493152-26-054507-index.htm",
+      "https://www.stocktitan.net/news/VVOS/vivos-therapeutics-reports-third-quarter-2026-financial-results-and-ndjnuer0itty.html"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [
+      481
+     ],
+     "from_missions": [
+      501
+     ]
+    },
+    {
+     "tickers": [
+      "PEN.AX"
+     ],
+     "direction_lean": "unclear",
+     "driver": "The Lance ISR uranium mine in Wyoming has been shut since a cyber incident on 20 Nov, with no restart date as of 27 Nov. ASX trading has been halted since 23 Nov, so the first price reaction comes on reopening. Production, sales deliveries and cash flow are at risk.",
+     "why_now": "The reopening date is unresolved (sources conflict between 25 Nov and 30 Nov), so the repricing is imminent. The stock was A$0.16 before the attack and had been falling for months.",
+     "angle": "Find the ASX announcements: the halt, any reinstatement and an operational update. Verify the restart timeline, Q4 production and sales guidance, remaining contracted deliveries, covenant and convertible-note terms, and cash. Check the Synatom offtake claim, which comes from a single source. Treat the read-through to URG, enCore and UEC as unproven. Kill it if operations restart within days with no data loss. If the equity is already distressed, the cyber shutdown may be second-order, so decide the direction only after the covenant and liquidity check.",
+     "measurable_by": "ASX announcements (halt, reinstatement, cyber update), Peninsula quarterly activities report, Lance weekly production disclosures, lender and convertible note documents.",
+     "sources": [
+      "https://www.world-nuclear-news.org/articles/lance-operations-suspended-after-cybersecurity-incident",
+      "https://www.securityweek.com/peninsula-energy-halts-trading-after-cyber-incident-hits-us-uranium-mine/",
+      "https://www.listcorp.com/asx/pen/peninsula-energy-limited/news/trading-halt-3440700.html"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [
+      471
+     ],
+     "from_missions": [
+      502
+     ]
+    },
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "A 1 Dec vote on a reverse split (1-for-10 to 1-for-35) with turnout risk. A restatement non-reliance 8-K (Q1 2025 to Q2 2026), a late Q3 10-Q, and notice that the primary contract manufacturer will terminate by 14 Dec. Going-concern doubt already existed.",
+     "why_now": "The vote is on 1 Dec and the manufacturer termination follows on 14 Dec. The late 10-Q will probably bring a Nasdaq 3.01 notice soon, and all of it falls inside six weeks.",
+     "angle": "Confirm the meeting is still on and check the vote and turnout results in the 8-K. Verify the contract manufacturer termination in the 8-K text and whether a replacement exists. Check when the restated financials are due and the 10-Q deadline. The lender default and B. Riley claims in the brief are unconfirmed, so do not rely on them. Kill it if the vote passes and a financing or a new manufacturer is announced. Check borrow and the retail-heavy register's squeeze risk.",
+     "measurable_by": "Blaize 8-Ks (vote results, 4.02 non-reliance, manufacturer notice), the late 10-Q and Nasdaq notice, DEF 14A, short interest and borrow.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000083/a2026-defproxy.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000073/0001871638-26-000073.txt",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000081/blz-20261016.htm"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      493
+     ]
+    },
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "short",
+     "driver": "The sale of Heron assets to CorMedix needs a majority of all outstanding Heron shares. About 22% is locked, leaving a shortfall of about 53M of roughly 148M unlocked shares. The stub is worth about 0.48 to 0.59 per share, with sensitivity of about 0.04 per share per $1 move in CRMD. The Nasdaq cure deadline is 22 Dec, and no PREM14A has been filed.",
+     "why_now": "A PREM14A or Nasdaq action is likely within weeks. The 22 Dec deadline will probably pass before any vote.",
+     "angle": "Check the stub's price against the 0.48-0.59 range. Verify the Rubric exchange floor, retained liabilities, the NOL value and the Nasdaq deficiency. Watch for a PREM14A, a delisting determination, and the notes' cross-acceleration terms. Kill it if the stub already trades near or below the value range, or if a deadline extension or vote date emerges. CRMD is a secondary leg and moved only 3.5% on the deal.",
+     "measurable_by": "EDGAR for a PREM14A or DEFM14A, Nasdaq notices, the 8-K and APA Exhibit 2.1, HRTX and CRMD prices, voting-agreement disclosures.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1417180/000119312526452672/0001193125-26-452672-index.htm"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      495
+     ]
+    }
+   ],
+   "passed_on": [
+    "MHC, RMCF, IQST, SPWR, MLR, SXTP, PPCB, QDM, VEEE: routine or ambiguous 8-K notices with no measured driver. SXTP has a hearing on 7 Jan, which is too far out. SPWR has conflicting data. MLR may be a listing transfer, not a deficiency.",
+    "Sol-Gel (SLGL): the readout is on 30 Nov, a binary event with no usable data or pricing edge, so it is a watch.",
+    "Kenya Airways and airlines: the profit warnings are public and priced. The hedge roll-off is a 2027 story, which is too slow.",
+    "Summit/Akeso PFS class: only price snapshots were supplied, with no data.",
+    "Avio/ICEYE: a 4.8% spread on a takeover bid with no offer document and uncertain golden power. Slow legs do not count.",
+    "Refiners crack overshoot: unresolved, with no 2027 strip data. The OPEC+ meeting on 29 Nov is a binary event.",
+    "David Jones/Myer/landlords: already on the desk watch list and mostly priced, and nothing material has changed.",
+    "Vivakor: the reverse split is mechanical, with no charter filing yet and stale share counts, so there is no verified driver."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 23:06:30.190784",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "VIVK"
+     ],
+     "direction_lean": "short",
+     "driver": "1-for-15 reverse split effective Dec 1 (fourth split in 2026), Series B no-floor-style conversion terms (unverified), cumulative ratio far above the Nasdaq 250:1 test, so any bid-price failure goes straight to a delisting determination. Q3 revenue of $303.6M is low-margin crude trading (~2% gross margin). Post-split price decay has been the pattern.",
+     "why_now": "Split takes effect at the Dec 1 open and the first post-split prints land within days. Earlier post-split feeds show about 98% decay in seven weeks (unverified). The new Nasdaq sub-$0.10 suspension rule has already hit SHFS and VVOS.",
+     "angle": "First, fetch the Series B Certificate of Designation for the conversion price and floor, and check the Exchange Cap and whether stockholder approval has been sought. Second, check whether the June 30 split authorization is per-split or aggregate. Third, track the Dec 1 and Dec 2 prints against the split-adjusted price (last $0.11 x 15 = ~$1.65). Fourth, check borrow availability and cost, since a post-split float of ~718k shares likely makes borrow scarce or impossible. Kills: borrow unavailable, a squeeze on the tiny float, or a Series B floor that limits dilution. Half size per the liquidity rule.",
+     "measurable_by": "Dec 1+ daily price and volume; Series B Certificate of Designation (8-K exhibit); share count in the next 10-Q/8-K; Nasdaq deficiency notices; short borrow data.",
+     "sources": [
+      "https://www.stocktitan.net/news/VIVK/vivakor-announces-1-for-15-reverse-stock-qxyr1tah44v7.html",
+      "https://www.sec.gov/Archives/edgar/data/1450704/000182912626012880/vivakor_8k.htm",
+      "https://www.sec.gov/Archives/edgar/data/1450704/000182912626012700/vivakor_10q.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      508,
+      509
+     ]
+    },
+    {
+     "tickers": [
+      "BNTX",
+      "BMY",
+      "SMMT"
+     ],
+     "direction_lean": "short",
+     "driver": "The FDA's Summit complete response letter (Nov 13) rejected a PFS-only benefit and said PFS cannot be applied to US patients because 93% of events came from China. The BioNTech/BMS pumitamig ROSETTA Lung-02 trial has a PFS-only primary endpoint and China-only arms, so it may face the same objection.",
+     "why_now": "Secondary coverage of the CRL is still being digested and the read-through to ROSETTA is not yet priced into BNTX/BMY. Pharma peers such as PFE are already insisting on OS as a primary endpoint.",
+     "angle": "Verify first the China share of ROSETTA Phase 3 events and enrolment from ClinicalTrials.gov and BioNTech/BMS disclosures. Then size pumitamig value against BNTX's market cap; BMY likely too large for it to matter, so BNTX is the cleaner expression. Also check whether FDA agreed the PFS-only design in writing; BioNTech says it chose it after FDA talks. Obtain the CRL itself, not just secondary coverage. Kills: a global-site-heavy ROSETTA, a written FDA agreement, or the pumitamig value already being heavily discounted. Look at Akeso (9926.HK) only after the 32% intraday drop, as it already ran down.",
+     "measurable_by": "ClinicalTrials.gov ROSETTA Lung-02 site and country listings, SEC 8-K for the Summit CRL, BioNTech and BMS filings and trial-design disclosures, price action on BNTX.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1599298/000159929826000092/smmt-20261115.htm",
+      "https://www.biospace.com/fda/summits-rejection-letter-reveals-fdas-deeper-concerns-about-trial-design-safety",
+      "https://www.fiercepharma.com/pharma/fda-rejects-summit-therapeutics-pd-1-vegf-ivonescimab-nsclc"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      515
+     ]
+    },
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "unclear",
+     "driver": "HRTX is selling assets to CRMD (APA signed Nov 8). The deal needs a majority of outstanding HRTX shares, about 95.1M 'for' votes, but June routine-proposal counts peaked around 88M and supporting holders hold ~22%. The Nasdaq bid-price deadline of Dec 22 falls before the preliminary proxy is due (~Dec 23). The Rubric exchange floor is redacted.",
+     "why_now": "The filings are public and the proxy, a reverse-split proposal and the Nasdaq deadline all land in the next four weeks. The residual value to HRTX holders (~$0.47-0.60 per share, the explorer's own arithmetic) is exposed to a Nasdaq delisting.",
+     "angle": "Verify the vote threshold against the share count on the record date and look for a reverse-split authority or an extension request. Confirm the residual value arithmetic. Check CRMD's dilution (~18.3%) and the Rubric convertible exchange mechanics from Q1 2027. Look for the DFAN14A filed under Heron's CIK. A CRMD short is only worth considering if the Rubric floor can be inferred. Kills: Nasdaq granting a delisting stay, or a vote-count path that turns out to be easy.",
+     "measurable_by": "PREM14A and DEFM14A, Nasdaq deficiency letters and 8-Ks, EX-10.4 Exchange Agreement, CRMD price vs the exchange floor.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1410098/000121390026117213/ea031142301ex2-1.htm",
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm",
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452759/hrtx-20260930.htm"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": [
+      510
+     ]
+    }
+   ],
+   "passed_on": [
+    "David Jones / MYR, SCG, VCX: already on the desk watch list with the base case priced; the Dec 1 shortlist is press-reported only; no new first-hand data.",
+    "Refiners VLO/MPC/PSX: decisive curve spread not retrieved and OPEC+ and the EIA print are still ahead; a watch, not a measured driver.",
+    "CACC/CRMT subprime auto: second-hand figures, equity already near wiped out, Fitch 60+ delinquency improving year over year.",
+    "PEN.AX Lance cyber halt: restart date and price prints unknown, halt dates conflict, illiquid, and market cap under the liquidity threshold; wait for the ASX update.",
+    "Blaize BZAI: no lender cross-default found, Nasdaq deadline is March 2027; slow legs only.",
+    "VVOS/SHFS: already suspended, so the move is done.",
+    "PPCB, TRNR, SPWR, RMCF, MSS, QDMI micro-caps: illiquid, mostly priced or unverified; SPWR already fell about 45% post-split.",
+    "Uranium cyber read-through (CCJ, UEC, URG): no cyber disclosure from peers and little supply impact."
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-27 23:46:35.387851",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "PEN.AX"
+     ],
+     "direction_lean": "short",
+     "driver": "Cyber shutdown of Lance since 20 Nov. Company reaffirmed CY2027 guidance on 29 Oct, then said on 25 Nov it cannot assess the impact. Convertible note covenants are unverified, funding was already thin after a weak ramp-up, and the stock trades at roughly A$0.16 against a A$0.35 placement.",
+     "why_now": "Trading reopens 30 Nov and a restart timeline is promised in the coming days. The ASX update or a missed restart date could trigger a guidance withdrawal or a funding or covenant disclosure within weeks.",
+     "angle": "First, pull the ASX 25 Nov announcement and the May $56M funding package terms (Soul Patts convertible note covenants, milestones, cash balance). Then check whether a post-halt price print exists, since the A$0.16 reference may be stale and the drop may already be priced. Kill the idea if the restart date is within days and funding is intact. Size at half because of liquidity.",
+     "measurable_by": "ASX announcements (restart date, guidance, covenants), the Q3/Sep quarterly cash balance, and the first post-halt price and volume.",
+     "sources": [
+      "https://www.world-nuclear-news.org/articles/lance-operations-suspended-after-cybersecurity-incident",
+      "https://cowboystatedaily.com/2026/11/23/very-odd-cyber-breach-halts-operations-stock-trading-at-lance-uranium-mine/",
+      "https://www.miningweekly.com/article/peninsula-secures-56m-funding-package-to-advance-lance-project-to-full-production-2026-05-14"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      531,
+      519
+     ]
+    },
+    {
+     "tickers": [
+      "BZAI"
+     ],
+     "direction_lean": "short",
+     "driver": "Restatement of FY2025 and quarters through June 2026, caused by China-customer revenue (91% of 2025 revenue). The Q3 10-Q is late, a sole contract manufacturer plans to terminate by 14 Dec, only $0.2M of the $13.3M NeoTensr receivable has been paid, there is a Nasdaq bid-price deficiency, and Series B votes can carry a reverse split of 1:10 to 1:35.",
+     "why_now": "The 1 Dec annual meeting, the 14 Dec manufacturer termination and the late 10-Q all fall inside six weeks, and the 31 Dec financing bonus threshold signals a near-term capital need.",
+     "angle": "Verify in the 10-Q and 8-Ks: the NeoTensr and Customer D receivable status, whether the contract manufacturer termination is in a primary filing (one dossier could not confirm it), and cash runway. Check borrow availability and the price move since the 23 Nov restatement 8-K to see how much is priced. Expect post-split pressure or a financing. Kill the idea if a new manufacturer is announced or the 10-Q shows collections.",
+     "measurable_by": "The Item 5.07 8-K after the 1 Dec vote, the Q3 10-Q filing, the Nasdaq notice, and the receivable disclosures.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000083/a2026-defproxy.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000094/blz-20261123.htm",
+      "https://www.sec.gov/Archives/edgar/data/1871638/000187163826000081/blz-20261016.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      530,
+      518
+     ]
+    },
+    {
+     "tickers": [
+      "SCG.AX",
+      "VCX.AX",
+      "MYR.AX"
+     ],
+     "direction_lean": "unclear",
+     "driver": "David Jones is closing 19 of 38 stores. Its rent is about $352/sqm against Scentre's $942 average and UBS's replacement estimate of about $650. Indicative bids are due 30 Nov and a shortlist is targeted for 1 Dec. The Myer AGM is on 10 Dec, and Vicinity guidance is reportedly under review.",
+     "why_now": "The bid deadline and shortlist fall in the next week, and the Myer AGM trading update follows on 10 Dec. If Myer wins or bids, history says the acquirer falls (MYR fell 7% over 20 days after Harris Scarfe, and Frasers fell 11% after House of Fraser).",
+     "angle": "Verify the exact closure list and its overlap with Myer stores, plus the VCX guidance review. Treat MYR as a fade or short-on-bid-confirmation, not a long, because the desk already holds a view that the first pop fades and Hilco clearance sales hurt December margins. Treat SCG and VCX as a long on rent reset only if the closure list is confirmed. Do not chase a pop. Check VCX's exposure at The Glen and the MA Financial valuation mark.",
+     "measurable_by": "The ASX announcements from Myer, Scentre and Vicinity, the administrator's shortlist and closure list, and the Myer AGM trading update.",
+     "sources": [
+      "AFR 26 Nov",
+      "SMH 27 Nov",
+      "Scentre ASX statement 4 Nov as reported by Ragtrader",
+      "channelnews.com.au 22 Nov"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      535,
+      524
+     ]
+    },
+    {
+     "tickers": [
+      "AVIO.MI",
+      "LDO.MI"
+     ],
+     "direction_lean": "long",
+     "driver": "ICEYE's \u20ac41 cash tender for Avio is pre-filing, with Consob approval and the golden power decision both pending and Leonardo's 18.04% stake undecided (decision expected about 10 Dec). The ~5% spread prices real failure risk. There is also bump potential, with Berenberg at \u20ac48.",
+     "why_now": "Leonardo's board decision around 10 Dec and the golden power notification are the next catalysts, both within six weeks.",
+     "angle": "The desk rules say takeover hopes are a slow leg, so only enter on measurable events: the golden power notification or decision, the Leonardo resolution, and the Consob offer document. Verify the \u20ac33.80 fallback price and the 20-30% break odds, which are unsourced. Check Advent's 12-month lock-up. Treat this as a watch with an event-driven trigger, and do not pay up above the offer.",
+     "measurable_by": "Consob filings (offer document, Art. 103 statement), the Council of Ministers golden power decision, the Leonardo board release, and the Avio spread.",
+     "sources": [
+      "https://www.iceye.com/hubfs/Comunicato%20102%20(17.11.2026)%20[ITA].pdf",
+      "https://www.reuters.com/business/aerospace-defense/italy-seeks-security-safeguards-finnish-bid-rocket-maker-avio-sources-say-2026-11-20/",
+      "https://www.teleborsa.it/News/2026/11/17/iceye-accende-i-motori-su-avio-ma-il-countdown-lo-decide-palazzo-chigi-165.html"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      536,
+      525
+     ]
+    }
+   ],
+   "passed_on": [
+    {
+     "ticker": "VIVK",
+     "lean": "short",
+     "reason": "A 1-for-15 split on 1 Dec is known, the Series B terms are undisclosed, and microcap liquidity is poor. The post-split open cannot be measured before it happens, so it is a watch.",
+     "idea": "Vivakor post-split open and Panel-monitor delisting"
+    },
+    {
+     "ticker": "DVLT",
+     "lean": "short",
+     "reason": "Sub-$0.10 suspension mechanics are real, but the names are illiquid and mostly OTC already, and the sweep is only a watch list.",
+     "idea": "Nasdaq reverse-split and sub-$0.10 sweep (Datavault, Parabolic)"
+    },
+    {
+     "ticker": "CACC",
+     "lean": "unclear",
+     "reason": "Most of the forecast cut is methodology and the waiver question is unresolved. ABS data is unverified, and the Car-Mart equity is already worthless.",
+     "idea": "Subprime auto: Car-Mart bankruptcy and CACC"
+    },
+    {
+     "ticker": "SMMT",
+     "lean": "short",
+     "reason": "The CRL was on 15-16 Nov and the move is already priced, with Akeso down about 30%. BNTX rose after the CRL, which cuts against the read-through, and the Pfizer and Merck facts conflict.",
+     "idea": "PFS-only class read-through from the Summit CRL"
+    },
+    {
+     "ticker": "PSX",
+     "lean": "short",
+     "reason": "The OPEC+ meeting on 29 Nov and the EIA report on 2 Dec have not happened, so the before/after test cannot be run. Policy risk is not measurable here.",
+     "idea": "Refiners and crack spreads"
+    },
+    {
+     "ticker": "SMCI",
+     "lean": "short",
+     "reason": "The Nvidia shipment freeze is reported but unconfirmed. The Ablecom framing was wrong, the 44% customer is unnamed, and the desk already covers Megaspeed.",
+     "idea": "AI-hardware and China-revenue contagion (SMCI, 2CRSi, Dell)"
+    },
+    {
+     "ticker": "AF.PA",
+     "lean": "unclear",
+     "reason": "Hedge ratios are known and mostly priced. There is no near-term trigger except the Norse lease terminations, whose notes are truncated and which has no clear listed trade.",
+     "idea": "Airline 2027 jet fuel hedge gap"
+    },
+    {
+     "ticker": "SLGL",
+     "lean": "unclear",
+     "reason": "This is a binary readout on 30 Nov with no data and no edge, so it is a coin flip rather than a researchable driver.",
+     "idea": "Sol-Gel SGT-610 readout"
+    },
+    {
+     "ticker": "HRTX",
+     "lean": "unclear",
+     "reason": "The dossiers contain no sources or verified findings.",
+     "idea": "Heron/CorMedix vote arithmetic"
+    }
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-28 00:03:02.399261",
+  "kind": "lead_dismissed",
+  "ref": "393",
+  "payload": {
+   "reason": "Pass. Keep on watch only in case a shareholder distribution is proposed. The residual value is roughly real (about $0.50 per share after costs), but there is no catalyst within six weeks that would force payout, and the company has said it won't pay it out. Direction is none; long only if a distribution is proposed."
+  }
+ },
+ {
+  "ts": "2026-11-28 00:04:28.881743",
+  "kind": "lead_dismissed",
+  "ref": "425",
+  "payload": {
+   "reason": "Recommendation is to pass on the lead and keep it on watch only. No tradable short in the restatement itself: the fraud and revenue risk is real and severe but largely priced in since early October. Remaining setup is a roughly $22M company that is hard to borrow and swinging 143% a year. Verdict: direction short (lean only), tier watch (pass for now), confidence 0.25 that it trades as a restatement short, horizon 30 days, size none (at most quarter size only if a post-split setup appears with cheap borrow). Expected move not stated in the note (set to 0). Hedge idea not stated."
+  }
+ },
+ {
+  "ts": "2026-11-28 00:05:24.055720",
+  "kind": "thesis_opened",
+  "ref": "1",
+  "payload": {
+   "tier": "watch",
+   "ticker": "BZAI",
+   "summary": "Restatement short on BZAI: verdict PASS (no trade). The driver (revenue restatement tied to China-customer revenue) is real, but the market has already priced most of it: stock at $0.155, down 94% over a year, subpoenas already disclosed, and the stock up 20.5% around the non-reliance filing. Squeeze risk from the reverse split and Series B structure. Tier watch, direction short (lean), horizon 42 days, confidence 0.3 that a short pays after borrow and squeeze risk. Expected move not stated in the note; probability reflects the note's stated confidence.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:06:17.977415",
+  "kind": "thesis_opened",
+  "ref": "2",
+  "payload": {
+   "tier": "watch",
+   "ticker": "BZAI",
+   "summary": "Reject as a trade and keep on watch. The driver is real and checks out, but the stock has already priced it: down 94% in a year, around $0.155, probably a $20-30M market cap, with a pre-arranged reverse split. Shorting here has poor risk/reward given likely scarce and expensive borrow, high volatility, and squeeze risk. Re-evaluate for a small short only if the reverse split goes through, the price resets to roughly $3-5, the restatement is unfinished, and cash is below about two quarters' outflow, provided borrow is available.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:07:41.208442",
+  "kind": "thesis_opened",
+  "ref": "3",
+  "payload": {
+   "tier": "watch",
+   "ticker": "BZAI",
+   "summary": "Note verdict: watch, not a short. The restatement is real and large but already priced in (+20.5% over 5 days including the 8-K). Only a realistic short in the window comes from reverse-split mechanics and dilution, not the restatement. Footer: short-lean, not actionable; tier watch; confidence 0.35 that a short pays within the horizon; size none (half-size liquidity cap; borrow unverified). Re-examine after the Dec 1 vote and split ratio, or if an offering is filed. The note gives no expected move, so expected_move_pct is recorded as 0 and no hedge idea is stated.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:09:17.886254",
+  "kind": "thesis_opened",
+  "ref": "4",
+  "payload": {
+   "tier": "watch",
+   "ticker": "BZAI",
+   "summary": "Note concludes WATCH with a short lean, not a trade. The restatement driver is real but already priced: stock down 94% over the year, up 20% in five days after the non-reliance 8-K. Borrow was not checked, so any short would be a bet on the reverse split and dilution rather than unseen news. Tier capped at small at most by unverified borrow, Form 4/13D and receivable reserves. Confidence low that an edge remains. No probability or expected move is stated in the note; zeros are placeholders.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:10:59.362291",
+  "kind": "thesis_opened",
+  "ref": "5",
+  "payload": {
+   "tier": "watch",
+   "ticker": "VIVAKOR (TICKER NOT STATED IN NOTE)",
+   "summary": "Recommend passing on this as a trade and keeping it on watch. Short direction is probably right (lean only: direction moderate, ability to execute low), but it cannot be traded safely: company worth about $1.2M, fewer than 750,000 shares after split, stock down 99% over 60 days with 410% volatility, shorting is the only expression, and borrow and Series B terms could not be checked. Search limits left several checks unverified. Capped below small size. Tier: watch, no trade.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:12:14.797822",
+  "kind": "thesis_opened",
+  "ref": "6",
+  "payload": {
+   "tier": "watch",
+   "ticker": "BZAI",
+   "summary": "WATCH, not a trade today. The driver is real and still getting worse, but most of it is already in the price. Becomes a small short only if borrow can be confirmed cheaply after the reverse split takes effect. Tier: watch; direction: short; size: none now, and if upgraded, half of a small position. Confidence driver is real: high. Confidence there is room left to price: low to moderate. Probability and expected move are not stated in the note.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:12:55.596269",
+  "kind": "lead_dismissed",
+  "ref": "482",
+  "payload": {
+   "reason": "Verdict: PASS, no trade. The short lean is correct, but the stock can't be traded (no Nasdaq venue, borrow effectively unavailable, unsizeable), the suspension is already public and priced, and reverse-split squeeze risk is real. Tier pass, direction none, horizon 0, high confidence there is no edge."
+  }
+ },
+ {
+  "ts": "2026-11-28 00:14:43.123876",
+  "kind": "thesis_opened",
+  "ref": "7",
+  "payload": {
+   "tier": "watch",
+   "ticker": "PEN.AX",
+   "summary": "Call is WATCH, no trade now, with a negative lean on the stock. The driver is real but secondary to funding and dilution risk. Shares are suspended, so the first move will be a gap on reopening. Shorting not practical on an A$0.16 stock with no borrow. Confidence low to medium. Note states no numeric probability or expected move; those fields are set to 0.5 and 0 as placeholders. Re-evaluate on or after 30 Nov reopening.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:15:36.824012",
+  "kind": "thesis_opened",
+  "ref": "8",
+  "payload": {
+   "tier": "watch",
+   "ticker": "VIVK",
+   "summary": "Note conclusion: tier WATCH (no trade). Direction: short, lean only. Horizon 45 days. Confidence 0.3. The note says the direction is probably right, but the decline is already priced in, the stock likely cannot be borrowed, the forcing event probably falls outside six weeks, and squeeze risk is high. Diligence gaps (Series B terms, filings) would cap the trade at small even if borrow turned up. Catalyst: a post-split price below $1, then the Nasdaq delisting determination or an 8-K showing Series B conversion. Upgrade path: borrow confirmed at a reasonable fee, Series B shows conversion at a discount to market with no floor, and the price prints below $1 by about Dec 10. The note states no separate probability or expected move; the 0.3 confidence is entered in the probability field and the expected move is 0 because none was stated.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:16:25.814658",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "long",
+     "driver": "Heron agreed on 8 Nov to sell substantially all assets to CorMedix for 14.58M CRMD shares plus $145M cash. The naive stub is about $0.54-0.62 per HRTX share against HRTX near $0.32. An asset sale needs a majority of outstanding HRTX shares, and no preliminary proxy has been found against a 22 Dec Nasdaq deadline.",
+     "why_now": "The Nasdaq deadline of 22 Dec and the missing PREM14A make the next 2-4 weeks decisive. A proxy filing, a deadline extension, or a delisting notice will reprice the stock sharply.",
+     "angle": "First read EDGAR for a PREM14A or PRER14A, any Nasdaq Panel extension, and the CorMedix DFAN14A of 16 Nov. Then pin down the CRMD price at today's date and the Rubric exchange floor on its notes, and recompute the stub. Work out whether the 0.32 price reflects a vote-failure or delisting probability. The long case dies if there is no proxy by early December, or if Nasdaq delists without a path. A short on HRTX is also viable if the vote is unachievable. Half size, because this is a sub-$1 stock with a liquidity limit.",
+     "measurable_by": "EDGAR filings (HRTX PREM14A, DEFM14A, 8-Ks, DFAN14A), the Nasdaq deficiency letter and Panel decision, and the CRMD and HRTX closing prices.",
+     "sources": [
+      "HRTX 8-K 0001193125-26-452672",
+      "CRMD 8-K 0001213900-26-117213"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      545
+     ]
+    },
+    {
+     "tickers": [
+      "VIVK"
+     ],
+     "direction_lean": "short",
+     "driver": "The 1-for-15 reverse split is set for Dec 1. The price fell from about $4.80 to about $0.11 on convertible conversions, and the share count is up about 18x since the Oct 5 split. The conversion floor was not adjusted for the July split, so market-based conversions dominate. The company is under a Nasdaq Panel Monitor.",
+     "why_now": "The Dec 1 split resets the price. Historically, serial-split names bleed again as conversions resume. The Monitor tripwire at $1 is a near-term delisting risk.",
+     "angle": "Desk already watches this; the new element is the Dec 1 split date. Verify the Series B and convertible note terms (exhibit not retrieved), the daily share count, and borrow availability and cost. Check whether prior post-split paths decayed within about 10 sessions. Kill the idea if borrow is unavailable or the conversion mechanism is capped. Do not chase the first-day move.",
+     "measurable_by": "8-Ks and 424B filings for conversion notices, share count in the cover page of the 10-Q, daily price and volume after Dec 1, and borrow data.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1450704/000182912626012700/vivakor_10q.htm",
+      "https://www.roic.ai/quote/VIVK/stock-splits"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      542
+     ]
+    },
+    {
+     "tickers": [
+      "AVIO.MI"
+     ],
+     "direction_lean": "long",
+     "driver": "ICEYE, via Iris 2, announced an all-cash tender at \u20ac41 per share. Avio last traded at about \u20ac38.89, so the spread is small. The offer needs Consob approval of the offer document and golden power clearance, and Leonardo holds 18.04%.",
+     "why_now": "Non-binding steps and the Leonardo board decision are expected around 10 Dec, within the 6-week window. Golden power conditions could force a waiver or a repricing.",
+     "angle": "First verify live prices and the real spread. Then check for a Consob filing and for the golden power decree, and read the exact conditions. Then check Leonardo's roll-over discussions and the stances of Advent and Delfin on the 66.67% threshold. Kill it if a conditional golden power decree arrives and the offeror declines to waive. This is mostly a merger-arbitrage slow leg, so size it small.",
+     "measurable_by": "Consob offer document filings, Italian government golden power decree, Leonardo board announcements, and the AVIO.MI price against \u20ac41.",
+     "sources": [
+      "euroborsa",
+      "Milano Finanza",
+      "Avio statement"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": [
+      546
+     ]
+    }
+   ],
+   "passed_on": [
+    {
+     "ticker": "BZAI",
+     "lean": "short",
+     "reason": "Already researched and open on the desk watch list. The restatement, subpoenas and late 10-Q are public and likely priced. The Dec 1 vote has not happened and nothing material is new.",
+     "idea": "Blaize restatement and China revenue"
+    },
+    {
+     "ticker": "PEN.AX",
+     "lean": "unclear",
+     "reason": "Halted, so there is no tradable price, and outcomes depend on the restart announcement. The desk already watches it.",
+     "idea": "Peninsula Lance restart after cyber incident"
+    },
+    {
+     "ticker": "MYR.AX",
+     "lean": "unclear",
+     "reason": "The bid status is contradictory across press sources and it was already researched on the desk. The DJ closure effect is mostly priced.",
+     "idea": "David Jones sale and Myer AGM"
+    },
+    {
+     "ticker": "CRMT",
+     "lean": "short",
+     "reason": "The Chapter 11 is already filed. Equity is a likely wipeout but already priced in, and the ACMAT trust notes data was unavailable.",
+     "idea": "Car-Mart bankruptcy and subprime auto stress"
+    },
+    {
+     "ticker": "CACC",
+     "lean": "short",
+     "reason": "The waiver bridge to the forecast is unverified and the move is not clearly measurable today.",
+     "idea": "Credit Acceptance vintages and ABS"
+    },
+    {
+     "ticker": "RYAAY",
+     "lean": "unclear",
+     "reason": "The hedge data is partly secondary and the effect on the cost gap is slow and not clearly measurable. Norse is not a liquid idea.",
+     "idea": "Airline 2027 hedge cliff and lessors"
+    },
+    {
+     "ticker": "NVDA",
+     "lean": "short",
+     "reason": "The chain has many unverified second-hand reports and the stock already fell sharply. Watch list coverage exists.",
+     "idea": "Nvidia/Megaspeed contagion and SEA small caps"
+    },
+    {
+     "ticker": "VVOS",
+     "lean": "short",
+     "reason": "The suspension has already happened, so it is priced. OTC outcomes in the sample are mixed and unverified.",
+     "idea": "Nasdaq sub-$0.10 suspension class"
+    },
+    {
+     "ticker": "MGX",
+     "lean": "long",
+     "reason": "A cash-floor thesis is a slow leg with no dated catalyst inside six weeks, which the desk rules exclude.",
+     "idea": "Metagenomi trading below cash"
+    },
+    {
+     "ticker": "SMMT",
+     "lean": "unclear",
+     "reason": "The brief's premise was wrong, no peer changed an endpoint, and there is no near-term measurable catalyst.",
+     "idea": "PFS-only class after the Summit CRL"
+    }
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-28 00:16:57.599764",
+  "kind": "thesis_opened",
+  "ref": "9",
+  "payload": {
+   "tier": "watch",
+   "ticker": "PEN.AX",
+   "summary": "Tier: watch. The driver is real and the company is under real funding stress, but a short is not worth taking yet. The stock has already fallen about 46% in 60 days and trading is halted with no post-halt price. Next news is close to a coin flip (restart date squeezes up, no date pushes down). Note covenants and borrow could not be checked, so the thesis is capped at small. Direction is short only if conditions are met. Look again on the first trading day after the halt and when the restart-timeline update is released. Horizon 30 days, confidence low-moderate.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:18:34.204033",
+  "kind": "thesis_opened",
+  "ref": "10",
+  "payload": {
+   "tier": "watch",
+   "ticker": "BZAI",
+   "summary": "Rated Watch: a conditional short only, with no position today. The distress is real and checks out in primary filings, but most of it is already in the price. A short also carries two outside-chance upside surprises that could squeeze it hard. Confidence 0.45 that the stock reprices lower inside the 30-day horizon. Entry only after the split takes effect, if borrow is available at reasonable cost and the stock fails to hold its first-day post-split level; small size.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:19:40.125623",
+  "kind": "lead_dismissed",
+  "ref": "394",
+  "payload": {
+   "reason": "Verdict: pass, tier: watch, no thesis. Direction is none; the short lean was rejected and no long lean was taken, so the direction field is set to short only because the schema requires long or short. CRMT is real but effectively zero and untradeable. CACC's markdown is real but was reported October 30 and is already priced. CPSS has no catalyst forcing a reprice within six weeks. Confidence 0.75 that passing is correct."
+  }
+ },
+ {
+  "ts": "2026-11-28 00:20:52.530970",
+  "kind": "lead_dismissed",
+  "ref": "426",
+  "payload": {
+   "reason": "Verdict: reject. Not a trade and no live position. The facts in the lead check out, but the short does not work: the stock is down about 98.6% over the past year, worth under $1M on the market, roughly 5% of book value and below its Bitcoin, cash and other current assets after liabilities. The delisting process is stayed and the most likely way out is a reverse split already proposed before the notice. Direction none (lean short rejected); tier reject; confidence 0.75 that no tradable repricing occurs; position none."
+  }
+ },
+ {
+  "ts": "2026-11-28 00:22:15.595892",
+  "kind": "lead_dismissed",
+  "ref": "427",
+  "payload": {
+   "reason": "Verdict: reject. BioNTech (BNTX) did not de-rate, which meets the lead's own kill test. The class issue was public and named on the first trading day, and the driver does not reach BioNTech's reported numbers within six weeks. Summit (SMMT) and Akeso (9926.HK) have already repriced. The only class catalyst inside the horizon is Summit's HARMONi-3 readout, with unknown direction. Tier: reject (keep on watch for HARMONi-3). Direction: none (short lean on BNTX rejected)."
+  }
+ },
+ {
+  "ts": "2026-11-28 00:23:51.454300",
+  "kind": "lead_dismissed",
+  "ref": "437",
+  "payload": {
+   "reason": "MYR stays on watch and SCG is a no-trade; neither gets a position now. No single clean driver is expected to reach price within six weeks, and the Myer bid trigger is disputed in the press, not confirmed. Possible small MYR long only if Myer is off shortlist, overlap verified at 10+, and price pulls back to 0.21-0.22. Confidence low."
+  }
+ },
+ {
+  "ts": "2026-11-28 00:25:18.390783",
+  "kind": "thesis_opened",
+  "ref": "11",
+  "payload": {
+   "tier": "watch",
+   "ticker": "VIVK",
+   "summary": "Reject as a trade and keep on watch. Dilution is real and very large compared with the company, but the market has already priced most of it in, the stock is probably impossible to borrow, and the one document that matters, Exhibit 10.1 with the Series B terms, was not read. Tier: watch (no trade). Direction: short lean. Conviction: low. Size: none; if Exhibit 10.1 shows a floating conversion with no approval gate and borrow is available, consider at most a small position, half the usual size. Next action: fetch Exhibit 10.1 and check borrow before taking any position.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 00:26:28.144757",
+  "kind": "lead_dismissed",
+  "ref": "442",
+  "payload": {
+   "reason": "Pass for now; keep on watch. No evidence the selloff has overshot, and the crack has fallen further than the stocks, so the divergence entry condition is unmet. OPEC+ rollover is priced and unlikely to be the catalyst; Hormuz and Iran peace talks are the main force. Confidence 0.3, no trade; the note gives direction as none, and long is recorded only because the schema requires long or short and the entry condition is for a long."
+  }
+ },
+ {
+  "ts": "2026-11-28 00:27:26.772715",
+  "kind": "thesis_opened",
+  "ref": "12",
+  "payload": {
+   "tier": "watch",
+   "ticker": "VIVK",
+   "summary": "Verdict: PASS / WATCH, no trade. The dilution is real, but the Series B conversion into about 276M shares cannot happen inside six weeks under the deal's terms, and at -99% over 60 days the market has already priced the dilution pattern. Lean short only; confidence low; size none; tier watch; re-evaluate when the deal closes.",
+   "cap_reasons": null
+  }
+ },
+ {
+  "ts": "2026-11-28 01:36:42.261784",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "HRTX"
+     ],
+     "direction_lean": "long",
+     "driver": "Heron asset-sale to CorMedix (CRMD): rebuilt stub of about $0.46-0.54 per HRTX share vs a $0.33 price, a 28-39% discount. Discount is attributed to vote risk and the 22 Dec Nasdaq cure deadline. Stub figures are the author's arithmetic, not sourced.",
+     "why_now": "The 22 Dec Nasdaq cure deadline is about three weeks away. No PREM14A or reverse-split proposal is filed yet, so a filing or Nasdaq notice is likely within the six-week window. Not on the held or researched list.",
+     "angle": "First rebuild the stub from the APA and the CRMD share issuance (about 14.58M shares, about $0.08 per HRTX share per $1 CRMD move). Next, check the vote requirement (majority of outstanding shares) against the Rubric and Velan voting agreements and the note-holder share. Then look for a PREM14A, a Nasdaq Panel request or a reverse-split proposal. Kill it if the vote looks unreachable, the Nasdaq delisting is imminent with no cure path, or the stub shrinks once Heron's liabilities and notes are netted. Liquidity is thin, so half size at most.",
+     "measurable_by": "HRTX SEC filings (PREM14A/DEFM14A, Nasdaq 8-K Item 3.01), CRMD price, and the asset purchase agreement terms.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452725/defa14a_-_apa_-_1192026_.htm",
+      "https://www.sec.gov/Archives/edgar/data/1410098/000121390026120019/ea0312211-dfan14a_cormedix.htm",
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526272388/hrtx-20260611.htm"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      577
+     ]
+    },
+    {
+     "tickers": [
+      "AVIO.MI",
+      "LDO.MI"
+     ],
+     "direction_lean": "long",
+     "driver": "ICEYE's EUR41 cash offer for Avio. AVIO.MI trades at 38.89, a spread of about 5.4%. The main gate is golden power, and Leonardo's 18.04% stake is the swing position. Berenberg values Avio standalone at EUR48.",
+     "why_now": "The Consob offer document, golden power decision and Leonardo board decision (reported for around 10 Dec, but the CEO says months) are all pending. Any one of them would reprice the spread within the window.",
+     "angle": "Check the Consob filing calendar and whether golden power was notified. Check whether ICEYE can waive the 66.67% threshold. Then see whether Leonardo is leaning toward tendering or reinvesting. The downside if the deal fails is EUR33-36, against about EUR2 of upside to the offer. Kill it if golden power prescriptions look heavy or Leonardo signals it will not tender. A bump to EUR50-55 is only one broker's view, so don't pay for it.",
+     "measurable_by": "Consob offer document and timetable, Palazzo Chigi golden power decree, Leonardo board communications, and the AVIO.MI price vs EUR41.",
+     "sources": [
+      "https://euroborsa.it/iceye-opa-avio-iris-2.aspx",
+      "https://www.milanofinanza.it/news/avio-berenberg-vede-un-potenziale-enorme-e-si-aspetta-un-rilancio-da-iceye-202611251122566643",
+      "https://en.ilsole24ore.com/art/avio-threshold-666-per-cent-golden-power-all-conditions-of-the-iceye-takeover-bid-AJvKWAJC"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      581,
+      569,
+      558
+     ]
+    },
+    {
+     "tickers": [
+      "AER",
+      "2588.HK"
+     ],
+     "direction_lean": "unclear",
+     "driver": "Norse Atlantic's operating subsidiary went bankrupt on 27 Nov and lessors terminated all 12 787-9 leases, with Norse disputing the notices. AerCap and BOC Aviation each hold six aircraft. The listed parent is outside the filing.",
+     "why_now": "The collapse and lease terminations happened this week. Repossession and re-lease outcomes, and lessor disclosures, will show up within weeks.",
+     "angle": "Measure materiality first: six 787-9s against AerCap's fleet (likely small), and the BOC Aviation filing language on Norse. Check the repossession legal fight and the re-lease market for 787-9s. AerCap is likely immaterial, so use this as a screen. It is a candidate only if BOC Aviation's exposure is meaningful relative to its size (shares fell 6.3% on results). Kill it if exposure is under 1% of fleet value.",
+     "measurable_by": "AerCap and BOC Aviation filings and fleet data, the Norwegian court filing, and Norse ASA RNS announcements.",
+     "sources": [
+      "https://news.cision.com/norse-atlantic-airways-as/r/norse-atlantic-asa--norwegian-operating-subsidiary-filing-for-bankruptcy,c4430282",
+      "https://www.aviacionline.com/english/commercial-aviation/europe/norse-atlantic-crisis-deepens-after-lessors-terminate-the-leases-on-its-12-boeing-787-9s_a6b095ae0b16aca3377237746"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": [
+      588,
+      576,
+      563
+     ]
+    }
+   ],
+   "passed_on": [
+    {
+     "ticker": "BZAI",
+     "lean": "short",
+     "reason": "Already held or researched in the last week, and the stock is down about 94% with the restatement priced. There is no material new information. Revisit only if a Nasdaq late-filing letter or lender acceleration appears.",
+     "idea": "Blaize restatement, late Q3 10-Q, 14 Dec contract manufacturer cliff"
+    },
+    {
+     "ticker": "PEN.AX",
+     "lean": "unclear",
+     "reason": "Already on the watch list. The stock is halted, so there is no tradable price, and funding terms are unverified.",
+     "idea": "Peninsula Lance cyber shutdown and restart"
+    },
+    {
+     "ticker": "VIVK",
+     "lean": "short",
+     "reason": "Already on the watch list. Data quality is poor, share counts are unreconciled, and the stock is illiquid with borrow likely unavailable.",
+     "idea": "Vivakor post-split decay and Series B dilution"
+    },
+    {
+     "ticker": "CRMT",
+     "lean": "short",
+     "reason": "Equity is already priced near zero in a prepack with $2.5M for common. Nasdaq delisting on 2 Dec is known.",
+     "idea": "Car-Mart Chapter 11 and subprime auto stress"
+    },
+    {
+     "ticker": "CACC",
+     "lean": "short",
+     "reason": "The cut looks company-specific and methodology-driven, and the stock already fell about 20%. Trust-level data could not be retrieved.",
+     "idea": "CACC forecast cut and vintages"
+    },
+    {
+     "ticker": "SMMT",
+     "lean": "short",
+     "reason": "The CRL happened on 13 Nov and SMMT has already fallen. The BNTX and BMY read-through is not isolable and ROSETTA is global.",
+     "idea": "China-only PFS read-through to BNTX, BMY and Akeso"
+    },
+    {
+     "ticker": "NVDA",
+     "lean": "short",
+     "reason": "The CEO premise is stale. Huang was reinstated and the rule details conflict across sources. SMCI and DELL are already down 35-40%, and the shipment halt is unconfirmed.",
+     "idea": "Nvidia/Megaspeed aftermath and SE Asia supply chain"
+    },
+    {
+     "ticker": "SCG.AX",
+     "lean": "unclear",
+     "reason": "No bid or shortlist is announced. David Jones was telegraphed for weeks, so it is mostly priced. The desk already holds a watch on it, and landlord exposure is small relative to the company.",
+     "idea": "David Jones sale read-through for Myer, Scentre and Vicinity"
+    },
+    {
+     "ticker": "PPCB",
+     "lean": "short",
+     "reason": "A micro-cap with uncertain borrow and liquidity. The dilution cap needs stockholder approval that is not scheduled, so the timing is unclear.",
+     "idea": "Propanc convertible note dilution"
+    },
+    {
+     "ticker": "VEEE",
+     "lean": "unclear",
+     "reason": "The deal ends 31 Dec and the 7% vs 93% split is unresolved. The structure is slow, with value in a CVR trust.",
+     "idea": "Twin Vee merger"
+    },
+    {
+     "ticker": "VVOS",
+     "lean": "short",
+     "reason": "Already suspended. The sub-$0.10 class is priced, and the 2 Dec vote is a small, illiquid, hard-to-borrow event.",
+     "idea": "Nasdaq sub-$0.10 suspension class"
+    },
+    {
+     "ticker": "THYAO.IS",
+     "lean": "short",
+     "reason": "The hedge ratio is unknown, with three conflicting figures (5%, 12%, 15-20%). It fails the measurable-by-data test, so it is a watch.",
+     "idea": "Jet fuel hedge cliff for airlines"
+    },
+    {
+     "ticker": "FULC",
+     "lean": "long",
+     "reason": "The 7 Dec record date is a hard date, but the per-share arithmetic does not reconcile (about $0.41 vs about $0.17). The stock is micro-cap and illiquid.",
+     "idea": "Fulcrum special dividend and Slate merger"
+    }
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-28 02:36:42.678920",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "short",
+     "driver": "Heron's sale of its assets to CorMedix needs a majority of all outstanding HRTX shares (about 95.1M For votes). Voting agreements cover only about 22%, and last June's best For tally was 88.2M with about 50.1M broker non-votes. No PREM14A or reverse-split authority had been found by 23 Nov, and the Nasdaq bid-price cure ends 22 Dec with the stock at $0.28-0.33.",
+     "why_now": "The vote math, the missing proxy filing and the 22 Dec Nasdaq cliff all land within about 4 weeks. A failed vote or a delisting path would reprice HRTX, and CRMD could move on deal completion or failure.",
+     "angle": "First check EDGAR for a PREM14A or DEFM14A, the meeting date and any reverse-split proposal. Then rebuild the vote math from the record-date share count and the broker non-vote history. Confirm the Nasdaq cure and second-period eligibility rules. Decide whether the trade is HRTX equity downside (vote fail or delisting) or CRMD, which falls if the deal closes and dilutes it (14.58M shares, about 18% of its stock). Kill it if the proxy shows a higher voting-agreement share, a competing bid, or a reverse-split plan that fixes the price.",
+     "measurable_by": "SEC filings: HRTX and CRMD proxy statements and 8-Ks, the Nasdaq deficiency notice, and the voting agreements; daily HRTX price versus $1.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm",
+      "https://www.sec.gov/Archives/edgar/data/0001410098/000141009826000067/crmd-20260930.htm"
+     ],
+     "urgency": "now",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      589
+     ]
+    },
+    {
+     "tickers": [
+      "AVIO.MI",
+      "LDO.MI"
+     ],
+     "direction_lean": "long",
+     "driver": "ICEYE's all-cash EUR 41 tender for Avio has a 66.67% threshold. Leonardo holds 18.04% and is the swing holder, with a reported 10 Dec board date (unverified). Avio trades at 38.89, a 5.4% gross spread. Berenberg sees a fair value of EUR 50-55, and no rival bidder has surfaced.",
+     "why_now": "The Leonardo decision, the golden power process and the Consob offer document are all due in the next 2-6 weeks. A raise or holdout would reprice the stock, and a golden power prescription would hit the spread.",
+     "angle": "Verify the Consob offer document and its calendar, the golden power status, and the Leonardo board date and stance. Work out the minimum acceptance needed if Leonardo holds out. Check Advent's stance, the 6.54% holder and a reinvestment candidate, and whether any hedge-fund holders are building. Kill it if golden power clearance comes with prescriptions that count as a failed condition, if the MAC clause is invoked, or if Leonardo tenders at 41 with no raise.",
+     "measurable_by": "Consob offer document and filings, Italian government golden power decree, Leonardo board communications, AVIO.MI spread to EUR 41 and volume.",
+     "sources": [
+      "Milano Finanza, 17 Nov",
+      "Teleborsa",
+      "Leonardo CEO Mariani comments"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      593
+     ]
+    },
+    {
+     "tickers": [
+      "SMCI",
+      "DELL",
+      "GDS",
+      "AL2SI.PA"
+     ],
+     "direction_lean": "unclear",
+     "driver": "A BIS interim final rule (effective 19 Nov) requires licences for advanced chips to Indonesia, Malaysia, Singapore, Thailand and Brazil. Shipment pauses and lender reviews are reportedly reaching SMCI and Dell. GDS/DayOne gets about 87% of H1 revenue from Malaysia. 2CRSi has over $460m of orders contingent on compliance validation.",
+     "why_now": "Savings clauses end 21 and 23 Dec, Huang testifies on 3 Dec, and Nvidia's 10-Q is due 4 Dec. SMCI, Dell and GDS are already down 35-42% over 20 days, so the entry is the question, not the theme.",
+     "angle": "Read the IFR text first: which licence exemptions apply, especially the US-HQ exemption, and the real licence clock. Then split winners from losers. US server makers with exempt customers may be oversold, while offshore operators like GDS and 2CRSi carry the real order risk. Check the 10-Q for the customer-HQ geographic disclosure and the order language. Verify the Dell shipment-pause report, since no statement was found. Do not chase the move. Kill any leg where the downside is already in the price and no new data is due.",
+     "measurable_by": "Federal Register IFR 2026-23529 and the Entity List rule, Nvidia 10-Q (due 4 Dec), SMCI and Dell filings and statements, 2CRSi order disclosures, GDS filings.",
+     "sources": [
+      "https://www.federalregister.gov/d/2026-23529",
+      "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm",
+      "https://www.thehindubusinessline.com/money-and-banking/billions-in-data-centre-deals-grind-to-halt-after-us-ai-chip-curbs/article71745033.ece"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      600,
+      599
+     ]
+    },
+    {
+     "tickers": [
+      "AER",
+      "2588.HK"
+     ],
+     "direction_lean": "unclear",
+     "driver": "AerCap and BOC Aviation served termination notices on all 12 Norse 787-9s (six each) after the Norse Atlantic Airways AS bankruptcy filing, which Norse disputes. The question is whether re-leasing is quick or there are write-downs.",
+     "why_now": "Aircraft recovery and re-leasing news and any court ruling are due in the coming weeks. The exposure looks small, about 1.3% of owned aircraft for BOC, and AerCap's widebody comments were bullish a month ago.",
+     "angle": "Size it first: six 787-9s against AerCap's fleet value, and the Q3 widebody lease-rate commentary. Look for any lessor 8-K or rate-card data and for re-lease deals. If the exposure is below about 1% of fleet value with fast placement, drop it. Kill it if there is no price reaction or no measurable data in two weeks.",
+     "measurable_by": "Lessor announcements, Agder court docket, 787-9 lease-rate indices, aircraft registry changes (Shannon, Tarbes).",
+     "sources": [
+      "Reuters via aol.com, 27 Nov",
+      "airdatanews.com"
+     ],
+     "urgency": "soon",
+     "priority": 2,
+     "from_leads": [],
+     "from_missions": [
+      598
+     ]
+    }
+   ],
+   "passed_on": [
+    {
+     "ticker": "BZAI",
+     "lean": "short",
+     "reason": "Already researched or held in the last 7 days, with nothing material changed. The 14 Dec manufacturer date is unconfirmed.",
+     "idea": "Blaize 1 Dec vote, restatement and manufacturer cliff"
+    },
+    {
+     "ticker": "VIVK",
+     "lean": "short",
+     "reason": "Already researched or held in the last 7 days. It is a micro-cap with a ~$1.1M market cap, too illiquid, and the dossier says it is research only.",
+     "idea": "Vivakor post-split decay and Nasdaq determination"
+    },
+    {
+     "ticker": "VVOS",
+     "lean": "short",
+     "reason": "Already suspended, so the move is largely done. The Panel timing is unknown, and the stock is far below the liquidity floor.",
+     "idea": "Vivos Nasdaq sub-$0.10 suspension"
+    },
+    {
+     "ticker": "PEN.AX",
+     "lean": "unclear",
+     "reason": "Already researched or held in the last 7 days. The halt is still on with no restart date and no financing data.",
+     "idea": "Peninsula Lance restart after the cyber halt"
+    },
+    {
+     "ticker": "SMMT",
+     "lean": "short",
+     "reason": "Already down about 16% on the CRL, and the key figures are second-hand. The next catalyst (HARMONi-3 final squamous readout) is not dated inside six weeks.",
+     "idea": "Summit CRL read-through to pumitamig and HARMONi-3"
+    },
+    {
+     "ticker": "CRMT",
+     "lean": "short",
+     "reason": "Already in Chapter 11 and priced near $0.35. The ABS trust-level data was not obtained, so there is no measurable edge on peers yet.",
+     "idea": "Car-Mart bankruptcy and subprime auto ABS read-across"
+    },
+    {
+     "ticker": "MYR.AX",
+     "lean": "unclear",
+     "reason": "No research content, and the David Jones administration was already researched and covered on the desk watch list.",
+     "idea": "David Jones, Myer and Australian mall landlords"
+    }
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-28 03:36:37.396820",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "HRTX"
+     ],
+     "direction_lean": "short",
+     "driver": "Heron's asset sale to CorMedix needs a majority of all outstanding shares. Voting agreements cover about 41.9M of the roughly 95.1M needed. The Nasdaq bid-price cure deadline is 22 Dec 2026. No PREM14A or reverse-split proposal had been filed as of 23 Nov. The per-share stub is only about $0.4-0.6 at CRMD prices of $3-6.",
+     "why_now": "The Nasdaq cure date falls inside the six-week window. The PREM14A and reverse-split proxy must be filed in the next few weeks. A failed vote or a delisting notice would hit the stock before closing.",
+     "angle": "Check EDGAR for the PREM14A and the record date. Rebuild the stub from CRMD shares, Hercules payoff ($93.3M), Rubric settlement and Q4 burn. Verify whether the voting gap is closable and whether the stock trades above the stub. Kill if the stock already sits at or below the stub value or if a large holder signs on. Check borrow and liquidity.",
+     "measurable_by": "HRTX and CRMD 8-Ks and PREM14A/DEFM14A on EDGAR; Nasdaq deficiency notices; the CRMD price against the 14.58M-share consideration.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm",
+      "https://www.sec.gov/Archives/edgar/data/1410098/000121390026117213/ea0311423-8k_cormedix.htm"
+     ],
+     "urgency": "soon",
+     "priority": 4,
+     "from_leads": [],
+     "from_missions": [
+      601
+     ]
+    },
+    {
+     "tickers": [
+      "AER",
+      "CRMT"
+     ],
+     "direction_lean": "unclear",
+     "driver": "Car-Mart's prepackaged Chapter 11 (S.D. Tex. 26-90834) pays common holders about $2.5M, with Nasdaq suspension on 2 Dec. CACC cut its collections forecast by $185.2M and posted a Q3 loss. Fitch and KBRA flag subprime stress re-accelerating in the Southeast.",
+     "why_now": "The suspension and the sale hearing fall within days. CACC's late forecast cut suggests more subprime ABS and lender marks to come.",
+     "angle": "Check CACC and RM for ABS performance, delinquency and provision trends. The ACM trust notes may be unregistered, so look for any 10-D filings. The CRMT equity is a likely zero, but the stock already trades near $0.29, so the edge is in the non-obvious lenders (RM, NICK) rather than CRMT. Kill if RM/NICK Q3 data are clean.",
+     "measurable_by": "Case docket and 8-Ks; CACC and RM 10-Q provisions and delinquency; Fitch/KBRA subprime auto indices; ABS 10-D filings.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/799850/000117184326007671/f8k_112426.htm",
+      "https://bondoro.com/americas-car-mart/"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      611
+     ]
+    },
+    {
+     "tickers": [
+      "SMCI",
+      "DELL",
+      "GDS"
+     ],
+     "direction_lean": "short",
+     "driver": "The BIS rule (91 FR 74970) requires licences for chip exports to Indonesia, Malaysia, Singapore, Thailand and Brazil. Reports say Nvidia has paused shipments to four SEA countries, and lenders have reportedly paused Malaysian data-centre loans.",
+     "why_now": "The rule was published 19 Nov. The 90-day licence clock is running, and the Nvidia pause and loan freezes are happening now. GDS and Nvidia have already sold off, so only the server and financing legs remain unpriced.",
+     "angle": "Verify the Nvidia pause in filings and the SMCI and DELL SEA revenue split. Look at the Q3 release commentary. Check the GDS Malaysia exposure and the YTL and DayOne loan status. The 90-day clock covers only existing D:5-serving data centres, so size the exposure narrowly. Kill if Nvidia denies the pause or BIS issues approvals. Tie the read to the desk's Megaspeed note.",
+     "measurable_by": "Federal Register text and BIS licence notices; Nvidia, SMCI and DELL filings and segment geography; DayOne and Malaysian loan headlines; GDS price action.",
+     "sources": [
+      "https://www.govinfo.gov/content/pkg/FR-2026-11-19/html/2026-23529.htm",
+      "https://www.federalregister.gov/documents/2026/11/19/2026-23529/addressing-remote-access-to-advanced-semiconductors"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      606
+     ]
+    }
+   ],
+   "passed_on": [
+    {
+     "ticker": "BZAI",
+     "lean": "short",
+     "reason": "Already researched and open on the desk this week, with no material change. The key items are unsourced.",
+     "idea": "Blaize restatement, cash and reverse split"
+    },
+    {
+     "ticker": "VIVK",
+     "lean": "short",
+     "reason": "Already researched and open on the desk this week. The split lifts the price to about $1.65, so the near-term delisting path is unclear.",
+     "idea": "Vivakor fourth reverse split and Nasdaq path"
+    },
+    {
+     "ticker": "PEN.AX",
+     "lean": "unclear",
+     "reason": "Already on the desk. There is no restart data, the stock is suspended and untradeable, and the covenant terms are unverified.",
+     "idea": "Lance cyber shutdown"
+    },
+    {
+     "ticker": "AVIO.MI",
+     "lean": "long",
+     "reason": "The 4.8% spread mainly prices completion risk. The offer document and golden power review are not yet filed, the Leonardo decision date is uncertain, and the bump case is one broker's view.",
+     "idea": "Avio ICEYE tender"
+    },
+    {
+     "ticker": "MYR.AX",
+     "lean": "unclear",
+     "reason": "The desk already researched David Jones. Bids and the shortlist have not occurred, and the desk's earlier work found it mostly priced.",
+     "idea": "David Jones sale read-through to Myer, Scentre and Vicinity"
+    },
+    {
+     "ticker": "SMMT",
+     "lean": "short",
+     "reason": "The CRL read-across to BNTX and BMY is weak on the evidence, and Summit has already dropped sharply.",
+     "idea": "PFS-only China data after Summit CRL"
+    },
+    {
+     "ticker": "AER",
+     "lean": "short",
+     "reason": "No impairment disclosure and no lease-rate data. The lessor exposure is small relative to AerCap's size, and the terminations are disputed.",
+     "idea": "Norse bankruptcy lessor read-through"
+    },
+    {
+     "ticker": "OTLY",
+     "lean": "short",
+     "reason": "The technical tender is a legal mechanic and the feed prices are stale. A long-dated structural thesis with no clear transmission.",
+     "idea": "Oatly below-market tender"
+    },
+    {
+     "ticker": "VVOS",
+     "lean": "short",
+     "reason": "Already suspended to OTC, so there is nothing left to trade. The vote is on 2 Dec and the stock is illiquid.",
+     "idea": "Nasdaq sub-$0.10 suspension class"
+    }
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-28 04:36:41.316675",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "NVDA"
+     ],
+     "direction_lean": "short",
+     "driver": "The Q3 FY27 10-Q is overdue (reportedly due about Dec 4) while the SEC is reportedly examining Nvidia's accounting. Receivables more than doubled in a quarter ($38.5bn to $81.0bn) against $48.3bn of operating cash flow. The Singapore disclosure basis changed, and BIS has added entities and imposed remote-access licensing for Southeast Asia.",
+     "why_now": "Dated catalysts fall inside the window: House interview Dec 1, briefing Dec 2, Senate Banking hearing Dec 3, 10-Q about Dec 4. The stock has already fallen from about 207 to 166 and Huang is back, so the question is whether the filing confirms or removes the accounting overhang.",
+     "angle": "First, read the Nov 17 8-K balance sheet and the 10-Q when it lands: receivables, guarantees ($108.5bn vs $118bn) and customer concentration. Second, reconcile Singapore billing with the FT's subsidiary-level figure. Third, check whether the 10-Q slips past Dec 4, which would raise NT 10-Q and late-filing risk. Kill the short if the 10-Q lands clean with receivables explained (for example, a timing or financing-related build) and no SEC language. Expect a relief squeeze given the drop already taken; size for that and prefer put spreads around the Dec 3-4 dates.",
+     "measurable_by": "SEC EDGAR 10-Q/NT 10-Q and 8-Ks for NVDA; the Federal Register and BIS Entity List notices; Senate Banking hearing record; S&P CreditWatch statements.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm",
+      "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm",
+      "https://markets.businessinsider.com/news/stocks/nvidia-announces-financial-results-for-third-quarter-fiscal-2027-1036775903",
+      "https://www.msn.com/en-us/money/other/nvidia-s-10-q-is-delayed-here-s-what-i-m-looking-for-when-it-lands/ar-AA2i3wTE"
+     ],
+     "urgency": "now",
+     "priority": 5,
+     "from_leads": [],
+     "from_missions": [
+      624
+     ]
+    },
+    {
+     "tickers": [
+      "GDS",
+      "DUOL.PLACEHOLDER"
+     ],
+     "direction_lean": "short",
+     "driver": "The BIS remote-access rule (91 FR 74970, effective Nov 19) requires licences for advanced chips into Indonesia, Malaysia, Singapore, Thailand and Brazil. Data-centre loans are frozen for Chinese-tenant sites in Johor, Batam and Thailand. DayOne, the GDS spin-off with Johor-heavy bookings, has paused its IPO and loans.",
+     "why_now": "The rule is already in force. Lender reviews and the reported Nvidia/Dell/Super Micro shipment pause are underway, and GDS peers are down about 42% over 20 days. Nvidia's 10-Q and the Dec 1-3 hearings could bring further named-customer disclosures.",
+     "angle": "Check GDS's DayOne stake size and Johor bookings against its own balance sheet. Confirm which customers and loans are ByteDance-linked and which are Alibaba-linked. Note that the shipment pause is unconfirmed and officially denied. Also check how much of the drop is already priced after the 42% peer fall; the better trade may be a non-obvious name such as Gigabyte or YTL Power (Malaysia) rather than GDS. Kill it if BIS issues licence guidance or general authorisations for Southeast Asia, or if the lenders resume.",
+     "measurable_by": "Federal Register BIS rule text and any FAQs; Entity List additions; GDS and DayOne filings and loan announcements; YTL Power Bursa disclosures.",
+     "sources": [
+      "https://www.govinfo.gov/content/pkg/FR-2026-11-19/html/2026-23529.htm",
+      "https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/",
+      "https://xenospectrum.com/en/aolani-malaysia-gpu-loan-rules/",
+      "https://247wallst.com/investing/2026/11/27/dell-super-micro-under-pressure-as-nvidia-halts-shipments-to-4-asian-countries/"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      615,
+      624
+     ]
+    },
+    {
+     "tickers": [
+      "AER",
+      "2588.HK"
+     ],
+     "direction_lean": "unclear",
+     "driver": "AerCap and BOC Aviation terminated all 12 Norse 787-9 leases on Nov 27. Norse disputes the terminations, and the trustee says the leases may be worthless to the estate if the terminations are valid.",
+     "why_now": "Repossession and remarketing are starting now. Any re-lease, repossession or write-down statement would be new information, and widebody scarcity may let lessors re-lease quickly at good rents.",
+     "angle": "Check each lessor's disclosed exposure: Norse is probably well under 1% of AerCap's fleet value, and BOC Aviation is similarly small. Materiality looks low, so this may be a pass unless the data show otherwise. Verify aircraft counts per lessor (six each) and any security deposits or letters of credit. The real upside is for Biman or other widebody takers; no listed name looks clean.",
+     "measurable_by": "Aircraft registry changes, lessor announcements and fleet reports, Norwegian bankruptcy court filings, and AerCap/BOC Aviation updates.",
+     "sources": [
+      "https://www.rte.ie/news/business/2026/1127/1600863-lessors-terminate-norse-plane-deals/",
+      "https://e24.no/energi-og-klima/i/8P6lxr/bostyrer-om-norse-masse-arbeid-foran-oss"
+     ],
+     "urgency": "soon",
+     "priority": 1,
+     "from_leads": [],
+     "from_missions": [
+      620
+     ]
+    }
+   ],
+   "passed_on": [
+    {
+     "ticker": "MYR.AX",
+     "lean": "long",
+     "reason": "Desk already researched and watching; bids and shortlist are not out yet. Price already reflects the base case and the first pop usually fades. No material change.",
+     "idea": "David Jones sale: Myer as bidder/beneficiary"
+    },
+    {
+     "ticker": "SCG.AX",
+     "lean": "long",
+     "reason": "DJ is only about 1.8% of rent and guidance was reaffirmed; the benefit depends on closure lists and re-letting, which are slower than six weeks.",
+     "idea": "Scentre as DJ landlord"
+    },
+    {
+     "ticker": "SMMT",
+     "lean": "short",
+     "reason": "Stock already fell 16.4% on the CRL; the nearest catalyst, HARMONi-3 squamous PFS, is guided to Q4 with no firm date, and the full CRL text was not reviewed.",
+     "idea": "Summit CRL read-through"
+    },
+    {
+     "ticker": "PEN.AX",
+     "lean": "short",
+     "reason": "Already held or researched this week; covenants are unknown, no restart date, and the primary ASX PDFs were not readable.",
+     "idea": "Peninsula Lance shutdown"
+    },
+    {
+     "ticker": "VIVK",
+     "lean": "short",
+     "reason": "Already researched this week with no material change; micro-cap liquidity and borrow limit the trade.",
+     "idea": "Vivakor post-split decay"
+    },
+    {
+     "ticker": "AVIO.MI",
+     "lean": "long",
+     "reason": "A merger-arbitrage spread of about 5% depends on golden power and the Leonardo decision, which are months away, so this is a slow leg.",
+     "idea": "Avio/ICEYE tender"
+    },
+    {
+     "ticker": "HRTX",
+     "lean": "long",
+     "reason": "There is no proxy or record date yet, the Dec 22 Nasdaq deadline precedes any vote, and the market cap is below the liquidity floor.",
+     "idea": "Heron/CorMedix vote math"
+    },
+    {
+     "ticker": "VVOS",
+     "lean": "short",
+     "reason": "Already suspended; trading is OTC and illiquid, and the sweep was not a market-wide screen.",
+     "idea": "Micro-cap dilution sweep (VVOS, SXTP, DVLT, PPCB, HCTI)"
+    },
+    {
+     "ticker": "",
+     "lean": "unclear",
+     "reason": "No research notes attached, so there are no verified findings.",
+     "idea": "Car-Mart Chapter 11 and subprime contagion"
+    }
+   ]
+  }
+ },
+ {
+  "ts": "2026-11-28 05:46:32.907761",
+  "kind": "evaluated",
+  "ref": "",
+  "payload": {
+   "candidates": [
+    {
+     "tickers": [
+      "CRMT",
+      "CACC"
+     ],
+     "direction_lean": "short",
+     "driver": "Car-Mart filed Chapter 11 on 24 Nov with liquidity down from $117.9M to about $12M. Equity is delisted from 2 Dec, with holders expected to get $2.5M. Credit Acceptance cut its forecast and took a $410.9M provision. The ABS trusts for subprime auto are the transmission channel.",
+     "why_now": "Nasdaq suspension on 2 Dec and the first-day Chapter 11 hearings are days away. 10-D trust data and monthly ABS servicer reports will show delinquency and trigger headroom within weeks. CACC fell about 20% on the news, so it needs a check on whether it is already priced.",
+     "angle": "Skip the CRMT equity (suspended, worth only about $2.5M to holders). Get the ACMAT 2025-1 to 2025-4 10-D reports first to check delinquencies, excess spread and trigger headroom. Then compare the 8-K's $33.6M of fixed cash with Bondoro's $370M headline. Next check the peers' ABS: CPSS, the $767.85M deal, and CACC, the $800M deal priced 24 Nov. Look at subprime ABS spreads and the Fitch 60+ delinquency series for a second source. Kill the idea if trust triggers show wide headroom and CACC has already priced the stress. Do not chase CACC within 3 sessions of its drop unless new data arrives.",
+     "measurable_by": "ACMAT trust 10-D filings, the CRMT 8-K and court docket, the CACC and CPSS ABS servicer reports, and the Fitch subprime 60+ delinquency index.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/799850/000117184326007671/f8k_112426.htm"
+     ],
+     "urgency": "now",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      643
+     ]
+    },
+    {
+     "tickers": [
+      "AVIO.MI",
+      "LDO.MI"
+     ],
+     "direction_lean": "long",
+     "driver": "ICEYE's EUR 41 cash tender for Avio trades at a 5-6% gross spread (EUR 38.65-38.89). Leonardo, with 18.04%, is the key holder and may decide around 10 Dec. Berenberg expects a raised bid. Golden power clearance is the key condition.",
+     "why_now": "Offer documents and the golden power filing should be submitted to Consob and the government in the coming weeks. Leonardo's stance sets the odds of success, because ICEYE needs 66.67%.",
+     "angle": "First confirm whether the Consob offer document has been filed. Confirm whether the golden power notification has been lodged. Then verify the 10 Dec date: it rests on one second-hand report and may only be an information session. Estimate the odds that ICEYE reaches 66.67% given Leonardo's 18.04% and the rollover option that could shrink the tender pool. Cross-check Mediobanca's and Berenberg's views. Kill the idea if Rome imposes prescriptions or Leonardo declines to tender. Test LDO's reinvestment optionality as a secondary leg.",
+     "measurable_by": "Consob filings for the offer document, the Italian government golden power decision, Leonardo board communications, and the AVIO.MI price versus EUR 41.",
+     "sources": [
+      "https://teleborsa.ansa.it/notiziario/finanza/iceye-accende-i-motori-su-avio-ma-il-countdown-lo-decide-palazzo-chigi/",
+      "https://www.milanofinanza.it/news/avio-berenberg-vede-un-potenziale-enorme-e-si-aspetta-un-rilancio-da-iceye-202611251122566643"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      642
+     ]
+    },
+    {
+     "tickers": [
+      "HRTX",
+      "CRMD"
+     ],
+     "direction_lean": "short",
+     "driver": "Heron's sale to CorMedix needs a majority of outstanding common stock, so at least 95.1M FOR votes out of 190.27M shares. The June non-routine votes never reached that level, and the voting agreements cover only about 22%. No PREM14A or record date exists, and Nasdaq's bid-price deadline is 22 Dec. If the vote fails, HRTX faces a deal break and a delisting risk.",
+     "why_now": "The Nasdaq cliff on 22 Dec will pass before any meeting can be held. A PREM14A filing and the Nasdaq response are the near-term observable events.",
+     "angle": "Check EDGAR for a PREM14A, record date and any reverse-split proposal. Look for a Nasdaq extension or hearing request. Check the June vote turnout. Compare the HRTX spread to the CRMD deal value, since CRMD is issuing about 14.58M shares. Consider the downside for HRTX if the deal is voted down, and whether the Hercules payoff of about $101-102M gets stressed. Kill the idea if a deal amendment or an extension appears, or if the spread already prices a failed vote.",
+     "measurable_by": "The HRTX EDGAR filings (PREM14A, 8-K), the Nasdaq deficiency letter, the HRTX/CRMD price spread and the June 2026 vote tallies.",
+     "sources": [
+      "https://www.sec.gov/Archives/edgar/data/818033/000119312526452672/hrtx-20261108.htm",
+      "https://www.sec.gov/Archives/edgar/data/1410098/000141009826000063/crmd-20261112.htm"
+     ],
+     "urgency": "soon",
+     "priority": 3,
+     "from_leads": [],
+     "from_missions": [
+      641
+     ]
+    }
+   ],
+   "passed_on": [
+    {
+     "ticker": "BZAI",
+     "lean": "short",
+     "reason": "The desk already holds it as a watch, so it is skipped unless the 1 Dec vote changes things. The 14 Dec manufacturer termination is unverified.",
+     "idea": "Blaize restatement and reverse split"
+    },
+    {
+     "ticker": "PEN.AX",
+     "lean": "unclear",
+     "reason": "The desk already holds it as a watch. Trading status and covenants are unverified, with no primary documents readable, and no new data.",
+     "idea": "Peninsula Lance cyber shutdown"
+    },
+    {
+     "ticker": "VIVK",
+     "lean": "short",
+     "reason": "The desk already holds it as a watch. The 1 Dec split is known and the conversion floor is unresolved.",
+     "idea": "Vivakor reverse split and conversions"
+    },
+    {
+     "ticker": "NVDA",
+     "lean": "short",
+     "reason": "Key figures are second-hand and the cash flow is strong. Over the past 2 weeks the stock has already fallen sharply. The 10-Q due about 4 Dec is a dated event, so this stays a watch until the filing or an NT 10-Q appears.",
+     "idea": "Nvidia 10-Q and receivables"
+    },
+    {
+     "ticker": "SCG.AX",
+     "lean": "long",
+     "reason": "The desk already holds a watch. David Jones rent is only 3.6% of earnings, and the sale is mostly priced.",
+     "idea": "David Jones landlords and Myer"
+    },
+    {
+     "ticker": "OTLY",
+     "lean": "unclear",
+     "reason": "The tender is far below the market price, so there is no arb. The trade price is unconfirmed.",
+     "idea": "Oatly technical tender"
+    },
+    {
+     "ticker": "ZAB.WA",
+     "lean": "long",
+     "reason": "The spread is tight and the subscription closes 2 Dec, which leaves too little time and edge.",
+     "idea": "Zabka tender arb"
+    },
+    {
+     "ticker": "AER",
+     "lean": "short",
+     "reason": "No lease-rate or provision data was found. The exposure is small and the terminations are disputed.",
+     "idea": "Norse 787 terminations"
+    },
+    {
+     "ticker": "MNHLDG.KL",
+     "lean": "long",
+     "reason": "The stocks already fell 6-20% on 26 Nov, and the rule's effect is contested. Pops or drops are already priced.",
+     "idea": "BIS remote-access rule Malaysia names"
+    }
+   ]
+  }
+ }
+]

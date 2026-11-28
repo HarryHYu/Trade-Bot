@@ -1,0 +1,952 @@
+[
+ {
+  "id": 1,
+  "opened": "2026-11-28 00:05:24.053916",
+  "ticker": "BZAI",
+  "type": "AI inference chip equity under revenue restatement",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.3,
+  "move": 0.0,
+  "horizon": 42,
+  "status": "killed",
+  "driver": "Non-reliance on FY2025 annual results and five quarters (Q1-Q3 2025, Q1-Q2 2026) due to revenue recognition, primarily revenue from agreements with China-based customers; special committee investigation under way; UHY LLP still auditor",
+  "mechanism": "Restatement of revenue (could be fabricated or booked in the wrong period) reduces reported revenue and results; the stock then falls as the restated figures and related filings arrive",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Driver is real. Up to most of revenue is at risk; Q3 2025 was about 80% of nine-month 2025 revenue. Market value at current price is unverified (share count not obtained)."
+   },
+   {
+    "name": "noticed",
+    "verdict": "fail",
+    "reasoning": "Mostly priced in. DOJ/SEC subpoenas already disclosed, Rosen Law fraud notice dated Sept 28, stock at $0.155, down 67% over 60 days and 94% over a year, past the already-down-50%-plus kill line."
+   },
+   {
+    "name": "transmission",
+    "verdict": "concern",
+    "reasoning": "Restated filings, Nasdaq late-filing notice (NT 10-Q for Q3 2026 filed Nov 17) and a going-concern or financing hit are likely within about 6 weeks, but each is a small step after a 94% fall; stock below $1 likely already has a bid-price problem, making a late-filing notice mostly old news."
+   },
+   {
+    "name": "reversal",
+    "verdict": "fail",
+    "reasoning": "A timing-only outcome or reverse split could trigger a sharp rally; risk is lopsided against a short."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "Share-structure squeeze risk: Oct 22 Series B preferred with 1,000,000 votes per share tied to proposed reverse split; borrow on sub-$0.20 name under investigation very likely scarce and expensive (not checked)."
+   },
+   {
+    "name": "reaction",
+    "verdict": "fail",
+    "reasoning": "Already playing out. Stock up 20.5% in the 5 days around the non-reliance filing on 0.61x normal volume, pattern of no sellers left."
+   }
+  ],
+  "catalysts": [
+   "Restated 10-K/10-Qs",
+   "Nasdaq deficiency notice",
+   "Reverse-split vote",
+   "Going-concern note or dilutive raise"
+  ],
+  "kill": [
+   "Re-open a short only if a reverse split goes through and the stock rallies sharply before the restatement comes out, with borrow under about 30% a year",
+   "Dead if the company says the problem is timing only",
+   "Dead if down more than 50% already (met)",
+   "Dead if borrow unavailable or above 100% a year"
+  ],
+  "summary": "Restatement short on BZAI: verdict PASS (no trade). The driver (revenue restatement tied to China-customer revenue) is real, but the market has already priced most of it: stock at $0.155, down 94% over a year, subpoenas already disclosed, and the stock up 20.5% around the non-reliance filing. Squeeze risk from the reverse split and Series B structure. Tier watch, direction short (lean), horizon 42 days, confidence 0.3 that a short pays after borrow and squeeze risk. Expected move not stated in the note; probability reflects the note's stated confidence.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "Read 8-K of Nov 25 (non-reliance). Knows Oct 22 8-K (rights plan / Series B, reverse split). Text of Nov 17 NT 10-Q and any Form 4s, 13D/Gs or proxy since Q2 unverified.",
+   "earnings_quality": "Reported revenue is itself what is being restated, so prior results are unreliable by definition.",
+   "product_scope": "Not relevant: AI inference chips; issue is accounting, not regulatory approval.",
+   "buyer_channel": "China counterparties are the subject of DOJ/SEC requests; who they are is unverified.",
+   "materiality": "About 80% of 9M 2025 revenue sat in a single quarter now under restatement. 88% China share (techi.com) unverified. Market cap not verified.",
+   "competition": "Not relevant.",
+   "consensus_and_guidance": "No meaningful coverage found; all prior guidance now unreliable.",
+   "unverified": [
+    "Text of Nov 17 NT 10-Q",
+    "Form 4s, 13D/Gs and proxy since Q2",
+    "Restatement dollar amount (none given in 8-K)",
+    "Share count and market value",
+    "Borrow fee, availability and short interest",
+    "88% China share (techi.com)",
+    "Auditor overlap (Boladale Lawal) not checked"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "**BZAI: restatement short. Verdict: PASS (no trade). The driver is real, but the market already priced most of it.**\n\n**Driver as a mechanism.** I read the 8-K filed Nov 25 myself. On Nov 23 the audit committee said the FY2025 annual numbers and five quarters (Q1\u2013Q3 2025, Q1\u2013Q2 2026) can't be relied on. The cause is how revenue was recognised, \"primarily revenue derived from agreements with the Company's customers in China.\" A special committee investigation is under way and UHY LLP is still the auditor. The 8-K gives no dollar amount and doesn't say whether the revenue is fake, or real but booked in the wrong period. The reported figures show how concentrated it is: Q3 2025 alone was $11.9M of $14.9M nine-month revenue (about 80%). It's quite possible a large share of reported revenue gets wiped out. Note that the body of the filing is mislabelled \"Item 5.02\" while EDGAR tags it 4.02. That's sloppy, but it changes nothing.\n\n**Why it dies here**\n- **noticed: yes, mostly priced in.** The 8-K says the DOJ/SEC subpoenas were already disclosed, and a Rosen Law fraud notice dates to Sept 28. The stock is $0.155: down 67% over 60 days and 94% over a year. That's past the \"already down 50%+\" kill line in the lead.\n- **reaction: already playing out.** The stock is *up* 20.5% in the 5 days around the non-reliance filing, on volume at 0.61x normal. That's the pattern of a stock with no sellers left, not one still to be repriced.\n- **override: share-structure squeeze risk.** On Oct 22 the company created Series B preferred stock with 1,000,000 votes per share, tied to a proposed reverse split. A reverse split at around $0.15 is a common squeeze trigger for shorts. Borrow on a sub-$0.20 name under investigation is very likely scarce and expensive, though I didn't check it.\n- **transmission:** The restated filings, a Nasdaq late-filing notice (the NT 10-Q for Q3 2026 was filed Nov 17) and a going-concern or financing hit are all likely within about 6 weeks. But each is a small step after a 94% fall. The stock is below $1, so it probably already has a bid-price problem with Nasdaq, which makes a late-filing notice mostly old news.\n- **real_and_size: yes.** Up to most of revenue is at risk. Market value at this price is unverified (I didn't get the share count).\n- **reversal:** A \"timing only\" outcome or the reverse split could set off a sharp rally. The risk is lopsided against a short.\n\n**Diligence**\n- filings: I read the 8-K of Nov 25 (non-reliance) and know the Oct 22 8-K (rights plan / Series B, reverse split). The text of the Nov 17 NT 10-Q, and any Form 4s, 13D/Gs or proxy since Q2, are unverified.\n- earnings quality: the reported revenue is itself what's being restated, so prior results are unreliable by definition.\n- product scope: not relevant (AI inference chips; the issue is accounting, not regulatory approval).\n- buyer channel: the China counterparties are the subject of the DOJ/SEC requests; who they are is unverified.\n- materiality: about 80% of 9M 2025 revenue sat in a single quarter that is now under restatement. The 88% China share (techi.com) is unverified.\n- competition: not relevant.\n- consensus and guidance: no meaningful coverage found; all prior guidance is now unreliable.\n- auditor overlap (Boladale Lawal): not checked; this needs its own task.\n\n**Catalyst:** the restated 10-K/10-Qs, a Nasdaq deficiency notice, the reverse-split vote, a going-concern note or a dilutive raise.\n**Kill / re-open criteria:** Re-open a short only if a reverse split goes through and the stock rallies sharply *before* the restatement comes out, with borrow available under about 30% a year. In that case the restatement becomes fresh downside from a higher price. The short is dead if the company says the problem is timing only.\n\n**Monitor**\n- EDGAR filings list for CIK 1871638: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1871638 (NT 10-Q text, restatement, 8-K 3.01, DEF 14A for the reverse split, Form 4s)\n- Nasdaq noncompliance list: https://listingcenter.nasdaq.com/noncompliantcompanylist.aspx\n- Searches: \"Blaize reverse stock split\", \"Blaize Nasdaq notice\", \"Blaize restatement amount\", \"Blaize special committee\", \"Blaize going concern\", \"UHY Blaize resign\"\n- Borrow fee and availability and short interest for BZAI (desk data)\n\n---\ndirection: short (lean) \u2192 no trade\ntier: watch\nhorizon_days: 42\nconfidence: 0.3 that a short from $0.155 pays after borrow and squeeze risk\ncatalyst: restated filings, Nasdaq notice, reverse-split vote\nkill: down more than 50% already (met); \"timing-only\" clarification; borrow unavailable or above 100% a year\nstatus: PASS. The driver is real but already priced: 94% drawdown, subpoenas already disclosed, squeeze risk from the reverse split and Series B structure."
+ },
+ {
+  "id": 2,
+  "opened": "2026-11-28 00:06:17.976570",
+  "ticker": "BZAI",
+  "type": "ai-semiconductor-microcap",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.0,
+  "move": 0.0,
+  "horizon": 0,
+  "status": "killed",
+  "driver": "Restatement of revenue from China customers, said to be about 88% of revenue, with DOJ and SEC subpoenas and a going-concern warning",
+  "mechanism": "Restated revenue could wipe out most reported revenue and force reserves against unpaid receivables, leading to heavily dilutive financing, delisting, or both",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Yes. It is real and goes to the core of the business."
+   },
+   {
+    "name": "noticed",
+    "verdict": "fail",
+    "reasoning": "Yes, fully. The stock fell 94% in a year and 67% in 60 days before the notice, and the restatement mostly confirms what the market already suspected."
+   },
+   {
+    "name": "transmission",
+    "verdict": "concern",
+    "reasoning": "Revenue will be cut and receivables written down when restated statements arrive, with no date set. The cash shortfall shows up through financing, which also has no date."
+   },
+   {
+    "name": "reversal",
+    "verdict": "concern",
+    "reasoning": "Not likely on the fundamentals, but the reverse split and squeezes in a heavily shorted micro-cap can reverse the price sharply."
+   },
+   {
+    "name": "override",
+    "verdict": "fail",
+    "reasoning": "The stock now trades on its share structure (split, possible ATM sales and resale registrations) and on borrow conditions, not on the restatement."
+   },
+   {
+    "name": "reaction",
+    "verdict": "fail",
+    "reasoning": "Restatement figures will probably be read as confirmation, not surprise. Only a funded rescue would be a surprise, and that would hurt a short."
+   }
+  ],
+  "catalysts": [
+   "Restated financial figures",
+   "Nasdaq deficiency letter or delisting determination",
+   "Dilutive financing"
+  ],
+  "kill": [
+   "Funded rescue (lead's kill condition)",
+   "Clean restatement timetable (lead's kill condition)",
+   "Price at about $0.15 with the reverse split already lined up (desk's stronger kill)"
+  ],
+  "summary": "Reject as a trade and keep on watch. The driver is real and checks out, but the stock has already priced it: down 94% in a year, around $0.155, probably a $20-30M market cap, with a pre-arranged reverse split. Shorting here has poor risk/reward given likely scarce and expensive borrow, high volatility, and squeeze risk. Re-evaluate for a small short only if the reverse split goes through, the price resets to roughly $3-5, the restatement is unfinished, and cash is below about two quarters' outflow, provided borrow is available.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "Since the Q2 10-Q (13 Aug): 28 Sep Nasdaq bid-price notice, 16 Oct Series B preferred dividend announcement, 17 Nov NT 10-Q (stated reason could not be read), 25 Nov non-reliance 8-K. Form 4s, 13D/13Gs, ATM, Cantor resale registration and CFO 30 Nov departure not checked.",
+   "earnings_quality": "Past revenue is the very item being restated, so it should be treated as unreliable.",
+   "product_scope": "AI inference chips. Not relevant to this driver.",
+   "buyer_channel": "China customers are the problem. Hong Kong counterparty reportedly promised at least $120M but placed one $10.4M order, $8.8M of which is with a collections agent. Source is sweep notes, unconfirmed.",
+   "materiality": "Up to about 88% of revenue (around $35M of $38.6M in 2025, per unconfirmed sweep notes). Market cap probably smaller than that; share count not confirmed. Market cap about $25M per the note's reason line.",
+   "competition": "Not relevant.",
+   "consensus_and_guidance": "Guidance was set before the restatement and is moot now.",
+   "unverified": [
+    "\u041a\u0438\u0442\u0430\u0439 revenue share of 88% and $35M of $38.6M 2025 revenue (sweep notes)",
+    "$120M Hong Kong counterparty commitment and $10.4M order, $8.8M with collections agent (sweep notes)",
+    "Share count and market cap",
+    "Form 4s, 13D/13G filings",
+    "ATM program and Cantor resale registration",
+    "Reason stated in NT 10-Q",
+    "CFO 30 Nov departure"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "**Verdict: reject as a trade and keep on watch. Every part of the driver checks out, but the stock has already priced it.** BZAI is at about $0.155, down 94% over the past year and 67% over 60 days, so most of the fall has happened. What remains is a $0.15 stock, probably worth $20\u201330M, about to do a reverse split. That is a poor short: borrow is likely scarce and expensive, the stock moves about 144% a year, and it is prone to squeezes. It is up 20.5% in the five days since the notice. The lead's own sizing rule (half size if the market cap is under $300M) points even smaller than that.\n\n**The driver as a mechanism.** Revenue from China customers is being restated, and those customers are said to be about 88% of revenue. That could wipe out most of the reported revenue and force reserves against unpaid receivables. Add DOJ and SEC subpoenas, a going-concern warning and roughly a year or less of cash, and the likely outcomes are heavily dilutive financing, delisting, or both. It is real and large relative to the business. The trouble is that the market has it.\n\n**Primary-source check**\n- **The 8-K** (filed 25 Nov, signed by the General Counsel) confirms the core facts. On 23 Nov the audit committee concluded that the FY2025 audited statements and the quarters ended 31 Mar, 30 Jun and 30 Sep 2025 and 31 Mar and 30 Jun 2026 can no longer be relied on. Management reviewed past revenue, \"primarily revenue derived from agreements with the Company's customers in China.\" The DOJ and SEC subpoenas reached the company and certain employees and directors, and a special committee is investigating. No dollar size and no timetable are given, only \"as soon as practicable.\" UHY LLP is still the auditor.\n- **Item label.** The filing body really is headed \"Item 5.02\" while its text is the non-reliance notice. It is a labelling error, not a sign of anything else.\n- **Nasdaq clocks.** A minimum bid-price notice arrived on 28 Sep 2026. The company has until 29 Mar 2027 to regain compliance, with a possible second 180 days. On 16 Oct the board declared a dividend of Series B preferred carrying 1,000,000 votes per share. It votes only on a reverse split, so the split is effectively pre-arranged. A late-filing notice for the Q3 10-Q (the company filed an NT 10-Q on 17 Nov) is likely but adds little news.\n\n**The six checks**\n- **Real and size:** Yes. It is real and goes to the core of the business.\n- **Noticed:** Yes, fully. The stock fell 94% in a year and 67% in 60 days before this notice, and the restatement mostly confirms what the market already suspected.\n- **Transmission:** Revenue will be cut and receivables written down when the restated statements arrive, with no date set. The cash shortfall shows up through financing, which has no date either.\n- **Reversal:** Not likely on the fundamentals, but the reverse split and squeezes in a heavily shorted micro-cap can reverse the price sharply.\n- **Override:** The stock now trades on its share structure (the split, possible ATM sales and resale registrations) and on borrow conditions, not on the restatement.\n- **Reaction:** The restatement figures, when they come, will probably be read as confirmation, not surprise. Only a funded rescue would be a surprise, and that would hurt a short.\n\n**Diligence fields (all limited, so the cap is watch)**\n- **Filings:** Since the Q2 10-Q (13 Aug): the 28 Sep bid-price notice, the 16 Oct Series B announcement, the 17 Nov NT 10-Q (its stated reason could not be read) and the 25 Nov non-reliance 8-K. I have not checked Form 4s, 13D/13Gs, the ATM, the Cantor resale registration or the CFO's 30 Nov departure.\n- **Earnings quality:** The past revenue is the very thing being restated, so treat it as unreliable.\n- **Product scope:** AI inference chips. Not relevant to this driver.\n- **Buyer channel:** The China customers are the problem. The Hong Kong counterparty reportedly promised at least $120M but placed one $10.4M order, $8.8M of which is now with a collections agent. That comes from the sweep notes and is unconfirmed.\n- **Materiality:** Up to about 88% of revenue (around $35M of $38.6M in 2025, per unconfirmed sweep notes). The market cap is probably smaller than that. I have not confirmed the share count.\n- **Competition:** Not relevant.\n- **Consensus and guidance:** Guidance was set before the restatement and is moot now.\n\n**Catalyst and kill criteria.** The catalysts are the restated figures, a deficiency letter or delisting determination, and a dilutive financing. They are not tradeable from here. The lead's kill conditions were a funded rescue or a clean restatement timetable. For the desk's purposes the stronger kill is simpler: a $0.15 price with the reverse split already lined up.\n\n**Monitor**\n- EDGAR filings for CIK 1871638 (https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1871638), especially: an 8-K Item 3.01 Nasdaq notice, an S-1/S-3 or ATM 424B filing, the proxy (DEF 14A) and effective date for the reverse split, restated 10-K/A and 10-Q/A filings, any auditor resignation (8-K Item 4.01), and the departing CFO's replacement.\n- News searches: \"Blaize restatement\", \"Blaize Nasdaq delisting\", \"Blaize reverse split\", \"Blaize subpoena DOJ\", \"Blaize financing\".\n- Borrow and short-interest data for BZAI.\n\n**Re-entry trigger.** If the reverse split goes through and the price resets to roughly $3\u20135, while the restatement is still unfinished and cash is below about two quarters' outflow, look again at a small short, provided borrow is available.\n\n---\n- tier: watch (not tradeable now)\n- direction: short (inactive)\n- horizon_days: 0 now; re-evaluate within about 42 days, after the reverse split\n- confidence that the driver is real: high\n- confidence that it is not yet priced: low\n- reason: the driver is real but already priced (\u221294% in a year, around a $25M market cap), and shorting a $0.15 stock ahead of a pre-arranged reverse split, with likely hard borrow, gives poor risk/reward"
+ },
+ {
+  "id": 3,
+  "opened": "2026-11-28 00:07:41.207579",
+  "ticker": "BZAI",
+  "type": "small-cap AI hardware, distressed, China-customer revenue restatement",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.35,
+  "move": 0.0,
+  "horizon": 30,
+  "status": "open",
+  "driver": "Non-reliance on FY2025 and five quarterly reports due to misstated revenue from China customer agreements; the restatement is already priced in, so the short case rests on reverse-split mechanics and dilution",
+  "mechanism": "Restated revenue reduces 2026 revenue (Q2 2026 $11.985M, 99.6% from Customer D NeoTensr; H1 2026 $14.7M). Receivables are impaired (Starshine $8.8M with collections agent, allowance $9.5M; NeoTensr $13.3M due Sep 24, 2026). Cash of $36.8M at June 30 against about $20M per quarter burn leaves an estimated $0-15M. Market cap about $22M (about 145M shares at $0.155). Dilution risk comes from the new CFO's reported $60M raise target and the reverse split, which the Series B preferred's 1,000,000 votes per share effectively pre-arranges.",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Real and large. It goes to the company's entire revenue base."
+   },
+   {
+    "name": "noticed",
+    "verdict": "fail",
+    "reasoning": "Fully noticed: August guidance cut and stock fall of about 49%, Q3 shortfall and federal investigation drop of over 30%, -67% over 60 days, and a +20.5% rally over 5 days including the 8-K. Non-reliance confirmed what the market assumed."
+   },
+   {
+    "name": "transmission",
+    "verdict": "concern",
+    "reasoning": "Slow. Restated filings, Nasdaq delinquency steps and any delisting take months; Nasdaq allows up to 180 days to regain compliance, so delisting falls outside the six-week window."
+   },
+   {
+    "name": "reversal",
+    "verdict": "pass",
+    "reasoning": "Not likely to reverse, but a collected NeoTensr payment of $13.3M (60% of market cap) would be a sharp upside shock."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "Financing and split mechanics dominate. A reported $60M raise tied to the new CFO's pay would be very dilutive, but no offering has been filed. The reverse split is effectively pre-arranged via the Series B preferred votes."
+   },
+   {
+    "name": "reaction",
+    "verdict": "concern",
+    "reasoning": "Mixed. A low-float post-split stock already heavily shorted (22.5M shares, about 15%, per unverified third-party data as of Aug 31) can squeeze."
+   }
+  ],
+  "catalysts": [
+   "Reverse split takes effect after the Dec 1 vote; post-split decay is common",
+   "A dilutive registered or direct offering",
+   "An Item 3.01 notice",
+   "An 8-K saying NeoTensr defaulted on the $13.3M"
+  ],
+  "kill": [
+   "NeoTensr pays the $13.3M",
+   "A financing that does not dilute",
+   "The restatement is quick and small",
+   "A squeeze after the split"
+  ],
+  "summary": "Note verdict: watch, not a short. The restatement is real and large but already priced in (+20.5% over 5 days including the 8-K). Only a realistic short in the window comes from reverse-split mechanics and dilution, not the restatement. Footer: short-lean, not actionable; tier watch; confidence 0.35 that a short pays within the horizon; size none (half-size liquidity cap; borrow unverified). Re-examine after the Dec 1 vote and split ratio, or if an offering is filed. The note gives no expected move, so expected_move_pct is recorded as 0 and no hedge idea is stated.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "Verified: the 8-K (non-reliance, Item 5.02 body though EDGAR tags 4.02), the Q2 10-Q, the Nasdaq bid-price notice (deadline Mar 29, 2027), the Series B preferred 8-K, and the CFO change (Costas started Nov 2; Sehmi stays through Nov 30). Unverified: NT 10-Q reasons, Form 4/13D/13G filings, full Polar warrant amendment text, any Item 3.01 notice.",
+   "earnings_quality": "None. Losses are deep (Q2 net loss $28.8M), and the revenue itself is what is being restated.",
+   "product_scope": "AI inference chips and servers. Export-control and licence position for China deliveries is unverified and may be central to the DOJ inquiry.",
+   "buyer_channel": "Hong Kong/China counterparties (Starshine, NeoTensr) plus BurTech, a party related to the SPAC sponsor. Starshine is effectively in default; NeoTensr's status after Sep 24 is unverified.",
+   "materiality": "Restatement could reach about $15M of H1 2026 revenue and most of FY2025, against a $22M market cap and an estimated $0-15M of cash.",
+   "competition": "Not relevant to this thesis.",
+   "consensus_and_guidance": "2026 guidance ($40-43M) was set before the restatement and is now unreliable. B. Riley and Roth still rate Buy with $2-2.50 targets, which look stale.",
+   "unverified": [
+    "NT 10-Q stated reasons",
+    "Form 4/13D/13G filings",
+    "Full text of Polar warrant amendment",
+    "Any Item 3.01 notice",
+    "Export-control and licence position for China deliveries",
+    "NeoTensr status after Sep 24",
+    "Borrow availability and cost",
+    "Short interest figure (22.5M shares, third-party data)"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "**Verdict: watch, not a short.** The driver is real and serious, but the market priced it in before the 8-K. The stock rose 20.5% in the five days around the filing, and the parts of the story that could push the price down within six weeks are either unverified or come too late.\n\n## 1. The driver as a mechanism\nOn Nov 23 the audit committee concluded that FY2025 and five quarterly reports (Q1\u2013Q3 2025 and Q1\u2013Q2 2026) can no longer be relied on, because of misstated revenue, \"primarily revenue derived from agreements with the Company's customers in China.\" The 8-K gives no restatement date and no dollar amount. UHY is still the auditor. The DOJ/SEC subpoenas and the Special Committee were disclosed earlier. (Source: the 8-K at sec.gov \u2026000187163826000094, which I read in full. The body is headed Item 5.02 although EDGAR tags it 4.02, as the dossier noted.)\n\nHow it reaches the numbers, from the Q2 10-Q, which I read:\n- **Revenue being restated.** Q2 2026 revenue was $11.985M, and 99.6% of it came from Customer D (NeoTensr). H1 2026 revenue was $14.7M. Most of the reported 2026 revenue is in question.\n- **Receivables.** Starshine owes $8.8M and is with a collections agent; the allowance already reached $9.5M at June 30. NeoTensr owes $13.3M, due Sep 24, 2026, and its contract was changed on Aug 7 to \"take-or-pay\" with deliveries running to July 2027.\n- **Cash.** $36.8M at June 30, against $41.3M used in operations in H1 (about $20M a quarter). I estimate about $0\u201315M left now, before any NeoTensr collection. A going-concern doubt is already disclosed.\n- **Valuation.** About 145M shares (Aug 13) \u00d7 $0.155 \u2248 **$22M market cap**. That is roughly equal to or below the NeoTensr receivable plus the remaining cash.\n\n## 2. Was it already noticed? Yes.\n- In August the stock fell about 49% to roughly $0.59 when 2026 revenue guidance was cut from about $130M to $40\u201343M.\n- About 52 days ago it fell more than 30% when the company reported a Q3 revenue shortfall, another guidance cut and the federal investigation.\n- Price: \u221267% over 60 days, \u221294% over the year, and **+20.5% over the last 5 days, which includes the 8-K.** The non-reliance confirmed what the market already assumed. Bad news that produces a rally is not a fresh driver.\n- A securities class action over the Starshine and NeoTensr statements was already filed on Aug 4.\n\n## 3. Checks\n| Check | Verdict |\n|---|---|\n| real_and_size | **Real and large.** It goes to the company's entire revenue base. |\n| noticed | **Fully.** See section 2. |\n| transmission | **Slow.** Restated filings, Nasdaq delinquency steps and any delisting take months. Nasdaq rules generally allow up to 180 days from the filing due date to regain compliance on a late 10-Q, so delisting falls outside the six-week window. |\n| reversal | Not likely to reverse. But a collected NeoTensr payment of $13.3M (60% of market cap) would be a sharp upside shock. |\n| override | **Financing and split mechanics dominate.** The new CFO (started Nov 2) is reportedly paid partly on raising $60M, about 2.7\u00d7 the market cap. That would be very dilutive, but no offering has been filed. The reverse split is effectively pre-arranged because the Series B preferred carries 1,000,000 votes per share. |\n| reaction | Mixed. A low-float post-split stock that is already heavily shorted can squeeze. Short interest was 22.5M shares (about 15% of shares) on Aug 31, according to third-party data I did not verify. |\n\n## 4. Catalyst and kill criteria\n- **Catalysts for a short:**\n  - Reverse split takes effect after the Dec 1 vote; post-split decay is common.\n  - A dilutive registered or direct offering.\n  - An Item 3.01 notice.\n  - An 8-K saying NeoTensr defaulted on the $13.3M.\n- **Kill (or flip) criteria:**\n  - NeoTensr pays the $13.3M.\n  - A financing that does not dilute.\n  - The restatement is quick and small.\n  - A squeeze after the split.\n\n## Diligence\n- **Filings:**\n  - Verified: the 8-K (non-reliance), the Q2 10-Q, the Nasdaq bid-price notice (deadline Mar 29, 2027), the Series B preferred 8-K, and the CFO change (Costas started Nov 2; Sehmi stays through Nov 30).\n  - Unverified: what the NT 10-Q gives as reasons, any Form 4/13D/13G filings, the full text of the Polar warrant amendment, and any Item 3.01 notice. *Unverified.*\n- **Earnings quality:** None. Losses are deep (Q2 net loss $28.8M), and the revenue itself is what is being restated.\n- **Product scope:** AI inference chips and servers. The export-control and licence position for China deliveries is *unverified* and may be at the centre of the DOJ inquiry.\n- **Buyer channel:** Hong Kong/China counterparties (Starshine, NeoTensr) plus BurTech, a party related to the SPAC sponsor. Whether they can pay is the open question: Starshine is effectively in default, and NeoTensr's status after Sep 24 is *unverified*.\n- **Materiality:** The restatement could reach about $15M of H1 2026 revenue and most of FY2025, against a $22M market cap and an estimated $0\u201315M of cash.\n- **Competition:** Not relevant to this thesis.\n- **Consensus and guidance:** Guidance ($40\u201343M for 2026) was set before the restatement and is now unreliable. B. Riley and Roth still have Buy ratings with $2\u20132.50 targets, which look stale.\n- **Shortability:** Borrow availability and cost are *unverified*. The stock trades under $0.20 with 144% annualised volatility.\n\n## Bottom line\nSeveral diligence items are unverified, so the cap is small at most, and the lead's half-size liquidity rule applies on top of that. The edge has also already been captured. The only realistic short in the window comes from the split mechanics and dilution, not from the restatement. Re-examine after the Dec 1 vote and the split ratio, and if an offering is filed.\n\n## Monitor\n- **Searches:**\n  - \"Blaize reverse split ratio effective\"\n  - \"Blaize offering\" / \"Blaize registered direct\"\n  - \"Blaize Nasdaq 5250(c)(1)\"\n  - \"Blaize NeoTensr payment\"\n  - \"Blaize restatement amount\"\n  - \"Blaize Special Committee findings\"\n-"
+ },
+ {
+  "id": 4,
+  "opened": "2026-11-28 00:09:17.885553",
+  "ticker": "BZAI",
+  "type": "distressed micro-cap edge AI",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.0,
+  "move": 0.0,
+  "horizon": 30,
+  "status": "open",
+  "driver": "Restatement of FY2025 and five quarterly reports after non-reliance 8-K, due to revenue from agreements with China customers",
+  "mechanism": "Most reported revenue may be reversed; cash is probably single-digit millions and the company has going-concern warning; reverse split and post-split dilution outweigh the accounting news",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Real (primary 8-K and late-filing notice) and existential in size: about $50M or more of revenue at risk against roughly $22.5M market cap."
+   },
+   {
+    "name": "noticed",
+    "verdict": "fail",
+    "reasoning": "Fully noticed: fell 29.4% on the October DOJ disclosure and rose 20% in the 5 days after the 4.02 8-K; the restatement itself is priced in."
+   },
+   {
+    "name": "transmission",
+    "verdict": "concern",
+    "reasoning": "Already in the price; the next steps are the dates listed in catalysts."
+   },
+   {
+    "name": "reversal",
+    "verdict": "concern",
+    "reasoning": "Unlikely to reverse cleanly; a clean 10-Q is very improbable now that non-reliance has been declared."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "The reverse split and financing mechanics outweigh the accounting news; the Dec 1 vote, split ratio 1:10 to 1:35, and possible equity-line dilution favour a short but carry squeeze risk on a thin float."
+   },
+   {
+    "name": "reaction",
+    "verdict": "concern",
+    "reasoning": "Distressed micro-caps usually drift down after a reverse split as dilution hits, but there is no new information left for the market to discover."
+   }
+  ],
+  "catalysts": [
+   "Dec 1, 2026 annual meeting reverse-split vote and effective date",
+   "Dec 14, 2026 contract manufacturer termination cutoff",
+   "Nasdaq late-filing notice and 60-day compliance plan deadline (about mid-Jan)",
+   "Any priced offering or equity-line draws after the split",
+   "Any Nasdaq delisting on public-interest grounds"
+  ],
+  "kill": [
+   "Borrow unavailable or very expensive",
+   "Non-dilutive cash infusion or strategic buyer",
+   "10-Q filed with restatement limited to timing"
+  ],
+  "summary": "Note concludes WATCH with a short lean, not a trade. The restatement driver is real but already priced: stock down 94% over the year, up 20% in five days after the non-reliance 8-K. Borrow was not checked, so any short would be a bet on the reverse split and dilution rather than unseen news. Tier capped at small at most by unverified borrow, Form 4/13D and receivable reserves. Confidence low that an edge remains. No probability or expected move is stated in the note; zeros are placeholders.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "4.02 8-K (Nov 25; body mislabelled Item 5.02), late-filing notice (Nov 17), Nasdaq bid-price 8-K (deadline Mar 29, 2027, possible second 180 days), June 10-Q, and DEF 14A. Insiders own 17.0%. CFO Sehmi retires Nov 30; Martin Costas took over Nov 2. Not checked: Form 4s and 13D/13G changes since Q2, and whether Nasdaq has sent its late-filing notice.",
+   "earnings_quality": "Reported revenue is itself being restated, so there is no reliable earnings base.",
+   "product_scope": "Edge AI inference chips and servers, sold mainly into China; mostly irrelevant to the thesis.",
+   "buyer_channel": "Customer A is BurTech Systems Tech, a related party and affiliate of the SPAC sponsor; $2.6M, or 17.8% of H1 2026 revenue. Starshine has stopped ordering. NeoTensr order became take-or-pay on Aug 7. Not checked: the $8.8M receivable and whether either receivable is fully reserved.",
+   "materiality": "About $50M or more of revenue at risk against roughly $22.5M market cap (145.0M shares x $0.155) and probably less than $10M of cash.",
+   "competition": "Not relevant to the thesis.",
+   "consensus_and_guidance": "Guidance was cut in early October, before the 4.02. Analyst coverage has largely given up.",
+   "unverified": [
+    "Borrow cost and availability (prime broker)",
+    "Current short interest (older data showed about 22.5M shares, roughly 15%)",
+    "Form 4 and 13D/13G changes since Q2",
+    "Receivable reserves: $13.3M NeoTensr and $8.8M receivable, pending Q3 10-Q",
+    "Whether Nasdaq has issued its late-filing notice"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "## BZAI: research note, 2026-11-28\n\n**Bottom line: the driver is real but the market already has it. This goes to WATCH with a short lean, not a trade.** The restatement is the right story. But the stock is already down 94% over the year, it rose 20% in the five days after the non-reliance 8-K, and I couldn't check borrow. Any short entry now would be a bet on how the reverse split and the dilution play out, not on news the market hasn't seen.\n\n### 1. Driver as a mechanism\n- **What's happening.** On Nov 23 the audit committee said the FY2025 accounts and five quarterly reports (Q1\u2013Q3 2025, Q1\u2013Q2 2026) can't be relied on. The cause is \"primarily revenue derived from agreements with the Company's customers in China\" (8-K filed Nov 25). The Q3 10-Q was due Nov 16 and is late. The late-filing notice says it won't come within the 5-day extension and that the company can't estimate results. The DOJ has issued subpoenas, the SEC has made voluntary requests, and a special committee is investigating.\n- **How it hits the numbers.** Most reported revenue may be reversed. FY2025 revenue was $38.6M, 91% from China, and two China customers were 61% and 27% of it. H1 2026 revenue was $14.7M; Q2 alone was $12.0M, mainly the NeoTensr order of $13.7M (a $13.3M receivable due Sep 24, 2026). The Starshine deal had a \"minimum $120M\" pledge, and the company now expects no more orders from Starshine.\n- **The bigger driver is liquidity.** Cash was $36.8M on Jun 30, and $12.4M of that sat in China behind capital controls. Operating cash burn was $41.3M in H1, so cash on hand now is probably in the single-digit millions unless new money came in (my estimate). The June 10-Q already carries a going-concern warning. The B. Riley equity line can't be used while the stock is under $1. The contract manufacturer's termination takes effect Dec 14, with $12.7M of purchase commitments outstanding ($5.4M needs prepayment). The new CFO's pay is \nlinked to a $60 million capital-raising mandate\n.\n- **Size.** Market cap is about $22.5M (145.0M shares \u00d7 $0.155). The revenue at risk is about $50M or more, i.e. larger than the whole market value.\n\n### 2. Checks\n| Check | Verdict |\n|---|---|\n| real_and_size | **Real** (primary 8-K and late-filing notice) and existential in size |\n| noticed | **Yes, fully.** It fell \n29.4% in morning trading to $0.31\n on the DOJ disclosure in October, alongside \na guidance cut and Wall St downgrades\n. It's down 67% over 60 days and up 20% in the 5 days after the 4.02. A fall followed by a bounce means the restatement itself is priced in. |\n| transmission | Already in the price. The next steps are the dates below. |\n| reversal | Unlikely to reverse cleanly. A clean 10-Q is very improbable now that non-reliance has been declared. |\n| override | **The reverse split and financing mechanics outweigh the accounting news.** The annual meeting is **Dec 1, 2026**. The split ratio is 1:10 to 1:35 (about $1.55\u2013$5.44 per share after the split). The Series B preferred makes approval close to certain. Once the price is above $1, the B. Riley equity line may become usable again. That means heavy dilution, which favours a short, but also squeeze risk on a thin float. |\n| reaction | Distressed micro-caps usually drift down after a reverse split as dilution hits. But there's no new information left for the market to \"discover.\" |\n\n### 3. Diligence\n- **Filings.** I read these from primary sources: the 4.02 8-K (Nov 25; the body is mislabelled \"Item 5.02\"), the late-filing notice (Nov 17), the Nasdaq bid-price 8-K (deadline Mar 29, 2027, with a possible second 180 days), the June 10-Q, and the DEF 14A. Insiders own 17.0%. CFO Sehmi retires Nov 30 and Martin Costas took over on Nov 2. **Not checked:** Form 4s and 13D/13G changes since Q2, and whether Nasdaq has sent its late-filing notice yet (normally about 5 business days after the due date).\n- **Earnings quality.** The reported revenue is itself being restated, so there's no reliable earnings base.\n- **Product scope.** Edge AI inference chips and servers, sold mainly into China. This is mostly irrelevant here.\n- **Buyer channel.** \"Customer A\" is a related party: BurTech Systems Tech, an affiliate of the SPAC sponsor. It was $2.6M, or **17.8% of H1 2026 revenue**, which confirms the lead. Starshine has stopped ordering. NeoTensr's order became a take-or-pay contract on Aug 7. **Not checked:** the $8.8M receivable, and whether either receivable is fully reserved. Those figures would come from the Q3 10-Q, which hasn't been filed, so the lead's \"reserved\" claim is not backed by any filing I saw.\n- **Materiality.** About $50M or more of revenue at risk against roughly $22.5M of market cap and probably less than $10M of cash.\n- **Competition.** Not relevant to the thesis.\n- **Consensus and guidance.** Guidance was cut in early October, before the 4.02. Analyst coverage has largely given up.\n- **Borrow and short interest.** **Not checked.** Older data showed about \n22.5M shares short\n, roughly 15% of shares. I found no current borrow cost or availability.\n\n### 4. Catalysts and kill criteria\n- **Catalysts:** the Dec 1 vote and the date the split takes effect; the Dec 14 contract manufacturer cutoff; the Nasdaq late-filing notice and the 60-day deadline for a compliance plan (about mid-Jan); any priced offering or equity-line draws after the split; any Nasdaq delisting on public-interest grounds.\n- **Kill (short):** borrow unavailable or very expensive; a non-dilutive cash infusion or strategic buyer; the 10-Q filed with a restatement limited to timing.\n\n### 5. What to monitor\n- EDGAR filing index for CIK 1871638 (8-Ks for Item 3.01 or 5.07, S-1/424B prospectuses, Form 4s): sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1871638\n- Nasdaq listing-deficiency list (listingcenter.nasdaq.com) for a late-filing notice\n- Searches: \"Blaize reverse split ratio\", \"Blaize Nasdaq 5250(c)(1)\", \"Blaize offering\", \"Blaize NeoTensr receivable\", \"Blaize contract manufacturer\", \"BurTech B"
+ },
+ {
+  "id": 5,
+  "opened": "2026-11-28 00:10:59.361627",
+  "ticker": "VIVAKOR (TICKER NOT STATED IN NOTE)",
+  "type": "share-supply thesis (dilution)",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.5,
+  "move": 0.0,
+  "horizon": 20,
+  "status": "open",
+  "driver": "Another reverse split with dilution landing on a very small share count; Series B convertible preferred conversion could issue roughly 250M shares",
+  "mechanism": "New share supply from Series B conversion and sales of shares from the Nov 4-6 Astor conversions hits the market after the split, pushing price down directly; timing not visible until the next 8-K, prospectus or Form 144",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Dilution is enormous relative to a $1.2M company; share count falls to about 718,683 after the split with 500M authorized shares unchanged."
+   },
+   {
+    "name": "noticed",
+    "verdict": "concern",
+    "reasoning": "Stock down 53% in 5 days, 93% in 20 days and 99% in 60 days on 2.55x normal volume; most of the move has probably already happened."
+   },
+   {
+    "name": "transmission",
+    "verdict": "concern",
+    "reasoning": "Reaches price directly through share supply, but timing depends on when new paper hits the market, which is not visible until the next Form 8-K or prospectus filing."
+   },
+   {
+    "name": "reversal",
+    "verdict": "concern",
+    "reasoning": "Risk is upward; with about 720k shares after the split, a short squeeze is the typical failure mode."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "A Nasdaq trading halt or suspension could trap a short position, and a lender recall could force covering at the worst time."
+   },
+   {
+    "name": "reaction",
+    "verdict": "concern",
+    "reasoning": "Market will read new issuance as negative, but it has seen this twice already."
+   }
+  ],
+  "catalysts": [
+   "Trading from the Dec 1 split onward",
+   "Next 8-K, prospectus or Form 144 showing new shares",
+   "A close below $1 triggering a Rule 5810(c)(3)(A)(iv) delisting determination"
+  ],
+  "kill": [
+   "Borrow is unavailable or costs more than about 100% a year",
+   "Series B has a hard conversion floor or a 4.99% ownership blocker that limits supply",
+   "Company announces a financing that holds the price up",
+   "Stock spikes after the split on the small float"
+  ],
+  "summary": "Recommend passing on this as a trade and keeping it on watch. Short direction is probably right (lean only: direction moderate, ability to execute low), but it cannot be traded safely: company worth about $1.2M, fewer than 750,000 shares after split, stock down 99% over 60 days with 410% volatility, shorting is the only expression, and borrow and Series B terms could not be checked. Search limits left several checks unverified. Capped below small size. Tier: watch, no trade.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "Partly checked. Nov 25 split 8-K and Nov 10 8-K (Astor notes paid off) confirmed. Series B certificate, Form 4s, 13D/Gs and Forms 144 unverified.",
+   "earnings_quality": "Unverified; 10-Q could not be reviewed.",
+   "product_scope": "Not relevant. Company provides energy transportation, storage and remediation services.",
+   "buyer_channel": "Not relevant. This is a share-supply thesis.",
+   "materiality": "Series B is about $25M against a market value of about $1.2M; unverified whether issued or how it converts.",
+   "competition": "Not relevant.",
+   "consensus_and_guidance": "No analyst coverage and no guidance relevant to the split.",
+   "unverified": [
+    "Series B certificate of designation (conversion floor, ownership blocker)",
+    "Borrow availability and cost",
+    "Form 4s, 13D/Gs and Forms 144",
+    "10-Q earnings quality",
+    "Whether Series B has been issued",
+    "Public float falling below Nasdaq 500,000 publicly-held-share minimum",
+    "How the company was reinstated after Dec 2025 suspension and whether a hearings panel decision is in effect"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "I recommend passing on this as a trade and keeping it on watch. The short case is probably right on direction: there is huge dilution and three reverse splits in five months. But it can't be traded safely. The company is worth about $1.2M. Fewer than 750,000 shares will exist after the split. The stock is down 99% over 60 days with 410% volatility. Shorting is the only way to express the view, and I couldn't check borrow availability or the Series B terms. My search tools hit their usage limit partway through, so several required checks are marked \"unverified\" below. That alone keeps it below small size.\n\n**1. The driver as a mechanism.** The company is doing another reverse split, and dilution keeps landing on a very small share count. \nThe split will reduce outstanding shares from approximately 10,780,240 to approximately 718,683, while authorized shares will remain unchanged.\n \nVivakor previously implemented a 1-for-20 reverse split effective July 17, 2026, and a 1-for-15 reverse split effective October 5, 2026.\n At $0.11 the market value is about $1.19M, and the stock should trade near $1.65 after the split. Leaving 500M shares authorized against about 0.72M outstanding gives the company almost unlimited room to issue more. The original Series B was planned at $25M of convertible preferred (\n\"Under the proposed terms, Vivakor would issue $25 million in Series B Convertible Preferred Stock\"\n). If it converts near the market price, that is roughly 20x the current market value, so the lead's figure of about 250M shares is plausible on its face. I could not check the certificate of designation, so I don't know about a conversion floor or an ownership blocker.\n\n**2. Corrections to the lead:**\n- **J.J. Astor supply is mostly used up.** The company says it has \nsatisfied all obligations under the convertible promissory notes issued to J.J. Astor & Co., and that no amounts remain outstanding\n. Shares from the November 4\u20136 conversions may still be sold into the market, but no new conversions are coming from that lender.\n- **The split ratio is 4,500:1, not 900,000:1.** 20 \u00d7 15 \u00d7 15 = 4,500:1 across the last three splits. That is still far above Nasdaq's 250:1 threshold.\n- **A delisting determination is not automatic on Dec 1.** Under Nasdaq Rule 5810(c)(3)(A)(iv), a company that \nhas effected one or more reverse stock splits over the prior two-year period with a cumulative ratio of 250 shares or more to one, then the company is not eligible for any\n compliance period. The trigger is the stock falling back below $1. A first fall of about 40% from $1.65 would still leave it above $1, so this is a near-term risk, not something that happens on the split date. The bigger issue may be the shareholder-count requirements. With about 0.72M shares in total, the public float could fall below Nasdaq's 500,000 publicly-held-share minimum. I haven't verified this.\n- **The listing history is unclear.** \nOn December 19, 2025, Nasdaq notified the company that its common stock is subject to delisting\n, and \ntrading was suspended on December 26, 2025\n. The 2026 releases still refer to the Nasdaq Capital Market. I couldn't confirm how the company was reinstated or whether a hearings panel decision is still in effect.\n\n**3. Checks:**\n- **real_and_size:** Yes, and the dilution is enormous relative to a $1.2M company.\n- **noticed:** Yes. The stock is down 53% in 5 days, 93% in 20 days and 99% in 60 days, on 2.55x normal volume. The pattern of drops after earlier splits is public. Most of the move has probably already happened.\n- **transmission:** It reaches the price directly through share supply, but the timing depends on when new paper hits the market. That is not visible until the next Form 8-K or prospectus filing.\n- **reversal:** The risk is upward. With about 720k shares after the split, a short squeeze is the typical failure mode for this kind of short.\n- **override:** A Nasdaq trading halt or suspension could trap a short position, and a lender recall could force covering at the worst time.\n- **reaction:** The market will read new issuance as negative, but it has seen this twice already.\n\n**4. Diligence:**\n- **filings:** Partly checked. The Nov 25 split 8-K and the Nov 10 8-K (Astor notes paid off) are confirmed. The Series B certificate, Form 4s, 13D/Gs and Forms 144 are **unverified**.\n- **earnings quality:** **unverified** (I couldn't review the 10-Q).\n- **product scope:** Not relevant. The company provides energy transportation, storage and remediation services.\n- **buyer channel:** Not relevant. This is a share-supply thesis.\n- **materiality:** Based on the term sheet, the Series B is about $25M against a market value of about $1.2M. It is **unverified** whether it has been issued or how it converts.\n- **competition:** Not relevant.\n- **consensus and guidance:** There is no analyst coverage, and no guidance relevant to the split.\n\n**5. Catalyst and kill criteria.** The catalyst is trading after the Dec 1 split, plus the next 8-K, prospectus or Form 144 showing new shares. A close below $1 would trigger the no-grace-period delisting determination. The idea dies if any of the following holds:\n- borrow is unavailable or costs more than about 100% a year;\n- the Series B has a hard conversion floor or a 4.99% ownership blocker that limits supply;\n- the company announces a financing that holds the price up;\n- the stock spikes after the split on the small float.\n\n**6. What to monitor:**\n- EDGAR filings: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001450704\n- Nasdaq listing center notices and the trading-halt list: https://www.nasdaqtrader.com/Trader.aspx?id=TradeHalts\n- Broker shortable-share and borrow-cost data\n- News searches: \"Vivakor Series B conversion\", \"Vivakor Nasdaq delisting determination\", \"Vivakor registered direct offering\", \"Vivakor 424B\"\n\n**Verdict fields**\n- direction: short (lean only)\n- tier: watch (no trade). It is capped below small because the Series B terms, borrow an"
+ },
+ {
+  "id": 6,
+  "opened": "2026-11-28 00:12:14.796820",
+  "ticker": "BZAI",
+  "type": "AI inference chips and software; distressed small-cap equity",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.0,
+  "move": 0.0,
+  "horizon": 35,
+  "status": "open",
+  "driver": "Restatement of previously recognized revenue, primarily from agreements with customers in China; FY2025 and 2026 quarters cannot be relied on",
+  "mechanism": "Restatement makes financials unreliable; the impact transmits through the balance sheet, not earnings, via a dilutive financing, Bess foreclosing on collateral, or Chapter 11",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Real, primary-sourced, existential. Company says it will file restated statements as soon as practicable with no amounts and no date; 10-Q is also late and the company does not anticipate filing within the five-day extension."
+   },
+   {
+    "name": "noticed",
+    "verdict": "concern",
+    "reasoning": "Noticed: yes, mostly. DOJ subpoenas first disclosed in 8-K on October 5; class actions date back to August; stock down 94% over the year and 67% over 60 days, hit all-time low of $0.117 on Nov 20, 2026, then bounced about 20% in five days on light volume. Market value about $22M, so most bad news is priced; what is left for a short is the gap between distressed and zero."
+   },
+   {
+    "name": "transmission",
+    "verdict": "pass",
+    "reasoning": "Through the balance sheet, not earnings. Possible routes: a dilutive financing, Bess foreclosing on its collateral (if the restatement counts as a materially incorrect representation, the forbearance can end early), or Chapter 11."
+   },
+   {
+    "name": "reversal",
+    "verdict": "pass",
+    "reasoning": "A clean, small restatement or a financing at a premium would end the short case. Both look unlikely given the collections status of Starshine and NeoTensr."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "The reverse split. Series B preferred votes only on the reverse split proposal and carries 1,000,000 votes per share, so the vote result is already decided. Splits like this mechanically lift the share price and squeeze short-term shorts, and the stock often decays afterwards."
+   },
+   {
+    "name": "reaction",
+    "verdict": "concern",
+    "reasoning": "Late-filing notices, a deeply discounted financing, or a forbearance default would be read as confirming the end of the equity. A Bess-led rescue could cause a sharp short-cover rally."
+   }
+  ],
+  "catalysts": [
+   "Vote result 8-K (Item 5.07) and the split ratio and effective date",
+   "Nasdaq late-filing notice (Rule 5250(c)(1))",
+   "Forbearance termination or new Bess default notice",
+   "Any private placement or bridge loan terms",
+   "Chapter 11 filing"
+  ],
+  "kill": [
+   "Financing is priced at or above market",
+   "Bess converts or extends on friendly terms",
+   "Restatement is quantified as small",
+   "Borrow costs more than about 50% a year or cannot be located"
+  ],
+  "summary": "WATCH, not a trade today. The driver is real and still getting worse, but most of it is already in the price. Becomes a small short only if borrow can be confirmed cheaply after the reverse split takes effect. Tier: watch; direction: short; size: none now, and if upgraded, half of a small position. Confidence driver is real: high. Confidence there is room left to price: low to moderate. Probability and expected move are not stated in the note.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "8-K of 23/25 Nov (restatement; filed under Item 4.02 per EDGAR but body says 5.02); NT 10-Q of 17 Nov; 5 Oct 8-K (DOJ); Series B 8-K and press release of 16 Oct; Nasdaq bid-price notice of 28 Sep (deadline 29 Mar 2027); third forbearance of 16 Sep (runs to 31 Dec); 2M shares issued to Bess on 7 Jul; Polar warrants repriced from $5 to $3 on 5 May; CFO change on 30 Nov. Form 4s and 13D/Gs since last results: unverified.",
+   "earnings_quality": "Not real. Revenue under review is about 90% of what was reported and is mostly uncollected (Starshine $8.8M with a collections agent; NeoTensr paid $0.2M of $13.3M).",
+   "product_scope": "AI inference chips and software. The real issue is who the customers are, not what the product is cleared for.",
+   "buyer_channel": "Broken. The two China customers are not paying, no more Starshine orders are expected, and BST paid in full but its end user is undisclosed.",
+   "materiality": "Restatement could wipe out roughly $47M of the $53M reported. Against a ~$22M market value (145M shares x $0.155), the restatement is no longer what matters; the cash runway is.",
+   "competition": "Nvidia, Hailo and others. Not relevant to this trade.",
+   "consensus_and_guidance": "Guidance is effectively withdrawn and estimates are stale. Not a driver.",
+   "unverified": [
+    "Borrow fee and locate availability",
+    "Form 4s and 13D/Gs since last results"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "**BZAI research note: restatement fallout. Verdict: WATCH. A short only with conditions, not now.**\n\n**Bottom line:** The driver is real, serious and still getting worse. But most of it is already in the price, and shorting a $0.15 stock that's about to reverse split has execution risks I couldn't verify. This lead doesn't die, but it isn't a trade today. It becomes a small short only if we can borrow the stock cheaply after the split takes effect.\n\n**1. Driver as a mechanism**\n- **What happened:** The audit committee concluded that FY2025 and the 2026 quarters can't be relied on. \nManagement reviewed previously recognized revenue, primarily revenue derived from agreements with the Company's customers in China, and determined to restate\n.\n- **Size:** China was about 91% of FY2025 revenue ($38.6M), and roughly 88% of the affected periods by TECHi's estimate. That's essentially the whole business.\n- **The question that matters isn't the earnings.** It's whether the company can stay solvent and fund itself:\n  - Cash was $36.8M at 30 Jun. $12.4M of that is stuck in China, and the first half burned $41.3M.\n  - A contract manufacturer termination takes effect 14 Dec, with $12.7M of purchase commitments, $5.4M of which needs prepayment.\n  - My estimate: usable US cash is now in the single-digit millions.\n- **Funding is closed off.** The B. Riley equity line can't be used below $1. My inference: with financials that can't be relied on, a registered offering is effectively impossible until the restatement is done. That leaves deeply discounted private placements, insider bridge loans, or a restructuring.\n- **Timeline:** 1 Dec vote, 14 Dec manufacturer termination, 31 Dec forbearance end. All within six weeks.\n\n**2. Checks**\n- **Real and size:** Real, primary-sourced, existential. \nThe company says it will file the restated statements \"as soon as practicable\"\n, with no amounts and no date. The 10-Q is also late: \nthe company does not anticipate filing it within the five-day extension\n.\n- **Noticed: yes, mostly.**\n  - \nDOJ subpoenas from July and August 2026 were first disclosed in an 8-K on October 5\n.\n  - Class actions date back to August. \nA Robbins LLP notice says it is investigating allegations that Blaize \"Faked Transactions\"\n.\n  - The stock is down 94% over the year and 67% over 60 days. It \nhit an all-time low of $0.117 on Nov 20, 2026\n, then bounced about 20% in five days on light volume.\n  - Market value is about $22M (145M shares \u00d7 $0.155), so most of the bad news is priced. What's left for a short is the gap between \"distressed\" and \"zero\".\n- **Transmission:** Through the balance sheet, not earnings. Possible routes: a dilutive financing, Bess foreclosing on its collateral (inference: if the restatement counts as a materially incorrect representation, the forbearance can end early), or Chapter 11.\n- **Reversal:** A clean, small restatement or a financing at a premium would end the short case. Both look unlikely given the collections status of Starshine and NeoTensr.\n- **Override:** The reverse split. \nThe Series B preferred votes only on the reverse split proposal\n and carries 1,000,000 votes per share, so the vote result is already decided. Splits like this mechanically lift the share price and squeeze short-term shorts, and the stock often decays afterwards.\n- **Reaction:** Late-filing notices, a deeply discounted financing, or a forbearance default would be read as confirming the end of the equity. A Bess-led rescue could cause a sharp short-cover rally.\n\n**3. Execution risk (the deciding factor)**\n- Short interest is \n4.1M shares, 1.36 days to cover, 7.79% of float\n, so the short isn't crowded.\n- I couldn't get the borrow fee or locate availability: **unverified**.\n- 20-day volatility is 144%. At $0.15, a +100% squeeze costs as much as the stock going to zero earns.\n\n**4. Catalyst and kill criteria**\n- **Catalysts:** the vote result 8-K (Item 5.07) and the split ratio and effective date; a Nasdaq late-filing notice (Rule 5250(c)(1)); a forbearance termination or new Bess default notice; any private placement or bridge loan terms; a Chapter 11 filing.\n- **Kill the trade if:** financing is priced at or above market, Bess converts or extends on friendly terms, the restatement is quantified as small, or borrow costs more than about 50% a year or can't be located.\n\n**5. Diligence**\n- **Filings:**\n  - 8-K of 23/25 Nov (restatement; filed under Item 4.02 per EDGAR but the body says 5.02)\n  - NT 10-Q of 17 Nov\n  - 5 Oct 8-K (DOJ)\n  - Series B 8-K and press release of 16 Oct\n  - Nasdaq bid-price notice of 28 Sep (deadline 29 Mar 2027)\n  - Third forbearance of 16 Sep (runs to 31 Dec)\n  - 2M shares issued to Bess on 7 Jul\n  - Polar warrants repriced from $5 to $3 on 5 May\n  - CFO change on 30 Nov\n  - Form 4s and 13D/Gs since the last results: **unverified**\n- **Earnings quality:** Not real. The revenue under review is about 90% of what was reported and is mostly uncollected (Starshine $8.8M is with a collections agent; NeoTensr paid $0.2M of $13.3M).\n- **Product scope:** AI inference chips and software. The real issue is who the customers are, not what the product is cleared for.\n- **Buyer channel:** Broken. The two China customers aren't paying, no more Starshine orders are expected, and BST paid in full but its end user is undisclosed.\n- **Materiality:** The restatement could wipe out roughly $47M of the $53M reported. Against a ~$22M market value, the restatement is no longer what matters; the cash runway is.\n- **Competition:** Nvidia, Hailo and others. Not relevant to this trade.\n- **Consensus and guidance:** Guidance is effectively withdrawn and estimates are stale. Not a driver.\n\n**Verdict fields**\n- **Tier:** watch. It can move to small short only after the split takes effect and borrow is confirmed.\n- **Direction:** short\n- **Ticker:** BZAI\n- **Horizon_days:** 35 (through the 31 Dec forbearance end and the January financing need)\n- **Confidence the driver is real:** high. **Confidence "
+ },
+ {
+  "id": 7,
+  "opened": "2026-11-28 00:14:43.123203",
+  "ticker": "PEN.AX",
+  "type": "uranium-producer",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.5,
+  "move": 0.0,
+  "horizon": 10,
+  "status": "open",
+  "driver": "Lance cyber shutdown",
+  "mechanism": "Cyber incident at Strata Energy hit plant and wellfield control systems at Lance, forcing a shutdown. Lost pounds while site costs continue, restart risk after wellfield shutdown, and the shutdown makes the already-needed CY2027 funding raise likely sooner and cheaper, with dilution as the main price channel.",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Real, confirmed by the company. Moderate: small in revenue terms, meaningful for funding."
+   },
+   {
+    "name": "noticed",
+    "verdict": "concern",
+    "reasoning": "Cannot be measured because the stock is halted or suspended since 23 Nov; the 20 Nov close came before the incident. Wide coverage means the reopening price will reflect it straight away."
+   },
+   {
+    "name": "transmission",
+    "verdict": "pass",
+    "reasoning": "Gaps in on reopening. Hits Dec-quarter activities report (late Jan) and any revised 2027 guidance."
+   },
+   {
+    "name": "reversal",
+    "verdict": "concern",
+    "reasoning": "Possible. A fast restart with no data loss could make this a non-event or relief rally."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "Bigger forces are the distressed balance sheet and funding gap and uranium spot price; the cyber event mainly speeds up the existing dilution story."
+   },
+   {
+    "name": "reaction",
+    "verdict": "concern",
+    "reasoning": "No restart date means gap down and probable raise overhang. Restart plus guidance intact means relief bounce from a beaten-down base."
+   }
+  ],
+  "catalysts": [
+   "Restart and guidance announcement that lifts the suspension, at the earliest by the open on Monday 30 Nov",
+   "Dec-quarter activities report (late Jan)",
+   "Any capital raise announcement"
+  ],
+  "kill": [
+   "Restart within days, no data loss, and guidance kept"
+  ],
+  "summary": "Call is WATCH, no trade now, with a negative lean on the stock. The driver is real but secondary to funding and dilution risk. Shares are suspended, so the first move will be a gap on reopening. Shorting not practical on an A$0.16 stock with no borrow. Confidence low to medium. Note states no numeric probability or expected move; those fields are set to 0.5 and 0 as placeholders. Re-evaluate on or after 30 Nov reopening.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "25 Nov ASX update and voluntary suspension read in full; 23 Nov halt request seen via reporting; 23 Nov AGM read via transcript. Not checked: substantial-holder notices, director share trades, note conversion price and covenants.",
+   "earnings_quality": "No profits. FY26 loss included a US$50.1m non-cash impairment (secondary source, unverified).",
+   "product_scope": "U3O8 (yellowcake). Plant built for 2 Mlb a year and licensed for 3 Mlb.",
+   "buyer_channel": "Only 600k lb under contract per CEO at AGM: one contract for 100k lb a year for six years from 2028. Rest sold at spot, so no contracted deliveries currently at risk. Synatom link from one source, unverified.",
+   "materiality": "Each lost month worth roughly US$1.5-4.5m of revenue at about US$90/lb spot, versus A$91m (about US$61m) market value and US$33.6m cash at 30 Sep. A 2-4 week shutdown is small; months-long shutdown or bad restart is a real funding problem.",
+   "competition": "Not relevant. Uranium is interchangeable and Lance volume does not move spot price. Knock-on effects for URG, enCore and UEC unproven and sentiment only.",
+   "consensus_and_guidance": "CY2027 guidance of 500-600k lb set before the incident and confirmed at AGM. Analyst coverage thin (unverified).",
+   "unverified": [
+    "Current production rate versus 50k lb a month target",
+    "Synatom contract",
+    "Note terms and covenants",
+    "Substantial-holder notices and director share trades",
+    "Analyst coverage"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "# Peninsula Energy (PEN.AX): Lance cyber shutdown\n\n**My call: WATCH, no trade now. Lean negative on the stock.** The driver is real. But the shares are suspended, so the first price move will be a gap when they reopen, not a move over days that we could ride. Shorting is not practical on an A$0.16 ASX stock where we can't borrow shares.\n\n## The driver as a mechanism\n- **What happened:** Strata Energy, Peninsula's US subsidiary, found a cyber incident on 20 Nov (US time). It hit the plant and wellfield control systems at Lance. The company shut the mine and isolated the affected systems.\n- **Where it stands:** Lance stays shut until a recovery and checking programme is done. The company promised a restart timeline \"in the coming days\". It says it cannot yet tell whether its CY2027 guidance is hurt. Payroll and corporate systems were not affected, and it is still checking whether data was taken. (Source: the company's 25 Nov ASX announcement, which I read in full.)\n- **How it reaches the numbers:**\n  - Lost pounds, while the site's costs keep running.\n  - Lance has had a rocky ramp-up. It withdrew 2026 guidance in July and had gassing problems in Mine Unit 4. Restarting a wellfield after a shutdown can bring its own problems.\n  - Most important, the company already needs new funding in CY2027 (the CEO said so at the AGM). The shutdown makes that raise likely to come sooner and cheaper. That share dilution is the real channel to the price.\n- **Size:** The target is 50k lb a month, and actual output is below that (the exact current rate is unverified). At about US$90/lb spot, each lost month is worth roughly US$1.5\u20134.5m of revenue. Compare that with:\n  - market value: A$91m (about US$61m)\n  - cash: US$33.6m at 30 Sep\n  - debt: a US$30m convertible note from Soul Patts, fully drawn\n\n  A shutdown of 2\u20134 weeks is small in revenue terms. A shutdown that runs for months, or a bad wellfield restart, is a real problem for financing.\n\n## Checks\n| Check | Verdict |\n|---|---|\n| real_and_size | Real (confirmed by the company). Moderate: small in revenue, meaningful for funding. |\n| noticed | Can't be measured. The stock has been halted or suspended since 23 Nov and the 20 Nov close (A$0.16, \u22128.6%) came *before* the incident. Coverage is wide (WNN, The Register, Mining Journal, security press), so the reopening price will reflect it straight away. |\n| transmission | Gaps in on reopening. Hits the numbers in the Dec-quarter activities report (late Jan) and any revised 2027 guidance. |\n| reversal | Possible. A fast restart with no data loss turns this into a non-event, or even a relief rally. |\n| override | **Yes.** The bigger forces are the distressed balance sheet and funding gap (\u221270% over a year, \u221246% over 60 days) and the uranium spot price. The cyber event mainly speeds up the existing dilution story. |\n| reaction | No restart date \u2192 gap down and probable raise overhang. Restart plus \"guidance intact\" \u2192 relief bounce from a beaten-down base. |\n\n## Diligence\n- **Filings:** Primary documents read: the 25 Nov update and voluntary suspension. Seen via reporting: the 23 Nov halt request. Read via transcript: the 23 Nov AGM. Not yet checked: substantial-holder notices, director share trades, and the note's conversion price and covenants. Search tool limit reached. **Unverified, so the thesis caps at small at most.**\n- **Earnings quality:** No profits. The FY26 loss included a US$50.1m non-cash impairment (secondary source, unverified).\n- **Product scope:** U3O8 (yellowcake). The plant is built for 2 Mlb a year and licensed for 3 Mlb.\n- **Buyer channel:** The CEO said at the AGM that only 600k lb is under contract: one contract for 100k lb a year for six years starting 2028. Everything else is sold at spot. So **no contracted deliveries are at risk right now**, which weakens the lead's \"sales deliveries\" angle. The Synatom link comes from one source and is unverified (it may be that 2028 contract). The three older contracts were terminated earlier.\n- **Materiality:** As above, about US$1.5\u20134.5m a month against a US$61m market value and US$33.6m cash.\n- **Competition:** Not relevant. Uranium is interchangeable and Lance's volume doesn't move the spot price. Knock-on effects for URG, enCore and UEC remain unproven and would be sentiment only.\n- **Consensus and guidance:** CY2027 guidance of 500\u2013600k lb was set before the incident, and management confirmed it at the AGM. Analyst coverage is thin (unverified).\n\n## Catalyst and kill criteria\n- **Catalyst:** The restart and guidance announcement that lifts the suspension, at the earliest by the open on Monday 30 Nov. The suspension can be extended.\n- **Possible future trade:** Re-check after the reopening gap. If restart is confirmed, 2027 guidance holds, and the shares gap down hard, a short bounce trade might exist.\n- **Kill the negative view if:** restart within days, no data loss, and guidance kept.\n- **Upgrade the negative view if:** the suspension is extended, Lance stays shut more than 30 days, data was stolen, guidance is cut, or a discounted capital raise is announced.\n\n## Monitor\n- **Queries:** \"Peninsula Energy Lance restart\", \"Peninsula Energy reinstatement\", \"Peninsula Energy capital raising\", \"Peninsula Energy guidance CY2027\", \"Strata Energy cyber\".\n- **URLs:**\n  - https://www.asx.com.au/markets/trade-our-cash-market/announcements.pen\n  - https://www.pel.net.au\n  - https://wcsecure.weblink.com.au/pdf/PEN/03166214.pdf (the 25 Nov update, as a baseline)\n  - https://www.world-nuclear-news.org/articles/lance-operations-suspended-after-cybersecurity-incident\n\n---\n**VERDICT**\n- **tier:** watch\n- **direction:** negative lean (not tradeable now)\n- **horizon_days:** 10 (reopening on or after 30 Nov; re-evaluate then)\n- **confidence:** low to medium\n- **one_driver:** yes (Lance cyber shutdown), but it is secondary to the funding and dilution risk\n- **diligence gaps:** note terms and covenants, holder notices, current production rate, Synatom contract"
+ },
+ {
+  "id": 8,
+  "opened": "2026-11-28 00:15:36.823383",
+  "ticker": "VIVK",
+  "type": "microcap-equity-reverse-split",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.3,
+  "move": 0.0,
+  "horizon": 45,
+  "status": "open",
+  "driver": "Dilution from the $29M Series B preferred in the Direct Midstream purchase agreement, plus a possible Nasdaq delisting after repeated reverse splits",
+  "mechanism": "Structural decline: the Series B preferred (about 29,000 shares at $1,000 stated value) is roughly 25x the post-split market value of about $1.2M, creating a large potential new stock overhang. Delisting route: if the price closes below $1 for 30 straight business days, Nasdaq issues a delisting determination with no grace period. Pattern: repeated splits, including a fourth split in 2026.",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Real. The potential new stock is enormous relative to the company. The crude-trading revenue (about $303.6M a quarter at about 2% gross margin) does nothing for the equity."
+   },
+   {
+    "name": "noticed",
+    "verdict": "fail",
+    "reasoning": "Fully priced in. The stock is down 99.2% over 60 days and 92.7% over 20 days, with 410% annualized volatility. Anyone watching small caps can see the decline pattern."
+   },
+   {
+    "name": "transmission",
+    "verdict": "fail",
+    "reasoning": "Weak and slow. The 19.99% Exchange Cap blocks big Series B conversions until stockholder approval, which takes weeks to months. Closing requires the listing to be intact. The 30-business-day clock cannot start until the price is below $1, so any delisting determination realistically lands in mid-to-late January or later, at or past the six-week window."
+   },
+   {
+    "name": "reversal",
+    "verdict": "fail",
+    "reasoning": "High risk. A float of about 718k shares and a market value around $1M make a squeeze very possible, and microcaps just after a split often spike."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "The deal could flip the story. Closing it, or management acting to save the listing, would interrupt the decline."
+   },
+   {
+    "name": "reaction",
+    "verdict": "concern",
+    "reasoning": "A delisting notice would be read as confirmation of the decline, not as a surprise."
+   }
+  ],
+  "catalysts": [
+   "A post-split price below $1, which starts the 30-day clock, followed by the Nasdaq delisting determination",
+   "An 8-K showing Series B converting"
+  ],
+  "kill": [
+   "Borrow is unavailable or costs more than about 100%/yr (the likely default)",
+   "The Series B has a fixed conversion price with a floor",
+   "The price holds above $1.50 through mid-December",
+   "Volume squeezes the small float"
+  ],
+  "summary": "Note conclusion: tier WATCH (no trade). Direction: short, lean only. Horizon 45 days. Confidence 0.3. The note says the direction is probably right, but the decline is already priced in, the stock likely cannot be borrowed, the forcing event probably falls outside six weeks, and squeeze risk is high. Diligence gaps (Series B terms, filings) would cap the trade at small even if borrow turned up. Catalyst: a post-split price below $1, then the Nasdaq delisting determination or an 8-K showing Series B conversion. Upgrade path: borrow confirmed at a reasonable fee, Series B shows conversion at a discount to market with no floor, and the price prints below $1 by about Dec 10. The note states no separate probability or expected move; the 0.3 confidence is entered in the probability field and the expected move is 0 because none was stated.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "Partly checked: the Nov 25 8-K (purchase agreement, $250k note converted to shares), the 10-Q, and the March 8-K. Not checked: Forms 4 or 13D/G, or whether a proxy has been filed. The 10-Q shows 10,030,238 shares against about 10,780,240 in the release, leaving roughly 750k shares unexplained.",
+   "earnings_quality": "Unverified. Margins are about 2% on trading revenue, so there are no meaningful profits.",
+   "product_scope": "Not applicable (no regulated product). The crude and water services have no regulatory gate.",
+   "buyer_channel": "Not applicable to a dilution short.",
+   "materiality": "The $29M Series B against a ~$1.2M market value is about 25x. Quarterly revenue of $303.6M against that market value is meaningless at 2% margin.",
+   "competition": "Not applicable.",
+   "consensus_and_guidance": "No meaningful analyst coverage. Guidance is unverified.",
+   "unverified": [
+    "Series B conversion price and floor",
+    "Forms 4 and 13D/G",
+    "Whether a proxy has been filed",
+    "About 750k share count discrepancy between the 10-Q and the release",
+    "Earnings quality",
+    "Guidance"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "I'm passing on this. The short case is directionally right, but there's nothing to trade here: the market already knows, the stock likely can't be borrowed, and the size is too small to matter.\n\n## Research note: VIVK (Vivakor), lead to short around the 1-for-15 reverse split on Dec 1\n\n**1. The driver as a mechanism.** This is a structural decline story, not a news event the market has missed. After this split there will be about 718,683 shares (down from about 10,780,240), at an implied price of about $1.65. That puts the market value near $1.2M. Against that, the Direct Midstream purchase agreement (signed Nov 21) pays roughly $1M in common stock plus **$29M in Series B preferred** (about 29,000 shares at $1,000 stated value). That is about 25x the current market value, a huge amount of potential new stock waiting to convert. Two things to note:\n- **Delisting route:** Vivakor has already split more than once inside a year, and its two-year cumulative ratio is far above 250:1. If the price closes below $1 for 30 straight business days, Nasdaq issues a delisting determination with no grace period to fix it.\n- **Pattern so far:** the stock fell 25.5% the day after the July split announcement and 43.1% the day after the September one. It is now on its fourth split of 2026 (March 1-for-200, July 1-for-20, October 1-for-15, and this one). The Dec 1 release leaves out the March split.\n\n**2. Corroboration.** The Nov 25 release confirms the split terms and the July and October splits. The 10-Q and the March 8-K confirm the March split was done to meet a Nasdaq Hearings Panel requirement. Recent reporting confirms the $1M common / $29M Series B price for Direct Midstream. **The Series B terms (conversion price and floor) are unverified.** The only Series B terms I found are from the 2020 S-1: the lower of $0.20 or a 10% discount to market. That is a different, older series and doesn't count as evidence here.\n\n**3. Checks**\n- **real_and_size:** Real. The potential new stock is enormous relative to the company. The crude-trading revenue (~$303.6M a quarter at ~2% gross margin) does nothing for the equity.\n- **noticed:** Fully priced in. The stock is down 99.2% over 60 days and 92.7% over 20 days, with 410% annualized volatility. Anyone watching small caps can see the decline pattern.\n- **transmission:** Weak and slow:\n  - The 19.99% Exchange Cap in the purchase agreement blocks big Series B conversions until stockholders approve. That approval needs a proxy vote, which takes weeks to months.\n  - Closing the deal requires the listing to be intact.\n  - The 30-business-day clock can't start until the price drops below $1, so any delisting determination realistically lands in mid-to-late January or later. That is at or past the six-week window.\n- **reversal / squeeze:** High risk. A float of about 718k shares and a market value around $1M make a squeeze very possible, and microcaps just after a split often spike.\n- **override:** The deal could flip the story. Closing it, or management doing something to save the listing, would interrupt the decline.\n- **reaction:** A delisting notice would be read as confirmation of the decline, not as a surprise.\n\n**4. Catalyst and kill criteria.** The catalyst is a post-split price below $1, which starts the 30-day clock, followed by the delisting determination, or any 8-K showing Series B converting. The trade is dead if any of these happen:\n- borrow is unavailable or costs more than ~100%/yr (the likely default),\n- the Series B has a fixed conversion price with a floor,\n- the price holds above $1.50 through mid-December,\n- volume squeezes the small float.\n\n**Mandatory diligence**\n- **filings:** Partly checked: the Nov 25 8-K (purchase agreement, $250k note converted to shares), the 10-Q, and the March 8-K. I did not check Forms 4 or 13D/G, or whether a proxy has been filed. The share counts don't reconcile: the 10-Q shows 10,030,238 against about 10,780,240 in the release, leaving roughly 750k shares unexplained.\n- **earnings quality:** Unverified. Margins are about 2% on trading revenue, so there are no meaningful profits.\n- **product scope:** Not applicable (no regulated product). The crude and water services have no regulatory gate.\n- **buyer channel:** Not applicable to a dilution short.\n- **materiality:** The $29M Series B against a ~$1.2M market value is about 25x. Quarterly revenue of $303.6M against that market value is meaningless at 2% margin.\n- **competition:** Not applicable.\n- **consensus and guidance:** No meaningful analyst coverage. Guidance is unverified.\n\n**5. What to monitor**\n- **Searches:** \"Vivakor Nasdaq delisting,\" \"Vivakor Series B certificate of designation,\" \"Vivakor special meeting proxy,\" \"Vivakor Direct Midstream closing.\"\n- **Pages:** the SEC filings list for Vivakor (CIK 1450704), https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1450704&type=&dateb=&owner=include&count=40, and Nasdaq's list of delisted and suspended companies, https://listingcenter.nasdaq.com/.\n- **Data:** the Dec 1 and Dec 2 prices against the ~$1.65 split-adjusted level, and daily borrow availability and fee.\n\n**Bottom line:** The direction is probably right, but the decline is already in the price and the stock likely can't be borrowed. The forcing event probably falls outside six weeks, and squeeze risk on a ~$1M float is high. Two diligence items are unverified (Series B terms and filings), which would cap this at small even if borrow turned up.\n\n---\n- **tier:** watch (no trade)\n- **direction:** short (lean only)\n- **horizon_days:** 45\n- **confidence:** 0.3\n- **catalyst:** a post-split price below $1, then the Nasdaq delisting determination, or an 8-K showing Series B conversion\n- **kill:** no borrow or a fee above ~100%; a floor on the Series B conversion price; the price holding above $1.50 into mid-December; a squeeze on the float\n- **upgrade path:** borrow confirmed at a reasonable fee, the Series B terms show conversion at a discount to marke"
+ },
+ {
+  "id": 9,
+  "opened": "2026-11-28 00:16:57.598764",
+  "ticker": "PEN.AX",
+  "type": "uranium-producer-equity",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.5,
+  "move": 0.0,
+  "horizon": 30,
+  "status": "open",
+  "driver": "Cyber intrusion on 20 Nov 2026 hit the plant and wellfield control systems at Lance (run by Strata Energy), shutting production with no restart date",
+  "mechanism": "Lost sales barely matter given 15,588 lb produced in the September quarter. The channels are cash burn while the plant is down, credibility of CY2027 guidance of 500-600k lb, and funding timing: the shutdown pulls the CY2027 funding need earlier and makes a raise more dilutive",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Real. Small in revenue terms, large for funding and credibility. With about US$34m of cash, a secured 13.5% lender, and a plant that has now been down twice in 2026 (agitator warranty outage Feb-Apr, now cyber), this is material."
+   },
+   {
+    "name": "noticed",
+    "verdict": "concern",
+    "reasoning": "Largely. Down 45.8% over 60 days, 70.4% over a year, and 84% below the 52-week high, before the halt. The A$0.16 is a pre-halt print. Six trade outlets plus WNN covered the incident. Sentiment is already very negative."
+   },
+   {
+    "name": "transmission",
+    "verdict": "concern",
+    "reasoning": "Uncertain and slow. The hit shows in the Dec quarterly (late Jan, near or past the 6-week window) and in any capital raise. A guidance withdrawal could come sooner, in the restart update."
+   },
+   {
+    "name": "reversal",
+    "verdict": "concern",
+    "reasoning": "Real risk. ISR control systems can often be rebuilt in weeks. A restart date within weeks would probably lead to a relief rally from a beaten-down level."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "Soul Patts is both the secured lender and a large shareholder, effectively the funder of last resort. It may prefer a backstopped raise or a waiver to enforcing. That removes the default tail but makes dilution more likely, which is the bear case, only on a slower timetable."
+   },
+   {
+    "name": "reaction",
+    "verdict": "concern",
+    "reasoning": "Expected path: if there is no date, a gap down and a guidance withdrawal. If a date is given, a sharp bounce. Either way, the next raise would probably price well below A$0.16."
+   }
+  ],
+  "catalysts": [
+   "Restart-timeline ASX announcement, expected around 30 Nov",
+   "Any guidance withdrawal, capital raise or waiver disclosure",
+   "Dec quarterly cash figure (late Jan)"
+  ],
+  "kill": [
+   "A restart date within about 3 weeks with CY2027 guidance kept",
+   "A Soul Patts funding commitment or waiver at or above market",
+   "No borrow available",
+   "First print gaps more than 30% below A$0.16, meaning the move is already priced"
+  ],
+  "summary": "Tier: watch. The driver is real and the company is under real funding stress, but a short is not worth taking yet. The stock has already fallen about 46% in 60 days and trading is halted with no post-halt price. Next news is close to a coin flip (restart date squeezes up, no date pushes down). Note covenants and borrow could not be checked, so the thesis is capped at small. Direction is short only if conditions are met. Look again on the first trading day after the halt and when the restart-timeline update is released. Horizon 30 days, confidence low-moderate.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "23 Nov halt (LR 17.1); 25 Nov Update on Lance Cyber Security Incident and Recovery Program; 29 Oct quarterly (US$33.6m cash, US$50.1m non-cash impairment, resource update to 59 Mlb); AGM statement that funding is needed in CY2027. Substantial-holder changes and director dealings since 29 Oct not verified.",
+   "earnings_quality": "No profits. FY26 included a US$50.1m impairment of legacy wellfield assets. Production is pre-commercial (15.6k lb a quarter). No beat to question.",
+   "product_scope": "U3O8 from the Lance ISR project in Wyoming under state permits. Wyoming DEQ had not been notified as of 23 Nov and does not need to be unless permits, spills or property damage are involved. No current sign of a licence problem.",
+   "buyer_channel": "Utility offtake contracts exist from earlier years. Current delivery obligations and the cost of buying uranium to cover missed deliveries are unverified. The halt notice did not mention deliveries.",
+   "materiality": "Lost production is worth about US$1-2m a quarter at the current run-rate, which is not material. Funding pressure is the material channel: about US$34m of cash against corporate costs guided at A$30-35m a year, plus Lance costs. Market cap unverified (share count).",
+   "competition": "Not relevant to the driver. Other US ISR producers (Ur-Energy, enCore, UEC) are unaffected and could pick up interest if utilities seek replacement supply.",
+   "consensus_and_guidance": "CY2027 guidance of 500-600k lb was set before the driver (reaffirmed in July and October) and is now unconfirmed. CY2026 guidance was withdrawn in July. Consensus not checked.",
+   "unverified": [
+    "Covenants (milestones, minimum cash, default triggers)",
+    "Borrow availability",
+    "Current uranium delivery obligations and cost to cover missed deliveries",
+    "Substantial-holder changes and director dealings since 29 Oct",
+    "Share count and market cap",
+    "Consensus",
+    "Whether trading has resumed or a restart date has been announced since 27 Nov"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "# PEN.AX: Lance cyber shutdown. Research note (as of ~28 Nov 2026)\n\n**Bottom line:** The driver is real, and the company is under real funding stress. But a short here isn't worth taking yet. The stock has already fallen about 46% in 60 days. Trading is halted, so there's no post-halt price to sell into. The next news is close to a coin flip: a restart date, which squeezes the price up, or no date, which pushes it down. I couldn't check the note covenants or whether borrow exists, so the thesis is capped at small anyway. **Tier: watch.** Look again on the first trading day after the halt and when the restart-timeline update comes out.\n\n## 1. The driver as a mechanism\n- **What's happening:** On 20 Nov an intrusion hit the plant and wellfield control systems at Lance, run by Peninsula's US subsidiary Strata Energy. Production was shut down. Corporate systems, including payroll, were not affected. There is no restart date, and the company says it can't yet assess the impact on CY2027 guidance (SC World / The Register; WNN, 25 Nov).\n- **Channel into the numbers:** Lost sales barely matter, because there's almost no production to lose. Lance produced only **15,588 lb in the September quarter** (Beinsure, citing the quarterly report). Lost revenue at current prices is likely in the low single-digit US$ millions. What matters is:\n  - **Cash burn while the plant is down.** Fixed costs, recovery advisers and wellfield work keep running.\n  - **Guidance credibility.** CY2027 guidance of 500\u2013600k lb needs a 30x+ jump in run-rate, and the ramp-up was already slow.\n  - **Funding timing.** The CEO said at the AGM that money will be needed in CY2027. The shutdown pulls that need earlier and makes it more dilutive.\n- **Size:**\n  - Cash was **US$33.6m at 30 Sep, after drawing the full US$30m Soul Patts note** (Mugglehead / Kalkine, citing the 29 Oct quarterly). Cash was US$47.1m around 21 Jul.\n  - The note is senior secured, pays a 13.5% coupon plus a 1% fee, and converts at A$0.35 (Substack summary of the prospectus). At A$0.16 the conversion is far out of the money, so the note behaves like debt.\n- **Timeline:** The company promised a restart-timeline update \"in the coming days\". The halt runs until 30 Nov or that announcement, whichever is earlier.\n\n## 2. Checks\n| Check | Verdict |\n|---|---|\n| real_and_size | **Real.** Small in revenue terms, large for funding and credibility. With about US$34m of cash, a secured 13.5% lender, and a plant that has now been down twice in 2026 (agitator warranty outage Feb\u2013Apr, now cyber), this is material. |\n| noticed | **Largely.** Down 45.8% over 60 days, 70.4% over a year, and 84% below the 52-week high, before the halt. The A$0.16 is a pre-halt print. Six trade outlets plus WNN covered the incident. Sentiment is already very negative. |\n| transmission | **Uncertain and slow.** The hit shows in the Dec quarterly (late Jan, which is near or past our 6-week window) and in any capital raise. A guidance withdrawal could come sooner, in the restart update. |\n| reversal | **Real risk.** ISR control systems can often be rebuilt in weeks. A restart date \"within weeks\" would probably lead to a relief rally from a beaten-down level. |\n| override | **Soul Patts.** It is both the secured lender and a large shareholder, and is effectively the funder of last resort. It may prefer a backstopped raise or a waiver to enforcing. That removes the default tail but makes dilution more likely, which is the bear case, only on a slower timetable. |\n| reaction | Expected path: if there's no date, a gap down and a guidance withdrawal. If a date is given, a sharp bounce. Either way, the next raise would probably price well below A$0.16. |\n\n## 3. Catalyst and kill criteria\n- **Catalyst:** The restart-timeline ASX announcement, expected around 30 Nov. After that, any guidance withdrawal or capital-raise or waiver disclosure. Then the Dec quarterly cash figure (late Jan).\n- **Kill the short idea if any of these happen:**\n  1. A restart date within about 3 weeks with CY2027 guidance kept.\n  2. A Soul Patts funding commitment or waiver at or above market.\n  3. No borrow available.\n  4. The first print gaps more than 30% below A$0.16, meaning the move is already priced.\n- **Re-tier to small short if:** the update has no restart date or extends the outage past January, or withdraws CY2027 guidance, **and** the first print holds around A$0.13 or higher, **and** borrow is confirmed.\n\n## 4. Diligence\n- **Filings:**\n  - 23 Nov halt (LR 17.1).\n  - 25 Nov \"Update on Lance Cyber Security Incident and Recovery Program\".\n  - 29 Oct quarterly (US$33.6m cash, US$50.1m non-cash impairment, resource update to 59 Mlb).\n  - The AGM statement said funding is needed in CY2027.\n  - Substantial-holder changes and director dealings since 29 Oct: **unverified.**\n- **Earnings quality:** There are no profits. FY26 included a US$50.1m impairment of legacy wellfield assets. Production is pre-commercial (15.6k lb a quarter). There is no beat to question.\n- **Product scope:** U3O8 from the Lance ISR project in Wyoming under state permits. Wyoming DEQ hadn't been notified as of 23 Nov, and doesn't need to be unless permits, spills or property damage are involved. There is no current sign of a licence problem.\n- **Buyer channel:** Utility offtake contracts exist from earlier years, but current delivery obligations and the cost of buying uranium to cover missed deliveries are **unverified.** The halt notice did not mention deliveries.\n- **Materiality:** Lost production is worth about US$1\u20132m a quarter at the current run-rate, which is not material. Funding pressure is the material channel: about US$34m of cash against corporate costs guided at A$30\u201335m a year, plus Lance costs. Market cap needs a share count, which is **unverified.**\n- **Competition:** Not relevant to the driver. Other US ISR producers (Ur-Energy, enCore, UEC) are unaffected and could pick up interest if utilities go looking for replacement supply.\n- **Covenants:"
+ },
+ {
+  "id": 10,
+  "opened": "2026-11-28 00:18:34.203365",
+  "ticker": "BZAI",
+  "type": "distressed-microcap-edge-ai-hardware",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.45,
+  "move": 0.0,
+  "horizon": 30,
+  "status": "open",
+  "driver": "Going concern plus restatement; the manufacturer leaves 14 Dec; nearly certain reverse split followed by dilutive financing.",
+  "mechanism": "Reported revenue is collapsing and the ability to keep operating is in question. Drivers are the restatement (non-reliance on FY2025 and five quarters through June 2026), a revenue collapse to about $0.5M in Q3, the sole contract manufacturer leaving 14 Dec with $12.7M of purchase commitments, NeoTensr's unpaid $13.3M, and cash of $36.8M with $41.3M first-half burn. It reaches the price via a dilutive raise, the reverse split followed by selling, and lower restated revenue, all within about six weeks.",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Real, existential. Booked revenue is under question, there is no manufacturer after 14 Dec, and unrestricted cash is probably under $10-15M by now (inferred from burn; not verified)."
+   },
+   {
+    "name": "noticed",
+    "verdict": "concern",
+    "reasoning": "Largely priced. Stock is down 93.8% over a year, 67% over 60 days and 23% over 20 days, then rose 20% in the 5 days after the restatement on 0.61x normal volume, read as sellers exhausted. Class actions and DOJ/SEC involvement were already public."
+   },
+   {
+    "name": "transmission",
+    "verdict": "pass",
+    "reasoning": "Transmission runs through the share count, not earnings. Likely path is split, then raise, then dilution. Restated figures may cut historical revenue but come later."
+   },
+   {
+    "name": "reversal",
+    "verdict": "concern",
+    "reasoning": "Two upside risks. If NeoTensr pays the $13.1M in Q4 (about 58% of market value in cash), or a new contract manufacturer is found, either could squeeze a $0.15 stock with 144% volatility."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "Financing terms dominate. A rescue deal or sale of the company could swamp everything else, and the reverse split leaves 600M authorized shares for heavy dilution."
+   },
+   {
+    "name": "reaction",
+    "verdict": "concern",
+    "reasoning": "Typical microcap pattern: after a reverse split the stock drifts down toward a raise. If the split ratio is announced together with a NeoTensr collection, the stock would spike instead."
+   }
+  ],
+  "catalysts": [
+   "1 Dec vote and the Item 5.07 8-K, then the board's choice of ratio and the split taking effect (likely in December)",
+   "14 Dec, when the manufacturer leaves",
+   "A Nasdaq 5250 notice for the late 10-Q, filed as an Item 3.01 8-K",
+   "A dilutive raise, which the 31 Dec financing bonus threshold for the CFO suggests is coming"
+  ],
+  "kill": [
+   "NeoTensr's receivable is collected (via an 8-K or disclosure in the 10-Q)",
+   "A replacement contract manufacturer is announced",
+   "Strategic or non-dilutive financing arrives",
+   "The board abandons the split",
+   "Borrow is unavailable or costs more than about 100% a year"
+  ],
+  "summary": "Rated Watch: a conditional short only, with no position today. The distress is real and checks out in primary filings, but most of it is already in the price. A short also carries two outside-chance upside surprises that could squeeze it hard. Confidence 0.45 that the stock reprices lower inside the 30-day horizon. Entry only after the split takes effect, if borrow is available at reasonable cost and the stock fails to hold its first-day post-split level; small size.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "Primary filings reviewed: 11/25 8-K (restatement), 10/16 and 10/22 8-Ks (Series B), DEF 14A of 11/2, 10/5 424B3/8-K (guidance, NeoTensr, class action), Q2 10-Q of 8/13, 10/2 Item 3.01 (bid price) and 11/17 NT 10-Q. CFO changed 2 Nov (Costas in; Sehmi retires 30 Nov). Forms 4 and 13D/G not checked.",
+   "earnings_quality": "Poor. Last year's revenue is being restated. Q2 2026 revenue of $12.0M came almost all from NeoTensr, which has paid only 1.5% of the $13.3M it owes. Starshine is not expected to place more orders.",
+   "product_scope": "Edge AI inference chips and hardware, plus resold servers. Not regulated in the way a cleared medical product would be. China sales go through local subsidiaries; Q3 sales went to Poland.",
+   "buyer_channel": "Revenue was almost all from two China customers (61% and 27% of FY2025). They have not paid and are under investigation. In practice there are no paying buyers left right now.",
+   "materiality": "Collected-cash revenue is close to zero against a market value of about $22.5M (145.0M shares x $0.155). The receivable and China cash together (~$25M) exceed market value but may not be recoverable.",
+   "competition": "Not the driver. Nvidia Jetson, Hailo, Ambarella and others serve the same edge AI demand.",
+   "consensus_and_guidance": "FY2026 guidance of $32-36M was set on 5 Oct, before the restatement. It implies about $17M+ in Q4, which looks unachievable and is effectively withdrawn. Consensus is not meaningful.",
+   "unverified": [
+    "Nasdaq late-filing (5250) letter",
+    "Customer D's receivable",
+    "Any Form 4 or 13D/G activity since the proxy",
+    "Borrow availability and cost",
+    "Cash at 30 Sep"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "I rate this **Watch**: a conditional short only, and no position today. The distress is real and checks out in primary filings, but most of it is already in the price. A short also carries two outside-chance upside surprises that could squeeze it hard.\n\n## 1. Driver as a mechanism\nBlaize's reported revenue is collapsing and its ability to keep operating is in question.\n- **Restatement:** On 23 Nov the audit committee said FY2025 and five quarters through June 2026 can no longer be relied on. The problem is revenue recognition, mainly on China contracts, which were 91% of FY2025 revenue ($35.2M of $38.6M; that split comes from secondary sources).\n- **Revenue collapse:** Q3 revenue was about $0.5M, from one customer in Poland.\n- **Manufacturing:** The sole contract manufacturer leaves on 14 Dec. The company still has $12.7M of purchase commitments, $5.4M of which must be prepaid.\n- **Collections:** NeoTensr owes $13.3M that was due 24 Sep. It paid only $0.2M and the terms were extended into Q4.\n- **Cash:** $36.8M at 30 Jun, of which $12.4M sits in China behind capital controls. First-half operating cash burn was $41.3M. The B. Riley equity line can't be used below $1.\n- **How it reaches the price:** a dilutive raise, the reverse split followed by selling, and lower restated revenue. All of this lands within about six weeks.\n- **Size:** existential. Market value is about $22.5M (145.0M shares \u00d7 $0.155), and another 94.5M shares are reserved for options, warrants and earnouts.\n\n## 2. Corroboration (primary sources checked directly)\n- **11/25 8-K:** Non-reliance confirmed for FY2025 and the quarters ended 3/25, 6/25, 9/25, 3/26 and 6/26. Restated statements will come \"as soon as practicable\", with no date and no size given. The body heading says \"Item 5.02\" while the text is clearly 4.02 content. I read that as a drafting error, not a substantive issue.\n- **Q2 10-Q (blz-20260630):** The manufacturer's notice to terminate by **14 Dec 2026 is confirmed in the 10-Q itself**, which settles the dossier's open question. It also confirms the going-concern note and the cash and China figures.\n- **10/5 424B3 / 8-K:** Confirms the $0.2M NeoTensr payment on 30 Sep, the extension into Q4, and Q3 revenue of about $0.5M.\n- **DEF 14A and 10/16 8-K:** The split vote runs 1:10 to 1:35. Each Series B fraction carries 1,000 votes and is cast the same way as its common share. Any Series B not present when polls open is redeemed. Brokers may vote on the split without instructions. Together these make **approval almost certain**, and the proxy itself says the split can pass with less than a majority of common shares. The board may still choose not to do it.\n- **Not verified:** the Nasdaq late-filing (5250) letter, Customer D's receivable, any Form 4 or 13D/G activity since the proxy, borrow availability and cost, and cash at 30 Sep.\n\n## 3. Checks\n| Check | Verdict |\n|---|---|\n| real_and_size | **Real, existential.** Revenue that was booked is under question, there is no manufacturer after 14 Dec, and unrestricted cash is probably under $10\u201315M by now (inferred from burn; not verified). |\n| noticed | **Largely priced.** The stock is down 93.8% over a year and 67% over 60 days, and fell 23% over 20 days. It then *rose 20% in the 5 days after the restatement*, on volume 0.61\u00d7 normal. That is sellers exhausted, not a market waking up. Class actions and DOJ/SEC involvement were already public. |\n| transmission | **Through the share count, not earnings.** The likely path is split \u2192 raise \u2192 dilution. Restated figures may cut historical revenue but come later. |\n| reversal | **Two upside risks.** If NeoTensr pays the $13.1M in Q4, that is about 58% of market value in cash. A new contract manufacturer would also help. Either could squeeze a $0.15 stock with 144% volatility. |\n| override | **Financing terms dominate.** A rescue deal or a sale of the company could swamp everything else, and the reverse split leaves 600M authorized shares for heavy dilution. |\n| reaction | Typical microcap pattern: after a reverse split the stock drifts down toward a raise. If the split ratio is announced together with a NeoTensr collection, the stock would spike instead. |\n\n## 4. Catalyst and kill criteria\n**Catalysts**\n- 1 Dec vote and the Item 5.07 8-K, then the board's choice of ratio and the split taking effect (likely in December).\n- 14 Dec, when the manufacturer leaves.\n- A Nasdaq 5250 notice for the late 10-Q, filed as an Item 3.01 8-K.\n- A dilutive raise, which the 31 Dec financing bonus threshold for the CFO suggests is coming.\n\n**Kill the short if any of these happen:**\n- NeoTensr's receivable is collected (an 8-K, or disclosure in the 10-Q).\n- A replacement contract manufacturer is announced.\n- Strategic or non-dilutive financing arrives.\n- The board abandons the split.\n- Borrow is unavailable or costs more than about 100% a year.\n\n## 5. Diligence\n- **filings:** Primary filings were reviewed: the 11/25 8-K (restatement), the 10/16 and 10/22 8-Ks (Series B), DEF 14A of 11/2, the 10/5 424B3/8-K (guidance, NeoTensr, class action), Q2 10-Q of 8/13, the 10/2 Item 3.01 (bid price) and the 11/17 NT 10-Q. The CFO changed on 2 Nov (Costas in; Sehmi retires 30 Nov). **Forms 4 and 13D/G were not checked: unverified.**\n- **earnings quality:** Poor. Last year's revenue is being restated. Q2 2026 revenue of $12.0M came almost all from NeoTensr, which has now paid only 1.5% of the $13.3M it owes. Starshine is not expected to place more orders.\n- **product scope:** Edge AI inference chips and hardware, plus resold servers. They are not regulated in the way a cleared medical product would be. China sales go through local subsidiaries; Q3 sales went to Poland.\n- **buyer channel:** Revenue was almost all two China customers (61% and 27% of FY2025). They have not paid and are under investigation. In practice there are no paying buyers left right now.\n- **materiality:** Collected-cash revenue is close to zero, against a market value of about $22.5M. T"
+ },
+ {
+  "id": 11,
+  "opened": "2026-11-28 00:25:18.389570",
+  "ticker": "VIVK",
+  "type": "dilutive microcap equity",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.0,
+  "move": 0.0,
+  "horizon": 30,
+  "status": "open",
+  "driver": "Direct Midstream preferred plus convertible-note dilution",
+  "mechanism": "Pending Direct Midstream acquisition paid in $1M common stock, $29M Series B Preferred and a $10M cash investment, with price adjusting on Direct's first-year performance and nothing happening unless the deal closes; plus May 2026 convertible notes converting at falling prices into freely tradeable shares, roughly 72% of the current share count in November alone, in a death-spiral dynamic amplified by repeated reverse splits.",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "pass",
+    "reasoning": "Yes, and huge compared with the company. The bigger issue is how much of it is still unpriced."
+   },
+   {
+    "name": "noticed",
+    "verdict": "pass",
+    "reasoning": "Yes. The stock is down 53% in 5 days, 92.7% in 20 days and 99.2% in 60 days, with volume about 2.5 times normal. The market already treats the equity as being diluted away."
+   },
+   {
+    "name": "transmission",
+    "verdict": "concern",
+    "reasoning": "The note conversions are reaching the price now. The Series B is gated: the deal has to close first, and issuing that much stock probably needs shareholder approval under Nasdaq's 20% rule. Both points are unverified because Exhibit 10.1 was not read. Most likely the Series B does not convert within six weeks."
+   },
+   {
+    "name": "reversal",
+    "verdict": "pass",
+    "reasoning": "Not likely to reverse. The danger to a short is a squeeze after Dec 1, when the share count is only about 720k."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "Listing status matters more than the deal. The company is far past Nasdaq's 250-to-1 reverse split threshold over two years and is already working under a Hearings Panel, so a delisting or move to OTC is plausible. That hurts holders but is messy for anyone short."
+   },
+   {
+    "name": "reaction",
+    "verdict": "pass",
+    "reasoning": "Each split has been sold hard: -25.5% after the July announcement and -43.1% after the September one. Expect the same pattern after Dec 1, the same dynamic the market has already been trading."
+   }
+  ],
+  "catalysts": [
+   "Dec 1 reverse split becomes effective",
+   "More note-conversion 8-Ks",
+   "Closing 8-K with a Series B certificate of designation",
+   "Nasdaq delisting notice"
+  ],
+  "kill": [
+   "Exhibit 10.1 shows a fixed high conversion price, a non-convertible preferred, or conversion gated on shareholder approval",
+   "The deal is terminated",
+   "Borrow is unavailable or costs more than about 100% a year (likely)",
+   "A squeeze after the split"
+  ],
+  "summary": "Reject as a trade and keep on watch. Dilution is real and very large compared with the company, but the market has already priced most of it in, the stock is probably impossible to borrow, and the one document that matters, Exhibit 10.1 with the Series B terms, was not read. Tier: watch (no trade). Direction: short lean. Conviction: low. Size: none; if Exhibit 10.1 shows a floating conversion with no approval gate and borrow is available, consider at most a small position, half the usual size. Next action: fetch Exhibit 10.1 and check borrow before taking any position.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "Read: 8-K 0001829126-26-012880 (deal, $54.5k note conversion, Q3 press release furnished) and earlier dossier reads of -012212, -012617, -010815 and 10-Q -012700, whose financial tables rendered blank. Not read: Exhibit 10.1, any Series B certificate of designation, Forms 4, 13D/13G or proxy. Partly unverified.",
+   "earnings_quality": "Q3 headline shows $303.6M revenue (up 17 times) and a $0.7M operating loss, likely low-margin pass-through, so it says little about value. Unverified: 10-Q tables were blank.",
+   "product_scope": "Direct Midstream is Permian saltwater disposal: 17 disposal facilities plus pipeline assets (press release headline).",
+   "buyer_channel": "Not applicable for a dilution short. Direct's customers were not checked.",
+   "materiality": "$30M of stock consideration against about $1.2M of market value (about 25 times). November note conversions issued about 7.8M shares against 10.78M outstanding.",
+   "competition": "Not relevant to this thesis.",
+   "consensus_and_guidance": "No meaningful analyst coverage. The deal was flagged in October with an LOI valuing Direct at 4 times targeted 2027 free cash flow, so the deal itself is old news.",
+   "unverified": [
+    "Exhibit 10.1 purchase agreement and Series B terms",
+    "Series B certificate of designation",
+    "Shareholder approval requirement under Nasdaq 20% rule",
+    "10-Q financial tables (blank on render)",
+    "Borrow availability and cost",
+    "Direct Midstream customers"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "# VIVK: Direct Midstream preferred plus convertible-note dilution. Short lean, but not tradeable\n\n**Bottom line:** Reject as a trade and keep on watch. The dilution is real and very large compared with the company. But the market has already priced most of it in, the stock is probably impossible to borrow, and I could not read the one document that matters: Exhibit 10.1, which holds the Series B terms. I ran out of tool calls before I could fetch it.\n\n## Driver as a mechanism\n- **The deal:** On Nov 21 Vivakor signed an agreement to buy all of Direct Midstream from Chris Early. The price is $1M in common stock, $29M in Series B Preferred and a $10M cash investment after closing. The price adjusts on Direct's performance in its first year after the cash goes in, and nothing happens unless the deal closes (8-K 0001829126-26-012880, Item 1.01, read directly).\n- **Size:** Before the Dec 1 split there are about 10.78M shares. At $0.11 that is a market value of roughly **$1.2M**. The $30M of stock consideration is about **25 times the current equity**. Even the $1M of common is about 80% of the market value. If the Series B converts at or near market, holders today end up with a few percent of the company.\n- **What is already happening now, and matters more:** The May 2026 convertible notes ($15M facility, $6M drawn) are converting at falling prices. In November alone they converted into 4.35M shares at about $0.19, 3.17M at about $0.23 and 250k at about $0.22. That is about 7.8M shares, roughly 72% of the current share count. Notes converting at $0.22 while the stock trades at $0.11 suggests the conversion price floats down with the market. Those shares are freely tradeable with no Rule 144 legend (8-K Item 3.02, read directly). This is a classic dilution death spiral, and it is happening today.\n- **Reverse splits:** 1-for-200 in March, 1-for-20 in July, 1-for-15 in October and another 1-for-15 on Dec 1. Combined, that is about 900,000-to-1 in under a year. The Dec 1 split takes the share count from about 10.78M to about 718,683.\n\n## Checks\n- **real_and_size:** Yes, and huge compared with the company. The bigger issue is how much of it is still unpriced.\n- **noticed:** Yes. The stock is down 53% in 5 days, 92.7% in 20 days and 99.2% in 60 days, with volume about 2.5 times normal. The market already treats the equity as being diluted away.\n- **transmission:** The note conversions are reaching the price now. The Series B is gated: the deal has to close first, and issuing that much stock for an acquisition probably needs shareholder approval under Nasdaq's 20% rule. Both points are unverified because Exhibit 10.1 was not read. Most likely the Series B does not convert within six weeks.\n- **reversal:** Not likely to reverse. The danger to a short is a squeeze after Dec 1, when the share count is only about 720k.\n- **override:** Listing status matters more than the deal. Under Nasdaq's rules, a company whose reverse splits add up to 250-to-1 or more over two years gets no compliance period. VIVK is far past that and already working under a Hearings Panel, so a delisting or move to OTC is plausible. That hurts holders, but it is messy for anyone short.\n- **reaction:** Each split has been sold hard: \u221225.5% after the July announcement and \u221243.1% after the September one. Expect the same pattern after Dec 1, which is the same dynamic the market has already been trading.\n\n## Diligence\n- **Filings:** Read: the 8-K -012880 (deal, $54.5k note conversion, Q3 press release furnished) and the earlier dossier reads of -012212, -012617, -010815 and the 10-Q -012700, whose financial tables rendered blank. Not read: Exhibit 10.1 (the purchase agreement), any Series B certificate of designation, Forms 4, 13D/13G or proxy. **Partly unverified.**\n- **Earnings quality:** The Q3 headline says $303.6M of revenue (up 17\u00d7) and a $0.7M operating loss. That revenue is likely low-margin crude supply-and-trading pass-through, so it says little about value. **Unverified:** the 10-Q tables were blank.\n- **Product scope:** Not applicable. Direct Midstream is Permian saltwater disposal: 17 disposal facilities plus pipeline assets (press release headline).\n- **Buyer channel:** Not applicable for a dilution short. Direct's customers were not checked.\n- **Materiality:** $30M of stock consideration against about $1.2M of market value (about 25\u00d7). November note conversions issued about 7.8M shares against 10.78M outstanding.\n- **Competition:** Not relevant to this thesis.\n- **Consensus and guidance:** No meaningful analyst coverage. The deal was flagged in October with a letter of intent valuing Direct at 4\u00d7 targeted 2027 free cash flow, so the deal itself is old news.\n\n## Catalyst and kill criteria\n- **Catalyst:** The Dec 1 split becomes effective, followed by more note-conversion 8-Ks, the closing 8-K with a Series B certificate of designation, or a Nasdaq delisting notice.\n- **Kill (for the short):**\n  - Exhibit 10.1 shows a fixed, high conversion price, a non-convertible preferred, or conversion gated on shareholder approval.\n  - The deal is terminated.\n  - Borrow is unavailable or costs more than about 100% a year. This is likely.\n  - A squeeze after the split.\n\n## Monitor\n- **Exhibit 10.1:** sec.gov/Archives/edgar/data/0001450704/000182912626012880/ (fetch the index and Exhibit 10.1 first).\n- **EDGAR filings list for CIK 1450704:** watch for 8-K Item 3.02 (note conversions), Item 5.03 (Series B designation), Item 3.01 (Nasdaq delisting notice), any DEF 14A asking shareholders to approve share issuance, and Form 4s from James Ballengee (chairman and CEO).\n- **News searches:** \"Vivakor Nasdaq delisting\", \"Vivakor Direct Midstream closing\", \"Vivakor conversion notes\".\n- **Market data:** borrow availability and cost, and daily dollar volume after the split.\n\n---\n**VERDICT**\n- tier: watch (no trade)\n- direction: short lean\n- horizon_days: 30\n- conviction: low. The direction is right, but the move has already happened, a short probabl"
+ },
+ {
+  "id": 12,
+  "opened": "2026-11-28 00:27:26.771713",
+  "ticker": "VIVK",
+  "type": "micro-cap energy, saltwater disposal, going-concern",
+  "tier": "watch",
+  "direction": "short",
+  "p": 0.0,
+  "move": 0.0,
+  "horizon": 42,
+  "status": "open",
+  "driver": "Series B preferred converting into about 276M shares, flooding the share count and pushing the price down",
+  "mechanism": "Vivakor pays for Direct Midstream with $1M of common stock and $29M of Series B preferred; the preferred converts at the 5-day VWAP with no floor. Per the MIPA, conversion requires mutual agreement of Purchaser and Seller, is subject to the Exchange Cap until shareholder approval, and common above 19.99% is issued as Purchaser Preferred Stock. Deal not closed; deadline Jan 31, 2027; uncapped issuance comes roughly 3 months after closing, outside the 42-day horizon. The 276M figure is an eventual ratio, not a near-term flow.",
+  "checks": [
+   {
+    "name": "real_and_size",
+    "verdict": "concern",
+    "reasoning": "Real and enormous relative to a market cap of about $1.1M, but the Series B piece is not acting now; current dilution comes from RBW notes (about $11.3M left) and the reverse-split cycle."
+   },
+   {
+    "name": "noticed",
+    "verdict": "concern",
+    "reasoning": "Fully noticed: -92.7% over 20 days, -99.2% over 60 days, -53% over 5 days, 410% annualized volatility; sharp falls after each split announcement."
+   },
+   {
+    "name": "transmission",
+    "verdict": "fail",
+    "reasoning": "Series B dilution reaches per-share value only after closing plus shareholder approval, not within six weeks."
+   },
+   {
+    "name": "reversal",
+    "verdict": "concern",
+    "reasoning": "Mutual consent on conversion, the cap converting into more preferred, and possible renegotiation could stretch the timeline further."
+   },
+   {
+    "name": "override",
+    "verdict": "concern",
+    "reasoning": "Bigger forces swamp this: going-concern status, $0.4M cash against a $51.6M working-capital deficit, RBW note conversions, and the Dec 1 1-for-15 split with squeeze risk."
+   },
+   {
+    "name": "reaction",
+    "verdict": "fail",
+    "reasoning": "The market already treats every issuance as a death-spiral signal; no fresh information edge left."
+   }
+  ],
+  "catalysts": [
+   "Closing 8-K for the Direct Midstream deal (outside the window)",
+   "Proxy filing within 60 days of closing",
+   "Shareholder approval vote within 90 days of closing"
+  ],
+  "kill": [
+   "Deal terminated or renegotiated",
+   "No borrow available, or borrow cost above about 100% a year",
+   "Deal not closed by Jan 31, 2027",
+   "Squeeze after the Dec 1 split"
+  ],
+  "summary": "Verdict: PASS / WATCH, no trade. The dilution is real, but the Series B conversion into about 276M shares cannot happen inside six weeks under the deal's terms, and at -99% over 60 days the market has already priced the dilution pattern. Lean short only; confidence low; size none; tier watch; re-evaluate when the deal closes.",
+  "outcome": null,
+  "failed_check": null,
+  "diligence": {
+   "filings_reviewed": "8-K/MIPA (Nov 21-25) verified; 10-Q (Nov 20) share counts and note terms from dossier, unverified; Form 4 and 13D/13G not reviewed, unverified; Certificate of Designation (Exhibit C) not filed in final form",
+   "earnings_quality": "Unverified. Q3 revenue of $303.6M is almost entirely low-margin crude trading; going-concern language present.",
+   "product_scope": "Direct is a Permian saltwater-disposal and produced-water operator; New Mexico assets estimated at over $2M a year, subject to approvals (unverified).",
+   "buyer_channel": "Not applicable for a short; relevant question is borrow availability and cost, unverified and probably prohibitive near $0.11 (about $1.6 post-split).",
+   "materiality": "$29M preferred plus 6% stock dividend (about $1.7M a year) against market cap of about $1.1M; massive but deferred.",
+   "competition": "Not applicable.",
+   "consensus_and_guidance": "No analyst coverage. Deal disclosed Nov 21-25.",
+   "unverified": [
+    "10-Q share counts and note terms",
+    "Form 4 and 13D/13G filings",
+    "Borrow availability and cost",
+    "Final Certificate of Designation",
+    "Earnings quality",
+    "Reconcile RBW conversions at about $0.23 versus stated $0.37 floor"
+   ]
+  },
+  "cap_reasons": null,
+  "note": "**Verdict: PASS / WATCH, no trade.** The dilution is real, but the specific driver in the lead, the Series B converting into about 276M shares, can't happen inside six weeks under the deal's own terms. And at -99% over 60 days, the market has already priced the dilution pattern.\n\n## Driver as a mechanism\nVivakor would pay for Direct Midstream with $1M of common stock and $29M of Series B preferred. The idea is that the preferred converts at the 5-day VWAP with no floor, flooding the share count and pushing the price down further. The source filing (the purchase agreement, or MIPA) changes three parts of that story:\n\n1. **Conversion is not at the seller's option.** The Series B is convertible only \"at the mutual agreement of the Purchaser and Seller,\" at the 5-day VWAP, and subject to the Exchange Cap until shareholders approve. Vivakor's board effectively holds a veto on each conversion. This is not a standard toxic preferred the holder can convert at will.\n2. **The Exchange Cap delays issuance rather than ending it.** Common stock above 19.99% of the shares outstanding at signing \"shall instead be issued in Purchaser Preferred Stock.\" The value the seller is owed stays the same. Before approval, that means at most about 2M new common shares, against roughly 10.8M outstanding before the split.\n3. **The timeline sits outside our window.** The deal hasn't closed; the deadline to close is **Jan 31, 2027**. After closing, the proxy is due within 60 days and the shareholder meeting within 90 days. The dividend steps up 4 points if approval isn't obtained within 120 days. So uncapped Series B issuance comes, at the earliest, roughly 3 months after closing. That's well beyond the 42-day horizon.\n\nThe 276M-share figure is a fair illustration of the eventual ratio (about 26x the current base, and the ratio survives the Dec 1 1-for-15 split). It is not a near-term flow.\n\n## Checks\n- **real_and_size:** Real and enormous relative to a market cap of about $1.1M. But the Series B piece isn't acting now. The dilution happening now comes from the RBW notes (about $11.3M left, per the 10-Q) and the reverse-split cycle.\n- **noticed:** Fully. The stock is -92.7% over 20 days, -99.2% over 60 days, -53% over 5 days, with 410% annualized volatility. The stock has fallen sharply after each split announcement (-25% in July, -43% in September).\n- **transmission:** The Series B dilution reaches per-share value only after closing plus shareholder approval. Not within six weeks.\n- **reversal:** Mutual consent on conversion, the cap converting into more preferred, and a possible renegotiation could all stretch the timeline further.\n- **override:** Bigger forces swamp this one: going-concern status, $0.4M of cash against a $51.6M working-capital deficit, RBW note conversions, and the Dec 1 split, which mechanically resets the price and often causes squeezes in low-float names.\n- **reaction:** The market already treats every issuance as a death-spiral signal. There's no fresh information edge left.\n\n## Mandatory diligence\n- **filings:** 8-K/MIPA (Nov 21\u201325) verified. 10-Q (Nov 20) share counts and note terms come from the dossier and are **unverified**. Form 4 and 13D/13G filings not reviewed (**unverified**). The Certificate of Designation (Exhibit C) hasn't been filed in final form.\n- **earnings quality:** **Unverified.** Q3 revenue of $303.6M is almost entirely low-margin crude trading, and the company carries going-concern language.\n- **product scope:** Not applicable. Direct is a Permian saltwater-disposal and produced-water operator; the New Mexico assets are estimated at over $2M a year, subject to approvals (unverified).\n- **buyer channel:** Not applicable for a short. The relevant question is who can short it. Borrow availability and cost are **unverified** and probably prohibitive for a stock near $0.11, or about $1.6 after the split.\n- **materiality:** $29M of preferred plus a 6% stock dividend (about $1.7M a year) against a market cap of about $1.1M. Massive, but deferred.\n- **competition:** Not applicable.\n- **consensus and guidance:** No analyst coverage. The deal was disclosed on Nov 21\u201325.\n\n## Catalyst and kill criteria\n- **Catalyst, outside the window:** a closing 8-K, then the proxy filing and the approval vote.\n- **Kill / no-go:** the deal is terminated or renegotiated; no borrow, or borrow costs over about 100% a year; a squeeze after the split.\n- **Upgrade to small short:** the deal closes and the proxy is filed early, the RBW conversion pace speeds up after the split, and borrow is confirmed.\n\n## Monitor\n- Queries: \"Vivakor closing Direct Midstream\", \"Vivakor proxy stockholder approval Series B\", \"Vivakor RBW conversion\", \"Vivakor reverse split Nasdaq deficiency\".\n- URLs: EDGAR filing index https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1450704 (watch for 8-K Items 2.01/3.02/5.03, a PRE 14A or DEF 14A, and new 424B filings); Nasdaq listing status and the threshold list; the desk's borrow screen for VIVK.\n- Reconcile: the RBW conversions at about $0.23 versus the stated $0.37 floor, which may mean the floor was split-adjusted or waived. That matters more for near-term dilution than the Series B does.\n\n---\ndirection: short (lean only)\ntier: watch\nhorizon_days: 42 (but the Series B driver falls outside it; re-evaluate when the deal closes)\nconfidence: low\nsize: none\nkey_risk: the move is already priced in after a 99% fall; borrow is probably unavailable; squeeze risk after the Dec 1 split; conversion needs mutual consent; the Exchange Cap pushes Series B issuance past the window\nkill_criteria: deal terminated or renegotiated; no borrow, or borrow above about 100% a year; deal not closed by Jan 31, 2027\ndiligence_status: partial (MIPA verified; 10-Q figures, Form 4s, borrow, and the final Certificate of Designation unverified), so capped at watch"
+ }
+]

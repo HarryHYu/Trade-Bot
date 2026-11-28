@@ -1,0 +1,502 @@
+{
+ "funnel_30d": {
+  "haiku_flags": 452,
+  "sonnet_shortlist": 66,
+  "opus_theses": 12,
+  "trades": 0
+ },
+ "spend": [
+  {
+   "day": "2026-11-05",
+   "purpose": "chat",
+   "usd": 0.0366,
+   "calls": 2
+  },
+  {
+   "day": "2026-11-05",
+   "purpose": "direct",
+   "usd": 0.276,
+   "calls": 5
+  },
+  {
+   "day": "2026-11-05",
+   "purpose": "dossier",
+   "usd": 0.1727,
+   "calls": 58
+  },
+  {
+   "day": "2026-11-05",
+   "purpose": "explore",
+   "usd": 2.8893,
+   "calls": 1174
+  },
+  {
+   "day": "2026-11-05",
+   "purpose": "triage",
+   "usd": 0.5591,
+   "calls": 3246
+  },
+  {
+   "day": "2026-11-06",
+   "purpose": "chat",
+   "usd": 0.0425,
+   "calls": 3
+  },
+  {
+   "day": "2026-11-06",
+   "purpose": "direct",
+   "usd": 1.7208,
+   "calls": 21
+  },
+  {
+   "day": "2026-11-06",
+   "purpose": "dossier",
+   "usd": 0.7109,
+   "calls": 234
+  },
+  {
+   "day": "2026-11-06",
+   "purpose": "explore",
+   "usd": 11.2107,
+   "calls": 4015
+  },
+  {
+   "day": "2026-11-06",
+   "purpose": "triage",
+   "usd": 3.1102,
+   "calls": 16908
+  },
+  {
+   "day": "2026-11-07",
+   "purpose": "collate",
+   "usd": 0.0261,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-07",
+   "purpose": "direct",
+   "usd": 1.1759,
+   "calls": 23
+  },
+  {
+   "day": "2026-11-07",
+   "purpose": "explore",
+   "usd": 0.2523,
+   "calls": 47
+  },
+  {
+   "day": "2026-11-07",
+   "purpose": "triage",
+   "usd": 0.0039,
+   "calls": 10
+  },
+  {
+   "day": "2026-11-08",
+   "purpose": "direct",
+   "usd": 0.9774,
+   "calls": 23
+  },
+  {
+   "day": "2026-11-08",
+   "purpose": "triage",
+   "usd": 0.0005,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-09",
+   "purpose": "collate",
+   "usd": 0.0262,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-09",
+   "purpose": "direct",
+   "usd": 0.6848,
+   "calls": 18
+  },
+  {
+   "day": "2026-11-09",
+   "purpose": "explore",
+   "usd": 0.0421,
+   "calls": 10
+  },
+  {
+   "day": "2026-11-09",
+   "purpose": "triage",
+   "usd": 0.0362,
+   "calls": 200
+  },
+  {
+   "day": "2026-11-10",
+   "purpose": "chat",
+   "usd": 0.0383,
+   "calls": 2
+  },
+  {
+   "day": "2026-11-10",
+   "purpose": "collate",
+   "usd": 0.0499,
+   "calls": 2
+  },
+  {
+   "day": "2026-11-10",
+   "purpose": "triage",
+   "usd": 0.0336,
+   "calls": 174
+  },
+  {
+   "day": "2026-11-11",
+   "purpose": "collate",
+   "usd": 0.0177,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-11",
+   "purpose": "triage",
+   "usd": 0.0056,
+   "calls": 13
+  },
+  {
+   "day": "2026-11-12",
+   "purpose": "collate",
+   "usd": 0.0247,
+   "calls": 2
+  },
+  {
+   "day": "2026-11-12",
+   "purpose": "triage",
+   "usd": 0.0429,
+   "calls": 217
+  },
+  {
+   "day": "2026-11-13",
+   "purpose": "collate",
+   "usd": 0.0557,
+   "calls": 4
+  },
+  {
+   "day": "2026-11-13",
+   "purpose": "triage",
+   "usd": 0.036,
+   "calls": 173
+  },
+  {
+   "day": "2026-11-14",
+   "purpose": "collate",
+   "usd": 0.0186,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-14",
+   "purpose": "triage",
+   "usd": 0.0012,
+   "calls": 3
+  },
+  {
+   "day": "2026-11-15",
+   "purpose": "triage",
+   "usd": 0.0023,
+   "calls": 5
+  },
+  {
+   "day": "2026-11-16",
+   "purpose": "collate",
+   "usd": 0.0179,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-16",
+   "purpose": "triage",
+   "usd": 0.0264,
+   "calls": 127
+  },
+  {
+   "day": "2026-11-17",
+   "purpose": "collate",
+   "usd": 0.0515,
+   "calls": 3
+  },
+  {
+   "day": "2026-11-17",
+   "purpose": "triage",
+   "usd": 0.0398,
+   "calls": 213
+  },
+  {
+   "day": "2026-11-18",
+   "purpose": "collate",
+   "usd": 0.0663,
+   "calls": 2
+  },
+  {
+   "day": "2026-11-18",
+   "purpose": "triage",
+   "usd": 0.0318,
+   "calls": 149
+  },
+  {
+   "day": "2026-11-19",
+   "purpose": "collate",
+   "usd": 0.0098,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-19",
+   "purpose": "triage",
+   "usd": 0.0224,
+   "calls": 114
+  },
+  {
+   "day": "2026-11-20",
+   "purpose": "collate",
+   "usd": 0.042,
+   "calls": 3
+  },
+  {
+   "day": "2026-11-20",
+   "purpose": "triage",
+   "usd": 0.0368,
+   "calls": 183
+  },
+  {
+   "day": "2026-11-21",
+   "purpose": "collate",
+   "usd": 0.0192,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-21",
+   "purpose": "triage",
+   "usd": 0.0032,
+   "calls": 8
+  },
+  {
+   "day": "2026-11-22",
+   "purpose": "triage",
+   "usd": 0.0029,
+   "calls": 7
+  },
+  {
+   "day": "2026-11-23",
+   "purpose": "collate",
+   "usd": 0.0423,
+   "calls": 2
+  },
+  {
+   "day": "2026-11-23",
+   "purpose": "triage",
+   "usd": 0.0374,
+   "calls": 187
+  },
+  {
+   "day": "2026-11-24",
+   "purpose": "collate",
+   "usd": 0.0411,
+   "calls": 2
+  },
+  {
+   "day": "2026-11-24",
+   "purpose": "triage",
+   "usd": 0.0404,
+   "calls": 200
+  },
+  {
+   "day": "2026-11-25",
+   "purpose": "collate",
+   "usd": 0.0648,
+   "calls": 4
+  },
+  {
+   "day": "2026-11-25",
+   "purpose": "triage",
+   "usd": 0.0295,
+   "calls": 153
+  },
+  {
+   "day": "2026-11-26",
+   "purpose": "collate",
+   "usd": 0.0346,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-26",
+   "purpose": "triage",
+   "usd": 0.0039,
+   "calls": 12
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "chat",
+   "usd": 0.0287,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "direct",
+   "usd": 1.3252,
+   "calls": 16
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "dossier",
+   "usd": 0.6113,
+   "calls": 211
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "evaluate",
+   "usd": 0.8558,
+   "calls": 13
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "explore",
+   "usd": 12.185,
+   "calls": 3831
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "research_fast",
+   "usd": 4.6905,
+   "calls": 19
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "selftest",
+   "usd": 0.2449,
+   "calls": 32
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "thesis_extract",
+   "usd": 0.0301,
+   "calls": 19
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "triage",
+   "usd": 0.9717,
+   "calls": 4127
+  },
+  {
+   "day": "2026-11-27",
+   "purpose": "weekly_review",
+   "usd": 0.0644,
+   "calls": 1
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_buyer_channel",
+   "usd": 0.828,
+   "calls": 18
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_competition",
+   "usd": 1.3349,
+   "calls": 24
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_extract",
+   "usd": 0.0556,
+   "calls": 18
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_filings",
+   "usd": 1.5113,
+   "calls": 28
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_financial_quality",
+   "usd": 1.0782,
+   "calls": 19
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_judge",
+   "usd": 0.5062,
+   "calls": 2
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_materiality",
+   "usd": 1.2662,
+   "calls": 23
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_priced_in",
+   "usd": 1.2303,
+   "calls": 17
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_product_scope",
+   "usd": 1.3307,
+   "calls": 32
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_red_team",
+   "usd": 0.9678,
+   "calls": 10
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "diligence_verify",
+   "usd": 2.2305,
+   "calls": 19
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "direct",
+   "usd": 0.6665,
+   "calls": 8
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "dossier",
+   "usd": 0.2822,
+   "calls": 96
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "evaluate",
+   "usd": 0.43,
+   "calls": 6
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "explore",
+   "usd": 5.5887,
+   "calls": 1795
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "research_fast",
+   "usd": 5.606,
+   "calls": 20
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "selftest",
+   "usd": 0.2406,
+   "calls": 32
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "thesis_extract",
+   "usd": 0.0356,
+   "calls": 20
+  },
+  {
+   "day": "2026-11-28",
+   "purpose": "triage",
+   "usd": 0.1207,
+   "calls": 473
+  }
+ ]
+}
