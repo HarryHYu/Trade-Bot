@@ -141,11 +141,17 @@ def ledger_lead(ticker: str, stance: str, idea: str, flagged: str = typer.Option
 
 @ledger_app.command("judge")
 def ledger_judge(lead_id: str, verdict: str, signal: str, cause: str, notes: str,
-                 confidence: float = typer.Option(None, help="how confident the call was, 0-1, if known")):
+                 confidence: float = typer.Option(None, help="how confident the call was, 0-1, if known"),
+                 actual_driver: str = typer.Option("", help="what really moved it (always fill in, whatever the verdict)"),
+                 driver_type: str = typer.Option("", help="earnings_beat_or_miss, guidance_change, input_cost_shift, ..."),
+                 early_signs: str = typer.Option("", help="what was observable beforehand, and where"),
+                 look_for: str = typer.Option("", help="what to watch for next time"),
+                 source: list[str] = typer.Option(None)):
     """Judge an idea on its signal and reasoning. verdict: reasoning_error | signal_missed | right_reason | lucky | unlucky |
     unrelated. signal: played_out | failed | unclear. cause: driver | market | other_news | unknown."""
     from . import ledger
-    print(ledger.judge(lead_id, verdict, signal, cause, notes, confidence))
+    print(ledger.judge(lead_id, verdict, signal, cause, notes, confidence, None, actual_driver, driver_type, early_signs,
+                       look_for, source))
 
 
 @ledger_app.command("tojudge")

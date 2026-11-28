@@ -206,6 +206,12 @@ def diligence_budget_left() -> bool:
     return n < get_settings().max_diligence_per_day
 
 
+def _movers_context() -> str:
+    from .ledger import movers_digest
+    md = movers_digest(3000)
+    return f"\n\nWHAT HAS REALLY MOVED STOCKS BEFORE (desk's movers bank; check for these early signs):\n{md}" if md else ""
+
+
 def research_lead(lead_id: int, fast: bool = False) -> int | None:
     s = get_settings()
     with session() as db:
@@ -227,7 +233,7 @@ def research_lead(lead_id: int, fast: bool = False) -> int | None:
             f"ORIGINAL ITEM [{item.source}, tier {item.source_tier}] {item.title}\n{item.url}\n{item.text[:8000]}\n\n"
             f"CANDIDATE TICKERS: {', '.join(lead.tickers)}\n"
             f"PRICE ACTION (use for the 'noticed' check; a big move since the item means the market may have it):\n"
-            f"{json.dumps(px, default=str)}\n\n{profile_context(ticker)}")
+            f"{json.dumps(px, default=str)}\n\n{profile_context(ticker)}{_movers_context()}")
     note = claude().research("research_fast" if fast else "research", s.research_model, RESEARCH_SYSTEM, user,
                              effort="medium" if fast else s.research_effort, max_searches=8 if fast else 15)
     out = claude().parse(

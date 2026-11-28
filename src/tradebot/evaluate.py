@@ -97,6 +97,10 @@ def _track_record() -> str:
     with session() as db:
         done = db.scalars(select(Thesis).where(Thesis.outcome.is_not(None)).order_by(Thesis.closed_at.desc()).limit(8)).all()
         out += [f"- {t.ticker}: {(t.outcome or {}).get('lesson_for_security', '')[:200]}" for t in done]
+    from .ledger import movers_digest
+    md = movers_digest()
+    if md:
+        out.append("REAL CAUSES OF PAST BIG MOVES (movers bank: early signs to look for):\n" + md)
     refl = Path(get_settings().knowledge_dir) / "reflections"
     if refl.exists():
         for f in sorted(refl.glob("*.md"))[-2:]:

@@ -90,3 +90,19 @@ def test_judged_calls_rank_by_reasoning_not_just_price(tmp_path, monkeypatch):
     ledger.judge(b["id"], "unrelated", "failed", "other_news", "takeover rumour, nothing to do with the idea")
     lines = ledger.biggest_calls(today="2026-11-04", n=2)
     assert lines[0].startswith("  SIGNAL_MISSED AAA") and "UNRELATED BBB" in lines[1]
+
+
+def test_judgement_files_the_real_cause_in_the_movers_bank(tmp_path, monkeypatch):
+    _setup(tmp_path, monkeypatch)
+    lead = ledger.add_lead("XYZ", "avoid", "2026-11-02", "rebound fading", ref=10.2)
+    ledger.judge(lead["id"], "lucky", "failed", "other_news", "fell, but not for our reason",
+                 actual_driver="Short report on Nov 3 alleging channel stuffing", driver_type="fraud_or_short_report",
+                 early_signs="Receivables up 40% q/q in the 10-Q; short interest doubled", look_for="receivables outrunning revenue",
+                 sources=["https://example.com/short"])
+    text = (tmp_path / "knowledge" / "movers" / "fraud_or_short_report.md").read_text()
+    assert "Short report on Nov 3" in text and "receivables outrunning revenue" in text
+    assert "receivables outrunning revenue" in ledger.movers_digest()
+    ledger.judge(lead["id"], "lucky", "failed", "other_news", "re-judged", actual_driver="Updated cause",
+                 driver_type="fraud_or_short_report", look_for="x")
+    text = (tmp_path / "knowledge" / "movers" / "fraud_or_short_report.md").read_text()
+    assert text.count("## XYZ from 2026-11-02") == 1 and "Updated cause" in text

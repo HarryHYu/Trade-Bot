@@ -356,24 +356,38 @@ def _lead_score(lead: dict[str, Any], today: str) -> dict[str, Any]:
                 raw=move * sign if sign else None, sigma=sigma, days=days)
 
 
-# How wrong or right a call was, judged by a review shift on the signal and the reasoning, not the price alone.
-VERDICT_WEIGHT = {"reasoning_error": 1.0, "signal_missed": 0.8, "right_reason": 1.0, "unlucky": 0.2, "lucky": 0.2, "unrelated": 0.0}
+# How much a judged call says about our judgement (for the scorecard ranking). Every big surprise is still investigated for
+# its real cause, whatever the verdict: that goes into the movers bank (knowledge/movers/), which is the learning.
+VERDICT_WEIGHT = {"reasoning_error": 1.0, "signal_missed": 0.8, "right_reason": 1.0, "unlucky": 0.3, "lucky": 0.6, "unrelated": 0.3}
+
+DRIVER_TYPES = ["earnings_beat_or_miss", "guidance_change", "input_cost_shift", "demand_data", "product_launch",
+                "m_and_a", "activist_or_stake", "short_squeeze_or_positioning", "analyst_action", "index_or_flow",
+                "regulatory_or_legal", "macro_rates_or_fx", "commodity_price", "sector_rotation", "management_change",
+                "financing_or_dilution", "fraud_or_short_report", "geopolitics", "other"]
 
 
 @_locked
 def judge(lead_id: str, verdict: str, signal: str, cause: str, notes: str, confidence_at_call: float | None = None,
-          when: str | None = None) -> dict[str, Any]:
+          when: str | None = None, actual_driver: str = "", driver_type: str = "", early_signs: str = "",
+          look_for: str = "", sources: list[str] | None = None) -> dict[str, Any]:
     """Record a review shift's judgement of an idea (kept or rejected).
     verdict: reasoning_error (our reasoning was wrong given what we knew), signal_missed (the evidence was there, we did not
              weigh it), right_reason (right, and for the reason we gave), lucky (right for the wrong reason),
              unlucky (sound call, an unforeseeable event decided it), unrelated (the move had nothing to do with the idea).
     signal: played_out | failed | unclear  (did the driver itself happen: the players, the order, the report...)
-    cause: driver | market | other_news | unknown  (what actually moved the price)"""
+    cause: driver | market | other_news | unknown  (what actually moved the price)
+    The learning part, needed whatever the verdict: actual_driver (what really moved it), driver_type (one of DRIVER_TYPES),
+    early_signs (what was observable beforehand, and where), look_for (what the desk should watch for next time), sources.
+    Judgements with an actual_driver are also filed in the movers bank, knowledge/movers/<driver_type>.md."""
     rows = load("leads")
     lead = next(r for r in rows if r["id"] == lead_id)
     lead["judgement"] = dict(verdict=verdict, signal=signal, cause=cause, notes=notes[:600],
-                             confidence_at_call=confidence_at_call, judged=when or _today())
+                             confidence_at_call=confidence_at_call, judged=when or _today(), actual_driver=actual_driver[:600],
+                             driver_type=driver_type, early_signs=early_signs[:600], look_for=look_for[:400],
+                             sources=(sources or [])[:8])
     save("leads", rows)
+    if actual_driver:
+        _file_mover(lead)
     # Also keep it in the knowledge base (git-tracked, mounted on the server) so the server's live ledger picks it up.
     jf = _judgements_file()
     allj = json.loads(jf.read_text()) if jf.exists() else {}
@@ -381,6 +395,58 @@ def judge(lead_id: str, verdict: str, signal: str, cause: str, notes: str, confi
     jf.parent.mkdir(parents=True, exist_ok=True)
     jf.write_text(json.dumps(allj, indent=1) + "\n")
     return lead
+
+
+def _movers_dir() -> Path:
+    try:
+        from .config import get_settings
+        return Path(get_settings().knowledge_dir) / "movers"
+    except Exception:
+        return Path("knowledge/movers")
+
+
+def _file_mover(lead: dict[str, Any]) -> None:
+    """Append the real cause of a move to the movers bank: one file per driver type, newest at the bottom."""
+    j = lead["judgement"]
+    kind = j.get("driver_type") if j.get("driver_type") in DRIVER_TYPES else "other"
+    d = _movers_dir()
+    d.mkdir(parents=True, exist_ok=True)
+    f = d / f"{kind}.md"
+    if not f.exists():
+        f.write_text(f"# Movers: {kind.replace('_', ' ')}\nReal causes of big moves the desk judged, and what preceded them.\n")
+    try:
+        s = _lead_score(lead, _today())
+        size = f"{(s['move'] or 0) * 100:+.0f}% ({s['sigma']:+.1f} sigma vs its normal moves)" if s.get("sigma") is not None else f"{(s['move'] or 0) * 100:+.0f}%"
+    except Exception:
+        size = "?"
+    entry = (f"\n## {lead['ticker']} from {lead['flagged']}: {size}\n"
+             f"- What actually moved it: {j['actual_driver']}\n"
+             f"- Early signs (observable beforehand): {j.get('early_signs') or 'none found'}\n"
+             f"- Look for next time: {j.get('look_for') or '-'}\n"
+             f"- Our call: {lead['stance']}{'/' + lead['implied'] if lead.get('implied') else ''} ({lead.get('stage') or lead.get('source', 'manual')}): "
+             f"{lead['idea'][:160]}. Verdict {j['verdict']}, signal {j['signal']}, moved by {j['cause']}.\n"
+             f"- Sources: {' '.join(j.get('sources') or []) or '-'}\n")
+    marker = f"## {lead['ticker']} from {lead['flagged']}:"
+    text = f.read_text()
+    if marker in text:   # re-judged: replace the old entry
+        start = text.index(marker) - 1
+        nxt = text.find("\n## ", start + 2)
+        text = text[:start] + (text[nxt:] if nxt != -1 else "")
+    f.write_text(text + entry)
+
+
+def movers_digest(max_chars: int = 5000) -> str:
+    """The movers bank condensed for prompts: driver types with their 'look for next time' lines."""
+    d = _movers_dir()
+    if not d.exists():
+        return ""
+    out = []
+    for f in sorted(d.glob("*.md")):
+        looks = [l.split(":", 1)[1].strip() for l in f.read_text().splitlines() if l.startswith("- Look for next time:")]
+        looks = [x for x in looks if x and x != "-"]
+        if looks:
+            out.append(f"{f.stem.replace('_', ' ')}: " + " | ".join(looks[-4:]))
+    return "\n".join(out)[:max_chars]
 
 
 def _judgements_file() -> Path:

@@ -29,8 +29,13 @@ Also read `knowledge/tuning_log.md` (what was changed before and why) so changes
   - what really moved the price? (`cause`: driver / market / other_news / unknown)
   - given what we knew then, was the reasoning (or the reason for rejecting) sound? (`verdict`: reasoning_error,
     signal_missed, right_reason, lucky, unlucky, unrelated)
+  **Whatever the verdict (lucky and unrelated included), find the real cause of every big move**: what actually moved it, its
+  type, what was observable beforehand and where, and what to look for next time. That goes into the movers bank
+  (`knowledge/movers/<driver_type>.md`), which Sonnet, Opus and the explorers read: it is how the desk learns what to hunt for.
   Record it: `uv run tradebot ledger judge L12 signal_missed played_out driver "Rejected as priced in; the Nov 17 report
-  confirmed cost relief and the stock re-rated" --confidence 0.6`. Ranking afterwards = surprise x verdict weight x confidence
+  confirmed cost relief and the stock re-rated" --confidence 0.6 --actual-driver "Q4 FY26 call guided FY27 protein costs down mid-teens" --driver-type input_cost_shift
+  --early-signs "USDA whey prices down 25% from June; peer Simply Good Foods flagged easing in October" --look-for "input cost
+  index turning down while the stock still prices peak costs" --source https://...`. Ranking afterwards = surprise x verdict weight x confidence
   ("Calls that teach the most"): a confident call that was wrong for a reason we could have seen ranks highest; a move caused
   by something unrelated ranks near zero. To judge server ideas, first copy the export into a local ledger
   (`mkdir -p /tmp/l && git show origin/desk-feed:feed/ledger/leads.json > /tmp/l/leads.json` etc., then

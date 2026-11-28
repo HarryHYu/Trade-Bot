@@ -157,6 +157,10 @@ def _context() -> str:
     watch = Path(get_settings().knowledge_dir) / "watch.md"
     if watch.exists():
         parts.append("\nDESK WATCH LIST (latest entries):\n" + watch.read_text()[-6000:])
+    from .ledger import movers_digest
+    md = movers_digest(3000)
+    if md:
+        parts.append("\nEARLY SIGNS THAT PRECEDED REAL MOVES BEFORE (hunt for these):\n" + md)
     return "\n".join(parts)
 
 
