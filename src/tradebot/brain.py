@@ -417,25 +417,35 @@ def research_top(n: int = 2) -> list[int]:
 
 
 def fast_lane() -> list[int]:
-    """Breaking, high-priority leads skip the queue: quick 3-agent check, small entry within minutes."""
+    """Emergency lane. Haiku flags that look urgent get a quick Sonnet check ("is this a genuine, tradable, not-yet-priced
+    emergency?"); only confirmed emergencies go straight to Opus (fast research + 3-agent diligence, small size), without
+    waiting for the 30-minute cycle. Has its own daily cap; tradability filter first, so no Sonnet or Opus spend on junk."""
     from .config import load_yaml as _ly
     from .db import Decision
+    from . import budget, evaluate
     cfg = _ly("strategy.yaml").get("fast_lane", {})
     if not cfg.get("enabled", True):
         return []
     start = utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
     with session() as db:
         used = len(db.scalars(select(Decision.id).where(Decision.kind == "fast_lane", Decision.ts >= start)).all())
-        room = cfg.get("max_per_day", 20) - used
+        room = cfg.get("max_per_day", 4) - used
         if room <= 0:
             return []
-        ids = db.scalars(select(Lead.id).where(Lead.status == "new", Lead.urgency.in_(cfg.get("urgency", ["now"])),
-                                               Lead.priority >= cfg.get("min_priority", 0.25))
-                         .order_by(Lead.priority.desc()).limit(room * 5)).all()
-        ids = [i for i in ids if db.get(Lead, i).tickers][:room]
+        rows = db.scalars(select(Lead).where(Lead.status == "new", Lead.signal_kind != "evaluated",
+                                             Lead.urgency.in_(cfg.get("urgency", ["now"])),
+                                             Lead.priority >= cfg.get("min_priority", 0.25),
+                                             Lead.created_at >= utcnow() - dt.timedelta(hours=2))
+                          .order_by(Lead.priority.desc()).limit(20)).all()
+        fresh = [(r.id, r.tickers[0].upper()) for r in rows if r.tickers and "emergency_checked" not in (r.notes or "")]
+        for r in rows:
+            r.notes = ((r.notes or "") + " emergency_checked").strip()
+    fresh = [(lid, tk) for lid, tk in fresh if not untradable(tk)]
+    if not fresh or budget.left("evaluate") <= 0:
+        return []
+    emergencies = evaluate.emergency_check([lid for lid, _ in fresh])
     done = []
-    from . import budget
-    for lid in ids:
+    for lid in emergencies[:room]:
         if budget.left("research") <= 0:
             break
         with session() as db:

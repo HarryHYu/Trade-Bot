@@ -11,11 +11,11 @@ trail_activate_r: 1.0            # once up 1R, a trailing stop follows the best 
 trail_atr_mult: 1.0              # trailing distance in ATRs below the best price (above, for shorts)
 target_r_min: 3.0                # hard take-profit at max(expected move, 3R); the trail usually exits first
 fast_lane:
-  enabled: false                 # 2026-11-28 review: it spent all Opus research on raw Haiku flags (distressed micro-cap 8-Ks)
-                                 # and used up the daily cap, so the Sonnet shortlist never reached Opus
+  enabled: true                  # emergency lane: urgent Haiku flags -> tradability filter -> Sonnet "is this an emergency?" ->
+                                 # Opus fast research. (The old Haiku-only version spent all Opus research on micro-cap 8-Ks.)
   urgency: [now]                 # triage urgency levels that skip the queue
   min_priority: 0.25
-  max_per_day: 20
+  max_per_day: 4                 # emergency Opus runs a day, separate from the normal research cap
   followup_full_diligence: true  # the 8-specialist review runs after entry and can cut the trade
 
 # Tradability floor before any Opus research (2026-11-28 review: 12/12 theses were untradable micro-caps; BZAI researched 6x).

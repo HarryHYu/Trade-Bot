@@ -157,3 +157,33 @@ def test_untradable_filters_illiquid_and_repeats(world, monkeypatch):
         s.add(db.Thesis(ticker="BIG", driver="d", mechanism="m", direction="long", probability=0.5, expected_move_pct=10,
                         horizon_days=10, tier="watch", checks=[], summary="s"))
     assert "already researched" in brain.untradable("BIG")
+
+
+def test_emergency_lane_goes_through_sonnet_then_opus(world, monkeypatch):
+    fake, prices = world
+    seen = []
+
+    def parse(purpose, model, system, user, schema, **kw):
+        seen.append((purpose, model))
+        if purpose == "triage":
+            return brain.TriageOut(kind="official", tickers=["XYZ"], driver="FDA approves XYZ drug early", novelty=0.9,
+                                   materiality=0.9, urgency="now", reason="breaking", direction="up")
+        if purpose == "evaluate_emergency":
+            lid = int(user.split("lead#")[1].split(" ")[0])
+            return evaluate.EmergencyCheck(verdicts=[evaluate.Emergency(lead_id=lid, emergency=True, tickers=["XYZ"],
+                                                                        direction_lean="long", why="surprise approval",
+                                                                        angle="check label scope")])
+        return FakeClaude.parse(fake, purpose, model, system, user, schema, **kw)
+    monkeypatch.setattr(fake, "parse", parse)
+    monkeypatch.setattr(fake, "research", lambda purpose, model, system, user, **kw: seen.append((purpose, model)) or "note")
+    monkeypatch.setattr("tradebot.diligence.run", lambda brief, fast=False: {
+        "final_tier": "small", "verdict": {"probability": 0.6, "expected_move_pct": 20, "horizon_days": 5}, "cap_reasons": []})
+    with db.session() as s:
+        s.add(db.Item(source="fda", source_tier=1, external_id="e1", title="FDA approves", text="approved"))
+    brain.triage_pending()
+    tids = brain.fast_lane()
+    assert len(tids) == 1
+    order = [p for p, _ in seen]
+    assert order.index("evaluate_emergency") < order.index("research_fast")
+    assert dict(seen)["evaluate_emergency"].startswith("claude-sonnet") and dict(seen)["research_fast"].startswith("claude-opus")
+    assert brain.fast_lane() == []          # the same flag is never re-checked

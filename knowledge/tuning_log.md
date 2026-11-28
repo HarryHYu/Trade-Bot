@@ -21,3 +21,8 @@ Every change made by a review shift: date | change | evidence | expected effect 
   watch-tier untradable micro-caps (BZAI researched 6x, VIVK 4x); 0 full research runs, 0 trades; fast lane used up the cap |
   Opus researches Sonnet's picks; theses on tradable names; first paper trades | next export: count research vs research_fast
   calls, theses by tier, trades opened.
+- 2026-11-28 | Emergency lane back ON, Sonnet-gated: urgent Haiku flags (last 2h, priority >= 0.25) -> tradability filter ->
+  one batched Sonnet "is this a genuine emergency?" check every 3 min -> Opus fast research (max 4/day, small size);
+  non-emergencies stay in the normal queue; emergency picks scored as source "sonnet_emergency" | owner request; the
+  Haiku-only lane wasted all Opus research on micro-cap filings | fast reaction to real breaking news without junk |
+  emergency runs per day, their tiers, and the outcome of emergency trades vs the normal queue.

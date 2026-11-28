@@ -96,7 +96,7 @@ def run() -> None:
     sch.add_job(_safe(collectors.run_all), "interval", minutes=10, max_instances=1, next_run_time=now)
     sch.add_job(_safe(_job("triage", brain.triage_pending)), "interval", minutes=5, max_instances=1,
                 next_run_time=now + dt.timedelta(minutes=2))
-    sch.add_job(_safe(_job("fast", fast_cycle)), "interval", minutes=2, max_instances=1)
+    sch.add_job(_safe(_job("fast", fast_cycle)), "interval", minutes=3, max_instances=1)
     sch.add_job(_safe(_job("inbox", inbox_cycle)), "interval", minutes=5, max_instances=1, next_run_time=now + dt.timedelta(minutes=1))
     sch.add_job(_safe(_job("research", research_cycle)), "interval", minutes=30, max_instances=1)
     sch.add_job(_safe(trade_cycle), "interval", minutes=1, max_instances=1)

@@ -178,3 +178,71 @@ def run(max_candidates: int = 4) -> int:
         except Exception:
             log.exception("could not record shortlist pick %s", c.tickers)
     return made
+
+
+EMERGENCY_SYSTEM = """You are the desk's emergency filter. A cheap scanner flagged the items below as urgent. Decide, for each,
+whether it is a genuine emergency worth an immediate deep dive and a small trade within minutes, rather than waiting half an
+hour for the normal queue. An emergency is: new, material information about a tradable listed company (or its supplier,
+customer or competitor) that the market is likely still absorbing right now, where waiting costs real money. Examples: a
+surprise approval/rejection, a plant explosion, a major contract or takeover announced minutes ago, an outbreak or ban that
+hits one company hard. NOT emergencies: old news, recaps, routine filings, reverse splits, delisting notices, bankruptcies
+already priced, anything already up or down a lot since the news, or anything that can wait for the normal queue. Be strict:
+most flags are not emergencies. Never invent tickers."""
+
+
+class Emergency(BaseModel):
+    lead_id: int
+    emergency: bool
+    tickers: list[str]
+    direction_lean: Literal["long", "short", "unclear"]
+    why: str
+    angle: str = Field(description="what the analyst must verify in the next few minutes")
+
+
+class EmergencyCheck(BaseModel):
+    verdicts: list[Emergency]
+
+
+def emergency_check(lead_ids: list[int]) -> list[int]:
+    """Sonnet's quick emergency verdict on urgent Haiku flags. Returns new emergency lead ids (signal_kind 'emergency')."""
+    s = get_settings()
+    with session() as db:
+        rows = db.execute(select(Lead, Item).join(Item, Item.id == Lead.item_id).where(Lead.id.in_(lead_ids))).all()
+        ctx = "\n".join(f"- lead#{l.id} [p={l.priority:.2f}] tickers {','.join(l.tickers)} | {l.theme} | {(i.title or '')[:200]} | "
+                        f"{i.url or ''} | published {i.published_at} | {(i.text or '')[:600]}" for l, i in rows)
+    from . import market
+    moves = []
+    for l, _ in rows:
+        try:
+            snap = market.snapshot(l.tickers[0])
+            moves.append(f"{l.tickers[0]}: 5d {snap.get('ret_5d_pct')}%, volume 5d/60d {snap.get('volume_5d_vs_60d')}")
+        except Exception:
+            pass
+    out = claude().parse("evaluate_emergency", s.evaluator_model, EMERGENCY_SYSTEM,
+                         f"FLAGS:\n{ctx}\n\nRECENT PRICE ACTION:\n" + "\n".join(moves), EmergencyCheck,
+                         effort="low", max_tokens=4000)
+    made = []
+    from . import ledger
+    now = utcnow()
+    with session() as db:
+        for v in out.verdicts:
+            src = db.get(Lead, v.lead_id)
+            if src is None:
+                continue
+            if not v.emergency or not v.tickers:
+                continue   # stays 'new' for the normal Sonnet queue, which records its own verdict
+            item = db.get(Item, src.item_id)
+            db.add(Lead(item_id=item.id, tickers=[x.upper() for x in v.tickers], theme=src.theme, signal_kind="emergency",
+                        priority=1.0, urgency="now", summary=f"EMERGENCY: {v.why}. ANGLE: {v.angle}"))
+            src.status = "reviewed"
+            db.flush()
+            made.append(db.scalars(select(Lead.id).order_by(Lead.id.desc())).first())
+        log_decision(db, "emergency_check", "", verdicts=[v.model_dump() for v in out.verdicts])
+    for v in out.verdicts:
+        if v.emergency and v.tickers:
+            try:
+                ledger.add_lead(v.tickers[0].upper(), {"long": "watch_long", "short": "watch_short"}.get(v.direction_lean, "watch"),
+                                ledger._today(), v.why[:240], source="sonnet_emergency", ref=ledger.last_close(v.tickers[0].upper())[1])
+            except Exception:
+                log.exception("could not record emergency pick")
+    return made
