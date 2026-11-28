@@ -343,13 +343,44 @@ def recheck_watch(days: int = 5, limit: int = 2) -> int:
     return made
 
 
+def untradable(ticker: str) -> str | None:
+    """Why a ticker should not get Opus research: researched very recently, or too small/illiquid to trade."""
+    from .config import load_yaml as _ly
+    from . import market
+    cfg = _ly("strategy.yaml").get("research_filter", {})
+    since = utcnow() - dt.timedelta(days=cfg.get("dedupe_days", 5))
+    with session() as db:
+        recent = db.scalars(select(Thesis.id).where(Thesis.ticker == ticker, Thesis.opened_at >= since)).first()
+        dismissed = [l for l in db.scalars(select(Lead).where(Lead.status == "dismissed", Lead.resolved_at >= since)).all()
+                     if ticker in [x.upper() for x in (l.tickers or [])]]
+    if recent or dismissed:
+        return f"already researched within {cfg.get('dedupe_days', 5)} days"
+    try:
+        b = market.bars(ticker, "3mo")
+    except Exception:
+        return "no price data"
+    if len(b) < 15:
+        return "no price data"
+    if b[-1]["c"] < cfg.get("min_price", 1.0):
+        return f"price {b[-1]['c']:.2f} below floor"
+    try:
+        from .simbroker import fx_to_usd
+        k = fx_to_usd(ticker)
+    except Exception:
+        k = 1.0
+    dv = sum(x["c"] * x["v"] for x in b[-20:]) / 20 * k
+    if dv < cfg.get("min_dollar_volume_usd", 2_000_000):
+        return f"illiquid: ~${dv / 1e6:.1f}M traded a day"
+    return None
+
+
 def research_top(n: int = 2) -> list[int]:
     """Opus deep dives on the evaluator's shortlist (best first), within the research budget and the daily cap."""
     from . import budget
     s = get_settings()
     day_start = utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
     with session() as db:
-        done_today = len(db.scalars(select(Lead.id).where(Lead.resolved_at >= day_start)).all())
+        done_today = len(db.scalars(select(Lead.id).where(Lead.resolved_at >= day_start, Lead.signal_kind == "evaluated")).all())
         room = min(n, s.max_research_per_day - done_today)
         if room <= 0:
             return []
@@ -358,7 +389,20 @@ def research_top(n: int = 2) -> list[int]:
         if kinds:
             q = q.where(Lead.signal_kind.in_(kinds))
         rows = db.scalars(q.order_by(Lead.priority.desc()).limit(room * 5)).all()
-        ids = [r.id for r in rows if r.tickers][:room]  # ticker-less drivers wait for a human/Ultra-plan session
+        candidates = [(r.id, r.tickers[0].upper(), r.theme) for r in rows if r.tickers]
+    ids = []
+    for lid, tk, theme in candidates:
+        if len(ids) >= room:
+            break
+        why = untradable(tk)
+        if why:
+            from . import ledger
+            with session() as db:
+                row = db.get(Lead, lid)
+                row.status, row.notes, row.resolved_at = "filtered", why, utcnow()
+            ledger.reject(tk, None, "filter", why, theme, lead_id=lid)
+            continue
+        ids.append(lid)
     done = []
     for lid in ids:
         if budget.left("research") <= 0:

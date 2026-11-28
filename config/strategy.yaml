@@ -11,8 +11,15 @@ trail_activate_r: 1.0            # once up 1R, a trailing stop follows the best 
 trail_atr_mult: 1.0              # trailing distance in ATRs below the best price (above, for shorts)
 target_r_min: 3.0                # hard take-profit at max(expected move, 3R); the trail usually exits first
 fast_lane:
-  enabled: true
+  enabled: false                 # 2026-11-28 review: it spent all Opus research on raw Haiku flags (distressed micro-cap 8-Ks)
+                                 # and used up the daily cap, so the Sonnet shortlist never reached Opus
   urgency: [now]                 # triage urgency levels that skip the queue
   min_priority: 0.25
   max_per_day: 20
   followup_full_diligence: true  # the 8-specialist review runs after entry and can cut the trade
+
+# Tradability floor before any Opus research (2026-11-28 review: 12/12 theses were untradable micro-caps; BZAI researched 6x).
+research_filter:
+  min_price: 1.0                 # in the security's own currency (pence for .L: 1.0 = 1p)
+  min_dollar_volume_usd: 2000000 # 20-day average daily traded value
+  dedupe_days: 5                 # skip a ticker that already has a thesis or dismissal this recent

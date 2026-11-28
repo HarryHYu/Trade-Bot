@@ -70,6 +70,8 @@ def _context(since: dt.datetime) -> tuple[str, list[int]]:
         missions = db.scalars(select(Mission).where(Mission.status == "done", Mission.finished_at >= since)
                               .order_by(Mission.id.desc()).limit(40)).all()
         recent = db.scalars(select(Thesis).where(Thesis.opened_at >= utcnow() - dt.timedelta(days=7))).all()
+        dismissed = db.scalars(select(Lead).where(Lead.status.in_(["dismissed", "filtered"]),
+                                                  Lead.resolved_at >= utcnow() - dt.timedelta(days=7))).all()
     parts = ["RAW FLAGS (Haiku triage):"]
     parts += [f"- lead#{l.id} [{l.urgency} p={l.priority:.2f} {l.signal_kind}] {l.theme} | tickers {','.join(l.tickers) or '-'} | "
               f"{(i.title or '')[:160]} | {i.url or ''}" for l, i in leads]
@@ -80,6 +82,9 @@ def _context(since: dt.datetime) -> tuple[str, list[int]]:
                      f"  affected: {'; '.join(d.get('affected', [])[:8])}\n  surprises: {'; '.join(d.get('surprises', [])[:5])}\n"
                      f"  sources: {' '.join(f.get('source', '') for f in d.get('findings', [])[:6])}")
     parts.append("\nALREADY RESEARCHED OR HELD (last 7 days): " + (", ".join(f"{t.ticker} ({t.tier}, {t.status})" for t in recent) or "none"))
+    parts.append("REJECTED BY OPUS OR THE TRADABILITY FILTER (last 7 days, do not resubmit without new information): "
+                 + (", ".join(sorted({tk for l in dismissed for tk in (l.tickers or [])[:1]})) or "none")
+                 + ". Only shortlist securities that are tradable: share price above $1 and roughly $2M+ traded a day.")
     watch = Path(get_settings().knowledge_dir) / "watch.md"
     if watch.exists():
         parts.append("\nDESK WATCH LIST (latest):\n" + watch.read_text()[-4000:])

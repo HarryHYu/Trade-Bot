@@ -112,7 +112,7 @@ def run() -> None:
                 next_run_time=now + dt.timedelta(minutes=4))
     sch.add_job(_safe(_job("explore", explore.dispatch)), "interval", minutes=1, max_instances=1)
     # Sonnet shortlists for Opus every hour, after the explorers have had time to file
-    sch.add_job(_safe(_job("evaluate", evaluate.run)), "interval", minutes=60, max_instances=1,
+    sch.add_job(_safe(_job("evaluate", evaluate.run)), "interval", minutes=30, max_instances=1,
                 next_run_time=now + dt.timedelta(minutes=25))
     # Daily performance review after the US close (08:20 Sydney covers both daylight-saving settings)
     ledger.seed()

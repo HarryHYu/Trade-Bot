@@ -55,6 +55,7 @@ def world(tmp_path, monkeypatch):
     monkeypatch.setattr(brain, "claude", lambda: fake)
     monkeypatch.setattr(evaluate, "claude", lambda: fake)
     monkeypatch.setattr(brain, "diligence_budget_left", lambda: False)
+    monkeypatch.setattr(brain, "untradable", lambda t: None)
     prices = {"XYZ": 100.0, "SPY": 500.0}
     monkeypatch.setattr(simbroker, "quote", lambda sym: prices[sym])
     monkeypatch.setattr(simbroker, "fx_to_usd", lambda sym: 1.0)
@@ -141,3 +142,18 @@ def test_rejections_are_paper_tracked_at_every_stage(world, monkeypatch):
     stages = sorted((l["stage"], l["ticker"], l.get("implied")) for l in ledger.load("leads") if l["stance"] == "rejected")
     assert ("haiku", "XYZ", "long") in stages and ("sonnet", "ABC", "short") in stages and ("sonnet", "XYZ", "long") in stages
     assert "rejections right" in ledger.rejection_summary() or "without a direction" in ledger.rejection_summary()
+
+
+def test_untradable_filters_illiquid_and_repeats(world, monkeypatch):
+    import datetime as dt
+    monkeypatch.undo()   # use the real filter, with fake bars
+    from tradebot import market, simbroker
+    monkeypatch.setattr(simbroker, "fx_to_usd", lambda s: 1.0)
+    monkeypatch.setattr(market, "bars", lambda s, r="3mo": [dict(c=0.5 if s == "PENNY" else 50, v=10_000 if s == "THIN" else 1_000_000)] * 30)
+    assert "below floor" in brain.untradable("PENNY")
+    assert "illiquid" in brain.untradable("THIN")
+    assert brain.untradable("BIG") is None
+    with db.session() as s:
+        s.add(db.Thesis(ticker="BIG", driver="d", mechanism="m", direction="long", probability=0.5, expected_move_pct=10,
+                        horizon_days=10, tier="watch", checks=[], summary="s"))
+    assert "already researched" in brain.untradable("BIG")

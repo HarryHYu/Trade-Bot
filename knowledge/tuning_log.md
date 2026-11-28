@@ -15,3 +15,9 @@ Every change made by a review shift: date | change | evidence | expected effect 
 - 2026-11-28 | Movers bank seeded with 10 judged moves; digest fed to Sonnet, Opus and the explorer director | judgement pass |
   the swarm flags early signs (self-help guidance, controlled-company deals, DC/ERP cutovers, neocloud financing) | count
   dossiers/theses citing a movers-bank pattern and their outcomes.
+- 2026-11-28 | Fast lane OFF; Opus daily cap counts only Sonnet-shortlisted research; tradability floor before Opus (price >= 1,
+  ~$2M+/day traded, no repeat within 5 days; filtered ideas paper-tracked as stage "filter"); evaluator every 30 min and told
+  about recent rejections | first export: 452 Haiku flags -> 66 Sonnet picks -> 12 Opus theses, ALL from the fast lane, all
+  watch-tier untradable micro-caps (BZAI researched 6x, VIVK 4x); 0 full research runs, 0 trades; fast lane used up the cap |
+  Opus researches Sonnet's picks; theses on tradable names; first paper trades | next export: count research vs research_fast
+  calls, theses by tier, trades opened.
