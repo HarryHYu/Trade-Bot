@@ -127,6 +127,18 @@ def announce_new_theses() -> None:
             th.meta = (th.meta or {}) | {"announced": True}
 
 
+def redact(text: str) -> str:
+    """Never echo a secret back: replace every configured secret value (and anything token-shaped) with ***."""
+    import re
+    from .config import SECRET_SETTINGS
+    s = get_settings()
+    for n in SECRET_SETTINGS:
+        for v in str(getattr(s, n, "") or "").replace(",", " ").split():
+            if len(v) >= 8:
+                text = text.replace(v, "***")
+    return re.sub(r"(github_pat_|ghp_|sk-ant-)[A-Za-z0-9_\-]+", r"\1***", text)
+
+
 def _setkey(text: str) -> str:
     from .config import SECRET_SETTINGS, set_override
     parts = text.split(maxsplit=2)
@@ -135,10 +147,11 @@ def _setkey(text: str) -> str:
     name = parts[1].lower()
     if name not in SECRET_SETTINGS:
         return f"/setkey is for secrets: {', '.join(sorted(n.upper() for n in SECRET_SETTINGS))}. Use /set for others."
+    value = parts[2].strip().split()[0]   # first token only: a second line (e.g. "/export") must not join the secret
     try:
-        set_override(name, parts[2].strip())
-    except Exception as e:
-        return f"Could not save {name.upper()}: {e}"
+        set_override(name, value)
+    except Exception:
+        return f"Could not save {name.upper()} (value hidden)."
     with session() as db:
         log_decision(db, "setting_changed", name, secret=True)
     return f"Saved {name.upper()} (hidden). Your message was deleted."
@@ -233,7 +246,7 @@ def _command(text: str, thread: str) -> str:
         try:
             return f"Exported to the desk-feed branch ({feed.export()[:8]})."
         except Exception as e:
-            return f"Export failed: {e}"
+            return f"Export failed: {redact(str(e))}"
     if cmd == "/selftest":
         from .selftest import run
         return run()
@@ -297,7 +310,7 @@ def _chat(msg: dict[str, Any]) -> None:
             send_file(path, cap, topic=None, thread_id=tid)
     except Exception as e:
         log.exception("chat failed")
-        send(f"Chat error: {e}", topic=None, thread_id=tid)
+        send(f"Chat error: {redact(str(e))}", topic=None, thread_id=tid)
 
 
 def _allowed(user_id: int) -> bool:

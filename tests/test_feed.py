@@ -20,3 +20,10 @@ def test_push_makes_one_commit_on_desk_feed(monkeypatch):
     body = tree.calls[0].request.content.decode()
     assert '"base_tree": "t0"' in body.replace('":"', '": "') and "feed/REPORT.md" in body
     assert blob.called and commit.called and ref.called
+
+
+def test_secrets_are_never_echoed(monkeypatch):
+    from tradebot import telegram
+    monkeypatch.setattr(telegram, "get_settings", lambda: Settings(github_feed_token="github_pat_ABCDEFGH12345678"))
+    msg = telegram.redact("Illegal header value b'Bearer github_pat_ABCDEFGH12345678\\n/export' and ghp_zzzzzzzz9")
+    assert "ABCDEFGH" not in msg and "zzzz" not in msg and "***" in msg

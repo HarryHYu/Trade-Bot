@@ -89,7 +89,8 @@ def push(files: dict[str, str | bytes], message: str) -> str:
     if not s.github_feed_token:
         raise RuntimeError("GITHUB_FEED_TOKEN is not set: /setkey GITHUB_FEED_TOKEN <token>")
     api = f"https://api.github.com/repos/{s.github_feed_repo}"
-    h = {"Authorization": f"Bearer {s.github_feed_token}", "Accept": "application/vnd.github+json"}
+    token = s.github_feed_token.strip().split()[0]
+    h = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
     with httpx.Client(headers=h, timeout=60) as c:
         ref = c.get(f"{api}/git/ref/heads/{BRANCH}")
         parent = ref.json()["object"]["sha"] if ref.status_code == 200 else None
@@ -116,6 +117,10 @@ def push(files: dict[str, str | bytes], message: str) -> str:
 
 
 def export() -> str:
-    sha = push(bundle(), f"Desk export {utcnow():%Y-%m-%d %H:%M} UTC")
+    try:
+        sha = push(bundle(), f"Desk export {utcnow():%Y-%m-%d %H:%M} UTC")
+    except Exception as e:   # errors can carry request headers: never let the token reach a log or a chat
+        from .telegram import redact
+        raise RuntimeError(redact(f"{type(e).__name__}: {e}")) from None
     log.info("desk feed exported %s", sha)
     return sha
